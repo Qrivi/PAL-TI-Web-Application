@@ -12,6 +12,7 @@
     <properties>
         <spring.version>4.1.6.RELEASE</spring.version>
         <pal-ti-integration.version>1.0</pal-ti-integration.version>
+        <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
     </properties>
 
     <dependencies>
@@ -31,6 +32,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>${hibernate-jpa.version}</version>
         </dependency>
     </dependencies>
 
