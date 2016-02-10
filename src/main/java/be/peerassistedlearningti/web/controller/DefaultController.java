@@ -1,8 +1,10 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.CourseForm;
+import be.peerassistedlearningti.web.model.StudentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,6 +39,24 @@ public class DefaultController
         service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName() ) );
 
         return new ModelAndView( "course" );
+    }
+
+    @RequestMapping( value = "/student", method = RequestMethod.GET )
+    public ModelAndView getStudentPage( ModelMap model )
+    {
+        model.addAttribute( "student", new StudentForm() );
+        return new ModelAndView( "student", model );
+    }
+
+    @RequestMapping( value = "/student", method = RequestMethod.POST )
+    public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "student" );
+
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.isAdmin() ) );
+
+        return new ModelAndView( "student" );
     }
 
 }

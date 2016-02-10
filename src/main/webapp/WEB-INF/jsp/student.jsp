@@ -8,12 +8,18 @@
         <form:input path="name" class="form-control" placeholder="Name"/>
     </div>
     <div class="form-group">
-        <form:input path="password" class="form-control" placeholder="Password"/>
-    </div>
-    <div class="form-group">
         <form:input path="email" class="form-control" placeholder="Email"/>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-default pull-right">Register</button>
+        <form:password path="password" class="form-control" placeholder="Password"/>
+    </div>
+    <div class="form-group">
+        <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
+    </div>
+    <div class="form-group">
+        <form:checkbox path="admin" class="form-control" placeholder="Admin"/>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default pull-right">Add</button>
     </div>
 </form:form>

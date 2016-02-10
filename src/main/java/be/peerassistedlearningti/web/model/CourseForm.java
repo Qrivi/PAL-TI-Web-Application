@@ -5,13 +5,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CourseForm
 {
 
-    @NotEmpty( message = "NotEmpty.CourseForm.code" )
+    @NotEmpty( message = "{NotEmpty.CourseForm.code}" )
     private String code;
 
-    @NotEmpty( message = "NotEmpty.CourseForm.name" )
+    @NotEmpty( message = "{NotEmpty.CourseForm.name}" )
     private String name;
 
-    @NotEmpty( message = "NotEmpty.CourseForm.shortName" )
+    @NotEmpty( message = "{NotEmpty.CourseForm.shortName}" )
     private String shortName;
 
     public CourseForm() {}
