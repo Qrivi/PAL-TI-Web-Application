@@ -12,4 +12,22 @@
 
     <context:annotation-config/>
 
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="PAL"/>
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+    </bean>
+
+    <bean id="courseJPADb" class="be.peerassistedlearningti.dao.jpa.CourseJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="studentJPADb" class="be.peerassistedlearningti.dao.jpa.StudentJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="service" class="be.peerassistedlearningti.service.PALServiceImpl">
+        <property name="courseDAO" ref="courseJPADb"/>
+        <property name="studentDAO" ref="studentJPADb"/>
+    </bean>
+
 </beans>

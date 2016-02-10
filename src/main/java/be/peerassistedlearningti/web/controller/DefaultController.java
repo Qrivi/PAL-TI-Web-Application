@@ -1,6 +1,9 @@
 package be.peerassistedlearningti.web.controller;
 
+import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.CourseForm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,9 @@ import javax.validation.Valid;
 public class DefaultController
 {
 
+    @Autowired
+    private PALService service;
+
     @RequestMapping( value = "/course", method = RequestMethod.GET )
     public ModelAndView getCoursePage( ModelMap model )
     {
@@ -28,7 +34,7 @@ public class DefaultController
         if ( result.hasErrors() )
             return new ModelAndView( "course" );
 
-        // TODO add course to service
+        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName() ) );
 
         return new ModelAndView( "course" );
     }

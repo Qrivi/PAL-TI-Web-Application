@@ -10,6 +10,7 @@
     <version>1.0</version>
 
     <properties>
+        <mysql.version>5.1.6</mysql.version>
         <spring.version>4.1.6.RELEASE</spring.version>
         <pal-ti-integration.version>1.0</pal-ti-integration.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
@@ -17,6 +18,12 @@
     </properties>
 
     <dependencies>
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
         <!-- PAL TI Integeration-->
         <dependency>
             <groupId>be.pal-ti</groupId>
@@ -32,6 +39,11 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <!-- Hibernate -->
