@@ -13,6 +13,7 @@
         <spring.version>4.1.6.RELEASE</spring.version>
         <pal-ti-integration.version>1.0</pal-ti-integration.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
+        <urlrewrite.version>4.0.4</urlrewrite.version>
     </properties>
 
     <dependencies>
@@ -38,6 +39,12 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>${hibernate-jpa.version}</version>
+        </dependency>
+        <!-- Url Rewrite -->
+        <dependency>
+            <groupId>org.tuckey</groupId>
+            <artifactId>urlrewritefilter</artifactId>
+            <version>${urlrewrite.version}</version>
         </dependency>
     </dependencies>
 
