@@ -15,7 +15,7 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
 
     <mvc:annotation-driven/>
-    <context:component-scan base-package="be.peerassistedlearningti"/>
+    <context:component-scan base-package="be.peerassistedlearningti.web"/>
 
     <!-- View Resolver -->
 

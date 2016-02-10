@@ -12,8 +12,4 @@
 
     <context:annotation-config/>
 
-    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor">
-        <property name="autowiredAnnotationType" value="javax.inject.Inject"/>
-    </bean>
-
 </beans>
