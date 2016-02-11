@@ -38,6 +38,16 @@ public class StudentController
 
         return new ModelAndView( "student_add" );
     }
+    @RequestMapping( value="register", method = RequestMethod.GET)
+    public ModelAndView registerStudent(@Valid @ModelAttribute("student") StudentForm studentForm, BindingResult result)
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "register_student" );
+
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), false ) );
+
+        return new ModelAndView( "register_student" );
+    }
 
 
 
