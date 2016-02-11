@@ -1,9 +1,12 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.common.model.jpa.*;
+import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.CourseForm;
+import be.peerassistedlearningti.web.model.LessonForm;
 import be.peerassistedlearningti.web.model.StudentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,31 +25,6 @@ public class DefaultController
 
     @Autowired
     private PALService service;
-
-    @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
-    public ModelAndView getCourseOverviewPage( ModelMap model )
-    {
-        model.addAttribute( "courses", service.getAllCourses() );
-        return new ModelAndView( "course_overview", model );
-    }
-
-    @RequestMapping( value = "/course/add", method = RequestMethod.GET )
-    public ModelAndView getCourseAddPage( ModelMap model )
-    {
-        model.addAttribute( "course", new CourseForm() );
-        return new ModelAndView( "course", model );
-    }
-
-    @RequestMapping( value = "/course/add", method = RequestMethod.POST )
-    public ModelAndView getCourseAddPage( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "course" );
-
-        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName() ) );
-
-        return new ModelAndView( "course" );
-    }
 
     @RequestMapping( value = "/student", method = RequestMethod.GET )
     public ModelAndView getStudentPage( ModelMap model )
@@ -69,17 +47,17 @@ public class DefaultController
     @RequestMapping( value = "/lesson", method = RequestMethod.GET )
     public ModelAndView getLessonPage( ModelMap model )
     {
-        model.addAttribute( "lesson", new lessonForm() );
+        model.addAttribute( "lesson", new LessonForm() );
         return new ModelAndView( "lesson", model );
     }
 
     @RequestMapping( value = "/lesson", method = RequestMethod.POST )
-    public ModelAndView addlessonPage( @Valid @ModelAttribute( "lesson" ) lessonForm lessonForm, BindingResult result )
+    public ModelAndView addLessonPage( @Valid @ModelAttribute( "lesson" ) LessonForm lessonForm, BindingResult result )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "lesson" );
 
-        service.addLesson( new Lesson( lessonForm.getCode(), lessonForm.getName(), lessonForm.getShortName() ) );
+        //service.addLesson( new Lesson( lessonForm.getCode(), lessonForm.getName(), lessonForm.getShortName() ) );
 
         return new ModelAndView( "lesson" );
     }
