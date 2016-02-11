@@ -24,32 +24,29 @@ public class CourseController
     private PALService service;
 
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
-    public ModelAndView getCourseOverviewPage( ModelMap model )
+    public ModelAndView getCourseOverviewPage()
     {
-        model.addAttribute( "courses", service.getAllCourses() );
-        return new ModelAndView( "course_overview", model );
+        return new ModelAndView( "course_overview", "courses", service.getAllCourses() );
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
-        model.addAttribute( "course", service.getCourseById( id ) );
-        return new ModelAndView( "course", model );
+        return new ModelAndView( "course", "course", service.getCourseById( id ) );
     }
 
     @RequestMapping( value = "/add", method = RequestMethod.GET )
     public ModelAndView getCourseAddPage( ModelMap model )
     {
-        model.addAttribute( "course", new CourseForm() );
-        return new ModelAndView( "course", model );
+        return new ModelAndView( "course", "course", new CourseForm() );
     }
 
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
-    public ModelAndView removeCourse( @PathVariable( value = "id" ) int id )
+    public String removeCourse( @PathVariable( value = "id" ) int id )
     {
         Course c = service.getCourseById( id );
         service.removeCourse( c );
-        return new ModelAndView( "course" );
+        return "redirect:/course/overview";
     }
 
     @RequestMapping( value = "/add", method = RequestMethod.POST )
@@ -60,7 +57,7 @@ public class CourseController
 
         service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName() ) );
 
-        return new ModelAndView( "course" );
+        return new ModelAndView( "redirect:/course/overview" );
     }
 
 }
