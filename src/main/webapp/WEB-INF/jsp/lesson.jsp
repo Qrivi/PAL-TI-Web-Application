@@ -5,24 +5,28 @@
 <form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
-        <form:input type="datetime" path="date" class="form-control" placeholder="Date & Time"/>
+        <form:input path="date" type="datetime" class="form-control" placeholder="Date & Time"/>
     </div>
     <div class="form-group">
-        <form:input type="time" path="duration" class="form-control" placeholder="Lesson duration (optional)"/>
+        <form:input path="duration" type="time" class="form-control" placeholder="Lesson duration (optional)"/>
     </div>
     <div class="form-group">
-        <form:input path="course" class="form-control" placeholder="Course Short Name"/>
-        <!-- drop down ? -->
+        <form:select path="course" class="form-control" placeholder="Course">
+            <form:option value="NONE" label="--- Select ---"/>
+            <form:options items="${courseList}" />
+        </form:select>
     </div>
     <div class="form-group">
         <form:input type="number" path="maxParticipants" class="form-control" placeholder="Maximum number of participants (optional)"/>
     </div>
-    <div class="form-group">
-        <form:input type="time" path="room" class="form-control" placeholder="Room"/>
-    </div>
-    <div class="form-group">
-        <form:input type="time" path="backup room" class="form-control" placeholder="Backup room"/>
-    </div>
+    <form:select path="room" class="form-control" placeholder="Room">
+        <form:option value="NONE" label="--- Select ---"/>
+        <form:options items="${roomList}" />
+    </form:select>
+    <form:select path="backupRoom" class="form-control" placeholder="Backup room">
+        <form:option value="NONE" label="--- Select ---"/>
+        <form:options items="${roomList}" />
+    </form:select>
 
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>

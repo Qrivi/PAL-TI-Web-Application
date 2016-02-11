@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.controller;
 
-import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.common.model.jpa.*;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.CourseForm;
@@ -59,4 +59,21 @@ public class DefaultController
         return new ModelAndView( "student" );
     }
 
+    @RequestMapping( value = "/lesson", method = RequestMethod.GET )
+    public ModelAndView getLessonPage( ModelMap model )
+    {
+        model.addAttribute( "lesson", new lessonForm() );
+        return new ModelAndView( "lesson", model );
+    }
+
+    @RequestMapping( value = "/lesson", method = RequestMethod.POST )
+    public ModelAndView addlessonPage( @Valid @ModelAttribute( "lesson" ) lessonForm lessonForm, BindingResult result )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "lesson" );
+
+        service.addLesson( new Lesson( lessonForm.getCode(), lessonForm.getName(), lessonForm.getShortName() ) );
+
+        return new ModelAndView( "lesson" );
+    }
 }
