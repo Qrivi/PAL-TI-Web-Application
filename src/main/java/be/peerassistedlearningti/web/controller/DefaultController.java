@@ -23,15 +23,22 @@ public class DefaultController
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/course", method = RequestMethod.GET )
-    public ModelAndView getCoursePage( ModelMap model )
+    @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
+    public ModelAndView getCourseOverviewPage( ModelMap model )
+    {
+        model.addAttribute( "courses", service.getAllCourses() );
+        return new ModelAndView( "course_overview", model );
+    }
+
+    @RequestMapping( value = "/course/add", method = RequestMethod.GET )
+    public ModelAndView getCourseAddPage( ModelMap model )
     {
         model.addAttribute( "course", new CourseForm() );
         return new ModelAndView( "course", model );
     }
 
-    @RequestMapping( value = "/course", method = RequestMethod.POST )
-    public ModelAndView addCoursePage( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
+    @RequestMapping( value = "/course/add", method = RequestMethod.POST )
+    public ModelAndView getCourseAddPage( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "course" );
