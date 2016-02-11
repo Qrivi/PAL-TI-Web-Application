@@ -2,16 +2,19 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
+<form:form method="post" commandName="student" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
-        <form:input path="code" class="form-control" placeholder="Course Code"/>
+        <form:input path="name" class="form-control" placeholder="Name"/>
     </div>
     <div class="form-group">
-        <form:input path="name" class="form-control" placeholder="Course Name"/>
+        <form:input path="email" class="form-control" placeholder="Email"/>
     </div>
     <div class="form-group">
-        <form:input path="shortName" class="form-control" placeholder="Course Short Name"/>
+        <form:password path="password" class="form-control" placeholder="Password"/>
+    </div>
+    <div class="form-group">
+        <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>

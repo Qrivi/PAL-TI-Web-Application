@@ -38,15 +38,22 @@ public class StudentController
 
         return new ModelAndView( "student_add" );
     }
-    @RequestMapping( value="register", method = RequestMethod.GET)
+
+    @RequestMapping( value="register", method = RequestMethod.GET )
+    public ModelAndView registerStudent(ModelMap model )
+    {
+        model.addAttribute( "student", new StudentForm() );
+        return new ModelAndView( "student_registration", model );
+    }
+    @RequestMapping( value="register", method = RequestMethod.POST)
     public ModelAndView registerStudent(@Valid @ModelAttribute("student") StudentForm studentForm, BindingResult result)
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "register_student" );
+            return new ModelAndView( "student_registration" );
 
         service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), false ) );
 
-        return new ModelAndView( "register_student" );
+        return new ModelAndView( "student_registration" );
     }
 
 
