@@ -4,22 +4,23 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Room;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class LessonForm
 {
 
-    @NotEmpty( message = "NotEmpty.LessonForm.date" )
+    @NotNull( message = "NotNull.LessonForm.date" )
     private Date date;
 
     private long duration;
 
-    @NotEmpty( message = "NotEmpty.LessonForm.course" )
+    @NotNull( message = "NotNull.LessonForm.course" )
     private Course course;
 
     private int maxParticipants;
 
-    @NotEmpty( message = "NotEmpty.LessonForm.course" )
+    @NotNull( message = "NotNull.LessonForm.course" )
     private Room room;
 
     private Room backupRoom;
