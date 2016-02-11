@@ -26,19 +26,19 @@ public class CourseController
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "course_overview", "courses", service.getAllCourses() );
+        return new ModelAndView( "course", "courses", service.getAllCourses() );
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
-        return new ModelAndView( "course", "course", service.getCourseById( id ) );
+        return new ModelAndView( "course_add", "course", service.getCourseById( id ) );
     }
 
     @RequestMapping( value = "/add", method = RequestMethod.GET )
-    public ModelAndView getCourseAddPage( ModelMap model )
+    public ModelAndView getCourseAddPage()
     {
-        return new ModelAndView( "course", "course", new CourseForm() );
+        return new ModelAndView( "course_add", "course", new CourseForm() );
     }
 
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
@@ -53,7 +53,7 @@ public class CourseController
     public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "course" );
+            return new ModelAndView( "course_add" );
 
         service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName() ) );
 
