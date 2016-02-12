@@ -2,7 +2,6 @@ package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.LessonForm;
-import be.peerassistedlearningti.web.model.LessonForm;
 import be.peerassistedlearningti.web.model.RoomForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +37,7 @@ public class LessonController
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getLessonOverviewPage()
     {
-        return new ModelAndView( "lesson", "lessons", service.getAllLessons() );
+        return new ModelAndView("lesson_add", "lessons", service.getAllLessons() );
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )

@@ -13,7 +13,7 @@
     <div class="form-group">
         <form:select path="course" class="form-control" placeholder="Course">
             <form:option value="NONE" label="--- Select ---"/>
-            <form:options items="${courseList}" />
+            <form:options items="${courses}" />
         </form:select>
     </div>
     <div class="form-group">
@@ -21,11 +21,11 @@
     </div>
     <form:select path="room" class="form-control" placeholder="Room">
         <form:option value="NONE" label="--- Select ---"/>
-        <form:options items="${roomList}" />
+        <form:options items="${rooms}" />
     </form:select>
     <form:select path="backupRoom" class="form-control" placeholder="Backup room">
         <form:option value="NONE" label="--- Select ---"/>
-        <form:options items="${roomList}" />
+        <form:options items="${rooms}" />
     </form:select>
 
     <div class="form-group">
