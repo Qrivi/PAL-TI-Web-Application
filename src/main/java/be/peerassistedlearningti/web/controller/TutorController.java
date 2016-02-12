@@ -1,5 +1,7 @@
 package be.peerassistedlearningti.web.controller;
 
+import be.peerassistedlearningti.model.Tutor;
+import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.TutorForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;

@@ -2,7 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
+<form:form method="post" commandName="room" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
         <form:input path="name" class="form-control" placeholder="Name"/>
@@ -14,7 +14,7 @@
         </form:select>
     </div>
     <div class="form-group">
-        <form:select path="course" class="form-control" placeholder="Course">
+        <form:select path="type" class="form-control" placeholder="Room type">
             <form:option value="NONE" label="--- Select ---"/>
             <form:options items="${roomTypes}" />
         </form:select>

@@ -24,10 +24,14 @@
     <bean id="studentJPADb" class="be.peerassistedlearningti.dao.jpa.StudentJPADAO">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+    <bean id="roomJPADb" class="be.peerassistedlearningti.dao.jpa.RoomJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
 
     <bean id="service" class="be.peerassistedlearningti.service.PALServiceImpl">
         <property name="courseDAO" ref="courseJPADb"/>
         <property name="studentDAO" ref="studentJPADb"/>
+        <property name="roomDAO" ref="roomJPADb"/>
     </bean>
 
 </beans>
