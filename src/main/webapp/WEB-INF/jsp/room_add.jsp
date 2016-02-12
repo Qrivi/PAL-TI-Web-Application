@@ -8,14 +8,14 @@
         <form:input path="name" class="form-control" placeholder="Name"/>
     </div>
     <div class="form-group">
-        <form:select path="campus" class="form-control" placeholder="Campus">
-            <form:option value="NONE" label="--- Select ---"/>
+        <form:select path="campus" class="form-control">
+            <form:option value="None" label="--- Select ---"/>
             <form:options items="${campuses}" />
         </form:select>
     </div>
     <div class="form-group">
-        <form:select path="type" class="form-control" placeholder="Room type">
-            <form:option value="NONE" label="--- Select ---"/>
+        <form:select path="type" class="form-control" >
+            <form:option value="None" label="--- Select ---"/>
             <form:options items="${roomTypes}" />
         </form:select>
     </div>

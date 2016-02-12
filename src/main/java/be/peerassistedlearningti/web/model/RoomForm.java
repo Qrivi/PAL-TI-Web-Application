@@ -7,13 +7,13 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class RoomForm {
-    @NotEmpty( message = "{NotEmpty.CourseForm.name}" )
+    @NotEmpty( message = "{NotEmpty.RoomForm.name}" )
     private String name;
 
-    @NotNull( message = "{NotEmpty.CourseForm.campus}" )
+    @NotNull( message = "{NotNull.RoomForm.campus}" )
     private Campus campus;
 
-    @NotNull( message = "{NotEmpty.CourseForm.type}" )
+    @NotNull( message = "{NotNull.RoomForm.type}" )
     private RoomType type;
 
     public RoomForm(){}

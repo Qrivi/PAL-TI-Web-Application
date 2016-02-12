@@ -34,4 +34,14 @@
         <property name="roomDAO" ref="roomJPADb"/>
     </bean>
 
+    <!-- Converter service -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="be.peerassistedlearningti.web.model.converter.RoomTypeConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.CampusConverter"/>
+            </set>
+        </property>
+    </bean>
+
 </beans>
