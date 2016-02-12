@@ -1,5 +1,7 @@
 package be.peerassistedlearningti.web.model;
 
+import be.peerassistedlearningti.model.Course;
+
 import javax.validation.constraints.NotNull;
 
 public class TutorForm {

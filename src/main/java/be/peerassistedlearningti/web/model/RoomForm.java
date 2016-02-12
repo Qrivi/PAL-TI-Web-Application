@@ -1,5 +1,7 @@
 package be.peerassistedlearningti.web.model;
 
+import be.peerassistedlearningti.model.Campus;
+import be.peerassistedlearningti.model.RoomType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class RoomForm {

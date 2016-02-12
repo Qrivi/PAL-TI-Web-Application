@@ -1,7 +1,8 @@
 package be.peerassistedlearningti.web.controller;
 
+import be.peerassistedlearningti.model.Campus;
+import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.LessonForm;
 import be.peerassistedlearningti.web.model.LessonForm;
 import be.peerassistedlearningti.web.model.RoomForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,26 +24,8 @@ public class LessonController
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
-    public ModelAndView getCourseOverviewPage()
-    {
-        return new ModelAndView( "course", "courses", service.getAllCourses() );
-    }
-
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
-    public ModelAndView getRoomOverviewPage(@Valid @ModelAttribute( "room" ) RoomForm roomForm)
-    {
-        return new ModelAndView( "room", "rooms", service.getRoomsFromCampus(roomForm.getCampus()) );
-    }
-
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
-    public ModelAndView getLessonOverviewPage()
-    {
-        return new ModelAndView( "lesson", "lessons", service.getAllLessons() );
-    }
-
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public ModelAndView getLessonDetailPage(@PathVariable( value = "id" ) int id, ModelMap model )
+    public ModelAndView getLessonDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
         return new ModelAndView( "lesson_add", "lesson", service.getLessonById( id ) );
     }
@@ -50,7 +33,10 @@ public class LessonController
     @RequestMapping( value = "/add", method = RequestMethod.GET )
     public ModelAndView getLessonAddPage()
     {
-        return new ModelAndView( "lesson_add", "lesson", new LessonForm() );
+        ModelMap model = new ModelMap();
+        model.addAttribute( "courses", service.getAllCourses() );
+        model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
+        return new ModelAndView( "lesson_add", model );
     }
 
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
