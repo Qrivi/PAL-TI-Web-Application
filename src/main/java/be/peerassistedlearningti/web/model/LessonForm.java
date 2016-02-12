@@ -10,17 +10,17 @@ import java.util.Date;
 public class LessonForm
 {
 
-    @NotNull( message = "NotNull.LessonForm.date" )
+    @NotNull( message = "{NotNull.LessonForm.date}" )
     private Date date;
 
     private long duration;
 
-    @NotNull( message = "NotNull.LessonForm.course" )
+    @NotNull( message = "{NotNull.LessonForm.course}" )
     private Course course;
 
     private int maxParticipants;
 
-    @NotNull( message = "NotNull.LessonForm.course" )
+    @NotNull( message = "{NotNull.LessonForm.course}" )
     private Room room;
 
     private Room backupRoom;
