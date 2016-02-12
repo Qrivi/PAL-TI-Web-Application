@@ -16,12 +16,24 @@ import javax.validation.Valid;
 @RequestMapping( value = "/room" )
 public class RoomController {
     @Autowired
-    private PALSpublic class RoomController {ervice service;
+    private PALService service;
+
+    @RequestMapping( value = "/overview", method = RequestMethod.GET )
+    public ModelAndView getRoomOverviewPage(@Valid @ModelAttribute( "room" ) RoomForm roomForm)
+    {
+        return new ModelAndView( "room", "rooms", service.getRoomsFromCampus(roomForm.getCampus()) );
+    }
 
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getRoomOverviewPage()
     {
-        return new ModelAndView( "room", "rooms", service.getRoomsFromCampus() );
+        return new ModelAndView( "campus", "campuses", service.getCampuses() );
+    }
+
+    @RequestMapping( value = "/overview", method = RequestMethod.GET )
+    public ModelAndView getRoomOverviewPage()
+    {
+        return new ModelAndView( "roomType", "roomTypes", service.getRoomTypes() );
     }
 
     @RequestMapping( value = "/add", method = RequestMethod.GET )
@@ -44,7 +56,7 @@ public class RoomController {
         if ( result.hasErrors() )
             return new ModelAndView( "room_add" );
 
-        service.addRoom( new Room( roomForm.getCode(), roomForm.getName(), roomForm.getShortName() ) );
+        service.addRoom( new Room( roomForm.getName(), roomForm.getCampus(), roomForm.getType() ) );
 
         return new ModelAndView( "redirect:/room/overview" );
     }
