@@ -21,7 +21,7 @@ public class StudentForm
     @NotEmpty( message = "{NotEmpty.StudentForm.repeatPassword}" )
     private String repeatPassword;
 
-    private boolean admin = true;
+    private boolean admin = false;
 
     public StudentForm() {}
 

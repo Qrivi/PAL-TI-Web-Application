@@ -2,6 +2,7 @@ package be.peerassistedlearningti.web.model;
 
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Room;
+import be.peerassistedlearningti.model.Tutor;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -9,6 +10,10 @@ import java.util.Date;
 
 public class LessonForm
 {
+    @NotEmpty( message = "{NotNull.LessonForm.name}")
+    private String name;
+
+    private String description;
 
     @NotNull( message = "{NotNull.LessonForm.date}" )
     private Date date;
@@ -25,7 +30,18 @@ public class LessonForm
 
     private Room backupRoom;
 
+    @NotNull( message = "{NotNull.LessonForm.course}")
+    private Tutor tutor;
+
     public LessonForm() {}
+
+    public String getName(){
+        return name;
+    }
+
+    public String setDescription() {
+        return description;
+    }
 
     public Date getDate()
     {
@@ -57,6 +73,19 @@ public class LessonForm
         return backupRoom;
     }
 
+    public Tutor getTutor()
+    {
+        return tutor;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setDescription(String description){
+        this.description = description;
+    }
+
     public void setDate( Date date )
     {
         this.date = date;
@@ -86,4 +115,9 @@ public class LessonForm
     {
         this.backupRoom = backupRoom;
     }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
 }
