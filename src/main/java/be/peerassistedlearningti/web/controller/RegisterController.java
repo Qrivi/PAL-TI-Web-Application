@@ -1,6 +1,5 @@
 package be.peerassistedlearningti.web.controller;
 
-
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.StudentForm;
@@ -16,29 +15,29 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping( value = "/student" )
-public class StudentController
+@RequestMapping( value = "/register" )
+public class RegisterController
 {
 
     @Autowired
     private PALService service;
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getStudentPage( ModelMap model )
+    public ModelAndView registerStudent( ModelMap model )
     {
         model.addAttribute( "student", new StudentForm() );
-        return new ModelAndView( "student_add", model );
+        return new ModelAndView( "student_registration", model );
     }
 
     @RequestMapping( method = RequestMethod.POST )
-    public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
+    public ModelAndView registerStudent( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "student_add" );
+            return new ModelAndView( "student_registration" );
 
-        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.isAdmin() ) );
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), false ) );
 
-        return new ModelAndView( "student_add" );
+        return new ModelAndView( "student_registration" );
     }
 
 }

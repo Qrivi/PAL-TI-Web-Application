@@ -12,8 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-public class TutorController {
-    @Autowired
+public class TutorController
+{
+   /* @Autowired
     private PALService service;
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
@@ -42,10 +43,9 @@ public class TutorController {
         if ( result.hasErrors() )
             return new ModelAndView( "tutor_add" );
 
-        /*TODO authenticated student
-        service.addTutor( new Tutor( tutorForm.getCourse(), () ) );
-        */
 
-        return new ModelAndView( "redirect:/tutor/overview" );
-    }
+    return new
+
+    ModelAndView( "redirect:/tutor/overview" );
+}*/
 }

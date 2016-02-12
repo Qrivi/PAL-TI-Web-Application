@@ -1,5 +1,6 @@
 package be.peerassistedlearningti.web.controller;
 
+import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.RoomForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,9 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping( value = "/room" )
-public class RoomController {
-    @Autowired
+public class RoomController
+{
+    /*@Autowired
     private PALService service;
 
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
@@ -59,5 +61,5 @@ public class RoomController {
         service.addRoom( new Room( roomForm.getName(), roomForm.getCampus(), roomForm.getType() ) );
 
         return new ModelAndView( "redirect:/room/overview" );
-    }
+    }*/
 }
