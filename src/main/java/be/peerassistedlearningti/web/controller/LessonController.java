@@ -59,4 +59,12 @@ public class LessonController
 
         return new ModelAndView( "redirect:/lesson/overview" );
     }
+
+    //TODO pass student
+    @RequestMapping( value = "/register/{id}", method = RequestMethod.POST )
+    public String RegisterForLesson( @PathVariable( value = "id" ) int id )
+    {
+        Lesson l = service.getLessonById( id );
+        return "redirect:/booking/add";
+    }
 }

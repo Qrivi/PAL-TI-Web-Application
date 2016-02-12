@@ -17,6 +17,10 @@
                 <form id="command" action="<c:url value="/lesson/remove/${lesson.id}" />" method="POST">
                     <input type="submit" value="Delete"/>
                 </form>
+                <form id="command" action="<c:url value="/lesson/register/${lesson.id}" />" method="POST">
+                    <input type="submit" value="Register"/>
+                </form>
+                <!-- authenticated student -->
             </td>
             <td></td>
         </tr>

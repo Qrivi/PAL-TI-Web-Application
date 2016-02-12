@@ -5,6 +5,12 @@
 <div>
     <p>${lesson.name}</p>
     <p>${lesson.description}</p>
+    <p>${lesson.date}</p>
+    <p>Duration: ${lesson.duration/60} : ${lesson.duration%60}</p>
+    <p>Course: ${lesson.course}</p>
+    <p>Maximum number of participants: ${lesson.maxParticipants}</p>
+    <p>Room: ${lesson.room}</p>
+    <p>Backup room: ${lesson.backupRoom}</p>
 
 </div>
 <form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">

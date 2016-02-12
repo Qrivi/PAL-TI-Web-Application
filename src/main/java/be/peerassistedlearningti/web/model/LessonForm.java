@@ -39,7 +39,7 @@ public class LessonForm
         return name;
     }
 
-    public String setDescription() {
+    public String getDescription() {
         return description;
     }
 
