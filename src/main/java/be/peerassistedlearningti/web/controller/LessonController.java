@@ -54,7 +54,7 @@ public class LessonController
             return new ModelAndView( "lesson_add" );
 
         /*TODO authenticated tutor
-        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), ,lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
+        service.addLesson( new Lesson(lessonForm.getDate(), LessonForm.getName(), LessonForm.getDescription(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), ,lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
         */
 
         return new ModelAndView( "redirect:/lesson/overview" );
