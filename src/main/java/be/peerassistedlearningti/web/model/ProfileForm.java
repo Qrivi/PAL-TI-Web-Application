@@ -1,29 +1,21 @@
 package be.peerassistedlearningti.web.model;
 
-import be.peerassistedlearningti.common.model.validation.FieldMatch;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-@FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentForm.password.repeatPassword}" )
-public class StudentForm
+public class ProfileForm
 {
-
-    @NotEmpty( message = "{NotEmpty.StudentForm.name}" )
+    @NotEmpty( message = "{NotEmpty.ProfileForm.name}" )
     private String name;
 
-    @NotEmpty( message = "{NotEmpty.StudentForm.email}" )
-    @Email( message = "{Email.StudentForm.email}" )
+    @NotEmpty( message = "{NotEmpty.ProfileForm.email}" )
+    @Email( message = "{Email.ProfileForm.email}" )
     private String email;
 
-    @NotEmpty( message = "{NotEmpty.StudentForm.password}" )
     private String password;
-
-    @NotEmpty( message = "{NotEmpty.StudentForm.repeatPassword}" )
     private String repeatPassword;
 
-    private boolean admin = false;
-
-    public StudentForm() {}
+    public ProfileForm() {}
 
     public void setName( String name )
     {
@@ -45,11 +37,6 @@ public class StudentForm
         this.repeatPassword = repeatPassword;
     }
 
-    public void setAdmin( boolean admin )
-    {
-        this.admin = admin;
-    }
-
     public String getName()
     {
         return name;
@@ -69,10 +56,4 @@ public class StudentForm
     {
         return repeatPassword;
     }
-
-    public boolean isAdmin()
-    {
-        return admin;
-    }
-
 }
