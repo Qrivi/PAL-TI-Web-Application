@@ -4,14 +4,16 @@ import be.peerassistedlearningti.model.Campus;
 import be.peerassistedlearningti.model.RoomType;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+
 public class RoomForm {
-    @NotEmpty( message = "{NotEmpty.CourseForm.name}" )
+    @NotEmpty( message = "{NotEmpty.RoomForm.name}" )
     private String name;
 
-    @NotEmpty( message = "{NotEmpty.CourseForm.campus}" )
+    @NotNull( message = "{NotNull.RoomForm.campus}" )
     private Campus campus;
 
-    @NotEmpty( message = "{NotEmpty.CourseForm.type}" )
+    @NotNull( message = "{NotNull.RoomForm.type}" )
     private RoomType type;
 
     public RoomForm(){}
