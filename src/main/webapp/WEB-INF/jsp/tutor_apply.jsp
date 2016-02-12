@@ -7,8 +7,11 @@
     <div class="form-group">
         <form:select path="course" class="form-control" placeholder="Course">
             <form:option value="NONE" label="--- Select ---"/>
-            <form:options items="${courseList}" />
+            <form:options items="${courses}" />
         </form:select>
+    </div>
+    <div>
+        <form:input path="screenshot" type="file" class="form-control" placeholder="Screenshot"/>
     </div>
 
     <div class="form-group">

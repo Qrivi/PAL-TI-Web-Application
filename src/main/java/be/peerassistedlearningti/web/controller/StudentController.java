@@ -1,6 +1,5 @@
 package be.peerassistedlearningti.web.controller;
 
-
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.StudentForm;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +22,12 @@ public class StudentController
 
     @Autowired
     private PALService service;
+
+    @RequestMapping( value = "/overview", method = RequestMethod.GET )
+    public ModelAndView getCourseOverviewPage()
+    {
+        return new ModelAndView( "course", "courses", service.getAllStudents() );
+    }
 
     @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getStudentPage( ModelMap model )
@@ -41,4 +47,11 @@ public class StudentController
         return new ModelAndView( "student_add" );
     }
 
+    @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
+    public String removeStudent( @PathVariable( value = "id" ) int id )
+    {
+        Student s = service.getStudentById( id );
+        service.removeStudent( s );
+        return "redirect:/student/overview";
+    }
 }
