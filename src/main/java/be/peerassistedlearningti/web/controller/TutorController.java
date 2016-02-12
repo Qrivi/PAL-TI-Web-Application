@@ -34,8 +34,8 @@ public class TutorController
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
     public String removeTutor( @PathVariable( value = "id" ) int id )
     {
-        Tutor c = service.getTutorById( id );
-        service.removeTutor( c );
+        Tutor t = service.getTutorById( id );
+        service.removeTutor( t );
         return "redirect:/tutor/overview";
     }
 
@@ -45,9 +45,12 @@ public class TutorController
         if ( result.hasErrors() )
             return new ModelAndView( "tutor_add" );
 
+        return new ModelAndView( "redirect:/tutor/overview" );
+    }
 
-    return new
-
-    ModelAndView( "redirect:/tutor/overview" );
+    @RequestMapping (value = "/approve", method = RequestMethod.POST )
+    public ModelAndView approveTutor(){
+        //TODO
+    }
 }*/
 }
