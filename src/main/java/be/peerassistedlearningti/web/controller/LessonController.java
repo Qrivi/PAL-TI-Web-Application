@@ -24,6 +24,12 @@ public class LessonController
     @Autowired
     private PALService service;
 
+    @RequestMapping( value = "/overview", method = RequestMethod.GET )
+    public ModelAndView getLessonOverviewPage()
+    {
+        return new ModelAndView( "lesson", "lessons", service.getAllLessons() );
+    }
+
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public ModelAndView getLessonDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
@@ -34,6 +40,7 @@ public class LessonController
     public ModelAndView getLessonAddPage()
     {
         ModelMap model = new ModelMap();
+        model.addAttribute( "lesson", new LessonForm() );
         model.addAttribute( "courses", service.getAllCourses() );
         model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
         return new ModelAndView( "lesson_add", model );

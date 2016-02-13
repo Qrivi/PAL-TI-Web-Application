@@ -2,7 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
+<form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
         <form:input path="date" type="datetime" class="form-control" placeholder="Date & Time"/>
@@ -13,7 +13,7 @@
     <div class="form-group">
         <form:select path="course" class="form-control" placeholder="Course">
             <form:option value="NONE" label="--- Select ---"/>
-            <form:options items="${courses}" />
+            <form:options items="${courses}" itemValue="id" itemLabel="name"/>
         </form:select>
     </div>
     <div class="form-group">
@@ -21,11 +21,12 @@
     </div>
     <form:select path="room" class="form-control" placeholder="Room">
         <form:option value="NONE" label="--- Select ---"/>
-        <form:options items="${rooms}" />
+        <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
     </form:select>
+
     <form:select path="backupRoom" class="form-control" placeholder="Backup room">
         <form:option value="NONE" label="--- Select ---"/>
-        <form:options items="${rooms}" />
+        <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
     </form:select>
 
     <div class="form-group">

@@ -5,41 +5,45 @@ import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.model.Tutor;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class LessonForm
 {
-    @NotEmpty( message = "{NotNull.LessonForm.name}")
+    @NotEmpty( message = "{NotNull.LessonForm.name}" )
     private String name;
 
+    @NotEmpty( message = "{NotNull.LessonForm.description}" )
     private String description;
 
     @NotNull( message = "{NotNull.LessonForm.date}" )
     private Date date;
 
+    @Min( value = 1, message = "{Min.LessonForm.duration}" )
     private long duration;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
     private Course course;
 
+    @Min( value = 1, message = "{Min.LessonForm.maxParticipants}" )
     private int maxParticipants;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
     private Room room;
 
+    @NotNull( message = "{NotNull.LessonForm.backupRoom}" )
     private Room backupRoom;
-
-    @NotNull( message = "{NotNull.LessonForm.course}")
-    private Tutor tutor;
 
     public LessonForm() {}
 
-    public String getName(){
+    public String getName()
+    {
         return name;
     }
 
-    public String getDescription() {
+    public String getDescription()
+    {
         return description;
     }
 
@@ -73,16 +77,13 @@ public class LessonForm
         return backupRoom;
     }
 
-    public Tutor getTutor()
+    public void setName( String name )
     {
-        return tutor;
-    }
-
-    public void setName(String name){
         this.name = name;
     }
 
-    public void setDescription(String description){
+    public void setDescription( String description )
+    {
         this.description = description;
     }
 
@@ -114,10 +115,6 @@ public class LessonForm
     public void setBackupRoom( Room backupRoom )
     {
         this.backupRoom = backupRoom;
-    }
-
-    public void setTutor(Tutor tutor) {
-        this.tutor = tutor;
     }
 
 }
