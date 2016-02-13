@@ -49,9 +49,9 @@ public class ProfileController
         student.setName( form.getName() );
         student.setEmail( form.getEmail() );
 
-        if ( form.getPassword() != null )
+        if ( form.getNewPassword() != null )
         {
-            student.setPassword( form.getPassword() );
+            student.setPassword( form.getNewPassword() );
         }
 
         // TODO update session object and update in database

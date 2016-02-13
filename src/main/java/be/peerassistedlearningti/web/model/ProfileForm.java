@@ -12,7 +12,10 @@ public class ProfileForm
     @Email( message = "{Email.ProfileForm.email}" )
     private String email;
 
+    @NotEmpty( message = "{NotEmpty.ProfileForm.password}" )
     private String password;
+
+    private String newPassword;
     private String repeatPassword;
 
     public ProfileForm() {}
@@ -32,6 +35,8 @@ public class ProfileForm
         this.password = password;
     }
 
+    public void setNewPassword (String newPassword){this.newPassword=newPassword;}
+
     public void setRepeatPassword( String repeatPassword )
     {
         this.repeatPassword = repeatPassword;
@@ -50,6 +55,11 @@ public class ProfileForm
     public String getPassword()
     {
         return password;
+    }
+
+    public String getNewPassword()
+    {
+        return newPassword;
     }
 
     public String getRepeatPassword()
