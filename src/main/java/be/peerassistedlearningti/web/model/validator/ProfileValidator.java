@@ -19,9 +19,9 @@ public class ProfileValidator implements Validator
     {
         ProfileForm profile = (ProfileForm) target;
 
-        if ( profile.getPassword() != null )
+        if ( profile.getNewPassword() != null )
         {
-            String password = profile.getPassword();
+            String password = profile.getNewPassword();
             if ( !password.equals( profile.getRepeatPassword() ) )
             {
                 errors.rejectValue( "repeatPassword", "FieldMatch.ProfileForm.password.repeatPassword" );

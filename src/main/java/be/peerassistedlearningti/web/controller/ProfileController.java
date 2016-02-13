@@ -27,7 +27,7 @@ public class ProfileController
     private ProfileValidator profileValidator;
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView registerStudent( ModelMap model )
+    public ModelAndView modifyStudentProfile( ModelMap model )
     {
         // TODO : get student object from session (replace)
         ProfileForm profile = new ProfileForm();
@@ -37,7 +37,7 @@ public class ProfileController
     }
 
     @RequestMapping( method = RequestMethod.POST )
-    public ModelAndView registerStudent( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result )
+    public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result )
     {
         profileValidator.validate( form, result );
 
@@ -49,9 +49,9 @@ public class ProfileController
         student.setName( form.getName() );
         student.setEmail( form.getEmail() );
 
-        if ( form.getPassword() != null )
+        if ( form.getNewPassword() != null )
         {
-            student.setPassword( form.getPassword() );
+            student.setPassword( form.getNewPassword() );
         }
 
         // TODO update session object and update in database

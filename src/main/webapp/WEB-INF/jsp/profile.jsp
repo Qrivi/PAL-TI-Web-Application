@@ -14,6 +14,9 @@
         <form:password path="password" class="form-control" placeholder="Password"/>
     </div>
     <div class="form-group">
+        <form:password path="newPassword" class="form-control" placeholder="New password"/>
+    </div>
+    <div class="form-group">
         <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
     </div>
     <div class="form-group">
