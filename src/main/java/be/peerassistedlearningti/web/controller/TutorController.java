@@ -16,7 +16,7 @@ import javax.validation.Valid;
 
 public class TutorController
 {
-   /* @Autowired
+   @Autowired
     private PALService service;
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
@@ -51,6 +51,6 @@ public class TutorController
     @RequestMapping (value = "/approve", method = RequestMethod.POST )
     public ModelAndView approveTutor(){
         //TODO
+        return null;
     }
-}*/
 }
