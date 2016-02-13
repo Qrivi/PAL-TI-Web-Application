@@ -16,6 +16,8 @@
         <pal-ti-integration.version>1.0</pal-ti-integration.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
         <urlrewrite.version>4.0.4</urlrewrite.version>
+        <commons-io.version>2.4</commons-io.version>
+        <commons-fileupload.version>1.3.1</commons-fileupload.version>
     </properties>
 
     <dependencies>
@@ -64,6 +66,17 @@
             <groupId>org.tuckey</groupId>
             <artifactId>urlrewritefilter</artifactId>
             <version>${urlrewrite.version}</version>
+        </dependency>
+        <!-- Apache commons -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons-fileupload.version}</version>
         </dependency>
     </dependencies>
 

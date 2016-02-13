@@ -11,6 +11,8 @@
         <class>be.peerassistedlearningti.model.Room</class>
         <class>be.peerassistedlearningti.model.RoomType</class>
         <class>be.peerassistedlearningti.model.Campus</class>
+        <class>be.peerassistedlearningti.model.Application</class>
+        <class>be.peerassistedlearningti.model.ApplicationState</class>
         <properties>
             <!-- HIBERNATE PROPERTIES -->
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
