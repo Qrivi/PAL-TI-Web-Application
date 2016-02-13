@@ -2,7 +2,7 @@ package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.ProfileForm;
+import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.validator.ProfileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

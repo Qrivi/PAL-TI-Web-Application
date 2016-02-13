@@ -2,7 +2,7 @@ package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.RoomForm;
+import be.peerassistedlearningti.web.model.form.RoomForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

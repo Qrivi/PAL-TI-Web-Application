@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.validator;
 
-import be.peerassistedlearningti.web.model.ProfileForm;
+import be.peerassistedlearningti.web.model.form.ProfileForm;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 

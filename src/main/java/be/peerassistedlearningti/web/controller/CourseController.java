@@ -2,7 +2,7 @@ package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.CourseForm;
+import be.peerassistedlearningti.web.model.form.CourseForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.web.model;
+package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.model.Course;
 

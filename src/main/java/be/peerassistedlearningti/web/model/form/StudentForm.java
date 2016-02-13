@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.web.model;
+package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.common.model.validation.FieldMatch;
 import org.hibernate.validator.constraints.Email;
