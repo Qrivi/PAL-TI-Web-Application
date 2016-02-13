@@ -2,21 +2,19 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<div>
-    <p>${lesson.name}</p>
-    <p>${lesson.description}</p>
-    <p>${lesson.date}</p>
-    <p>Duration: ${lesson.duration/60} : ${lesson.duration%60}</p>
-    <p>Course: ${lesson.course}</p>
-    <p>Maximum number of participants: ${lesson.maxParticipants}</p>
-    <p>Room: ${lesson.room}</p>
-    <p>Backup room: ${lesson.backupRoom}</p>
-
-</div>
-<form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
+<form:form method="post" commandName="booking" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
-
+    <p>Name : ${booking.lesson.name}</p>
+    <p>Description : ${booking.lesson.description}</p>
+    <p>Date : ${booking.lesson.date}</p>
+    <p>Duration: ${booking.lesson.duration / 60} hour(s)</p>
+    <p>Course: ${booking.lesson.course.name}</p>
+    <p>Maximum number of participants: ${booking.lesson.maxParticipants}</p>
+    <p>Room: ${booking.lesson.room.name}</p>
+    <p>Backup room: ${booking.lesson.backupRoom.name}</p>
+    <form:hidden path="lesson" />
+    <form:hidden path="student"/>
     <div class="form-group">
-        <button type="submit" class="btn btn-default pull-right">Register</button>
+        <button type="submit" class="btn btn-default pull-right">Book</button>
     </div>
 </form:form>

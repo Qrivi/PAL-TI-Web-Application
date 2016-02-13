@@ -26,7 +26,7 @@ public class StudentController
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "course", "courses", service.getAllStudents() );
+        return new ModelAndView( "student", "students", service.getAllStudents() );
     }
 
     @RequestMapping( method = RequestMethod.GET )

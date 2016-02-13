@@ -19,7 +19,6 @@
             <form:options items="${roomTypes}" />
         </form:select>
     </div>
-
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>
     </div>

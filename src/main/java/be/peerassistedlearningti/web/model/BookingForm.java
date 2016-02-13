@@ -1,31 +1,38 @@
 package be.peerassistedlearningti.web.model;
 
+import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Student;
+
 import javax.validation.constraints.NotNull;
 
 public class BookingForm
 {
 
     @NotNull( message = "{NotNull.BookingForm.lesson}" )
-    private String lesson;
+    private Lesson lesson;
 
     @NotNull( message = "{NotNull.BookingForm.student}" )
-    private String student;
+    private Student student;
 
     public BookingForm() {}
 
-    public String getLesson() {
-        return lesson;
-    }
-
-    public String getStudent() {
-        return student;
-    }
-
-    public void setLesson(String lesson) {
+    public void setLesson( Lesson lesson )
+    {
         this.lesson = lesson;
     }
 
-    public void setStudent(String student) {
+    public void setStudent( Student student )
+    {
         this.student = student;
+    }
+
+    public Lesson getLesson()
+    {
+        return lesson;
+    }
+
+    public Student getStudent()
+    {
+        return student;
     }
 }
