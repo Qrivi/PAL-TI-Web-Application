@@ -28,9 +28,6 @@ public class BookingController
     @Autowired
     private PALService service;
 
-    @Autowired
-    private BookingJPADAO bookingJPADAO;
-
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getBookingOverviewPage()
     {
@@ -72,8 +69,9 @@ public class BookingController
     public String removeBooking( @PathVariable( value = "id" ) int id )
     {
         Booking b = service.getBookingById( id );
-        service.removeBooking( b );
-        bookingJPADAO.remove( b );
+        Lesson l = service.getLessonById( 1 );
+        l.removeBooking( b );
+        service.updateLesson( l );
         return "redirect:/booking/overview";
     }
 
