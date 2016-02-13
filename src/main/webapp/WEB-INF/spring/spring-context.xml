@@ -12,26 +12,48 @@
 
     <context:annotation-config/>
 
+    <!-- Entity manager factory -->
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="PAL"/>
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
     </bean>
 
-    <bean id="courseJPADb" class="be.peerassistedlearningti.dao.jpa.CourseJPADAO">
+    <!-- DAOs -->
+
+    <bean id="courseJPADAO" class="be.peerassistedlearningti.dao.jpa.CourseJPADAO">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
-    <bean id="studentJPADb" class="be.peerassistedlearningti.dao.jpa.StudentJPADAO">
+    <bean id="studentJPADAO" class="be.peerassistedlearningti.dao.jpa.StudentJPADAO">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
-    <bean id="roomJPADb" class="be.peerassistedlearningti.dao.jpa.RoomJPADAO">
+
+    <bean id="tutorJPADAO" class="be.peerassistedlearningti.dao.jpa.TutorJPADAO">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+
+    <bean id="roomJPADAO" class="be.peerassistedlearningti.dao.jpa.RoomJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="lessonJPADAO" class="be.peerassistedlearningti.dao.jpa.LessonJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="bookingJPADAO" class="be.peerassistedlearningti.dao.jpa.BookingJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <!-- Service -->
 
     <bean id="service" class="be.peerassistedlearningti.service.PALServiceImpl">
-        <property name="courseDAO" ref="courseJPADb"/>
-        <property name="studentDAO" ref="studentJPADb"/>
-        <property name="roomDAO" ref="roomJPADb"/>
+        <property name="courseDAO" ref="courseJPADAO"/>
+        <property name="studentDAO" ref="studentJPADAO"/>
+        <property name="tutorDAO" ref="tutorJPADAO"/>
+        <property name="roomDAO" ref="roomJPADAO"/>
+        <property name="lessonDAO" ref="lessonJPADAO"/>
+        <property name="bookingDAO" ref="bookingJPADAO"/>
     </bean>
 
     <!-- Validators -->
@@ -45,6 +67,10 @@
             <set>
                 <bean class="be.peerassistedlearningti.web.model.converter.RoomTypeConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.CampusConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.LessonConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.LessonInverseConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.StudentConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.StudentInverseConverter"/>
             </set>
         </property>
     </bean>
