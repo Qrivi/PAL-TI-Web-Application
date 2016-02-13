@@ -45,6 +45,10 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
+    <bean id="applicationJPADAO" class="be.peerassistedlearningti.dao.jpa.ApplicationJPADAO">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
     <!-- Service -->
 
     <bean id="service" class="be.peerassistedlearningti.service.PALServiceImpl">
@@ -54,6 +58,7 @@
         <property name="roomDAO" ref="roomJPADAO"/>
         <property name="lessonDAO" ref="lessonJPADAO"/>
         <property name="bookingDAO" ref="bookingJPADAO"/>
+        <property name="applicationDAO" ref="applicationJPADAO"/>
     </bean>
 
     <!-- Validators -->
