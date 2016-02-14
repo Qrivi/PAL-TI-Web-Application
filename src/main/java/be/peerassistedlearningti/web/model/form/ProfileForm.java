@@ -1,5 +1,6 @@
 package be.peerassistedlearningti.web.model.form;
 
+import be.peerassistedlearningti.web.model.validator.annotation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -13,6 +14,7 @@ public class ProfileForm
     private String email;
 
     @NotEmpty( message = "{NotEmpty.ProfileForm.password}" )
+    @CheckWithSessionPassword
     private String password;
 
     private String newPassword;

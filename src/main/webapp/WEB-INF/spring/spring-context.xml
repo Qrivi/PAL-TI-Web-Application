@@ -68,6 +68,7 @@
     <!-- Validators -->
 
     <bean id="profileValidator" class="be.peerassistedlearningti.web.model.validator.ProfileValidator"/>
+    <bean id="passwordValidator" class="be.peerassistedlearningti.web.model.validator.PasswordValidator"/>
 
     <!-- Converter service -->
 
