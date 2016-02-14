@@ -20,7 +20,7 @@ public class ApplicationController
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getApplicationOverviewPage()
     {
-        return new ModelAndView( "application", "applications", service.getAllApplications() );
+        return new ModelAndView( "application", "applications", service.getAllPendingApplications() );
     }
 
     @RequestMapping( value = "/approve/{id}", method = RequestMethod.POST )

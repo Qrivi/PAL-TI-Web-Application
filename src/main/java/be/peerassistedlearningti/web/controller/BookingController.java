@@ -66,9 +66,9 @@ public class BookingController
     public String removeBooking( @PathVariable( value = "id" ) int id )
     {
         Booking b = service.getBookingById( id );
-        Lesson l = service.getLessonById( 1 );
-        l.removeBooking( b );
-        service.updateLesson( l );
+        //Lesson l = service.getLessonById( 1 );
+        //l.removeBooking( b );
+        service.removeBooking( b );
         return "redirect:/booking/overview";
     }
 
