@@ -61,6 +61,10 @@
         <property name="applicationDAO" ref="applicationJPADAO"/>
     </bean>
 
+    <!-- File manager -->
+
+    <bean id="fileManager" class="be.peerassistedlearningti.web.model.file.FileManagerImpl"/>
+
     <!-- Validators -->
 
     <bean id="profileValidator" class="be.peerassistedlearningti.web.model.validator.ProfileValidator"/>
