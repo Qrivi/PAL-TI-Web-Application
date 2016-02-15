@@ -19,8 +19,6 @@
             <property name="hibernate.connection.url" value="jdbc:mysql://185.3.210.249:3306/PAL?autoReconnectForPools=true"/>
             <property name="hibernate.connection.username" value="PAL-TI"/>
             <property name="hibernate.connection.password" value="DjKdwfrmquJ9SL55"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <property name="hibernate.show.sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>
