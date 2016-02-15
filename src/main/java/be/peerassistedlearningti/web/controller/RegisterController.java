@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class RegisterController
         if ( result.hasErrors() )
             return new ModelAndView( "student_registration" );
 
-        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), false ) );
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), UserType.NORMAL ) );
 
         return new ModelAndView( "student_registration" );
     }

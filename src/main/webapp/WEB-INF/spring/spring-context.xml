@@ -61,15 +61,6 @@
         <property name="applicationDAO" ref="applicationJPADAO"/>
     </bean>
 
-    <!-- File manager -->
-
-    <bean id="fileManager" class="be.peerassistedlearningti.web.model.file.FileManagerImpl"/>
-
-    <!-- Validators -->
-
-    <bean id="profileValidator" class="be.peerassistedlearningti.web.model.validator.ProfileValidator"/>
-    <bean id="passwordValidator" class="be.peerassistedlearningti.web.model.validator.PasswordValidator"/>
-
     <!-- Converter service -->
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">

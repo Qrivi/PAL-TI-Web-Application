@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.web.model.validator;
+package be.peerassistedlearningti.web.model.validation;
 
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import org.springframework.validation.Errors;
@@ -9,7 +9,6 @@ import org.springframework.validation.Validator;
  */
 public class ProfileValidator implements Validator
 {
-
     public boolean supports( Class c )
     {
         return ProfileForm.class.equals( c );

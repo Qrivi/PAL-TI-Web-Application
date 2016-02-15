@@ -3,10 +3,11 @@ package be.peerassistedlearningti.web.controller;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
-import be.peerassistedlearningti.web.model.validator.ProfileValidator;
+import be.peerassistedlearningti.web.model.validation.ProfileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,28 +18,27 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping( value = "/profile" )
+@PreAuthorize( "hasRole('ROLE_USER')" )
 public class ProfileController
 {
 
     @Autowired
     private PALService service;
 
-    @Autowired
-    private ProfileValidator profileValidator;
-
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView modifyStudentProfile( ModelMap model )
+    public ModelAndView modifyStudentProfile( Authentication auth )
     {
-        // TODO : get student object from session (replace)
+        Student current = (Student) auth.getPrincipal();
         ProfileForm profile = new ProfileForm();
-        profile.setName( "David Op de Beeck" );
-        profile.setEmail( "davidopdebeeck@hotmail.com" );
+        profile.setName( current.getName() );
+        profile.setEmail( current.getEmail() );
         return new ModelAndView( "profile", "profile", profile );
     }
 
     @RequestMapping( method = RequestMethod.POST )
     public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result )
     {
+        ProfileValidator profileValidator = new ProfileValidator();
         profileValidator.validate( form, result );
 
         if ( result.hasErrors() )
@@ -54,9 +54,9 @@ public class ProfileController
             student.setPassword( form.getNewPassword() );
         }
 
-        // TODO update session object and update in database
+        // TODO update session object
 
-        //service.updateStudent( student );
+        service.updateStudent( student );
 
         return new ModelAndView( "profile" );
     }

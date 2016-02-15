@@ -42,7 +42,7 @@ public class StudentController
         if ( result.hasErrors() )
             return new ModelAndView( "student_add" );
 
-        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.isAdmin() ) );
+        //service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.isAdmin() ) );
 
         return new ModelAndView( "student_add" );
     }

@@ -2,7 +2,6 @@ package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.file.FileManager;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -23,9 +23,6 @@ public class ApplicationController
 {
     @Autowired
     private PALService service;
-
-    @Autowired
-    private FileManager fileManager;
 
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getApplicationOverviewPage()
@@ -59,12 +56,10 @@ public class ApplicationController
     @ResponseBody
     public void getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
-        File file = fileManager.getFile( service.getApplicationById( id )
-                .getScreenshotURL() );
         try
         {
-            File downloadFile = new File( file.getPath() );
-            InputStream is = new FileInputStream( downloadFile );
+            InputStream is = new ByteArrayInputStream( service.getApplicationById( id )
+                    .getScreenshot() );
             IOUtils.copy( is, response.getOutputStream() );
             response.flushBuffer();
         } catch ( Exception e ) {}

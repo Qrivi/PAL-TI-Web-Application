@@ -37,7 +37,7 @@ public class BookingController
         // Get from lesson
         final Course course = new Course( "MX2506", ".NET Programeren", ".NET" );
         // Get from session
-        final Student student = new Student( "David", "123", "davidopdebeeck@hotmail.com", true );
+        final Student student = new Student( "David", "123", "davidopdebeeck@hotmail.com", UserType.ADMIN );
         // Get from lesson
         Tutor tutor = new Tutor( student, new HashSet<Course>()
         {{ add( course );}} );
