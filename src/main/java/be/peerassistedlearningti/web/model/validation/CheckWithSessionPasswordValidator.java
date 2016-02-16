@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.model.validation;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import javax.validation.ConstraintValidator;
@@ -14,9 +15,7 @@ public class CheckWithSessionPasswordValidator implements ConstraintValidator<Ch
 
     public boolean isValid( String password, ConstraintValidatorContext constraintValidatorContext )
     {
-        Student current = (Student) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
+        Student current = SessionAuth.getStudent();
         return current.isPasswordValid( password );
     }
 
