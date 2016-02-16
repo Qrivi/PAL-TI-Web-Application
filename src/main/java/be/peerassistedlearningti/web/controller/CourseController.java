@@ -55,7 +55,7 @@ public class CourseController
         if ( result.hasErrors() )
             return new ModelAndView( "course_add" );
 
-        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName() ) );
+        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
 
         return new ModelAndView( "redirect:/course/overview" );
     }

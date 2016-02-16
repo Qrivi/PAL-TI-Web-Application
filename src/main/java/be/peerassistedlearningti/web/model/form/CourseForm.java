@@ -2,6 +2,8 @@ package be.peerassistedlearningti.web.model.form;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
+
 public class CourseForm
 {
 
@@ -13,6 +15,12 @@ public class CourseForm
 
     @NotEmpty( message = "{NotEmpty.CourseForm.shortName}" )
     private String shortName;
+
+    @NotEmpty(message = "{NotEmpty.CourseForm.curriculum}")
+    private String curriculum;
+
+    @Min(value = 1, message = "{Min.CourseForm.year}")
+    private int year;
 
     public CourseForm() {}
 
@@ -31,6 +39,14 @@ public class CourseForm
         this.shortName = shortName;
     }
 
+    public void setCurriculum(String curriculum) {
+        this.curriculum = curriculum;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public String getCode()
     {
         return code;
@@ -46,4 +62,11 @@ public class CourseForm
         return shortName;
     }
 
+    public String getCurriculum() {
+        return curriculum;
+    }
+
+    public int getYear() {
+        return year;
+    }
 }
