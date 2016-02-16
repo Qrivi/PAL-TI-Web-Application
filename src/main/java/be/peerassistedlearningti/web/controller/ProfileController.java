@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
 import be.peerassistedlearningti.web.model.validation.ProfileValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -44,19 +45,20 @@ public class ProfileController
         if ( result.hasErrors() )
             return new ModelAndView( "profile" );
 
-        Student student = new Student();
+        Student student = SessionAuth.getStudent();
 
         student.setName( form.getName() );
         student.setEmail( form.getEmail() );
-
-        if ( form.getNewPassword() != null )
+        if ( !form.getNewPassword().isEmpty())
         {
             student.setPassword( form.getNewPassword() );
         }
 
-        // TODO update session object
-
+        //TODO update session only if db is updated w/o errors
         service.updateStudent( student );
+        SessionAuth.setStudent(student);
+
+
 
         return new ModelAndView( "profile" );
     }
