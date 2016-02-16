@@ -20,5 +20,4 @@ public @interface CheckWithSessionPassword
     String message() default "{constraints.checkwithsessionpassword}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String algorithm() default "SHA-512";
 }
