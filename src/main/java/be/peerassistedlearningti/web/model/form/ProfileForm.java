@@ -1,5 +1,6 @@
 package be.peerassistedlearningti.web.model.form;
 
+import be.peerassistedlearningti.web.model.validation.CheckEmailExists;
 import be.peerassistedlearningti.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -10,6 +11,7 @@ public class ProfileForm
     private String name;
 
     @NotEmpty( message = "{NotEmpty.ProfileForm.email}" )
+    @CheckEmailExists( allowSessionEmail = true)
     @Email( message = "{Email.ProfileForm.email}" )
     private String email;
 
