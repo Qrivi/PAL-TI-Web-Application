@@ -5,27 +5,24 @@
 <form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
-        <form:input path="code" class="form-control" placeholder="Course code"/>
+        <form:input path="text" class="form-control" placeholder="Comment"/>
     </div>
     <div class="form-group">
-        <form:input path="name" class="form-control" placeholder="Course name"/>
+        <form:input type="number" min="1" max="10" path="contentScore" class="form-control" placeholder="Content score"/>
     </div>
     <div class="form-group">
-        <form:input path="shortName" class="form-control" placeholder="Course short name"/>
+        <form:input type="number" min="1" max="10" path="tutorScore" class="form-control" placeholder="Tutor score"/>
     </div>
     <div class="form-group">
-        <form:input path="curriculum" class="form-control" placeholder="Course curriculum"/>
+        <form:input type="number" min="1" max="10" path="engagementScore" class="form-control" placeholder="Engagement score"/>
     </div>
     <div class="form-group">
-        <form:input type="number" min="1" value="null" path="year" class="form-control" placeholder="Course year"/>
+        <form:input type="number" min="1" max="10" path="AtmosphereScore" class="form-control" placeholder="Atmosphere score"/>
     </div>
     <div class="form-group">
-        <form:input path="curriculum" class="form-control" placeholder="Curriculum"/>
+        <form:input type="checkbox" path="Anonymous" class="form-control" placeholder="Anonymous"/>
     </div>
-    <div class="form-group">
-        <form:input type="number" min="1" path="year" class="form-control" placeholder="Year"/>
-    </div>
-
+    
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>
     </div>

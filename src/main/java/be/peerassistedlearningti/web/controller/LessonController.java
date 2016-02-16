@@ -2,8 +2,10 @@ package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Campus;
 import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.LessonForm;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -60,9 +62,8 @@ public class LessonController
         if ( result.hasErrors() )
             return new ModelAndView( "lesson_add" );
 
-        /*TODO authenticated tutor
-        service.addLesson( new Lesson(lessonForm.getDate(), LessonForm.getName(), LessonForm.getDescription(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), ,lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
-        */
+        Tutor tutor = service.getTutorById(SessionAuth.getStudent().getId());
+        service.addLesson( new Lesson(lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor ,lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
 
         return new ModelAndView( "redirect:/lesson/overview" );
     }

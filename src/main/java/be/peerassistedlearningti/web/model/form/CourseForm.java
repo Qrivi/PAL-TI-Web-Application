@@ -3,7 +3,6 @@ package be.peerassistedlearningti.web.model.form;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
 
 public class CourseForm
 {
