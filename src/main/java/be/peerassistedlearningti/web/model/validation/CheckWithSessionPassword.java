@@ -15,7 +15,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface CheckWithSessionPassword
 {
-    String message() default "{constraints.checkwithsessionpassword}";
+    String message() default "{constraints.checkwithsessionpassword.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
