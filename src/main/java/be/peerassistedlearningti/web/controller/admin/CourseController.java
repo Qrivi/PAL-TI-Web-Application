@@ -25,13 +25,13 @@ public class CourseController extends AdminController
     @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "course", "courses", service.getAllCourses() );
+        return new ModelAndView("course", "courses", service.getAllCourses());
     }
 
     @RequestMapping( value = "/course/{id}", method = RequestMethod.GET )
     public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
-        return new ModelAndView( "course_add", "course", service.getCourseById( id ) );
+        return new ModelAndView("course_add", "course", service.getCourseById(id));
     }
 
     @RequestMapping( value = "/course/add", method = RequestMethod.GET )
@@ -43,8 +43,8 @@ public class CourseController extends AdminController
     @RequestMapping( value = "/course/remove/{id}", method = RequestMethod.POST )
     public String removeCourse( @PathVariable( value = "id" ) int id )
     {
-        Course c = service.getCourseById( id );
-        service.removeCourse( c );
+        Course c = service.getCourseById(id);
+        service.removeCourse(c);
         return "redirect:/course/overview";
     }
 
@@ -54,7 +54,7 @@ public class CourseController extends AdminController
         if ( result.hasErrors() )
             return new ModelAndView( "course_add" );
 
-        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
+        service.addCourse(new Course(courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear()));
 
         return new ModelAndView( "redirect:/course/overview" );
     }

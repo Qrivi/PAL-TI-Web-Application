@@ -76,10 +76,9 @@ public class LessonController
         return "redirect:/booking/add";
     }
 
-    @RequestMapping( value = "/reviews/lesson/{id}", method = RequestMethod.POST )
-    public ModelAndView getReviews( @PathVariable( value = "id" ) int id )
-    {
-        Lesson l = service.getLessonById( id );
-        return new ModelAndView( "lesson_add", "lesson", service.getLessonById( id ) );
+    @RequestMapping(value = "/reviews/lesson/{id}", method = RequestMethod.POST)
+    public ModelAndView getReviews(@PathVariable(value = "id") int id) {
+        Lesson l = service.getLessonById(id);
+        return new ModelAndView("lesson_add", "lesson", service.getLessonById(id));
     }
 }
