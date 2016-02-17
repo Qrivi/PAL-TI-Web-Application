@@ -2,11 +2,12 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <table>
     <th>
-        <td>Name</td>
-        <td>Course</td>
+    <td>Name</td>
+    <td>Course</td>
     <td>Description</td>
     <td>Date</td>
-    <td>Duration</td>7
+    <td>Duration</td>
+    7
     <td>Maximum Participants</td>
     <td>Tutor</td>
     <td>Room</td>

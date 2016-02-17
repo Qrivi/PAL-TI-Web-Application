@@ -17,7 +17,8 @@
         </form:select>
     </div>
     <div class="form-group">
-        Maximum number of participants (optional): <form:input type="number" min="1" path="maxParticipants" class="form-control"/>
+        Maximum number of participants (optional): <form:input type="number" min="1" path="maxParticipants"
+                                                               class="form-control"/>
     </div>
     <div>
         <form:select path="room" class="form-control" placeholder="Room">

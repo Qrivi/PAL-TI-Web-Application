@@ -30,9 +30,11 @@
                     </div>
                     <div class="col-lg-6">
                         <button type="submit" class="btn btn-default btn-raised pull-right">Login</button>
+                        <a href="/auth/reset">Forgot password ?</a>
                     </div>
                 </div>
             </fieldset>
         </form>
+
     </body>
 </html>
