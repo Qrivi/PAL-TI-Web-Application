@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping( value = "/student" )
-public class StudentController
+public class StudentCRUDController
 {
 
     @Autowired
