@@ -13,17 +13,18 @@ public class CheckEmailExistsValidator implements ConstraintValidator<CheckEmail
     @Autowired
     private PALService service;
 
-    private boolean allowSessionEmail;
+    private boolean allowSessionEmail, inverted;
 
     public void initialize( CheckEmailExists checkEmailExists )
     {
-        this.allowSessionEmail = checkEmailExists.allowSessionEmail();
+        allowSessionEmail = checkEmailExists.allowSessionEmail();
+        inverted = checkEmailExists.inverted();
     }
 
     public boolean isValid( String email, ConstraintValidatorContext constraintValidatorContext )
     {
-        return service.getStudentByEmail( email ) == null || ( allowSessionEmail && SessionAuth.getStudent()
+        return inverted != (service.getStudentByEmail(email) == null || (allowSessionEmail && SessionAuth.getStudent()
                 .getEmail()
-                .equals( email ) );
+                .equals(email)));
     }
 }
