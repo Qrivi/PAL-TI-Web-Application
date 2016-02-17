@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.controller.admin;
 
 import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.service.PALSpringService;
+import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.CourseForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,18 +20,18 @@ public class CourseController extends AdminController
 {
 
     @Autowired
-    private PALSpringService palSpringService;
+    private PALService service;
 
     @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "course", "courses", palSpringService.getAllCourses() );
+        return new ModelAndView( "course", "courses", service.getAllCourses() );
     }
 
     @RequestMapping( value = "/course/{id}", method = RequestMethod.GET )
     public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
-        return new ModelAndView( "course_add", "course", palSpringService.getCourseById( id ) );
+        return new ModelAndView( "course_add", "course", service.getCourseById( id ) );
     }
 
     @RequestMapping( value = "/course/add", method = RequestMethod.GET )
@@ -43,8 +43,8 @@ public class CourseController extends AdminController
     @RequestMapping( value = "/course/remove/{id}", method = RequestMethod.POST )
     public String removeCourse( @PathVariable( value = "id" ) int id )
     {
-        Course c = palSpringService.getCourseById( id );
-        palSpringService.removeCourse( c );
+        Course c = service.getCourseById( id );
+        service.removeCourse( c );
         return "redirect:/course/overview";
     }
 
@@ -54,7 +54,7 @@ public class CourseController extends AdminController
         if ( result.hasErrors() )
             return new ModelAndView( "course_add" );
 
-        palSpringService.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
+        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
 
         return new ModelAndView( "redirect:/course/overview" );
     }
