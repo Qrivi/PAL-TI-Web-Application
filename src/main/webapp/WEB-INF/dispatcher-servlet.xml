@@ -16,9 +16,11 @@
     http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <context:annotation-config/>
+    <context:component-scan base-package="be.peerassistedlearningti"/>
+
     <mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
     <security:global-method-security pre-post-annotations="enabled"/>
-    <context:component-scan base-package="be.peerassistedlearningti"/>
 
     <!-- View Resolver -->
 
@@ -32,7 +34,7 @@
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="exceptionMappings">
             <props>
-                <prop key=".AccessDeniedException">redirect:auth/login</prop>
+                <prop key=".AccessDeniedException">redirect:/auth/login</prop>
             </props>
         </property>
     </bean>

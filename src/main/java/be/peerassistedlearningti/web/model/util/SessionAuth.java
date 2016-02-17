@@ -13,7 +13,8 @@ import java.util.ArrayList;
 /**
  * Class used to get/set the Authenticated user
  */
-public class SessionAuth {
+public class SessionAuth
+{
 
     /**
      * Sets the current session's authenticated user
@@ -21,12 +22,14 @@ public class SessionAuth {
      * @param student The new authenticated student
      * @see Student
      */
-    public static void setStudent(Student student){
-        Authentication auth = new UsernamePasswordAuthenticationToken(student, student.getPassword(),new ArrayList<GrantedAuthority>(){{add(new SimpleGrantedAuthority("ROLE_USER"));}});
+    public static void setStudent( Student student )
+    {
+        Authentication auth = new UsernamePasswordAuthenticationToken( student, student.getPassword(), new ArrayList<GrantedAuthority>()
+        {{add( new SimpleGrantedAuthority( "ROLE_USER" ) );}} );
 
         SecurityContext securityContext = SecurityContextHolder.getContext();
-        securityContext.setAuthentication(auth);
-        SecurityContextHolder.setContext(securityContext);
+        securityContext.setAuthentication( auth );
+        SecurityContextHolder.setContext( securityContext );
     }
 
     /**
@@ -35,7 +38,8 @@ public class SessionAuth {
      * @return The current authenticated student
      * @see Student
      */
-    public static Student getStudent(){
+    public static Student getStudent()
+    {
         return (Student) SecurityContextHolder.getContext()
                 .getAuthentication()
                 .getPrincipal();

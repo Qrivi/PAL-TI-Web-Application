@@ -5,21 +5,20 @@
 <form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
-        <form:input path="code" class="form-control" placeholder="Course Code"/>
+        <form:input path="code" class="form-control" placeholder="Course code"/>
     </div>
     <div class="form-group">
-        <form:input path="name" class="form-control" placeholder="Course Name"/>
+        <form:input path="name" class="form-control" placeholder="Course name"/>
     </div>
     <div class="form-group">
-        <form:input path="shortName" class="form-control" placeholder="Course Short Name"/>
+        <form:input path="shortName" class="form-control" placeholder="Course short name"/>
     </div>
     <div class="form-group">
-        <form:input path="curriculum" class="form-control" placeholder="Curriculum"/>
+        <form:input path="curriculum" class="form-control" placeholder="Course curriculum"/>
     </div>
     <div class="form-group">
-        <form:input type="number" min="1" path="year" class="form-control" placeholder="Year"/>
+        <form:input type="number" min="1" value="null" path="year" class="form-control" placeholder="Course year"/>
     </div>
-
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>
     </div>

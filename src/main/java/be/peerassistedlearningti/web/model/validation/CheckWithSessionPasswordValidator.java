@@ -10,8 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 public class CheckWithSessionPasswordValidator implements ConstraintValidator<CheckWithSessionPassword, String>
 {
 
-    public void initialize( CheckWithSessionPassword checkWithSessionPassword )
-    {}
+    public void initialize( CheckWithSessionPassword checkWithSessionPassword ) {}
 
     public boolean isValid( String password, ConstraintValidatorContext constraintValidatorContext )
     {

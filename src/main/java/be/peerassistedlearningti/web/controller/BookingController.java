@@ -35,7 +35,7 @@ public class BookingController
     public ModelAndView getBookingAddPage()
     {
         // Get from lesson
-        final Course course = new Course( "MX2506", ".NET Programeren", ".NET" );
+        final Course course = new Course( "MX2506", ".NET Programeren", ".NET", "", 1 );
         // Get from session
         final Student student = new Student( "David", "123", "davidopdebeeck@hotmail.com", UserType.ADMIN );
         // Get from lesson

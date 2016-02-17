@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller.auth;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.service.PALSpringService;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@PreAuthorize( "hasRole('ROLE_ANONYMOUS')" )
 @RequestMapping( value = "/auth" )
 public class AuthController
 {
@@ -46,15 +46,6 @@ public class AuthController
     {
         if ( result.hasErrors() )
             return new ModelAndView( "auth/register" );
-
-        String email = form.getEmail()
-                .toLowerCase();
-
-        if ( service.getStudentByEmail( email ) != null )
-        {
-            result.reject( "EmailInUse.StudentForm.email" );
-            return new ModelAndView( "auth/register" );
-        }
 
         service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail()
                 .toLowerCase(), UserType.NORMAL ) );

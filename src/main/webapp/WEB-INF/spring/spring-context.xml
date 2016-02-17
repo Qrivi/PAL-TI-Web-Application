@@ -3,63 +3,14 @@
 <beans
         xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
 
         xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-
-    <!-- Entity manager factory -->
-
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="PAL"/>
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
-    </bean>
-
-    <!-- DAOs -->
-
-    <bean id="courseJPADAO" class="be.peerassistedlearningti.dao.jpa.CourseJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <bean id="studentJPADAO" class="be.peerassistedlearningti.dao.jpa.StudentJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <bean id="tutorJPADAO" class="be.peerassistedlearningti.dao.jpa.TutorJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <bean id="roomJPADAO" class="be.peerassistedlearningti.dao.jpa.RoomJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <bean id="lessonJPADAO" class="be.peerassistedlearningti.dao.jpa.LessonJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <bean id="bookingJPADAO" class="be.peerassistedlearningti.dao.jpa.BookingJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <bean id="applicationJPADAO" class="be.peerassistedlearningti.dao.jpa.ApplicationJPADAO">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </bean>
-
-    <!-- Service -->
-
-    <bean id="service" class="be.peerassistedlearningti.service.PALServiceImpl">
-        <property name="courseDAO" ref="courseJPADAO"/>
-        <property name="studentDAO" ref="studentJPADAO"/>
-        <property name="tutorDAO" ref="tutorJPADAO"/>
-        <property name="roomDAO" ref="roomJPADAO"/>
-        <property name="lessonDAO" ref="lessonJPADAO"/>
-        <property name="bookingDAO" ref="bookingJPADAO"/>
-        <property name="applicationDAO" ref="applicationJPADAO"/>
-    </bean>
+    <context:component-scan base-package="be.peerassistedlearningti"/>
 
     <!-- Converter service -->
 
@@ -84,7 +35,7 @@
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize" value="-1"/>
+        <property name="maxUploadSize" value="20971520"/>
     </bean>
 
     <!-- Localization of hibernate messages during validation -->
