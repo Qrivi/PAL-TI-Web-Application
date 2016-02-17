@@ -55,7 +55,8 @@ public class AuthController
 
     @RequestMapping(value = "/reset", method = RequestMethod.GET)
     public ModelAndView resetPassword() {
-        return new ModelAndView("auth/reset");
+        System.out.println("TEST TO OUTPUT");
+        return new ModelAndView("auth/reset", "resetRequest", new ResetRequestForm());
     }
 
     @RequestMapping(value = "/reset", method = RequestMethod.POST)
@@ -70,9 +71,11 @@ public class AuthController
             result.reject("ReqLimit.AuthController.Token");
             return new ModelAndView("auth/reset");
         }
-        ResetMail.send(student.getEmail(), student.issuePasswordReset());
+        ResetMail.send(student, student.issuePasswordReset());
+        service.updateStudent(student);
 
-        return new ModelAndView("auth/reset_validation");
+        //TODO::message success to user
+        return new ModelAndView("redirect:/auth/login");
     }
 
     @RequestMapping(value = "/reset/validate/{email}/{token}", method = RequestMethod.POST)
@@ -80,8 +83,9 @@ public class AuthController
             @PathVariable(value = "email") String email,
             @PathVariable(value = "token") String token,
             @Valid @ModelAttribute("reset") ResetForm form, BindingResult result) {
+        //TODO :: Only show errors on post
         if (result.hasErrors())
-            return new ModelAndView("auth/reset");
+            return new ModelAndView("auth/reset_validation");
 
         Student student = service.getStudentByEmail(email);
         if (student.validatePasswordReset(token)) {
