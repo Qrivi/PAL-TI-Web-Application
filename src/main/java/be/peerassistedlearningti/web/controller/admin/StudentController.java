@@ -1,6 +1,7 @@
-package be.peerassistedlearningti.web.controller;
+package be.peerassistedlearningti.web.controller.admin;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class StudentController
         if ( result.hasErrors() )
             return new ModelAndView( "student_add" );
 
-        //service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.isAdmin() ) );
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), UserType.NORMAL ) );
 
         return new ModelAndView( "student_add" );
     }

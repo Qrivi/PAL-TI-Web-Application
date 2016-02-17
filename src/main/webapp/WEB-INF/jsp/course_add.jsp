@@ -20,13 +20,6 @@
         <form:input type="number" min="1" value="null" path="year" class="form-control" placeholder="Course year"/>
     </div>
     <div class="form-group">
-        <form:input path="curriculum" class="form-control" placeholder="Curriculum"/>
-    </div>
-    <div class="form-group">
-        <form:input type="number" min="1" path="year" class="form-control" placeholder="Year"/>
-    </div>
-
-    <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>
     </div>
 </form:form>

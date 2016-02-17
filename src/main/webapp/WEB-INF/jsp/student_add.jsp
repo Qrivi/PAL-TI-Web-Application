@@ -14,7 +14,7 @@
         <form:password path="password" class="form-control" placeholder="Password"/>
     </div>
     <div class="form-group">
-        <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
+        <form:password path="newRepeatPassword" class="form-control" placeholder="Repeat Password"/>
     </div>
     <div class="form-group">
         <form:checkbox path="admin" class="form-control" placeholder="Admin"/>

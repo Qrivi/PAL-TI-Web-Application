@@ -39,9 +39,6 @@ public class ProfileController
     @RequestMapping( method = RequestMethod.POST )
     public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result )
     {
-        ProfileValidator profileValidator = new ProfileValidator();
-        profileValidator.validate( form, result );
-
         if ( result.hasErrors() )
             return new ModelAndView( "profile" );
 
@@ -49,15 +46,15 @@ public class ProfileController
 
         student.setName( form.getName() );
         student.setEmail( form.getEmail() );
-        if ( !form.getNewPassword().isEmpty())
+        if ( !form.getNewPassword()
+                .isEmpty() )
         {
             student.setPassword( form.getNewPassword() );
         }
 
         //TODO update session only if db is updated w/o errors
         service.updateStudent( student );
-        SessionAuth.setStudent(student);
-
+        SessionAuth.setStudent( student );
 
 
         return new ModelAndView( "profile" );

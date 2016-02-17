@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.common.model.validation.FieldMatch;
+import be.peerassistedlearningti.web.model.validation.CheckEmailExists;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -13,6 +14,7 @@ public class StudentForm
 
     @NotEmpty( message = "{NotEmpty.StudentForm.email}" )
     @Email( message = "{Email.StudentForm.email}" )
+    @CheckEmailExists( message = "{CheckEmailExists.StudentForm.email}" )
     private String email;
 
     @NotEmpty( message = "{NotEmpty.StudentForm.password}" )

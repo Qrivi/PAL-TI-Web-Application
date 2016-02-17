@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface CheckEmailExists
 {
-    String message() default  "{constraints.checkemailexists.message}";
+    String message() default "{constraints.checkemailexists.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     public boolean allowSessionEmail() default false;

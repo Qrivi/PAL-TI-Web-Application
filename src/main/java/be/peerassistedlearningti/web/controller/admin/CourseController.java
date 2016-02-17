@@ -1,7 +1,7 @@
-package be.peerassistedlearningti.web.controller;
+package be.peerassistedlearningti.web.controller.admin;
 
 import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.service.PALSpringService;
 import be.peerassistedlearningti.web.model.form.CourseForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,46 +16,45 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping( value = "/course" )
-public class CourseController
+public class CourseController extends AdminController
 {
 
     @Autowired
-    private PALService service;
+    private PALSpringService palSpringService;
 
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
+    @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "course", "courses", service.getAllCourses() );
+        return new ModelAndView( "course", "courses", palSpringService.getAllCourses() );
     }
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    @RequestMapping( value = "/course/{id}", method = RequestMethod.GET )
     public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
-        return new ModelAndView( "course_add", "course", service.getCourseById( id ) );
+        return new ModelAndView( "course_add", "course", palSpringService.getCourseById( id ) );
     }
 
-    @RequestMapping( value = "/add", method = RequestMethod.GET )
+    @RequestMapping( value = "/course/add", method = RequestMethod.GET )
     public ModelAndView getCourseAddPage()
     {
         return new ModelAndView( "course_add", "course", new CourseForm() );
     }
 
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/course/remove/{id}", method = RequestMethod.POST )
     public String removeCourse( @PathVariable( value = "id" ) int id )
     {
-        Course c = service.getCourseById( id );
-        service.removeCourse( c );
+        Course c = palSpringService.getCourseById( id );
+        palSpringService.removeCourse( c );
         return "redirect:/course/overview";
     }
 
-    @RequestMapping( value = "/add", method = RequestMethod.POST )
+    @RequestMapping( value = "/course/add", method = RequestMethod.POST )
     public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "course_add" );
 
-        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(),courseForm.getCurriculum(), courseForm.getYear() ) );
+        palSpringService.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
 
         return new ModelAndView( "redirect:/course/overview" );
     }

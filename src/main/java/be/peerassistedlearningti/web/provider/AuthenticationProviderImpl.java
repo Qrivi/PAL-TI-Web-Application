@@ -40,6 +40,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
             {
                 {
                     add( new SimpleGrantedAuthority( "ROLE_USER" ) );
+                    // TODO remove this when live
+                    add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
                 }
             } );
         }
