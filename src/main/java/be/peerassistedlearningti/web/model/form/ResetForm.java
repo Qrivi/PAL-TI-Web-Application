@@ -8,8 +8,8 @@ public class ResetForm {
 
     @NotEmpty(message = "{NotEmpty.ResetForm.password}")
     private String password;
-    @NotEmpty(message = "{NotEmpty.ResetForm.passwordRepeat}")
-    private String passwordRepeat;
+    @NotEmpty(message = "{NotEmpty.ResetForm.repeatPassword}")
+    private String repeatPassword;
 
     public ResetForm() {
     }
@@ -22,11 +22,11 @@ public class ResetForm {
         this.password = password;
     }
 
-    public String getPasswordRepeat() {
-        return passwordRepeat;
+    public String getRepeatPassword() {
+        return repeatPassword;
     }
 
-    public void setPasswordRepeat(String passwordRepeat) {
-        this.passwordRepeat = passwordRepeat;
+    public void setRepeatPassword(String repeatPassword) {
+        this.repeatPassword = repeatPassword;
     }
 }
