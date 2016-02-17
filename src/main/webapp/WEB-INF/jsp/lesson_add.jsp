@@ -17,17 +17,21 @@
         </form:select>
     </div>
     <div class="form-group">
-        <form:input type="number" path="maxParticipants" class="form-control" placeholder="Maximum number of participants (optional)"/>
+        Maximum number of participants (optional): <form:input type="number" min="1" path="maxParticipants" class="form-control"/>
     </div>
-    <form:select path="room" class="form-control" placeholder="Room">
-        <form:option value="NONE" label="--- Select ---"/>
-        <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
-    </form:select>
+    <div>
+        <form:select path="room" class="form-control" placeholder="Room">
+            <form:option value="NONE" label="--- Room ---"/>
+            <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
+        </form:select>
+    </div>
 
-    <form:select path="backupRoom" class="form-control" placeholder="Backup room">
-        <form:option value="NONE" label="--- Select ---"/>
-        <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
-    </form:select>
+    <div>
+        <form:select path="backupRoom" class="form-control">
+            <form:option value="NONE" label="--- Backup Room ---"/>
+            <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
+        </form:select>
+    </div>
 
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>
