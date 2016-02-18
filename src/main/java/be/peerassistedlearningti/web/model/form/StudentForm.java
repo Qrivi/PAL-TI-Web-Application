@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.common.model.validation.FieldMatch;
-import be.peerassistedlearningti.web.model.validation.CheckEmailExists;
+import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,7 +14,7 @@ public class StudentForm
 
     @NotEmpty( message = "{NotEmpty.StudentForm.email}" )
     @Email( message = "{Email.StudentForm.email}" )
-    @CheckEmailExists( message = "{CheckEmailExists.StudentForm.email}" )
+    @CheckEmailIsUnique(message = "{CheckEmailIsUnique.StudentForm.email}")
     private String email;
 
     @NotEmpty( message = "{NotEmpty.StudentForm.password}" )
@@ -27,34 +27,14 @@ public class StudentForm
 
     public StudentForm() {}
 
-    public void setName( String name )
-    {
-        this.name = name;
-    }
-
-    public void setEmail( String email )
-    {
-        this.email = email;
-    }
-
-    public void setPassword( String password )
-    {
-        this.password = password;
-    }
-
-    public void setRepeatPassword( String repeatPassword )
-    {
-        this.repeatPassword = repeatPassword;
-    }
-
-    public void setAdmin( boolean admin )
-    {
-        this.admin = admin;
-    }
-
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     public String getEmail()
@@ -62,9 +42,19 @@ public class StudentForm
         return email;
     }
 
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
     public String getPassword()
     {
         return password;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
     }
 
     public String getRepeatPassword()
@@ -72,9 +62,19 @@ public class StudentForm
         return repeatPassword;
     }
 
+    public void setRepeatPassword(String repeatPassword)
+    {
+        this.repeatPassword = repeatPassword;
+    }
+
     public boolean isAdmin()
     {
         return admin;
+    }
+
+    public void setAdmin(boolean admin)
+    {
+        this.admin = admin;
     }
 
 }

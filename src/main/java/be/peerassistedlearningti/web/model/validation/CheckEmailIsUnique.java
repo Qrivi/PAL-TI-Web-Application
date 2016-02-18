@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target( { METHOD , FIELD , ANNOTATION_TYPE } )
+@Target({METHOD, FIELD, ANNOTATION_TYPE})
 @Retention( RUNTIME )
-@Constraint( validatedBy = CheckEmailExistsValidator.class )
+@Constraint(validatedBy = CheckEmailIsUniqueValidator.class)
 @Documented
-public @interface CheckEmailExists
+public @interface CheckEmailIsUnique
 {
     String message() default "{constraints.checkemailexists.message}";
     Class<?>[] groups() default {};
