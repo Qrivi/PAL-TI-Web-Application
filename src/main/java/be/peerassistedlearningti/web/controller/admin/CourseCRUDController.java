@@ -45,7 +45,7 @@ public class CourseCRUDController extends AdminController
     {
         Course c = service.getCourseById(id);
         service.removeCourse(c);
-        return "redirect:/course/overview";
+        return "redirect:/admin/course/overview";
     }
 
     @RequestMapping( value = "/course/add", method = RequestMethod.POST )
@@ -56,7 +56,7 @@ public class CourseCRUDController extends AdminController
 
         service.addCourse(new Course(courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear()));
 
-        return new ModelAndView( "redirect:/course/overview" );
+        return new ModelAndView( "redirect:/admin/course/overview" );
     }
 
 }

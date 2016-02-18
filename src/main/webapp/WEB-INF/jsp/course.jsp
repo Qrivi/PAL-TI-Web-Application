@@ -20,16 +20,18 @@
             <td>${course.year}</td>
             <td>${course.subscribers.size()}</td>
             <td>
-                <c:when test="${!course.isSubscribed(SessionAuth.student)}">
-                    <form id="subscribe" action="<c:url value="/course/subscribe/${course.id}" />" method="POST">
-                        <input type="submit" value="Subscribe"/>
-                    </form>
-                </c:when>
-                <c:otherwise>
-                    <form id="unsubscribe" action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
-                        <input type="submit" value="Unsubscribe"/>
-                    </form>
-                </c:otherwise>
+                <c:choose>
+                    <c:when test="${!course.isSubscribed(SessionAuth.student)}">
+                        <form id="subscribe" action="<c:url value="/course/subscribe/${course.id}" />" method="POST">
+                            <input type="submit" value="Subscribe"/>
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <form id="unsubscribe" action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
+                            <input type="submit" value="Unsubscribe"/>
+                        </form>
+                    </c:otherwise>
+                </c:choose>
             </td>
             <td>
                 <form id="command" action="<c:url value="/course/remove/${course.id}" />" method="POST">
