@@ -24,6 +24,7 @@
         <group-ref>ion-icons</group-ref>
         <css>/assets/dist/css/AdminLTE.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
+        <css>/assets/app/css/login.css</css>
         <!-- js -->
         <group-ref>jquery</group-ref>
         <group-ref>bootstrap-js</group-ref>

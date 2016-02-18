@@ -33,7 +33,7 @@
                             <div class="col-xs-8">
                                 <div class="checkbox icheck">
                                     <label>
-                                        <input type="checkbox"> <span style="display:inline-block;margin-left: 5px;vertical-align: middle;padding: 1px 0px;">Remember Me</span>
+                                        <input type="checkbox"> <span>Remember Me</span>
                                     </label>
                                 </div>
                             </div>

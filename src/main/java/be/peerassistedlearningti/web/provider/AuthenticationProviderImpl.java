@@ -26,8 +26,6 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
                 .toString();
         Student student;
 
-        System.out.println( email + " " + password );
-
         try
         {
             student = service.getStudentByEmail( email );
