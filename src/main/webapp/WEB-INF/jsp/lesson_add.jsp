@@ -2,19 +2,37 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
+
 <form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
-        Date: <form:input path="name" class="form-control" placeholder="Name"/>
+        <form:input path="name" class="form-control" placeholder="Name"/>
     </div>
     <div class="form-group">
-        Date: <form:input path="description" class="form-control" placeholder="Description"/>
+        <form:input path="description" class="form-control" placeholder="Description"/>
     </div>
     <div class="form-group">
-        Date: <form:input path="date" type="datetime" class="form-control" placeholder="Date"/>
-    </div>
-    <div class="form-group">
-        Date: <form:input path="time" type="datetime" class="form-control" placeholder="Time"/>
+        Date & Time:
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+                </script>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         Duration: <form:input path="duration" type="time" class="form-control" placeholder="Lesson duration (optional)"/>
