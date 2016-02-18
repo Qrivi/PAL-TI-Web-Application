@@ -5,7 +5,7 @@
     <jsp:include page="../include/head.jsp">
         <jsp:param value="Login" name="title"/>
     </jsp:include>
-    <body>
+    <body class="hold-transition login-page">
         <body class="hold-transition login-page">
             <div class="login-box">
                 <div class="login-logo">
@@ -47,8 +47,6 @@
                     <a href="<c:url value="/auth/register"/>" class="text-center">Register a new membership</a>
                 </div>
             </div>
-            <jsp:include page="../include/footer.jsp">
-                <jsp:param value="Login" name="title"/>
-            </jsp:include>
+            <jsp:include page="../include/footer.jsp"/>
         </body>
 </html>

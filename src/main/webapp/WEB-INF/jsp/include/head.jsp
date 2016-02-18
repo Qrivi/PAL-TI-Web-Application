@@ -8,9 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <c:if test="${param.title == 'Login'}">
-        <link href="<c:url value="/resources/login.css"/>" rel="stylesheet">
-    </c:if>
+    <link href="<c:url value="/resources/global.css"/>" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
