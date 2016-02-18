@@ -11,6 +11,7 @@
                 <div class="login-logo">
                     <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
                 </div>
+                <jsp:include page="../include/generic_message.jsp"/>
                 <c:if test="${not empty error}">
                     <div class="callout callout-danger lead">
                         <p>

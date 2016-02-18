@@ -1,10 +1,20 @@
 package be.peerassistedlearningti.web.model.util;
 
 
+/**
+ * Class used to send generic messages between pages
+ */
 public class GenericMessage {
+
     private String message;
     private MessageType type;
 
+    /**
+     * Constructs the message
+     *
+     * @param message The message string
+     * @param type    The type of message
+     */
     public GenericMessage(String message, MessageType type) {
         this.message = message;
         this.type = type;

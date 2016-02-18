@@ -73,8 +73,7 @@ public class AuthController
             ResetMail.send(student, student.issuePasswordReset());
             service.updateStudent(student);
 
-            //TODO::message success to user
-            return new ModelAndView("redirect:/auth/login");
+            return new ModelAndView("auth/login", "message", new GenericMessage("Success.AuthController.Mail", GenericMessage.MessageType.success));
         }
     }
 
@@ -98,12 +97,11 @@ public class AuthController
         if (student.validatePasswordReset(token)) {
             student.setPassword(form.getPassword());
             service.updateStudent(student);
-            //TODO::message success to user
-            return new ModelAndView("redirect:/auth/login");
+            return new ModelAndView("redirect:/auth/login", "message", new GenericMessage("Success.AuthController.PasswordReset", GenericMessage.MessageType.success));
         } else {
             ModelMap map = new ModelMap();
             map.addAttribute("reset", form);
-            map.addAttribute("message", new GenericMessage("Invalid.AuthController.Token", GenericMessage.MessageType.success));
+            map.addAttribute("message", new GenericMessage("Invalid.AuthController.Token", GenericMessage.MessageType.danger));
             return new ModelAndView("auth/reset_validation", map);
         }
     }
