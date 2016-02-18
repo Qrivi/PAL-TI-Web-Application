@@ -5,14 +5,23 @@
 <form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">
-        <form:input path="date" type="datetime" class="form-control" placeholder="Date & Time"/>
+        Date: <form:input path="name" class="form-control" placeholder="Name"/>
     </div>
     <div class="form-group">
-        <form:input path="duration" type="time" class="form-control" placeholder="Lesson duration (optional)"/>
+        Date: <form:input path="description" class="form-control" placeholder="Description"/>
+    </div>
+    <div class="form-group">
+        Date: <form:input path="date" type="datetime" class="form-control" placeholder="Date"/>
+    </div>
+    <div class="form-group">
+        Date: <form:input path="time" type="datetime" class="form-control" placeholder="Time"/>
+    </div>
+    <div class="form-group">
+        Duration: <form:input path="duration" type="time" class="form-control" placeholder="Lesson duration (optional)"/>
     </div>
     <div class="form-group">
         <form:select path="course" class="form-control" placeholder="Course">
-            <form:option value="NONE" label="--- Select ---"/>
+            <form:option value="NONE" label="--- Course ---"/>
             <form:options items="${courses}" itemValue="id" itemLabel="name"/>
         </form:select>
     </div>
