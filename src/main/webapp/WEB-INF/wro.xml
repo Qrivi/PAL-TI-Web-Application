@@ -16,8 +16,8 @@
     <group name="jquery">
         <js>https://code.jquery.com/jquery-2.2.0.min.js</js>
     </group>
-    <!-- Page specific libraries -->
-    <group name="login">
+    <!-- Global -->
+    <group name="global">
         <!-- css -->
         <group-ref>bootstrap-css</group-ref>
         <group-ref>font-awesome</group-ref>
@@ -25,6 +25,7 @@
         <css>/assets/dist/css/AdminLTE.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
         <css>/assets/app/css/login.css</css>
+        <css>/assets/app/css/register.css</css>
         <!-- js -->
         <group-ref>jquery</group-ref>
         <group-ref>bootstrap-js</group-ref>

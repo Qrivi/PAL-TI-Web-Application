@@ -2,7 +2,7 @@
 <c:if test="${not empty message}">
     <div class="callout callout-<c:out value="${message.type}"/> lead">
         <p>
-            <c:out value="${message.message}"/>.
+            <c:out value="${message.message}"/>
         </p>
     </div>
 </c:if>

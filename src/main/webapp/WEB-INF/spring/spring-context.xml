@@ -12,6 +12,10 @@
     <context:annotation-config/>
     <context:component-scan base-package="be.peerassistedlearningti"/>
 
+    <!-- Message factory -->
+
+    <bean class="be.peerassistedlearningti.web.model.util.MessageFactory"/>
+
     <!-- Converter service -->
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">

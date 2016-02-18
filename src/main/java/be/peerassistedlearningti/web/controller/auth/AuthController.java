@@ -7,8 +7,11 @@ import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import be.peerassistedlearningti.web.model.util.GenericMessage;
+import be.peerassistedlearningti.web.model.util.MessageFactory;
 import be.peerassistedlearningti.web.model.util.ResetMail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -26,6 +29,10 @@ public class AuthController
     @Autowired
     private PALService service;
 
+    //================================================================================
+    // region Login
+    //================================================================================
+
     @RequestMapping( value = "/login", method = RequestMethod.GET )
     public ModelAndView getLoginPage( @RequestParam( value = "error", required = false ) boolean error, ModelMap model )
     {
@@ -33,6 +40,14 @@ public class AuthController
             model.addAttribute( "error", true );
         return new ModelAndView( "auth/login", model );
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Register
+    //================================================================================
 
     @RequestMapping( value = "/register", method = RequestMethod.GET )
     public ModelAndView registerStudent( ModelMap model )
@@ -53,57 +68,78 @@ public class AuthController
         return new ModelAndView( "redirect:/auth/login" );
     }
 
-    @RequestMapping(value = "/reset", method = RequestMethod.GET)
-    public ModelAndView resetPassword() {
-        return new ModelAndView("auth/reset", "resetRequest", new ResetRequestForm());
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Reset
+    //================================================================================
+
+    @RequestMapping( value = "/reset", method = RequestMethod.GET )
+    public ModelAndView resetPassword()
+    {
+        return new ModelAndView( "auth/reset", "resetRequest", new ResetRequestForm() );
     }
 
-    @RequestMapping(value = "/reset", method = RequestMethod.POST)
-    public ModelAndView resetPassword(@Valid @ModelAttribute("resetRequest") ResetRequestForm form, BindingResult result) {
-        if (result.hasErrors())
-            return new ModelAndView("auth/reset");
-        Student student = service.getStudentByEmail(form.getEmail());
+    @RequestMapping( value = "/reset", method = RequestMethod.POST )
+    public ModelAndView resetPassword( @Valid @ModelAttribute( "resetRequest" ) ResetRequestForm form, BindingResult result )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "auth/reset" );
 
-        //max 1 reset request an hour
-        if (student.getResetTokenExpiration() != null &&
-                student.getResetTokenExpiration().getTime() - new Date().getTime() > 0) {
-            result.reject("ReqLimit.AuthController.Token");
-            return new ModelAndView("auth/reset");
-        } else {
-            ResetMail.send(student, student.issuePasswordReset());
-            service.updateStudent(student);
+        Student student = service.getStudentByEmail( form.getEmail() );
 
-            return new ModelAndView("auth/login", "message", new GenericMessage("Success.AuthController.Mail", GenericMessage.MessageType.success));
+        // max 1 reset request an hour
+        if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration()
+                .getTime() - new Date().getTime() > 0 )
+        {
+            return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
+        } else
+        {
+            ResetMail.send( student, student.issuePasswordReset() );
+            service.updateStudent( student );
+            return new ModelAndView( "auth/reset", "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
         }
     }
 
+    //================================================================================
+    // endregion
+    //================================================================================
 
-    @RequestMapping(value = "/reset/validate/{email}/{token}/", method = RequestMethod.GET)
-    public ModelAndView resetPasswordValidation(
-            @PathVariable(value = "email") String email,
-            @PathVariable(value = "token") String token) {
-        return new ModelAndView("auth/reset_validation", "reset", new ResetForm());
+    //================================================================================
+    // region Validate
+    //================================================================================
+
+    @RequestMapping( value = "/reset/validate/{email}/{token}/", method = RequestMethod.GET )
+    public ModelAndView resetPasswordValidation( @PathVariable( value = "email" ) String email, @PathVariable( value = "token" ) String token )
+    {
+        return new ModelAndView( "auth/reset_validation", "reset", new ResetForm() );
     }
 
-    @RequestMapping(value = "/reset/validate/{email}/{token}/", method = RequestMethod.POST)
-    public ModelAndView resetPasswordValidation(
-            @PathVariable(value = "email") String email,
-            @PathVariable(value = "token") String token,
-            @Valid @ModelAttribute("reset") ResetForm form, BindingResult result) {
-        if (result.hasErrors())
-            return new ModelAndView("auth/reset_validation", "reset", form);
+    @RequestMapping( value = "/reset/validate/{email}/{token}/", method = RequestMethod.POST )
+    public ModelAndView resetPasswordValidation( @PathVariable( value = "email" ) String email, @PathVariable( value = "token" ) String token, @Valid @ModelAttribute( "reset" ) ResetForm form, BindingResult result )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "auth/reset_validation", "reset", form );
 
-        Student student = service.getStudentByEmail(email);
-        if (student.validatePasswordReset(token)) {
-            student.setPassword(form.getPassword());
-            service.updateStudent(student);
-            return new ModelAndView("redirect:/auth/login", "message", new GenericMessage("Success.AuthController.PasswordReset", GenericMessage.MessageType.success));
-        } else {
+        Student student = service.getStudentByEmail( email );
+        if ( student.validatePasswordReset( token ) )
+        {
+            student.setPassword( form.getPassword() );
+            service.updateStudent( student );
+            return new ModelAndView( "redirect:/auth/login", "message", new GenericMessage( "Success.AuthController.PasswordReset", GenericMessage.MessageType.success ) );
+        } else
+        {
             ModelMap map = new ModelMap();
-            map.addAttribute("reset", form);
-            map.addAttribute("message", new GenericMessage("Invalid.AuthController.Token", GenericMessage.MessageType.danger));
-            return new ModelAndView("auth/reset_validation", map);
+            map.addAttribute( "reset", form );
+            map.addAttribute( "message", new GenericMessage( "Invalid.AuthController.Token", GenericMessage.MessageType.danger ) );
+            return new ModelAndView( "auth/reset_validation", map );
         }
     }
+
+    //================================================================================
+    // endregion
+    //================================================================================
 
 }
