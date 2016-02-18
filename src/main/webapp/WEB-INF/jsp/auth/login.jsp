@@ -1,40 +1,53 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+    <jsp:include page="../include/head.jsp">
+        <jsp:param value="Login" name="title"/>
+    </jsp:include>
     <body>
-        <c:if test="${not empty error}">
-            <div class="alert alert-danger" role="alert">Username and password are incorrect!</div>
-        </c:if>
-        <form class="form-horizontal" method="post" action="checklogin">
-            <fieldset>
-                <legend>Login</legend>
-                <div class="form-group">
-                    <label for="email" class="col-lg-2 control-label">Email</label>
-                    <div class="col-lg-10">
-                        <input type="email" name="email" class="form-control" id="email" placeholder="Email" required>
-                    </div>
+        <body class="hold-transition login-page">
+            <div class="login-box">
+                <div class="login-logo">
+                    <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
                 </div>
-                <div class="form-group">
-                    <label for="password" class="col-lg-2 control-label">Password</label>
-                    <div class="col-lg-10">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                <c:if test="${not empty error}">
+                    <div class="callout callout-danger lead">
+                        <p>
+                            Username and password are incorrect!
+                        </p>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-lg-6">
-                        <div class="checkbox pull-left">
-                            <label>
-                                <input type="checkbox" id="remember"> Remember email?
-                            </label>
+                </c:if>
+                <div class="login-box-body">
+                    <p class="login-box-msg">Sign in to start your session</p>
+                    <form method="post" action="checklogin">
+                        <div class="form-group has-feedback">
+                            <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <button type="submit" class="btn btn-default btn-raised pull-right">Login</button>
-                        <a href="/auth/reset">Forgot password ?</a>
-                    </div>
+                        <div class="form-group has-feedback">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox"> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                            </div>
+                        </div>
+                    </form>
+                    <a href="<c:url value="/auth/reset"/>">I forgot my password</a><br>
+                    <a href="<c:url value="/auth/register"/>" class="text-center">Register a new membership</a>
                 </div>
-            </fieldset>
-        </form>
-
-    </body>
+            </div>
+            <jsp:include page="../include/footer.jsp">
+                <jsp:param value="Login" name="title"/>
+            </jsp:include>
+        </body>
 </html>

@@ -1,0 +1,32 @@
+<groups xmlns="http://www.isdc.ro/wro">
+    <!-- Common css libraries -->
+    <group name="bootstrap-css">
+        <css>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</css>
+    </group>
+    <group name="font-awesome">
+        <css>https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css</css>
+    </group>
+    <group name="ion-icons">
+        <css>https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css</css>
+    </group>
+    <!-- Common css libraries -->
+    <group name="bootstrap-js">
+        <js>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</js>
+    </group>
+    <group name="jquery">
+        <js>https://code.jquery.com/jquery-2.2.0.min.js</js>
+    </group>
+    <!-- Page specific libraries -->
+    <group name="login">
+        <!-- css -->
+        <group-ref>bootstrap-css</group-ref>
+        <group-ref>font-awesome</group-ref>
+        <group-ref>ion-icons</group-ref>
+        <css>/assets/dist/css/AdminLTE.min.css</css>
+        <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
+        <!-- js -->
+        <group-ref>jquery</group-ref>
+        <group-ref>bootstrap-js</group-ref>
+        <js>/assets/plugins/iCheck/icheck.min.js</js>
+    </group>
+</groups>
