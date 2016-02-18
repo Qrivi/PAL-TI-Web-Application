@@ -16,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping( value = "/auth" )
@@ -67,7 +66,7 @@ public class AuthController
 
         //max 1 reset request an hour
         if (student.getResetTokenExpiration() != null &&
-                student.getResetTokenExpiration().getTime() + TimeUnit.HOURS.toMillis(1) - new Date().getTime() < 0) {
+                student.getResetTokenExpiration().getTime() - new Date().getTime() <= 0) {
             result.reject("ReqLimit.AuthController.Token");
             return new ModelAndView("auth/reset");
         }
