@@ -4,8 +4,18 @@
     <persistence-unit name="PAL" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/PAL</jta-data-source>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <class>be.peerassistedlearningti.model.Student</class>
+        <class>be.peerassistedlearningti.model.Course</class>
+        <class>be.peerassistedlearningti.model.Tutor</class>
+        <class>be.peerassistedlearningti.model.Lesson</class>
+        <class>be.peerassistedlearningti.model.Booking</class>
+        <class>be.peerassistedlearningti.model.Room</class>
+        <class>be.peerassistedlearningti.model.RoomType</class>
+        <class>be.peerassistedlearningti.model.Campus</class>
+        <class>be.peerassistedlearningti.model.Application</class>
+        <class>be.peerassistedlearningti.model.Review</class>
         <properties>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform"/>
         </properties>
     </persistence-unit>

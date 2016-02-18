@@ -27,6 +27,6 @@
         <!-- js -->
         <group-ref>jquery</group-ref>
         <group-ref>bootstrap-js</group-ref>
-        <js>/assets/plugins/iCheck/icheck.min.js</js>
+        <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
     </group>
 </groups>
