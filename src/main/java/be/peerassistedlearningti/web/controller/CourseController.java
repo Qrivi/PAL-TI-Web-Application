@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -18,27 +17,27 @@ public class CourseController
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
+    @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
         return new ModelAndView( "course", "courses", service.getAllCourses() );
     }
 
-    @RequestMapping( value = "/{id}/subscribe", method = RequestMethod.POST )
+    @RequestMapping( value = "/subscribe/{id}", method = RequestMethod.POST )
     public String subscribeToCourse( @PathVariable( value = "id" ) int id )
     {
         Course c = service.getCourseById( id );
         c.subscribe( SessionAuth.getStudent() );
         service.updateCourse( c );
-        return "redirect:/review/overview";
+        return "redirect:/course/overview";
     }
 
-    @RequestMapping( value = "/{id}/unsubscribe", method = RequestMethod.POST )
+    @RequestMapping( value = "/unsubscribe/{id}", method = RequestMethod.POST )
     public String unsubscribeToCourse( @PathVariable( value = "id" ) int id )
     {
         Course c = service.getCourseById( id );
         c.unsubscribe( SessionAuth.getStudent() );
         service.updateCourse( c );
-        return "redirect:/review/overview";
+        return "redirect:/course/overview";
     }
 }
