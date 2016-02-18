@@ -6,6 +6,7 @@ import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.form.StudentForm;
+import be.peerassistedlearningti.web.model.util.GenericMessage;
 import be.peerassistedlearningti.web.model.util.ResetMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,7 +55,6 @@ public class AuthController
 
     @RequestMapping(value = "/reset", method = RequestMethod.GET)
     public ModelAndView resetPassword() {
-        System.out.println("TEST TO OUTPUT");
         return new ModelAndView("auth/reset", "resetRequest", new ResetRequestForm());
     }
 
@@ -66,35 +66,46 @@ public class AuthController
 
         //max 1 reset request an hour
         if (student.getResetTokenExpiration() != null &&
-                student.getResetTokenExpiration().getTime() - new Date().getTime() <= 0) {
+                student.getResetTokenExpiration().getTime() - new Date().getTime() > 0) {
             result.reject("ReqLimit.AuthController.Token");
             return new ModelAndView("auth/reset");
-        }
-        ResetMail.send(student, student.issuePasswordReset());
-        service.updateStudent(student);
+        } else {
+            ResetMail.send(student, student.issuePasswordReset());
+            service.updateStudent(student);
 
-        //TODO::message success to user
-        return new ModelAndView("redirect:/auth/login");
+            //TODO::message success to user
+            return new ModelAndView("redirect:/auth/login");
+        }
     }
 
-    @RequestMapping(value = "/reset/validate/{email}/{token}", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/reset/validate/{email}/{token}/", method = RequestMethod.GET)
+    public ModelAndView resetPasswordValidation(
+            @PathVariable(value = "email") String email,
+            @PathVariable(value = "token") String token) {
+        return new ModelAndView("auth/reset_validation", "reset", new ResetForm());
+    }
+
+    @RequestMapping(value = "/reset/validate/{email}/{token}/", method = RequestMethod.POST)
     public ModelAndView resetPasswordValidation(
             @PathVariable(value = "email") String email,
             @PathVariable(value = "token") String token,
             @Valid @ModelAttribute("reset") ResetForm form, BindingResult result) {
-        //TODO :: Only show errors on post
         if (result.hasErrors())
-            return new ModelAndView("auth/reset_validation");
+            return new ModelAndView("auth/reset_validation", "reset", form);
 
         Student student = service.getStudentByEmail(email);
         if (student.validatePasswordReset(token)) {
             student.setPassword(form.getPassword());
             service.updateStudent(student);
+            //TODO::message success to user
+            return new ModelAndView("redirect:/auth/login");
         } else {
-            result.reject("Invalid.AuthController.Token");
-            return new ModelAndView("auth/reset");
+            ModelMap map = new ModelMap();
+            map.addAttribute("reset", form);
+            map.addAttribute("message", new GenericMessage("Invalid.AuthController.Token", GenericMessage.MessageType.success));
+            return new ModelAndView("auth/reset_validation", map);
         }
-        return new ModelAndView("redirect:/auth/login");
     }
 
 }

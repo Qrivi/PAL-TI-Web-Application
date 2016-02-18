@@ -1,13 +1,13 @@
 package be.peerassistedlearningti.web.model.form;
 
 
-import be.peerassistedlearningti.web.model.validation.CheckEmailExists;
+import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class ResetRequestForm {
 
     @NotEmpty(message = "{NotEmpty.ResetRequestForm.email}")
-    @CheckEmailExists(inverted = true, message = "{CheckEmailExists.ResetRequestForm.email}")
+    @CheckEmailIsUnique(inverted = true, message = "{CheckEmailIsUnique.ResetRequestForm.email}")
     private String email;
 
     public ResetRequestForm() {

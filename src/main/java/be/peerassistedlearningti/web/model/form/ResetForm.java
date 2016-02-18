@@ -3,7 +3,7 @@ package be.peerassistedlearningti.web.model.form;
 import be.peerassistedlearningti.common.model.validation.FieldMatch;
 import org.hibernate.validator.constraints.NotEmpty;
 
-@FieldMatch(first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ResetForm.newPassword.newRepeatPassword}")
+@FieldMatch(first = "password", second = "repeatPassword", message = "{FieldMatch.ResetForm.password.repeatPassword}")
 public class ResetForm {
 
     @NotEmpty(message = "{NotEmpty.ResetForm.password}")
@@ -29,4 +29,5 @@ public class ResetForm {
     public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
     }
+
 }

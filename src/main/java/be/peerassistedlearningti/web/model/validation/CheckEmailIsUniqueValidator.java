@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class CheckEmailExistsValidator implements ConstraintValidator<CheckEmailExists, String>
+public class CheckEmailIsUniqueValidator implements ConstraintValidator<CheckEmailIsUnique, String>
 {
 
     @Autowired
@@ -15,10 +15,10 @@ public class CheckEmailExistsValidator implements ConstraintValidator<CheckEmail
 
     private boolean allowSessionEmail, inverted;
 
-    public void initialize( CheckEmailExists checkEmailExists )
+    public void initialize(CheckEmailIsUnique checkEmailIsUnique)
     {
-        allowSessionEmail = checkEmailExists.allowSessionEmail();
-        inverted = checkEmailExists.inverted();
+        allowSessionEmail = checkEmailIsUnique.allowSessionEmail();
+        inverted = checkEmailIsUnique.inverted();
     }
 
     public boolean isValid( String email, ConstraintValidatorContext constraintValidatorContext )
