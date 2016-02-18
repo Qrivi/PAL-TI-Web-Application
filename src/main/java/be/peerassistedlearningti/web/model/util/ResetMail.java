@@ -16,6 +16,6 @@ public class ResetMail {
      */
     public static void send(Student student, String token) {
         String email = student.getEmail();
-        System.out.println("URL=" + "http://localhost:8080/auth/reset/validate/" + email + "/" + token);
+        System.out.println("URL=" + "http://localhost:8080/auth/reset/validate/" + email + "/" + token + "/");
     }
 }
