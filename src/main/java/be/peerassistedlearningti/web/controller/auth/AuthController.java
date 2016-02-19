@@ -17,6 +17,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Date;
@@ -83,7 +84,7 @@ public class AuthController
     }
 
     @RequestMapping( value = "/reset", method = RequestMethod.POST )
-    public ModelAndView resetPassword( @Valid @ModelAttribute( "resetRequest" ) ResetRequestForm form, BindingResult result )
+    public ModelAndView resetPassword( @Valid @ModelAttribute( "resetRequest" ) ResetRequestForm form, BindingResult result, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "auth/reset" );
@@ -99,7 +100,8 @@ public class AuthController
         {
             ResetMail.send( student, student.issuePasswordReset() );
             service.updateStudent( student );
-            return new ModelAndView( "auth/reset", "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
+            redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
+            return new ModelAndView( "redirect:/auth/login" );
         }
     }
 
@@ -118,22 +120,25 @@ public class AuthController
     }
 
     @RequestMapping( value = "/reset/validate/{email}/{token}/", method = RequestMethod.POST )
-    public ModelAndView resetPasswordValidation( @PathVariable( value = "email" ) String email, @PathVariable( value = "token" ) String token, @Valid @ModelAttribute( "reset" ) ResetForm form, BindingResult result )
+    public ModelAndView resetPasswordValidation( @PathVariable( value = "email" ) String email, @PathVariable( value = "token" ) String token, @Valid @ModelAttribute( "reset" ) ResetForm form, BindingResult result, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "auth/reset_validation", "reset", form );
 
         Student student = service.getStudentByEmail( email );
+
         if ( student.validatePasswordReset( token ) )
         {
             student.setPassword( form.getPassword() );
             service.updateStudent( student );
-            return new ModelAndView( "redirect:/auth/login", "message", new GenericMessage( "Success.AuthController.PasswordReset", GenericMessage.MessageType.success ) );
+
+            redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.PasswordReset" ) );
+            return new ModelAndView( "redirect:/auth/login" );
         } else
         {
             ModelMap map = new ModelMap();
             map.addAttribute( "reset", form );
-            map.addAttribute( "message", new GenericMessage( "Invalid.AuthController.Token", GenericMessage.MessageType.danger ) );
+            map.addAttribute( "message", MessageFactory.createDangerMessage( "Invalid.AuthController.Token" ) );
             return new ModelAndView( "auth/reset_validation", map );
         }
     }
