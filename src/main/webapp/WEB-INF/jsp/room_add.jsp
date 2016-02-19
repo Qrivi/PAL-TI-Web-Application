@@ -9,13 +9,13 @@
     </div>
     <div class="form-group">
         <form:select path="campus" class="form-control">
-            <form:option value="None" label="--- Select ---"/>
+            <form:option value="None" label="--- Campus ---"/>
             <form:options items="${campuses}" />
         </form:select>
     </div>
     <div class="form-group">
         <form:select path="type" class="form-control" >
-            <form:option value="None" label="--- Select ---"/>
+            <form:option value="None" label="--- Room Type ---"/>
             <form:options items="${roomTypes}" />
         </form:select>
     </div>
