@@ -2,6 +2,7 @@ package be.peerassistedlearningti.web.model.converter;
 
 import be.peerassistedlearningti.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.converter.Converter;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,7 +13,7 @@ import java.util.Date;
 /**
  * Converts a Date into the matching String
  */
-public class DateInverseConverter
+public class DateInverseConverter implements Converter<Date, String>
 {
     @Autowired
     private PALService service;
