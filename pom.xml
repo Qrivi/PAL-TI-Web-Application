@@ -10,6 +10,7 @@
     <version>1.0</version>
 
     <properties>
+        <velocity.version>1.7</velocity.version>
         <java-mail.version>1.5.5</java-mail.version>
         <jstl.version>1.2</jstl.version>
         <mysql.version>5.1.6</mysql.version>
@@ -27,6 +28,13 @@
     </properties>
 
     <dependencies>
+        <!-- velocity -->
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>${velocity.version}</version>
+        </dependency>
+
         <!-- Java Mail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
