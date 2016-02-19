@@ -15,7 +15,13 @@ public class LessonConverter implements Converter<String, Lesson>
 
     public Lesson convert( String s )
     {
-        return service.getLessonById( Integer.parseInt( s ) );
+        try
+        {
+            return service.getLessonById( Integer.parseInt( s ) );
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }
 

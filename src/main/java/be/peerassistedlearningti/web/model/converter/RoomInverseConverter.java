@@ -10,7 +10,13 @@ public class RoomInverseConverter implements Converter<Room, String>
 {
     public String convert( Room room )
     {
-        return room.getId()
-                .toString();
+        try
+        {
+            return room.getId()
+                    .toString();
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

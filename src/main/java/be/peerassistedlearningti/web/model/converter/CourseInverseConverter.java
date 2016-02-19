@@ -10,7 +10,13 @@ public class CourseInverseConverter implements Converter<Course, String>
 {
     public String convert( Course course )
     {
-        return course.getId()
-                .toString();
+        try
+        {
+            return course.getId()
+                    .toString();
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

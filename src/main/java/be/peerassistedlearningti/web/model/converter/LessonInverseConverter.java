@@ -10,7 +10,13 @@ public class LessonInverseConverter implements Converter<Lesson, String>
 {
     public String convert( Lesson lesson )
     {
-        return lesson.getId()
-                .toString();
+        try
+        {
+            return lesson.getId()
+                    .toString();
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

@@ -59,11 +59,14 @@ public class LessonController
     @RequestMapping( value = "/add", method = RequestMethod.POST )
     public ModelAndView addLesson( @Valid @ModelAttribute( "lesson" ) LessonForm lessonForm, BindingResult result )
     {
+        System.out.println( lessonForm.getCourse()
+                .getName() );
         if ( result.hasErrors() )
             return new ModelAndView( "lesson_add" );
 
-        Tutor tutor = service.getTutorById(SessionAuth.getStudent().getId());
-        service.addLesson( new Lesson(lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor ,lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
+        Tutor tutor = service.getTutorById( SessionAuth.getStudent()
+                .getId() );
+        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
 
         return new ModelAndView( "redirect:/lesson/overview" );
     }
@@ -76,9 +79,10 @@ public class LessonController
         return "redirect:/booking/add";
     }
 
-    @RequestMapping(value = "/reviews/lesson/{id}", method = RequestMethod.POST)
-    public ModelAndView getReviews(@PathVariable(value = "id") int id) {
-        Lesson l = service.getLessonById(id);
-        return new ModelAndView("lesson_add", "lesson", service.getLessonById(id));
+    @RequestMapping( value = "/reviews/lesson/{id}", method = RequestMethod.POST )
+    public ModelAndView getReviews( @PathVariable( value = "id" ) int id )
+    {
+        Lesson l = service.getLessonById( id );
+        return new ModelAndView( "lesson_add", "lesson", service.getLessonById( id ) );
     }
 }

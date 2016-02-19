@@ -15,6 +15,12 @@ public class CourseConverter implements Converter<String, Course>
 
     public Course convert( String s )
     {
-        return service.getCourseById( Integer.parseInt( s ) );
+        try
+        {
+            return service.getCourseById( Integer.parseInt( s ) );
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }
