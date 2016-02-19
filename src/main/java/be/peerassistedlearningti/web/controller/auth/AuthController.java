@@ -81,6 +81,9 @@ public class AuthController
         return new ModelAndView( "auth/reset", "resetRequest", new ResetRequestForm() );
     }
 
+    @Autowired
+    ResetMail resetMail;
+
     @RequestMapping( value = "/reset", method = RequestMethod.POST )
     public ModelAndView resetPassword( @Valid @ModelAttribute( "resetRequest" ) ResetRequestForm form, BindingResult result, RedirectAttributes redirectAttributes )
     {
@@ -90,20 +93,19 @@ public class AuthController
         Student student = service.getStudentByEmail( form.getEmail() );
 
         // max 1 reset request an hour
-        if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration()
+        /*if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration()
                 .getTime() - new Date().getTime() > 0 )
         {
             return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
-        } else
-        {
-            ResetMail mail = new ResetMail();
-            mail.sendResetMail(student, student.issuePasswordReset());
-            //ResetMail.send( student, student.issuePasswordReset() );
-            service.updateStudent( student );
-            SessionAuth.setStudent(student);
-            redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
-            return new ModelAndView( "redirect:/auth/login" );
-        }
+        } else*/
+        // {
+        resetMail.sendResetMail( student, student.issuePasswordReset() );
+        //ResetMail.send( student, student.issuePasswordReset() );
+        service.updateStudent( student );
+        SessionAuth.setStudent( student );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
+        return new ModelAndView( "redirect:/auth/login" );
+        // }
     }
 
     //================================================================================

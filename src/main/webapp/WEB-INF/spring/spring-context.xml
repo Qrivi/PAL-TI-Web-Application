@@ -62,22 +62,32 @@
 
     <!-- Reset mail -->
 
-    <bean class="be.peerassistedlearningti.web.model.util.ResetMail"/>
+    <bean id="resetMail" class="be.peerassistedlearningti.web.model.util.ResetMail"/>
 
     <!-- Java Mail -->
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="mail.csonth.gov.uk"/>
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="peerassistedlearningti@gmail.com"/>
+        <property name="password" value="KNP3faCggtdQF6TL"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
     </bean>
 
     <!-- Velocity -->
 
     <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
         <property name="velocityProperties">
-            <value>
-                resource.loader=file
-                file.resource.loader.class=org.apache.velocity.runtime.resource.loader.FileResourceLoader
-            </value>
+            <props>
+                <prop key="resource.loader">classpath</prop>
+                <prop key="classpath.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+            </props>
         </property>
     </bean>
 
