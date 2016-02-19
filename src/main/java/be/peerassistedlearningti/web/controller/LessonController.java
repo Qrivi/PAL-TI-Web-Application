@@ -66,7 +66,7 @@ public class LessonController
 
         Tutor tutor = service.getTutorById( SessionAuth.getStudent()
                 .getId() );
-        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), lessonForm.getDuration(), lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
+        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), Long.parseLong(lessonForm.getDuration()), lessonForm.getCourse(), Integer.parseInt(lessonForm.getMaxParticipants()), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
 
         return new ModelAndView( "redirect:/lesson/overview" );
     }

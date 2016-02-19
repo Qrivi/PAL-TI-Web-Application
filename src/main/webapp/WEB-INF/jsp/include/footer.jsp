@@ -9,4 +9,9 @@
             increaseArea  : '20%' // optional
         } );
     } );
+    $( function () {
+        $( "#datetimepicker1" ).datetimepicker( {
+            locale : 'nl'
+        } );
+    } );
 </script>

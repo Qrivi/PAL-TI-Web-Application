@@ -20,14 +20,14 @@ public class LessonForm
     @NotNull( message = "{NotNull.LessonForm.date}" )
     private Date date;
 
-    @Min( value = 1, message = "{Min.LessonForm.duration}" )
-    private long duration;
+    //@Min( value = 1, message = "{Min.LessonForm.duration}" )
+    private String duration;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
     private Course course;
 
-    @Min( value = 1, message = "{Min.LessonForm.maxParticipants}" )
-    private int maxParticipants;
+    //@Min( value = 1, message = "{Min.LessonForm.maxParticipants}" )
+    private String maxParticipants;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
     private Room room;
@@ -52,7 +52,7 @@ public class LessonForm
         return date;
     }
 
-    public long getDuration()
+    public String getDuration()
     {
         return duration;
     }
@@ -62,7 +62,7 @@ public class LessonForm
         return course;
     }
 
-    public int getMaxParticipants()
+    public String getMaxParticipants()
     {
         return maxParticipants;
     }
@@ -92,7 +92,7 @@ public class LessonForm
         this.date = date;
     }
 
-    public void setDuration( long duration )
+    public void setDuration( String duration )
     {
         this.duration = duration;
     }
@@ -102,7 +102,7 @@ public class LessonForm
         this.course = course;
     }
 
-    public void setMaxParticipants( int maxParticipants )
+    public void setMaxParticipants( String maxParticipants )
     {
         this.maxParticipants = maxParticipants;
     }
