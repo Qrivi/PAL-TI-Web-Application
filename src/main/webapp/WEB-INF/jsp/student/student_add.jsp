@@ -14,7 +14,13 @@
         <form:password path="password" class="form-control" placeholder="Password"/>
     </div>
     <div class="form-group">
-        <form:password path="newRepeatPassword" class="form-control" placeholder="Repeat Password"/>
+        <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
+    </div>
+    <div class="form-group">
+        <form:select path="type" class="form-control">
+            <form:option value="None" label="--- Select ---"/>
+            <form:options items="${userTypes}"/>
+        </form:select>
     </div>
     <div class="form-group">
         <button type="submit" class="btn btn-default pull-right">Add</button>

@@ -27,18 +27,18 @@ public class RegisterController
     public ModelAndView registerStudent( ModelMap model )
     {
         model.addAttribute( "student", new StudentForm() );
-        return new ModelAndView( "student_registration", model );
+        return new ModelAndView( "student/student_registration", model );
     }
 
     @RequestMapping( method = RequestMethod.POST )
     public ModelAndView registerStudent( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "student_registration" );
+            return new ModelAndView( "student/student_registration" );
 
         service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), UserType.NORMAL ) );
 
-        return new ModelAndView( "student_registration" );
+        return new ModelAndView( "student/student_registration" );
     }
 
 }
