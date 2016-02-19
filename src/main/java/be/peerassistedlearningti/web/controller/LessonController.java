@@ -63,8 +63,10 @@ public class LessonController
         if ( result.hasErrors() )
             return new ModelAndView( "lesson_add" );
 
-        Tutor tutor = service.getTutorById( SessionAuth.getStudent()
-                .getId() );
+        Tutor tutor = SessionAuth.getStudent().getTutor();
+        if (!tutor.getCourses().contains(lessonForm.getCourse())) {
+            result.reject("NoTutor.LessonForm.course");
+        }
 
         LocalTime time = lessonForm.getDuration();
         long duration = time.getHour() * 60 + time.getMinute();

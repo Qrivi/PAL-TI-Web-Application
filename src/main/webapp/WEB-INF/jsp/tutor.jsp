@@ -6,13 +6,12 @@
 </jsp:include>
 
 <table>
-    <c:forEach var="room" items="${rooms}">
+    <c:forEach var="tutor" items="${tutors}">
         <tr>
-            <td>${room.name}</td>
-            <td>${room.campus}</td>
-            <td>${room.type}</td>
+            <td>${tutor.}
+            <td>${booking.student.email}</td>
             <td>
-                <form id="command" action="<c:url value="/room/remove/${room.id}" />" method="POST">
+                <form id="command" action="<c:url value="/booking/remove/${booking.id}" />" method="POST">
                     <input type="submit" value="Delete"/>
                 </form>
             </td>

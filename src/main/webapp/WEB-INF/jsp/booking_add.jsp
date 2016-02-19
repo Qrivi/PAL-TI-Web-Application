@@ -2,6 +2,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<jsp:include page="include/head.jsp">
+    <jsp:param value="Login" name="title"/>
+</jsp:include>
+
 <form:form method="post" commandName="booking" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <p>Name : ${booking.lesson.name}</p>
