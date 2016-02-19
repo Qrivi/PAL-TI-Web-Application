@@ -1,7 +1,10 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Application;
+import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,10 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 @Controller
 @RequestMapping( value = "application" )
@@ -48,6 +55,15 @@ public class ApplicationController
 
         application.reject();
         service.updateApplication( application );
+
+        Tutor tutor = SessionAuth.getStudent().getTutor();
+        if(tutor == null){
+            Set<Course> courses = new HashSet<Course>();
+            courses.add(application.getCourse());
+            service.addTutor(new Tutor(SessionAuth.getStudent(), courses));
+        } else {
+            tutor.addCourse(application.getCourse());
+        }
 
         return "redirect:/application/overview";
     }

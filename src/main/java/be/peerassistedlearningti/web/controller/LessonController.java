@@ -63,7 +63,7 @@ public class LessonController
         if ( result.hasErrors() )
             return new ModelAndView( "lesson_add" );
 
-        Tutor tutor = service.getTutor(SessionAuth.getStudent());
+        Tutor tutor = SessionAuth.getStudent().getTutor();
         if (!tutor.getCourses().contains(lessonForm.getCourse())) {
             result.reject("NoTutor.LessonForm.course");
         }
