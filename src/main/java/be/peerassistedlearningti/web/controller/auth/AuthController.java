@@ -7,12 +7,10 @@ import be.peerassistedlearningti.web.model.form.RegisterForm;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.form.StudentForm;
-import be.peerassistedlearningti.web.model.util.GenericMessage;
 import be.peerassistedlearningti.web.model.util.MessageFactory;
 import be.peerassistedlearningti.web.model.util.ResetMail;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -98,8 +96,11 @@ public class AuthController
             return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
         } else
         {
-            ResetMail.send( student, student.issuePasswordReset() );
+            ResetMail mail = new ResetMail();
+            mail.sendResetMail(student, student.issuePasswordReset());
+            //ResetMail.send( student, student.issuePasswordReset() );
             service.updateStudent( student );
+            SessionAuth.setStudent(student);
             redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
             return new ModelAndView( "redirect:/auth/login" );
         }
