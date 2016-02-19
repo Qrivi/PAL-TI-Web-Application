@@ -3,6 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
+<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
 
 <form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
@@ -39,7 +40,7 @@
     </div>
     <div class="form-group">
         <form:select path="course" class="form-control" placeholder="Course">
-            <form:option value="NONE" label="--- Course ---"/>
+            <form:option value="" label="--- Course ---"/>
             <form:options items="${courses}" itemValue="id" itemLabel="name"/>
         </form:select>
     </div>
@@ -49,14 +50,14 @@
     </div>
     <div>
         <form:select path="room" class="form-control" placeholder="Room">
-            <form:option value="NONE" label="--- Room ---"/>
+            <form:option value="" label="--- Room ---"/>
             <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
         </form:select>
     </div>
 
     <div>
         <form:select path="backupRoom" class="form-control">
-            <form:option value="NONE" label="--- Backup Room ---"/>
+            <form:option value="" label="--- Backup Room ---"/>
             <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
         </form:select>
     </div>
