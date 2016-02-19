@@ -45,6 +45,15 @@ public class ApplicationController
         application.approve();
         service.updateApplication( application );
 
+        Tutor tutor = SessionAuth.getStudent().getTutor();
+        if(tutor == null){
+            Set<Course> courses = new HashSet<Course>();
+            courses.add(application.getCourse());
+            service.addTutor(new Tutor(SessionAuth.getStudent(), courses));
+        } else {
+            tutor.addCourse(application.getCourse());
+        }
+
         return "redirect:/application/overview";
     }
 
@@ -55,15 +64,6 @@ public class ApplicationController
 
         application.reject();
         service.updateApplication( application );
-
-        Tutor tutor = SessionAuth.getStudent().getTutor();
-        if(tutor == null){
-            Set<Course> courses = new HashSet<Course>();
-            courses.add(application.getCourse());
-            service.addTutor(new Tutor(SessionAuth.getStudent(), courses));
-        } else {
-            tutor.addCourse(application.getCourse());
-        }
 
         return "redirect:/application/overview";
     }
