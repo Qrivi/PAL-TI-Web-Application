@@ -81,6 +81,9 @@ public class AuthController
         return new ModelAndView( "auth/reset", "resetRequest", new ResetRequestForm() );
     }
 
+    @Autowired
+    ResetMail resetMail;
+
     @RequestMapping( value = "/reset", method = RequestMethod.POST )
     public ModelAndView resetPassword( @Valid @ModelAttribute( "resetRequest" ) ResetRequestForm form, BindingResult result, RedirectAttributes redirectAttributes )
     {
@@ -96,11 +99,8 @@ public class AuthController
             return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
         } else
         {
-            ResetMail mail = new ResetMail();
-            mail.sendResetMail(student, student.issuePasswordReset());
-            //ResetMail.send( student, student.issuePasswordReset() );
+            resetMail.sendResetMail( student, student.issuePasswordReset() );
             service.updateStudent( student );
-            SessionAuth.setStudent(student);
             redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
             return new ModelAndView( "redirect:/auth/login" );
         }

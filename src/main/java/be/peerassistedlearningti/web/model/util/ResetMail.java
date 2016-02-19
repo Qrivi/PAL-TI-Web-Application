@@ -4,6 +4,7 @@ package be.peerassistedlearningti.web.model.util;
 import be.peerassistedlearningti.model.Student;
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -27,6 +28,8 @@ public class ResetMail
     @Autowired
     private VelocityEngine velocityEngine;
 
+    public ResetMail() {}
+
     public void sendResetMail( final Student student, final String token )
     {
         MimeMessagePreparator preparator = new MimeMessagePreparator()
@@ -37,13 +40,13 @@ public class ResetMail
                 messageHelper.setTo( student.getEmail() );
                 messageHelper.setFrom( SENDER_EMAIL );
                 messageHelper.setSubject( "PAL-TI password reset" );
-                Map model = new HashMap();
+                Map<String, Object> model = new HashMap<String, Object>();
                 model.put( "student", student );
                 model.put( "resetLink", "http://localhost:8080/auth/reset/validate/" + student.getEmail() + "/" + token + "/" );
                 String text = VelocityEngineUtils.mergeTemplateIntoString( velocityEngine, "mail/reset_mail.vm", "UTF-8", model );
                 messageHelper.setText( text, true );
             }
         };
-        this.mailSender.send( preparator );
+        mailSender.send( preparator );
     }
 }
