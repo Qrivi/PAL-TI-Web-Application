@@ -16,36 +16,34 @@ import java.util.Map;
 /**
  * Class used to send a reset password mail to a given student.
  */
-public class ResetMail {
+public class ResetMail
+{
 
     private static final String SENDER_EMAIL = "noreply@pal-ti.be";
+
+    @Autowired
     private JavaMailSender mailSender;
+
+    @Autowired
     private VelocityEngine velocityEngine;
 
-    @Autowired
-    public void setMailSender(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
-
-    @Autowired
-    public void setVelocityEngine(VelocityEngine velocityEngine) {
-        this.velocityEngine = velocityEngine;
-    }
-
-    public void sendResetMail(final Student student, final String token) {
-        MimeMessagePreparator preparator = new MimeMessagePreparator() {
-            public void prepare(MimeMessage mimeMessage) throws Exception {
-                MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-                messageHelper.setTo(student.getEmail());
-                messageHelper.setFrom(SENDER_EMAIL);
-                messageHelper.setSubject("PAL-TI password reset");
+    public void sendResetMail( final Student student, final String token )
+    {
+        MimeMessagePreparator preparator = new MimeMessagePreparator()
+        {
+            public void prepare( MimeMessage mimeMessage ) throws Exception
+            {
+                MimeMessageHelper messageHelper = new MimeMessageHelper( mimeMessage );
+                messageHelper.setTo( student.getEmail() );
+                messageHelper.setFrom( SENDER_EMAIL );
+                messageHelper.setSubject( "PAL-TI password reset" );
                 Map model = new HashMap();
-                model.put("student", student);
-                model.put("resetLink", "http://localhost:8080/auth/reset/validate/" + student.getEmail() + "/" + token + "/");
-                String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "mail/reset_mail.vm", "UTF-8", model);
-                messageHelper.setText(text, true);
+                model.put( "student", student );
+                model.put( "resetLink", "http://localhost:8080/auth/reset/validate/" + student.getEmail() + "/" + token + "/" );
+                String text = VelocityEngineUtils.mergeTemplateIntoString( velocityEngine, "mail/reset_mail.vm", "UTF-8", model );
+                messageHelper.setText( text, true );
             }
         };
-        this.mailSender.send(preparator);
+        this.mailSender.send( preparator );
     }
 }

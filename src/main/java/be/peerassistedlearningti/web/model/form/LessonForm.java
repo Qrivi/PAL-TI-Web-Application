@@ -4,9 +4,12 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Room;
 import be.peerassistedlearningti.model.Tutor;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class LessonForm
@@ -21,7 +24,8 @@ public class LessonForm
     private Date date;
 
     //@Min( value = 1, message = "{Min.LessonForm.duration}" )
-    private String duration;
+    @DateTimeFormat( pattern = "hh:mm" )
+    private LocalTime duration;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
     private Course course;
@@ -52,7 +56,7 @@ public class LessonForm
         return date;
     }
 
-    public String getDuration()
+    public LocalTime getDuration()
     {
         return duration;
     }
@@ -92,7 +96,7 @@ public class LessonForm
         this.date = date;
     }
 
-    public void setDuration( String duration )
+    public void setDuration( LocalTime duration )
     {
         this.duration = duration;
     }
