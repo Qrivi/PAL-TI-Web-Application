@@ -17,42 +17,42 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping( value = "/student" )
-public class StudentCRUDController
+public class StudentCRUDController extends AdminController
 {
 
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
+    @RequestMapping( value = "/student/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "student", "students", service.getAllStudents() );
+        return new ModelAndView( "student/student", "students", service.getAllStudents() );
     }
 
-    @RequestMapping( method = RequestMethod.GET )
+    @RequestMapping( value = "/student/add", method = RequestMethod.GET )
     public ModelAndView getStudentPage( ModelMap model )
     {
         model.addAttribute( "student", new StudentForm() );
-        return new ModelAndView( "student_add", model );
+        model.addAttribute( "userTypes", UserType.values() );
+        return new ModelAndView( "student/student_add", model );
     }
 
-    @RequestMapping( method = RequestMethod.POST )
+    @RequestMapping( value = "/student/add", method = RequestMethod.POST )
     public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "student_add" );
+            return new ModelAndView( "student/student_add" );
 
-        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), UserType.NORMAL ) );
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.getType() ) );
 
-        return new ModelAndView( "student_add" );
+        return new ModelAndView( "redirect:/admin/student/overview" );
     }
 
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/student/remove/{id}", method = RequestMethod.POST )
     public String removeStudent( @PathVariable( value = "id" ) int id )
     {
         Student s = service.getStudentById( id );
         service.removeStudent( s );
-        return "redirect:/student/overview";
+        return "redirect:/admin/student/overview";
     }
 }

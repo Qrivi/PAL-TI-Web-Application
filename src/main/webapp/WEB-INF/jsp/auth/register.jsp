@@ -15,7 +15,7 @@
             </div>
             <div class="register-box-body">
                 <p class="login-box-msg">Register a new membership</p>
-                <form:form method="post" commandName="student" enctype="application/x-www-form-urlencoded">
+                <form:form method="post" commandName="register" enctype="application/x-www-form-urlencoded">
                     <c:set var="nameError"><form:errors path="name"/></c:set>
                     <c:set var="emailError"><form:errors path="email"/></c:set>
                     <c:set var="passwordError"><form:errors path="password"/></c:set>

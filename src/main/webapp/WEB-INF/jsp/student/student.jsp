@@ -7,7 +7,7 @@
             <td>${student.email}</td>
             <td>${student.type}</td>
             <td>
-                <form id="command" action="<c:url value="/student/remove/${student.id}" />" method="POST">
+                <form id="command" action="<c:url value="/admin/student/remove/${student.id}" />" method="POST">
                     <input type="submit" value="Delete"/>
                 </form>
             </td>

@@ -3,8 +3,11 @@
         "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
 <urlrewrite>
     <rule>
-        <condition type="request-uri" operator="notequal">\.[a-z]+$</condition>
-        <from>(.*)$</from>
-        <to>$1.htm</to>
+        <from>^/$</from>
+        <to>/.htm</to>
+    </rule>
+    <rule>
+        <from>^/([^\.]+)$</from>
+        <to>/$1.htm</to>
     </rule>
 </urlrewrite>
