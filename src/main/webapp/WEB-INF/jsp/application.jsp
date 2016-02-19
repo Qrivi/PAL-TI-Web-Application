@@ -3,6 +3,9 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<jsp:include page="include/head.jsp">
+    <jsp:param value="Login" name="title"/>
+</jsp:include>
 
 <c:forEach var="application" items="${applications}">
     <div class="apply">
