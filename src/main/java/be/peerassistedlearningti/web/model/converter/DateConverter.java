@@ -20,7 +20,6 @@ public class DateConverter implements Converter<String, Date>
             return dateFormat.parse( s );
         } catch ( ParseException e )
         {
-            e.printStackTrace();
             return null;
         }
     }

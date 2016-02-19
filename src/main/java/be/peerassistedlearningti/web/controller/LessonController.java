@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalTime;
 
 @Controller
 @RequestMapping( value = "lesson" )
@@ -59,14 +60,16 @@ public class LessonController
     @RequestMapping( value = "/add", method = RequestMethod.POST )
     public ModelAndView addLesson( @Valid @ModelAttribute( "lesson" ) LessonForm lessonForm, BindingResult result )
     {
-        System.out.println( lessonForm.getCourse()
-                .getName() );
         if ( result.hasErrors() )
             return new ModelAndView( "lesson_add" );
 
         Tutor tutor = service.getTutorById( SessionAuth.getStudent()
                 .getId() );
-        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), Long.parseLong(lessonForm.getDuration()), lessonForm.getCourse(), Integer.parseInt(lessonForm.getMaxParticipants()), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
+
+        LocalTime time = lessonForm.getDuration();
+        long duration = time.getHour() * 60 + time.getMinute();
+
+        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), Integer.parseInt( lessonForm.getMaxParticipants() ), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
 
         return new ModelAndView( "redirect:/lesson/overview" );
     }

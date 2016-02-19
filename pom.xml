@@ -34,14 +34,12 @@
             <artifactId>velocity</artifactId>
             <version>${velocity.version}</version>
         </dependency>
-
         <!-- Java Mail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>${java-mail.version}</version>
         </dependency>
-
         <!-- JSTL -->
         <dependency>
             <groupId>javax.servlet</groupId>

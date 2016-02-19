@@ -60,6 +60,27 @@
 
     <bean class="be.peerassistedlearningti.web.model.util.MessageFactory"/>
 
+    <!-- Reset mail -->
+
+    <bean class="be.peerassistedlearningti.web.model.util.ResetMail"/>
+
+    <!-- Java Mail -->
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="mail.csonth.gov.uk"/>
+    </bean>
+
+    <!-- Velocity -->
+
+    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="velocityProperties">
+            <value>
+                resource.loader=file
+                file.resource.loader.class=org.apache.velocity.runtime.resource.loader.FileResourceLoader
+            </value>
+        </property>
+    </bean>
+
     <!-- Converter service -->
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -77,6 +98,8 @@
                 <bean class="be.peerassistedlearningti.web.model.converter.RoomInverseConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.DateConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.DateInverseConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.TimeConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.TimeInverseConverter"/>
             </set>
         </property>
     </bean>
@@ -132,21 +155,5 @@
             <property name="paramName" value="lang"/>
         </bean>
     </mvc:interceptors>
-
-    <!-- Java Mail -->
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="localhost"/>
-    </bean>
-
-    <!-- Velocity -->
-    <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
-        <property name="velocityProperties">
-            <value>
-                resource.loader=file
-                file.resource.loader.class=org.apache.velocity.runtime.resource.loader.FileResourceLoader
-            </value>
-        </property>
-    </bean>
-
 
 </beans>
