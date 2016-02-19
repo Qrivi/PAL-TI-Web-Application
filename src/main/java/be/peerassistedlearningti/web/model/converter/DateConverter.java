@@ -16,7 +16,7 @@ public class DateConverter implements Converter<String, Date>
     {
         try
         {
-            DateFormat dateFormat = new SimpleDateFormat( "MM/dd/yyyy hh:mm a" );
+            DateFormat dateFormat = new SimpleDateFormat( "MM/dd/yyyy hh:mm" );
             return dateFormat.parse( s );
         } catch ( ParseException e )
         {

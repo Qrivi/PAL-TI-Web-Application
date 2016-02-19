@@ -2,8 +2,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js"></script>
-<script type="text/javascript" src="bootstrap/dist/js/bootstrap.js"></script>
+<jsp:include page="include/head.jsp">
+    <jsp:param value="Login" name="title"/>
+</jsp:include>
 
 <form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
@@ -17,21 +18,16 @@
         Date & Time:
         <div class="container">
             <div class="row">
-                <div class='col-sm-6'>
+                <div class="col-sm-6">
                     <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" />
+                        <div class="input-group date" id="datetimepicker1">
+                            <input type="text" class="form-control"/>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                         </div>
                     </div>
                 </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker();
-                    });
-                </script>
             </div>
         </div>
     </div>
@@ -66,3 +62,5 @@
         <button type="submit" class="btn btn-default pull-right">Add</button>
     </div>
 </form:form>
+
+<jsp:include page="include/footer.jsp"/>

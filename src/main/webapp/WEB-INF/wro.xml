@@ -13,6 +13,9 @@
         <css>/assets/dist/css/AdminLTE.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
     </group>
+    <group name="datetime-picker-css">
+        <css>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css</css>
+    </group>
     <!-- Common js libraries -->
     <group name="bootstrap-js">
         <js>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</js>
@@ -23,6 +26,13 @@
     <group name="admin-lte-js">
         <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
     </group>
+    <group name="moment-js">
+        <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js</js>
+        <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/nl.js</js>
+    </group>
+    <group name="datetime-picker-js">
+        <js>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js</js>
+    </group>
     <!-- Global -->
     <group name="global">
         <!-- css -->
@@ -30,11 +40,14 @@
         <group-ref>font-awesome</group-ref>
         <group-ref>ion-icons</group-ref>
         <group-ref>admin-lte-css</group-ref>
+        <group-ref>datetime-picker-css</group-ref>
         <css>/assets/app/css/login.css</css>
         <css>/assets/app/css/register.css</css>
         <!-- js -->
         <group-ref>jquery</group-ref>
         <group-ref>bootstrap-js</group-ref>
+        <group-ref>moment-js</group-ref>
+        <group-ref>datetime-picker-js</group-ref>
         <group-ref>admin-lte-js</group-ref>
     </group>
 </groups>

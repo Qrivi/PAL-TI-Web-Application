@@ -22,7 +22,7 @@ public class DateInverseConverter implements Converter<Date, String>
     {
         try
         {
-            DateFormat dateFormat = new SimpleDateFormat( "MM/dd/yyyy hh:mm a" );
+            DateFormat dateFormat = new SimpleDateFormat( "MM/dd/yyyy hh:mm" );
             return dateFormat.format( d );
         } catch ( Exception e )
         {
