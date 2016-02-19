@@ -16,6 +16,12 @@ public class RoomTypeConverter implements Converter<String, RoomType>
 
     public RoomType convert( String s )
     {
-        return service.getRoomTypeByType( s );
+        try
+        {
+            return service.getRoomTypeByType( s );
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

@@ -10,7 +10,13 @@ public class StudentInverseConverter implements Converter<Student, String>
 {
     public String convert( Student student )
     {
-        return student.getId()
-                .toString();
+        try
+        {
+            return student.getId()
+                    .toString();
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

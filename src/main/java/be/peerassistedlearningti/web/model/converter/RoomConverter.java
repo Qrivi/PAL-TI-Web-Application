@@ -15,6 +15,12 @@ public class RoomConverter implements Converter<String, Room>
 
     public Room convert( String s )
     {
-        return service.getRoomById( Integer.parseInt( s ) );
+        try
+        {
+            return service.getRoomById( Integer.parseInt( s ) );
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

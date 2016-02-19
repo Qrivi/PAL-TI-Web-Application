@@ -15,6 +15,12 @@ public class StudentConverter implements Converter<String, Student>
 
     public Student convert( String s )
     {
-        return service.getStudentById( Integer.parseInt( s ) );
+        try
+        {
+            return service.getStudentById( Integer.parseInt( s ) );
+        } catch ( Exception e )
+        {
+            return null;
+        }
     }
 }

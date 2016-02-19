@@ -74,6 +74,8 @@
                 <bean class="be.peerassistedlearningti.web.model.converter.CourseInverseConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.RoomConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.RoomInverseConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.DateConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.DateInverseConverter"/>
             </set>
         </property>
     </bean>
