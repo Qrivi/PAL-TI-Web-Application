@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller.auth;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.form.RegisterForm;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.form.StudentForm;
@@ -53,12 +54,11 @@ public class AuthController
     @RequestMapping( value = "/register", method = RequestMethod.GET )
     public ModelAndView registerStudent( ModelMap model )
     {
-        model.addAttribute( "student", new StudentForm() );
-        return new ModelAndView( "auth/register", model );
+        return new ModelAndView( "auth/register", "register", new RegisterForm() );
     }
 
     @RequestMapping( value = "/register", method = RequestMethod.POST )
-    public ModelAndView registerStudent( @Valid @ModelAttribute( "student" ) StudentForm form, BindingResult result )
+    public ModelAndView registerStudent( @Valid @ModelAttribute( "register" ) StudentForm form, BindingResult result )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "auth/register" );
