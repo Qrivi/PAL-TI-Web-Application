@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.model.util;
 
 import be.peerassistedlearningti.model.Student;
 import org.apache.velocity.app.VelocityEngine;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -21,11 +22,12 @@ public class ResetMail {
     private JavaMailSender mailSender;
     private VelocityEngine velocityEngine;
 
-
+    @Autowired
     public void setMailSender(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
+    @Autowired
     public void setVelocityEngine(VelocityEngine velocityEngine) {
         this.velocityEngine = velocityEngine;
     }

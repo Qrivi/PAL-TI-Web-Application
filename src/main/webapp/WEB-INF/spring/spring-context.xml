@@ -60,6 +60,9 @@
 
     <bean class="be.peerassistedlearningti.web.model.util.MessageFactory"/>
 
+    <!-- Reset mail -->
+
+    <bean class="be.peerassistedlearningti.web.model.util.ResetMail"/>
     <!-- Converter service -->
 
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -135,7 +138,7 @@
 
     <!-- Java Mail -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-        <property name="host" value="localhost"/>
+        <property name="host" value="mail.csonth.gov.uk"/>
     </bean>
 
     <!-- Velocity -->
