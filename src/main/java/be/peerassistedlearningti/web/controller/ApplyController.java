@@ -5,6 +5,7 @@ import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.TutorApplyForm;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,15 +38,10 @@ public class ApplyController
         if ( result.hasErrors() )
             return new ModelAndView( "tutor_apply" );
 
-        Student david = new Student( "David", "123", "davidopdebeeck@hotmail.com", UserType.ADMIN );
-
-        service.addStudent( david );
-
-        MultipartFile screenshot = form.getScreenshot();
-
         try
         {
-            service.addApplication( new Application( david, form.getCourse(), screenshot.getBytes() ) );
+            MultipartFile screenshot = form.getScreenshot();
+            service.addApplication( new Application( SessionAuth.getStudent(), form.getCourse(), screenshot.getBytes() ) );
         } catch ( Exception e )
         {
             result.reject( "SaveFile.TutorApplyForm.screenshot" );
