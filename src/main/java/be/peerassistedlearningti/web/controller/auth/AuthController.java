@@ -93,19 +93,17 @@ public class AuthController
         Student student = service.getStudentByEmail( form.getEmail() );
 
         // max 1 reset request an hour
-        /*if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration()
+        if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration()
                 .getTime() - new Date().getTime() > 0 )
         {
             return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
-        } else*/
-        // {
-        resetMail.sendResetMail( student, student.issuePasswordReset() );
-        //ResetMail.send( student, student.issuePasswordReset() );
-        service.updateStudent( student );
-        SessionAuth.setStudent( student );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
-        return new ModelAndView( "redirect:/auth/login" );
-        // }
+        } else
+        {
+            resetMail.sendResetMail( student, student.issuePasswordReset() );
+            service.updateStudent( student );
+            redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
+            return new ModelAndView( "redirect:/auth/login" );
+        }
     }
 
     //================================================================================
