@@ -15,17 +15,16 @@ import java.util.Date;
  */
 public class DateInverseConverter implements Converter<Date, String>
 {
-    @Autowired
-    private PALService service;
 
     public String convert( Date d )
     {
         try
         {
-            DateFormat dateFormat = new SimpleDateFormat( "MM/dd/yyyy hh:mm" );
+            DateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy hh:mm" );
             return dateFormat.format( d );
         } catch ( Exception e )
         {
+            e.printStackTrace();
             return null;
         }
     }
