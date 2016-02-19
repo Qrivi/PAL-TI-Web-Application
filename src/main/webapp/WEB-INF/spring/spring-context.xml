@@ -3,14 +3,57 @@
 <beans
         xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:spring-data="http://www.springframework.org/schema/data/jpa" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
 
         xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <context:annotation-config/>
     <context:component-scan base-package="be.peerassistedlearningti"/>
+
+    <!-- Spring Data -->
+
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/PAL" expected-type="javax.sql.DataSource"/>
+
+    <!-- Create default configuration for Hibernate -->
+
+    <bean id="hibernateJpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+
+    <!-- Configure the entity manager factory bean -->
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter"/>
+        <!-- Set JPA properties -->
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.ejb.entitymanager_factory_name">PAL-FN</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        <!-- Set base package of your entities -->
+        <property name="packagesToScan" value="be.peerassistedlearningti.model"/>
+    </bean>
+
+    <!-- Configure the transaction manager bean -->
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <!-- Enable annotation driven transaction management -->
+
+    <tx:annotation-driven/>
+
+    <!-- Base package of the repository and service interfaces -->
+
+    <spring-data:repositories base-package="be.peerassistedlearningti.repository, be.peerassistedlearningti.service"/>
 
     <!-- Message factory -->
 

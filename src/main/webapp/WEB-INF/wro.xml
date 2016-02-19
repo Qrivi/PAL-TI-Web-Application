@@ -9,12 +9,19 @@
     <group name="ion-icons">
         <css>https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css</css>
     </group>
-    <!-- Common css libraries -->
+    <group name="admin-lte-css">
+        <css>/assets/dist/css/AdminLTE.min.css</css>
+        <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
+    </group>
+    <!-- Common js libraries -->
     <group name="bootstrap-js">
         <js>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</js>
     </group>
     <group name="jquery">
         <js>https://code.jquery.com/jquery-2.2.0.min.js</js>
+    </group>
+    <group name="admin-lte-js">
+        <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
     </group>
     <!-- Global -->
     <group name="global">
@@ -22,13 +29,12 @@
         <group-ref>bootstrap-css</group-ref>
         <group-ref>font-awesome</group-ref>
         <group-ref>ion-icons</group-ref>
-        <css>/assets/dist/css/AdminLTE.min.css</css>
-        <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
+        <group-ref>admin-lte-css</group-ref>
         <css>/assets/app/css/login.css</css>
         <css>/assets/app/css/register.css</css>
         <!-- js -->
         <group-ref>jquery</group-ref>
         <group-ref>bootstrap-js</group-ref>
-        <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
+        <group-ref>admin-lte-js</group-ref>
     </group>
 </groups>
