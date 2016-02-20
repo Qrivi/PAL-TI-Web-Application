@@ -2,7 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
-<jsp:include page="include/head.jsp">
+<jsp:include page="../include/head.jsp">
     <jsp:param value="Login" name="title"/>
 </jsp:include>
 

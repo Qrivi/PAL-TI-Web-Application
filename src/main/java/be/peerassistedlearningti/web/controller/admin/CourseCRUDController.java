@@ -25,19 +25,19 @@ public class CourseCRUDController extends AdminController
     @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
     public ModelAndView getCourseOverviewPage()
     {
-        return new ModelAndView( "course", "courses", service.getAllCourses() );
+        return new ModelAndView( "admin/course", "courses", service.getAllCourses() );
     }
 
     @RequestMapping( value = "/course/{id}", method = RequestMethod.GET )
     public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
     {
-        return new ModelAndView( "course_add", "course", service.getCourseById( id ) );
+        return new ModelAndView( "admin/course_add", "course", service.getCourseById( id ) );
     }
 
     @RequestMapping( value = "/course/add", method = RequestMethod.GET )
     public ModelAndView getCourseAddPage()
     {
-        return new ModelAndView( "course_add", "course", new CourseForm() );
+        return new ModelAndView("admin/course_add", "course", new CourseForm() );
     }
 
     @RequestMapping( value = "/course/remove/{id}", method = RequestMethod.POST )
@@ -52,7 +52,7 @@ public class CourseCRUDController extends AdminController
     public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "course_add" );
+            return new ModelAndView("admin/course_add");
 
         service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
 
