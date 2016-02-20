@@ -45,14 +45,20 @@ public class ApplicationController
         application.approve();
         service.updateApplication( application );
 
-        Tutor tutor = SessionAuth.getStudent().getTutor();
-        if(tutor == null){
+        Tutor tutor = application.getStudent()
+                .getTutor();
+
+        if ( tutor == null )
+        {
             Set<Course> courses = new HashSet<Course>();
-            courses.add(application.getCourse());
-            service.addTutor(new Tutor(SessionAuth.getStudent(), courses));
-        } else {
-            tutor.addCourse(application.getCourse());
+            courses.add( application.getCourse() );
+            service.addTutor( new Tutor( application.getStudent(), courses ) );
+        } else
+        {
+            tutor.addCourse( application.getCourse() );
         }
+
+        service.updateTutor( tutor );
 
         return "redirect:/application/overview";
     }
