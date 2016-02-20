@@ -114,13 +114,13 @@ public class AuthController
     // region Validate
     //================================================================================
 
-    @RequestMapping( value = "/reset/validate/{email}/{token}/", method = RequestMethod.GET )
+    @RequestMapping( value = "/reset/validate/{email}/{token}", method = RequestMethod.GET )
     public ModelAndView resetPasswordValidation( @PathVariable( value = "email" ) String email, @PathVariable( value = "token" ) String token )
     {
         return new ModelAndView( "auth/reset_validation", "reset", new ResetForm() );
     }
 
-    @RequestMapping( value = "/reset/validate/{email}/{token}/", method = RequestMethod.POST )
+    @RequestMapping( value = "/reset/validate/{email}/{token}", method = RequestMethod.POST )
     public ModelAndView resetPasswordValidation( @PathVariable( value = "email" ) String email, @PathVariable( value = "token" ) String token, @Valid @ModelAttribute( "reset" ) ResetForm form, BindingResult result, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )

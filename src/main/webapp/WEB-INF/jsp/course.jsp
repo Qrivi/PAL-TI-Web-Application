@@ -39,7 +39,7 @@
                 </c:choose>
             </td>
             <td>
-                <form action="<c:url value="/course/remove/${course.id}" />" method="POST">
+                <form action="<c:url value="/admin/course/remove/${course.id}" />" method="POST">
                     <input type="submit" value="Delete"/>
                 </form>
             </td>

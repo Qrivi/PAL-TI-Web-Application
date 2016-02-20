@@ -4,6 +4,7 @@
 <urlrewrite>
     <rule>
         <condition type="request-uri" operator="notequal">\.[a-z]+$</condition>
+        <condition type="method" name="POST" operator="notequal">POST</condition>
         <from>(.*)$</from>
         <to>$1.htm</to>
     </rule>
