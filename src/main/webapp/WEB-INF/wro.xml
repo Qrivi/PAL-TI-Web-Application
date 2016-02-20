@@ -51,8 +51,7 @@
         <group-ref>datetime-picker-css</group-ref>
         <group-ref>data-tables-css</group-ref>
         <group-ref>admin-lte-css</group-ref>
-        <css>/assets/app/css/login.css</css>
-        <css>/assets/app/css/register.css</css>
+        <css>/assets/app/css/app.css</css>
         <!-- js -->
         <group-ref>jquery</group-ref>
         <group-ref>bootstrap-js</group-ref>

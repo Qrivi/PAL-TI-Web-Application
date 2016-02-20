@@ -8,28 +8,24 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 
-@FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentForm.password.repeatPassword}" )
-public class StudentForm
+@FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentUpdateForm.password.repeatPassword}" )
+public class StudentUpdateForm
 {
 
-    @NotEmpty( message = "{NotEmpty.StudentForm.name}" )
+    private Integer id;
     private String name;
-
-    @NotEmpty( message = "{NotEmpty.StudentForm.email}" )
-    @Email( message = "{Email.StudentForm.email}" )
-    @CheckEmailIsUnique( message = "{CheckEmailIsUnique.StudentForm.email}" )
     private String email;
-
-    @NotEmpty( message = "{NotEmpty.StudentForm.password}" )
     private String password;
-
-    @NotEmpty( message = "{NotEmpty.StudentForm.repeatPassword}" )
     private String repeatPassword;
 
-    @NotNull( message = "{NotNull.StudentForm.type}" )
+    @NotNull( message = "{NotNull.StudentUpdateForm.type}" )
     private UserType type;
 
-    public StudentForm() {}
+    public StudentUpdateForm() {}
+
+    public Integer getId() { return id; }
+
+    public void setId( Integer id ) { this.id = id; }
 
     public String getName()
     {
