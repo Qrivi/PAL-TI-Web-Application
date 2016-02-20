@@ -22,6 +22,7 @@ import java.util.HashSet;
 @RequestMapping( value = "/booking" )
 public class BookingController
 {
+    /*
     @Autowired
     private PALService service;
 
@@ -82,4 +83,5 @@ public class BookingController
 
         return new ModelAndView( "redirect:/booking/overview" );
     }
+    */
 }
