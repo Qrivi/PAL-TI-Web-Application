@@ -8,36 +8,40 @@
 </jsp:include>
 
 <table>
-    <th>
-        <td>Course Code</td>
-        <td>Name</td>
-        <td>Short name</td>
-        <td>Curriculum</td>
-        <td>Year</td>
-        <td>Subscribers</td>
-    </th>
-    <c:forEach var="course" items="${courses}">
+    <thead>
         <tr>
-            <td>${course.code}</td>
-            <td>${course.name}</td>
-            <td>${course.shortName}</td>
-            <td>${course.curriculum}</td>
-            <td>${course.year}</td>
-            <td>${course.subscribers.size()}</td>
-            <td>
-                <c:choose>
-                    <c:when test="${!course.isSubscribed(SessionAuth.student)}">
-                        <form action="<c:url value="/course/subscribe/${course.id}" />" method="POST">
-                            <input type="submit" value="Subscribe"/>
-                        </form>
-                    </c:when>
-                    <c:otherwise>
-                        <form  action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
-                            <input type="submit" value="Unsubscribe"/>
-                        </form>
-                    </c:otherwise>
-                </c:choose>
-            </td>
+            <th>Course Code</th>
+            <th>Name</th>
+            <th>Short name</th>
+            <th>Curriculum</th>
+            <th>Year</th>
+            <th>Subscribers</th>
         </tr>
-    </c:forEach>
+    </thead>
+    <tbody>
+        <c:forEach var="course" items="${courses}">
+            <tr>
+                <td>${course.code}</td>
+                <td>${course.name}</td>
+                <td>${course.shortName}</td>
+                <td>${course.curriculum}</td>
+                <td>${course.year}</td>
+                <td>${course.subscribers.size()}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${!course.isSubscribed(SessionAuth.student)}">
+                            <form action="<c:url value="/course/subscribe/${course.id}" />" method="POST">
+                                <input type="submit" value="Subscribe"/>
+                            </form>
+                        </c:when>
+                        <c:otherwise>
+                            <form  action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
+                                <input type="submit" value="Unsubscribe"/>
+                            </form>
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>
