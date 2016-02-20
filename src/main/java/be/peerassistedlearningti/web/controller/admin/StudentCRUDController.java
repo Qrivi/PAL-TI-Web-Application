@@ -24,24 +24,24 @@ public class StudentCRUDController extends AdminController
     private PALService service;
 
     @RequestMapping( value = "/student/overview", method = RequestMethod.GET )
-    public ModelAndView getCourseOverviewPage()
+    public ModelAndView getStudentOverviewPage()
     {
-        return new ModelAndView( "student/student", "students", service.getAllStudents() );
+        return new ModelAndView( "admin/student/student", "students", service.getAllStudents() );
     }
 
     @RequestMapping( value = "/student/add", method = RequestMethod.GET )
-    public ModelAndView getStudentPage( ModelMap model )
+    public ModelAndView getStudentAddPage( ModelMap model )
     {
         model.addAttribute( "student", new StudentForm() );
         model.addAttribute( "userTypes", UserType.values() );
-        return new ModelAndView( "student/student_add", model );
+        return new ModelAndView( "admin/student/student_add", model );
     }
 
     @RequestMapping( value = "/student/add", method = RequestMethod.POST )
     public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "student/student_add" );
+            return new ModelAndView( "admin/student/student_add" );
 
         service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.getType() ) );
 

@@ -11,10 +11,14 @@
     </group>
     <group name="admin-lte-css">
         <css>/assets/dist/css/AdminLTE.min.css</css>
+        <css>/assets/dist/css/skins/skin-blue.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
     </group>
     <group name="datetime-picker-css">
         <css>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css</css>
+    </group>
+    <group name="data-tables-css">
+        <css>https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css</css>
     </group>
     <!-- Common js libraries -->
     <group name="bootstrap-js">
@@ -24,6 +28,7 @@
         <js>https://code.jquery.com/jquery-2.2.0.min.js</js>
     </group>
     <group name="admin-lte-js">
+        <js>/assets/dist/js/app.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
     </group>
     <group name="moment-js">
@@ -33,14 +38,19 @@
     <group name="datetime-picker-js">
         <js>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js</js>
     </group>
+    <group name="data-tables-js">
+        <js>https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js</js>
+        <js>https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js</js>
+    </group>
     <!-- Global -->
     <group name="global">
         <!-- css -->
         <group-ref>bootstrap-css</group-ref>
         <group-ref>font-awesome</group-ref>
         <group-ref>ion-icons</group-ref>
-        <group-ref>admin-lte-css</group-ref>
         <group-ref>datetime-picker-css</group-ref>
+        <group-ref>data-tables-css</group-ref>
+        <group-ref>admin-lte-css</group-ref>
         <css>/assets/app/css/login.css</css>
         <css>/assets/app/css/register.css</css>
         <!-- js -->
@@ -48,6 +58,7 @@
         <group-ref>bootstrap-js</group-ref>
         <group-ref>moment-js</group-ref>
         <group-ref>datetime-picker-js</group-ref>
+        <group-ref>data-tables-js</group-ref>
         <group-ref>admin-lte-js</group-ref>
     </group>
 </groups>

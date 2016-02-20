@@ -13,7 +13,7 @@
             <div class="login-logo">
                 <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
             </div>
-            <jsp:include page="../include/generic_message.jsp"/>
+            <jsp:include page="../include/util/generic_message.jsp"/>
             <div class="login-box-body">
                 <p class="login-box-msg">Enter your registered email address and we will send instructions to help you.</p>
                 <form:form method="post" commandName="resetRequest" enctype="application/x-www-form-urlencoded">

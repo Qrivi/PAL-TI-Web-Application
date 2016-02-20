@@ -6,47 +6,46 @@
         <jsp:param value="Login" name="title"/>
     </jsp:include>
     <body class="hold-transition login-page">
-        <body class="hold-transition login-page">
-            <div class="login-box">
-                <div class="login-logo">
-                    <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
-                </div>
-                <jsp:include page="../include/generic_message.jsp"/>
-                <c:if test="${not empty error}">
-                    <div class="callout callout-danger lead">
-                        <p>
-                            Username and password are incorrect!
-                        </p>
-                    </div>
-                </c:if>
-                <div class="login-box-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
-                    <form method="post" action="<c:url value="/auth/checklogin"/>">
-                        <div class="form-group has-feedback">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required>
-                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                        </div>
-                        <div class="form-group has-feedback">
-                            <input type="password" name="password" class="form-control" placeholder="Password" required>
-                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-8">
-                                <div class="checkbox icheck">
-                                    <label>
-                                        <input type="checkbox"> <span>Remember Me</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-xs-4">
-                                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                            </div>
-                        </div>
-                    </form>
-                    <a href="<c:url value="/auth/reset"/>">I forgot my password</a><br>
-                    <a href="<c:url value="/auth/register"/>" class="text-center">Register a new membership</a>
-                </div>
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
             </div>
-            <jsp:include page="../include/footer.jsp"/>
-        </body>
+            <jsp:include page="../include/util/generic_message.jsp"/>
+            <c:if test="${not empty error}">
+                <div class="callout callout-danger lead">
+                    <p>
+                        Username and password are incorrect!
+                    </p>
+                </div>
+            </c:if>
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in to start your session</p>
+                <form method="post" action="<c:url value="/auth/checklogin"/>">
+                    <div class="form-group has-feedback">
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="checkbox icheck">
+                                <label>
+                                    <input type="checkbox"> <span>Remember Me</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                    </div>
+                </form>
+                <a href="<c:url value="/auth/reset"/>">I forgot my password</a><br>
+                <a href="<c:url value="/auth/register"/>" class="text-center">Register a new membership</a>
+            </div>
+        </div>
+        <jsp:include page="../include/footer.jsp"/>
+    </body>
 </html>
