@@ -1,3 +1,5 @@
+<%@ page import="be.peerassistedlearningti.web.model.util.SessionAuth" %>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -34,12 +36,16 @@
                 <td>${lesson.backupRoom.name}</td>
                 <td>${lesson.bookings.size()}</td>
                 <td>
-                    <form id="command" action="<c:url value="/lesson/remove/${lesson.id}" />" method="POST">
-                        <input type="submit" value="Delete"/>
-                    </form>
-                    <form id="register" action="<c:url value="/lesson/register/${lesson.id}" />" method="POST">
-                        <input type="submit" value="Register"/>
-                    </form>
+                    <c:if test="${lesson.tutor.equals(SessionAuth.student)}">
+                        <form action="<c:url value="/lesson/remove/${lesson.id}" />" method="POST">
+                            <input type="submit" value="Delete"/>
+                        </form>
+                    </c:if>
+                    <c:if test="${lesson.bookings.size() >= lesson.maxParticipants}">
+                        <form action="<c:url value="/lesson/register/${lesson.id}" />" method="POST">
+                            <input type="submit" value="Register"/>
+                        </form>
+                    </c:if>
                 </td>
                 <td></td>
             </tr>

@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Campus;
+import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
@@ -33,8 +34,15 @@ public class LessonController
         return new ModelAndView( "lesson", "lessons", service.getAllLessons() );
     }
 
+    @RequestMapping( value = "/overview/course/{id}", method = RequestMethod.GET )
+    public ModelAndView getLessonOfCourse( @PathVariable( value = "id" ) int id )
+    {
+        Course course = service.getCourseById(id);
+        return new ModelAndView( "lesson", "lessons", service.getLessons(course) );
+    }
+
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public ModelAndView getLessonDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
+    public ModelAndView getLessonDetailPage( @PathVariable( value = "id" ) int id )
     {
         return new ModelAndView( "lesson_add", "lesson", service.getLessonById( id ) );
     }

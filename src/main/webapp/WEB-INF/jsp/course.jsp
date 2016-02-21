@@ -1,4 +1,4 @@
-<%@ page import="be.peerassistedlearningti.web.model.util.SessionAuth" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,6 +15,8 @@
             <th>Short name</th>
             <th>Curriculum</th>
             <th>Year</th>
+            <th>Lessons</th>
+            <th>Subscribe</th>
             <th>Subscribers</th>
         </tr>
     </thead>
@@ -26,7 +28,11 @@
                 <td>${course.shortName}</td>
                 <td>${course.curriculum}</td>
                 <td>${course.year}</td>
-                <td>${course.subscribers.size()}</td>
+                <td>
+                    <form  action="<c:url value="/lesson/overview/${course.id}" />" method="POST">
+                        <input type="submit" value="Lessons"/>
+                    </form>
+                </td>
                 <td>
                     <c:choose>
                         <c:when test="${course.isSubscribed(SessionAuth.student)}">
@@ -41,6 +47,7 @@
                         </c:otherwise>
                     </c:choose>
                 </td>
+                <td>${course.subscribers.size()}</td>
             </tr>
         </c:forEach>
     </tbody>
