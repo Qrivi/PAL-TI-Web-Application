@@ -8,15 +8,16 @@
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
-            <jsp:include page="../../include/menu/sidebar.jsp"/>
+            <jsp:include page="../../include/menu/main-header.jsp"/>
+            <jsp:include page="../../include/menu/sidebar.jsp">
+                <jsp:param value="students" name="title"/>
+            </jsp:include>
             <div class="content-wrapper" style="min-height: 1126px;">
-                <!-- content-header -->
                 <section class="content-header">
                     <h1>
                         Students
                     </h1>
                 </section>
-                <!-- content -->
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">

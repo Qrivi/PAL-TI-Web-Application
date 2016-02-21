@@ -42,7 +42,7 @@ public class ResetMail
                 messageHelper.setSubject( "PAL-TI password reset" );
                 Map<String, Object> model = new HashMap<String, Object>();
                 model.put( "student", student );
-                model.put( "resetLink", "http://localhost:8080/auth/reset/validate/" + student.getEmail() + "/" + token + "/" );
+                model.put( "resetLink", "http://localhost:8080/auth/reset/validate/" + student.getEmail() + "/" + token );
                 String text = VelocityEngineUtils.mergeTemplateIntoString( velocityEngine, "mail/reset_mail.vm", "UTF-8", model );
                 messageHelper.setText( text, true );
             }

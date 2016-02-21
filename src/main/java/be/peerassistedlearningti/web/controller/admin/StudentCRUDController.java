@@ -20,56 +20,65 @@ public class StudentCRUDController extends AdminController
     @Autowired
     private PALService service;
 
+    private ModelMap fillModel( ModelMap model )
+    {
+        if ( model.get( "student" ) == null )
+            model.addAttribute( "student", new StudentForm() );
+        if ( model.get( "updateStudent" ) == null )
+            model.addAttribute( "updateStudent", new StudentUpdateForm() );
+        if ( model.get( "updateStudent" ) == null )
+            model.addAttribute( "userTypes", UserType.values() );
+        if ( model.get( "students" ) == null )
+            model.addAttribute( "students", service.getAllStudents() );
+        return model;
+    }
+
     @RequestMapping( value = "/students", method = RequestMethod.GET )
     public ModelAndView getStudentOverviewPage( ModelMap model )
     {
-        model.addAttribute( "student", new StudentForm() );
-        model.addAttribute( "updateStudent", new StudentUpdateForm() );
-        model.addAttribute( "userTypes", UserType.values() );
-        model.addAttribute( "students", service.getAllStudents() );
-        return new ModelAndView( "admin/student/student", model );
+        return new ModelAndView( "admin/student/students", fillModel( model ) );
     }
 
     @RequestMapping( value = "/students", method = RequestMethod.POST )
-    public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result )
+    public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/student/student" );
+            return new ModelAndView( "admin/student/students", fillModel( model ) );
 
         service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.getType() ) );
 
-        return new ModelAndView( "redirect:/admin/students" );
+        return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
     }
 
     @RequestMapping( value = "/students/update", method = RequestMethod.POST )
-    public ModelAndView updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result )
+    public ModelAndView updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/student/student" );
+            return new ModelAndView( "admin/student/students", fillModel( model ) );
 
         Integer id = form.getId();
 
         if ( id == null )
-            return new ModelAndView( "redirect:/admin/students" );
+            return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
 
         Student s = service.getStudentById( id );
 
         if ( s == null )
-            return new ModelAndView( "redirect:/admin/students" );
+            return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
 
         String email = form.getEmail();
         String password = form.getPassword();
         UserType type = form.getType();
 
-        if ( email != null )
+        if ( email != null && !email.isEmpty() )
             s.setEmail( email );
-        if ( password != null )
+        if ( password != null && !password.isEmpty() )
             s.setPassword( password );
         if ( type != null )
             s.setType( type );
 
         service.updateStudent( s );
-        return new ModelAndView( "redirect:/admin/students" );
+        return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
     }
 
     @RequestMapping( value = "/students/remove/{id}", method = RequestMethod.POST )
