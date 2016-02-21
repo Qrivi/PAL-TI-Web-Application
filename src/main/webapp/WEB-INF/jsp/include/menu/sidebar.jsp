@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="currStudent" property="principal"/>
 <aside class="main-sidebar">
     <div class="sidebar">
         <div class="user-panel">
@@ -13,8 +14,14 @@
         </div>
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="${param.title == "students" ? "active" : "" }"><a href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
-            <li class="${param.title == "courses" ? "active" : "" }"><a href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
+            <!-- ADMIN menu -->
+            <c:if test="${currStudent.type == 'ADMIN'}">
+                <li class="${param.title == "students" ? "active" : "" }"><a
+                        href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
+                <li class="${param.title == "courses" ? "active" : "" }"><a
+                        href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
+            </c:if>
+            <!-- NORMAL menu -->
         </ul>
     </div>
 </aside>
