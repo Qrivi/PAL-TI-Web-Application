@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="currStudent" property="principal"/>
 <aside class="main-sidebar">
     <div class="sidebar">
         <div class="user-panel">
@@ -12,10 +13,24 @@
             </div>
         </div>
         <ul class="sidebar-menu">
+            <!-- ADMIN menu -->
+            <c:if test="${currStudent.type == 'ADMIN'}">
+                <li class="header">ADMIN NAVIGATION</li>
+                <li class="${param.title == "students" ? "active" : "" }"><a
+                        href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
+                <li class="${param.title == "courses" ? "active" : "" }"><a
+                        href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
+                <li class="${param.title == "courses" ? "active" : "" }"><a href="<c:url value="/admin/rooms"/>"><span>Rooms</span></a>
+                </li>
+            </c:if>
+            <!-- TUTOR menu -->
+            <c:if test="${currStudent.tutor != null}">
+                <li class="header">TUTOR NAVIGATION</li>
+            </c:if>
+            <!-- NORMAL menu -->
             <li class="header">MAIN NAVIGATION</li>
-            <li class="${param.title == "students" ? "active" : "" }"><a href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
-            <li class="${param.title == "courses" ? "active" : "" }"><a href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
-            <li class="${param.title == "courses" ? "active" : "" }"><a href="<c:url value="/admin/rooms"/>"><span>Rooms</span></a></li>
+            <li class="${param.title == "profile" ? "active" : "" }"><a
+                    href="<c:url value="/profile"/>"><span>My Profile</span></a></li>
         </ul>
     </div>
 </aside>

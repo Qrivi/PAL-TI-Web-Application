@@ -21,7 +21,7 @@
                 </h1>
             </section>
             <!-- main content -->
-            <section class="container">
+            <section class="container container-box">
                 <div class="row">
                     <div class="col-md-3">
                         <div class="box box-primary">
@@ -109,7 +109,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-default pull-right">Change</button>
+                                            <button type="submit" class="btn btn-default pull-right"
+                                                    style="margin-right: 15px">Change
+                                            </button>
                                         </div>
                                     </form:form>
                                     </div>
