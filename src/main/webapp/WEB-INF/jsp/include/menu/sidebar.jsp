@@ -22,6 +22,8 @@
                         href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
             </c:if>
             <!-- NORMAL menu -->
+            <li class="${param.title == "profile" ? "active" : "" }"><a
+                    href="<c:url value="/profile"/>"><span>My Profile</span></a></li>
         </ul>
     </div>
 </aside>
