@@ -6,24 +6,36 @@
 </jsp:include>
 
 <table>
-    <c:forEach var="review" items="${reviews}">
-        <tr>
-            <td>${review.lesson.name}</td>
-            <td>${review.date}</td>
-            <td>
-                <c:when test="${review.anonymous}">Anonymous</c:when>
-                <c:otherwise>${review.student}</c:otherwise>
-            </td>
-            <td>${review.contentScore}</td>
-            <td>${review.tutorScore}</td>
-            <td>${review.engagementScore}</td>
-            <td>${review.atmosphereScore}</td>
-            <td>
-                <form id="command" action="<c:url value="/review/remove/${review.id}" />" method="POST">
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-            <td></td>
-        </tr>
-    </c:forEach>
+    <thead>
+        <th>Lesson</th>
+        <th>Date</th>
+        <th>Student</th>
+        <th>Content Score</th>
+        <th>Tutor Score</th>
+        <th>Engagement Score</th>
+        <th>Atmosphere Score</th>
+        <th>Comment</th>
+    </thead>
+    <tbody>
+        <c:forEach var="review" items="${reviews}">
+            <tr>
+                <td>${review.lesson.name}</td>
+                <td>${review.date}</td>
+                <td>
+                    <c:when test="${review.anonymous}">Anonymous</c:when>
+                    <c:otherwise>${review.student}</c:otherwise>
+                </td>
+                <td>${review.contentScore}</td>
+                <td>${review.tutorScore}</td>
+                <td>${review.engagementScore}</td>
+                <td>${review.atmosphereScore}</td>
+                <td>${review.text}</td></ts>
+                <td>
+                    <form id="command" action="<c:url value="/review/remove/${review.id}" />" method="POST">
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>

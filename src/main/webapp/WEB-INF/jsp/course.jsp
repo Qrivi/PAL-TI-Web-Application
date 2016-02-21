@@ -29,14 +29,14 @@
                 <td>${course.subscribers.size()}</td>
                 <td>
                     <c:choose>
-                        <c:when test="${!course.isSubscribed(SessionAuth.student)}">
-                            <form action="<c:url value="/course/subscribe/${course.id}" />" method="POST">
-                                <input type="submit" value="Subscribe"/>
+                        <c:when test="${course.isSubscribed(SessionAuth.student)}">
+                            <form  action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
+                                <input type="submit" value="Unsubscribe"/>
                             </form>
                         </c:when>
                         <c:otherwise>
-                            <form  action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
-                                <input type="submit" value="Unsubscribe"/>
+                            <form action="<c:url value="/course/subscribe/${course.id}" />" method="POST">
+                                <input type="submit" value="Subscribe"/>
                             </form>
                         </c:otherwise>
                     </c:choose>

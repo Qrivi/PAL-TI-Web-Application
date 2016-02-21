@@ -24,7 +24,7 @@ public class RoomController {
     @RequestMapping( value = "/overview", method = RequestMethod.GET )
     public ModelAndView getRoomOverviewPage()
     {
-        return new ModelAndView( "rooms", "rooms", service.getAllRooms());
+        return new ModelAndView( "room", "rooms", service.getAllRooms());
     }
 
     @RequestMapping( value = "/add", method = RequestMethod.GET )

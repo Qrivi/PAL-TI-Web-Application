@@ -6,17 +6,24 @@
 </jsp:include>
 
 <table>
-    <c:forEach var="room" items="${rooms}">
-        <tr>
-            <td>${room.name}</td>
-            <td>${room.campus}</td>
-            <td>${room.type}</td>
-            <td>
-                <form id="command" action="<c:url value="/room/remove/${room.id}" />" method="POST">
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-            <td></td>
-        </tr>
-    </c:forEach>
+    <thead>
+        <th>Name</th>
+        <th>Campus</th>
+        <th>Room Type</th>
+    </thead>
+    <tbody>
+        <c:forEach var="room" items="${rooms}">
+            <tr>
+                <td>${room.name}</td>
+                <td>${room.campus}</td>
+                <td>${room.type}</td>
+                <td>
+                    <form id="command" action="<c:url value="/room/remove/${room.id}" />" method="POST">
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>

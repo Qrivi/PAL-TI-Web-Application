@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,11 @@ public class CourseController
     public String subscribeToCourse( @PathVariable( value = "id" ) int id )
     {
         Course c = service.getCourseById( id );
-        c.subscribe( SessionAuth.getStudent() );
+        Student s = SessionAuth.getStudent();
+        c.subscribe( s );
         service.updateCourse( c );
+        service.updateStudent( s );
+        SessionAuth.setStudent( s );
         return "redirect:/course/overview";
     }
 
@@ -38,6 +42,7 @@ public class CourseController
         Course c = service.getCourseById( id );
         c.unsubscribe( SessionAuth.getStudent() );
         service.updateCourse( c );
+        service.updateStudent( SessionAuth.getStudent() );
         return "redirect:/course/overview";
     }
 }

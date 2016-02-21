@@ -5,17 +5,26 @@
     <jsp:param value="Login" name="title"/>
 </jsp:include>
 
+<h2>Bookings for ${lesson}</h2>
 <table>
-    <c:forEach var="booking" items="${bookings}">
+    <thead>
         <tr>
-            <td>${booking.student.name}
-            <td>${booking.student.email}</td>
-            <td>
-                <form id="command" action="<c:url value="/booking/remove/${booking.id}" />" method="POST">
-                    <input type="submit" value="Delete"/>
-                </form>
-            </td>
-            <td></td>
+            <th>Student</th>
+            <th>Email</th>
         </tr>
-    </c:forEach>
+    </thead>
+    <tbody>
+        <c:forEach var="booking" items="${bookings}">
+            <tr>
+                <td>${booking.student.name}
+                <td>${booking.student.email}</td>
+                <td>
+                    <form action="<c:url value="/booking/remove/${booking.id}" />" method="POST">
+                        <input type="submit" value="Delete"/>
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        </c:forEach>
+    </tbody>
 </table>

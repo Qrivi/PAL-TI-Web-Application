@@ -8,8 +8,8 @@
 <table>
     <c:forEach var="tutor" items="${tutors}">
         <tr>
-            <td>${tutor.}
-            <td>${booking.student.email}</td>
+            <td>${tutor}
+            <td>${tutor}</td>
             <td>
                 <form id="command" action="<c:url value="/booking/remove/${booking.id}" />" method="POST">
                     <input type="submit" value="Delete"/>
