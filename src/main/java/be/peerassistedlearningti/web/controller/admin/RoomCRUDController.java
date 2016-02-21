@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -57,20 +58,24 @@ public class RoomCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/rooms/update", method = RequestMethod.POST )
-    public ModelAndView updateRoom( @Valid @ModelAttribute( "updateStudent" ) RoomUpdateForm form, BindingResult result, ModelMap model )
+    public String updateRoom( @Valid @ModelAttribute( "updateStudent" ) RoomUpdateForm form, BindingResult result, RedirectAttributes attr )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "redirect:/admin/rooms" );
+        {
+            attr.addFlashAttribute( "org.springframework.validation.BindingResult.updateStudent", result );
+            attr.addFlashAttribute( "updateStudent", form );
+            return "redirect:/admin/rooms";
+        }
 
         Integer id = form.getId();
 
         if ( id == null )
-            return new ModelAndView( "redirect:/admin/rooms" );
+            return "redirect:/admin/rooms";
 
         Room r = service.getRoomById( id );
 
         if ( r == null )
-            return new ModelAndView( "redirect:/admin/rooms" );
+            return "redirect:/admin/rooms";
 
         String name = form.getName();
         Campus campus = form.getCampus();
@@ -84,7 +89,7 @@ public class RoomCRUDController extends AdminController
             r.setType( type );
 
         service.updateRoom( r );
-        return new ModelAndView( "redirect:/admin/rooms" );
+        return "redirect:/admin/rooms";
     }
 
     @RequestMapping( value = "/rooms/remove/{id}", method = RequestMethod.POST )

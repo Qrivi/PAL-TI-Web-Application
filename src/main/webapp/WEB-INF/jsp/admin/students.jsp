@@ -138,9 +138,10 @@
                                             <form:form method="post" action="/admin/students/update" commandName="updateStudent" enctype="application/x-www-form-urlencoded">
                                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                                 <c:set var="emailError"><form:errors path="email"/></c:set>
-                                                <c:set var="passwordError"><form:errors path="password"/></c:set>
-                                                <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
+                                                <c:set var="passwordError"><form:errors path="password"/><form:errors/></c:set>
+                                                <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/><form:errors/></c:set>
                                                 <c:set var="typeError"><form:errors path="type"/></c:set>
+                                                <form:errors element="div" cssClass="alert alert-danger"/>
                                                 <form:hidden path="id" class="form-control"/>
                                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                                     <form:errors path="name" element="label"/>
