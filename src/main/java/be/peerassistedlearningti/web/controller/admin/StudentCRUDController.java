@@ -26,7 +26,7 @@ public class StudentCRUDController extends AdminController
             model.addAttribute( "student", new StudentForm() );
         if ( model.get( "updateStudent" ) == null )
             model.addAttribute( "updateStudent", new StudentUpdateForm() );
-        if ( model.get( "updateStudent" ) == null )
+        if ( model.get( "userTypes" ) == null )
             model.addAttribute( "userTypes", UserType.values() );
         if ( model.get( "students" ) == null )
             model.addAttribute( "students", service.getAllStudents() );
@@ -54,7 +54,7 @@ public class StudentCRUDController extends AdminController
     public ModelAndView updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/students", fillModel( model ) );
+            return new ModelAndView( "redirect:/admin/students" );
 
         Integer id = form.getId();
 
@@ -78,7 +78,7 @@ public class StudentCRUDController extends AdminController
             s.setType( type );
 
         service.updateStudent( s );
-        return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
+        return new ModelAndView( "redirect:/admin/students" );
     }
 
     @RequestMapping( value = "/students/remove/{id}", method = RequestMethod.POST )

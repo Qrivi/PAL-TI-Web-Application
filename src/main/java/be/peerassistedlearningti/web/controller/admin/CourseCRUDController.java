@@ -55,17 +55,17 @@ public class CourseCRUDController extends AdminController
     public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/courses", fillModel( model ) );
+            return new ModelAndView( "redirect:/admin/courses" );
 
         Integer id = form.getId();
 
         if ( id == null )
-            return new ModelAndView( "redirect:admin/courses", fillModel( model ) );
+            return new ModelAndView( "redirect:/admin/courses" );
 
         Course c = service.getCourseById( id );
 
         if ( c == null )
-            return new ModelAndView( "redirect:admin/courses", fillModel( model ) );
+            return new ModelAndView( "redirect:/admin/courses" );
 
         String code = form.getCode();
         String name = form.getName();
@@ -85,7 +85,7 @@ public class CourseCRUDController extends AdminController
         c.setYear( year );
 
         service.updateCourse( c );
-        return new ModelAndView( "redirect:/admin/courses", fillModel( model ) );
+        return new ModelAndView( "redirect:/admin/courses" );
     }
 
     @RequestMapping( value = "/courses/remove/{id}", method = RequestMethod.POST )

@@ -17,8 +17,6 @@ public class StudentUpdateForm
     private String email;
     private String password;
     private String repeatPassword;
-
-    @NotNull( message = "{NotNull.StudentUpdateForm.type}" )
     private UserType type;
 
     public StudentUpdateForm() {}

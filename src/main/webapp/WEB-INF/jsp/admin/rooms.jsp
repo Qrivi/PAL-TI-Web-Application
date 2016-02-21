@@ -1,22 +1,21 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <jsp:include page="../include/head.jsp">
-        <jsp:param value="Students" name="title"/>
+        <jsp:param value="Rooms" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
             <jsp:include page="../include/menu/main-header.jsp"/>
             <jsp:include page="../include/menu/sidebar.jsp">
-                <jsp:param value="students" name="title"/>
+                <jsp:param value="rooms" name="title"/>
             </jsp:include>
             <div class="content-wrapper" style="min-height: 1126px;">
                 <section class="content-header">
                     <h1>
-                        Students
+                        Rooms
                     </h1>
                 </section>
                 <section class="content">
@@ -24,7 +23,7 @@
                         <div class="col-md-12">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Student overview</h3>
+                                    <h3 class="box-title">Room overview</h3>
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                                             <i class="fa fa-minus"></i></button>
@@ -33,11 +32,11 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <table id="student-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                            <table id="room-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th>Name</th>
-                                                        <th>Email</th>
+                                                        <th>Campus</th>
                                                         <th>Type</th>
                                                         <th data-orderable="false">Delete</th>
                                                     </tr>
@@ -45,22 +44,22 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th>Name</th>
-                                                        <th>Email</th>
+                                                        <th>Campus</th>
                                                         <th>Type</th>
                                                         <th>Delete</th>
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                    <c:forEach var="student" items="${students}">
+                                                    <c:forEach var="room" items="${rooms}">
                                                         <tr>
-                                                            <td>${student.name}</td>
-                                                            <td>${student.email}</td>
-                                                            <td>${student.type}</td>
+                                                            <td>${room.name}</td>
+                                                            <td>${room.campus}</td>
+                                                            <td>${room.type}</td>
                                                             <td>
-                                                                <form class="small" action="<c:url value="/admin/students/remove/${student.id}" />" method="POST">
+                                                                <form class="small" action="<c:url value="/admin/rooms/remove/${room.id}" />" method="POST">
                                                                     <button class="btn btn-sm">Delete</button>
                                                                 </form>
-                                                                <button class="btn btn-sm update" data-id="${student.id}">Update</button>
+                                                                <button class="btn btn-sm update" data-id="${room.id}">Update</button>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -76,7 +75,7 @@
                         <div class="col-md-6">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Create a Student</h3>
+                                    <h3 class="box-title">Create a Room</h3>
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                                             <i class="fa fa-minus"></i></button>
@@ -85,33 +84,26 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <form:form method="post" commandName="student" enctype="application/x-www-form-urlencoded">
+                                            <form:form method="post" commandName="room" enctype="application/x-www-form-urlencoded">
                                                 <c:set var="nameError"><form:errors path="name"/></c:set>
-                                                <c:set var="emailError"><form:errors path="email"/></c:set>
-                                                <c:set var="passwordError"><form:errors path="password"/></c:set>
-                                                <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
+                                                <c:set var="campusError"><form:errors path="campus"/></c:set>
                                                 <c:set var="typeError"><form:errors path="type"/></c:set>
                                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                                     <form:errors path="name" element="label"/>
                                                     <form:input path="name" class="form-control" placeholder="Name"/>
                                                 </div>
-                                                <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
-                                                    <form:errors path="email" element="label"/>
-                                                    <form:input path="email" class="form-control" placeholder="Email"/>
-                                                </div>
-                                                <div class="form-group has-feedback ${ not empty passwordError ? 'has-error' : ''}">
-                                                    <form:errors path="password" element="label"/>
-                                                    <form:password path="password" class="form-control" placeholder="Password"/>
-                                                </div>
-                                                <div class="form-group has-feedback ${ not empty repeatPasswordError ? 'has-error' : ''}">
-                                                    <form:errors path="repeatPassword" element="label"/>
-                                                    <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
+                                                <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
+                                                    <form:errors path="campus" element="label"/>
+                                                    <form:select path="campus" class="form-control">
+                                                        <form:option value="None" label="--- Campus ---"/>
+                                                        <form:options items="${campuses}"/>
+                                                    </form:select>
                                                 </div>
                                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                                     <form:errors path="type" element="label"/>
                                                     <form:select path="type" class="form-control">
-                                                        <form:option value="None" label="--- Select ---"/>
-                                                        <form:options items="${userTypes}"/>
+                                                        <form:option value="None" label="--- Room Type ---"/>
+                                                        <form:options items="${roomTypes}"/>
                                                     </form:select>
                                                 </div>
                                                 <div class="form-group">
@@ -126,7 +118,7 @@
                         <div class="col-md-6">
                             <div class="box">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Update a Student</h3>
+                                    <h3 class="box-title">Update a Room</h3>
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                                             <i class="fa fa-minus"></i></button>
@@ -135,34 +127,27 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <form:form method="post" action="/admin/students/update" commandName="updateStudent" enctype="application/x-www-form-urlencoded">
+                                            <form:form method="post" commandName="updateRoom" action="/admin/rooms/update" enctype="application/x-www-form-urlencoded">
                                                 <c:set var="nameError"><form:errors path="name"/></c:set>
-                                                <c:set var="emailError"><form:errors path="email"/></c:set>
-                                                <c:set var="passwordError"><form:errors path="password"/></c:set>
-                                                <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
+                                                <c:set var="campusError"><form:errors path="campus"/></c:set>
                                                 <c:set var="typeError"><form:errors path="type"/></c:set>
                                                 <form:hidden path="id" class="form-control"/>
                                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                                     <form:errors path="name" element="label"/>
                                                     <form:input path="name" class="form-control" placeholder="Name"/>
                                                 </div>
-                                                <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
-                                                    <form:errors path="email" element="label"/>
-                                                    <form:input path="email" class="form-control" placeholder="Email"/>
-                                                </div>
-                                                <div class="form-group has-feedback ${ not empty passwordError ? 'has-error' : ''}">
-                                                    <form:errors path="password" element="label"/>
-                                                    <form:password path="password" class="form-control" placeholder="Password"/>
-                                                </div>
-                                                <div class="form-group has-feedback ${ not empty repeatPasswordError ? 'has-error' : ''}">
-                                                    <form:errors path="repeatPassword" element="label"/>
-                                                    <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
+                                                <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
+                                                    <form:errors path="campus" element="label"/>
+                                                    <form:select path="campus" class="form-control">
+                                                        <form:option value="None" label="--- Campus ---"/>
+                                                        <form:options items="${campuses}"/>
+                                                    </form:select>
                                                 </div>
                                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                                     <form:errors path="type" element="label"/>
                                                     <form:select path="type" class="form-control">
-                                                        <form:option value="None" label="--- Select ---"/>
-                                                        <form:options items="${userTypes}"/>
+                                                        <form:option value="None" label="--- Room Type ---"/>
+                                                        <form:options items="${roomTypes}"/>
                                                     </form:select>
                                                 </div>
                                                 <div class="form-group">
@@ -181,13 +166,13 @@
         <jsp:include page="../include/footer.jsp"/>
         <script type="application/javascript">
             $( document ).ready( function () {
-                $( "#student-overview" ).DataTable();
-                $( "#student-overview .update" ).click( function () {
+                $( "#room-overview" ).DataTable();
+                $( "#room-overview .update" ).click( function () {
                     var props = $( this ).parent().parent().find( "td" );
-                    $( "#updateStudent #id" ).val( $( this ).attr( "data-id" ) );
-                    $( "#updateStudent #name" ).val( props[ 0 ].textContent );
-                    $( "#updateStudent #email" ).val( props[ 1 ].textContent );
-                    $( "#updateStudent #type" ).val( props[ 2 ].textContent );
+                    $( "#updateRoom #id" ).val( $( this ).attr( "data-id" ) );
+                    $( "#updateRoom #name" ).val( props[ 0 ].textContent );
+                    $( "#updateRoom #campus" ).val( props[ 1 ].textContent );
+                    $( "#updateRoom #type" ).val( props[ 2 ].textContent );
                 } );
             } );
         </script>
