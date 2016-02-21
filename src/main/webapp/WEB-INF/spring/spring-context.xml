@@ -110,6 +110,7 @@
                 <bean class="be.peerassistedlearningti.web.model.converter.DateInverseConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.TimeConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.TimeInverseConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.UserTypeConverter"/>
             </set>
         </property>
     </bean>

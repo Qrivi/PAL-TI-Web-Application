@@ -19,14 +19,7 @@
         <!-- sidebar-menu -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active"><a href="#"><span>Link</span></a></li>
-            <li class="treeview">
-                <a href="#"><span>Students</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="<c:url value="/admin/student/add"/>">Add a new student</a></li>
-                    <li><a href="<c:url value="/admin/student/overview"/>">Student overview</a></li>
-                </ul>
-            </li>
+            <li class="active"><a href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </div>
