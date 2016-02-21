@@ -3,13 +3,13 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-    <jsp:include page="../../include/head.jsp">
+    <jsp:include page="../include/head.jsp">
         <jsp:param value="Students" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
-            <jsp:include page="../../include/menu/main-header.jsp"/>
-            <jsp:include page="../../include/menu/sidebar.jsp">
+            <jsp:include page="../include/menu/main-header.jsp"/>
+            <jsp:include page="../include/menu/sidebar.jsp">
                 <jsp:param value="students" name="title"/>
             </jsp:include>
             <div class="content-wrapper" style="min-height: 1126px;">
@@ -38,7 +38,7 @@
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Type</th>
-                                                        <th>Delete</th>
+                                                        <th data-orderable="false">Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
@@ -177,7 +177,7 @@
                 </section>
             </div>
         </div>
-        <jsp:include page="../../include/footer.jsp"/>
+        <jsp:include page="../include/footer.jsp"/>
         <script type="application/javascript">
             $( document ).ready( function () {
                 $( "#student-overview" ).DataTable();

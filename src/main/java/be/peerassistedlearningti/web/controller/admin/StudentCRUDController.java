@@ -36,35 +36,35 @@ public class StudentCRUDController extends AdminController
     @RequestMapping( value = "/students", method = RequestMethod.GET )
     public ModelAndView getStudentOverviewPage( ModelMap model )
     {
-        return new ModelAndView( "admin/student/students", fillModel( model ) );
+        return new ModelAndView( "admin/students", fillModel( model ) );
     }
 
     @RequestMapping( value = "/students", method = RequestMethod.POST )
     public ModelAndView addStudentPage( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/student/students", fillModel( model ) );
+            return new ModelAndView( "admin/students", fillModel( model ) );
 
         service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.getType() ) );
 
-        return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
+        return new ModelAndView( "redirect:/admin/students" );
     }
 
     @RequestMapping( value = "/students/update", method = RequestMethod.POST )
     public ModelAndView updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/student/students", fillModel( model ) );
+            return new ModelAndView( "admin/students", fillModel( model ) );
 
         Integer id = form.getId();
 
         if ( id == null )
-            return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
+            return new ModelAndView( "redirect:/admin/students" );
 
         Student s = service.getStudentById( id );
 
         if ( s == null )
-            return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
+            return new ModelAndView( "redirect:/admin/students" );
 
         String email = form.getEmail();
         String password = form.getPassword();

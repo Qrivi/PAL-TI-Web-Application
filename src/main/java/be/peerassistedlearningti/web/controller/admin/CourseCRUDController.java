@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller.admin;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.CourseForm;
+import be.peerassistedlearningti.web.model.form.CourseUpdateForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,41 +23,77 @@ public class CourseCRUDController extends AdminController
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/course/overview", method = RequestMethod.GET )
-    public ModelAndView getCourseOverviewPage()
+    private ModelMap fillModel( ModelMap model )
     {
-        return new ModelAndView( "admin/course", "courses", service.getAllCourses() );
+        if ( model.get( "course" ) == null )
+            model.addAttribute( "course", new CourseForm() );
+        if ( model.get( "updateCourse" ) == null )
+            model.addAttribute( "updateCourse", new CourseUpdateForm() );
+        if ( model.get( "courses" ) == null )
+            model.addAttribute( "courses", service.getAllCourses() );
+        return model;
     }
 
-    @RequestMapping( value = "/course/{id}", method = RequestMethod.GET )
-    public ModelAndView getCourseDetailPage( @PathVariable( value = "id" ) int id, ModelMap model )
+    @RequestMapping( value = "/courses", method = RequestMethod.GET )
+    public ModelAndView getCourseOverviewPage( ModelMap model )
     {
-        return new ModelAndView( "admin/course_add", "course", service.getCourseById( id ) );
+        return new ModelAndView( "admin/courses", fillModel( model ) );
     }
 
-    @RequestMapping( value = "/course/add", method = RequestMethod.GET )
-    public ModelAndView getCourseAddPage()
+    @RequestMapping( value = "/course", method = RequestMethod.POST )
+    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result, ModelMap model )
     {
-        return new ModelAndView("admin/course_add", "course", new CourseForm() );
+        if ( result.hasErrors() )
+            return new ModelAndView( "admin/courses", fillModel( model ) );
+
+        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
+
+        return new ModelAndView( "redirect:/admin/courses" );
     }
 
-    @RequestMapping( value = "/course/remove/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/courses/update", method = RequestMethod.POST )
+    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "admin/courses", fillModel( model ) );
+
+        Integer id = form.getId();
+
+        if ( id == null )
+            return new ModelAndView( "redirect:admin/courses", fillModel( model ) );
+
+        Course c = service.getCourseById( id );
+
+        if ( c == null )
+            return new ModelAndView( "redirect:admin/courses", fillModel( model ) );
+
+        String code = form.getCode();
+        String name = form.getName();
+        String shortName = form.getShortName();
+        String curriculum = form.getCurriculum();
+        int year = form.getYear();
+
+        if ( code != null && !code.isEmpty() )
+            c.setCode( code );
+        if ( name != null && !name.isEmpty() )
+            c.setName( name );
+        if ( shortName != null && !shortName.isEmpty() )
+            c.setShortName( shortName );
+        if ( curriculum != null && !curriculum.isEmpty() )
+            c.setCurriculum( curriculum );
+
+        c.setYear( year );
+
+        service.updateCourse( c );
+        return new ModelAndView( "redirect:/admin/courses", fillModel( model ) );
+    }
+
+    @RequestMapping( value = "/courses/remove/{id}", method = RequestMethod.POST )
     public String removeCourse( @PathVariable( value = "id" ) int id )
     {
         Course c = service.getCourseById( id );
         service.removeCourse( c );
         return "redirect:/admin/course/overview";
-    }
-
-    @RequestMapping( value = "/course/add", method = RequestMethod.POST )
-    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView("admin/course_add");
-
-        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
-
-        return new ModelAndView( "redirect:/admin/course/overview" );
     }
 
 }
