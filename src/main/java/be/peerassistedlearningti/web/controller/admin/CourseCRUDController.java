@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -52,20 +53,24 @@ public class CourseCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/courses/update", method = RequestMethod.POST )
-    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model )
+    public String updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, RedirectAttributes attr )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/courses", fillModel( model ) );
+        {
+            attr.addFlashAttribute( "org.springframework.validation.BindingResult.updateCourse", result );
+            attr.addFlashAttribute( "updateCourse", form );
+            return "redirect:/admin/courses";
+        }
 
         Integer id = form.getId();
 
         if ( id == null )
-            return new ModelAndView( "redirect:admin/courses", fillModel( model ) );
+            return "redirect:/admin/courses";
 
         Course c = service.getCourseById( id );
 
         if ( c == null )
-            return new ModelAndView( "redirect:admin/courses", fillModel( model ) );
+            return "redirect:/admin/courses";
 
         String code = form.getCode();
         String name = form.getName();
@@ -85,7 +90,7 @@ public class CourseCRUDController extends AdminController
         c.setYear( year );
 
         service.updateCourse( c );
-        return new ModelAndView( "redirect:/admin/courses", fillModel( model ) );
+        return "redirect:/admin/courses";
     }
 
     @RequestMapping( value = "/courses/remove/{id}", method = RequestMethod.POST )

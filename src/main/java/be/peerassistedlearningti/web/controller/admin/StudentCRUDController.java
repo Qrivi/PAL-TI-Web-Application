@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -26,7 +27,7 @@ public class StudentCRUDController extends AdminController
             model.addAttribute( "student", new StudentForm() );
         if ( model.get( "updateStudent" ) == null )
             model.addAttribute( "updateStudent", new StudentUpdateForm() );
-        if ( model.get( "updateStudent" ) == null )
+        if ( model.get( "userTypes" ) == null )
             model.addAttribute( "userTypes", UserType.values() );
         if ( model.get( "students" ) == null )
             model.addAttribute( "students", service.getAllStudents() );
@@ -51,20 +52,24 @@ public class StudentCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/students/update", method = RequestMethod.POST )
-    public ModelAndView updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result, ModelMap model )
+    public String updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result, RedirectAttributes attr )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "admin/students", fillModel( model ) );
+        {
+            attr.addFlashAttribute( "org.springframework.validation.BindingResult.updateStudent", result );
+            attr.addFlashAttribute( "updateStudent", form );
+            return "redirect:/admin/students";
+        }
 
         Integer id = form.getId();
 
         if ( id == null )
-            return new ModelAndView( "redirect:/admin/students" );
+            return "redirect:/admin/students";
 
         Student s = service.getStudentById( id );
 
         if ( s == null )
-            return new ModelAndView( "redirect:/admin/students" );
+            return "redirect:/admin/students";
 
         String email = form.getEmail();
         String password = form.getPassword();
@@ -78,7 +83,7 @@ public class StudentCRUDController extends AdminController
             s.setType( type );
 
         service.updateStudent( s );
-        return new ModelAndView( "redirect:/admin/students", fillModel( model ) );
+        return "redirect:/admin/students";
     }
 
     @RequestMapping( value = "/students/remove/{id}", method = RequestMethod.POST )
