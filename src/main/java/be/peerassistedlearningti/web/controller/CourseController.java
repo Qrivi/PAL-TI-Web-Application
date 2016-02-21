@@ -45,4 +45,10 @@ public class CourseController
         service.updateStudent( SessionAuth.getStudent() );
         return "redirect:/course/overview";
     }
+
+    @RequestMapping( value = "/lessons/course/{id}", method = RequestMethod.GET )
+    public String getLessonOfCourse( @PathVariable( value = "id" ) int id )
+    {
+        return "redirect:/lesson/overview/course/" + id ;
+    }
 }

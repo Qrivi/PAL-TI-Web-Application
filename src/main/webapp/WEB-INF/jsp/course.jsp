@@ -30,7 +30,7 @@
                 <td>${course.curriculum}</td>
                 <td>${course.year}</td>
                 <td>
-                    <form  action="<c:url value="/lesson/overview/${course.id}" />" method="POST">
+                    <form  action="<c:url value="/lesson/overview/course/${course.id}"/>" method="GET">
                         <input type="submit" value="Lessons"/>
                     </form>
                 </td>
