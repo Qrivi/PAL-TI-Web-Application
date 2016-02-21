@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.model.util;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.UserType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +10,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class used to get/set the Authenticated user
@@ -24,8 +26,13 @@ public class SessionAuth
      */
     public static void setStudent( Student student )
     {
-        Authentication auth = new UsernamePasswordAuthenticationToken( student, student.getPassword(), new ArrayList<GrantedAuthority>()
-        {{add( new SimpleGrantedAuthority( "ROLE_USER" ) );}} );
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
+
+        if ( student.getType().equals( UserType.ADMIN ) )
+            authorities.add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
+
+        Authentication auth = new UsernamePasswordAuthenticationToken( student, student.getPassword(), authorities );
 
         SecurityContext securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication( auth );

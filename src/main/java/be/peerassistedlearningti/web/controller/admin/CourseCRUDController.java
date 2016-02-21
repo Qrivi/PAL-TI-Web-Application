@@ -41,7 +41,7 @@ public class CourseCRUDController extends AdminController
         return new ModelAndView( "admin/courses", fillModel( model ) );
     }
 
-    @RequestMapping( value = "/course", method = RequestMethod.POST )
+    @RequestMapping( value = "/courses", method = RequestMethod.POST )
     public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
@@ -98,7 +98,7 @@ public class CourseCRUDController extends AdminController
     {
         Course c = service.getCourseById( id );
         service.removeCourse( c );
-        return "redirect:/admin/course/overview";
+        return "redirect:/admin/courses";
     }
 
 }

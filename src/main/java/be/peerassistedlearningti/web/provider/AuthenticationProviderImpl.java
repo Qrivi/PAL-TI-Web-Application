@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.provider;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -20,11 +21,9 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
 
     public Authentication authenticate( Authentication auth ) throws AuthenticationException
     {
-        String email = auth.getName()
-                .toLowerCase();
-        String password = auth.getCredentials()
-                .toString();
-        Student student;
+        final String email = auth.getName().toLowerCase();
+        final String password = auth.getCredentials().toString();
+        final Student student;
 
         try
         {
@@ -40,8 +39,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
             {
                 {
                     add( new SimpleGrantedAuthority( "ROLE_USER" ) );
-                    // TODO remove this when live
-                    add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
+                    if ( student.getType().equals( UserType.ADMIN ) )
+                        add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
                 }
             } );
         }
