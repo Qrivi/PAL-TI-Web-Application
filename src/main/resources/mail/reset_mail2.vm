@@ -206,7 +206,7 @@
                                                                                     <img class="center fullwidth"
                                                                                          style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block;border: none;height: auto;line-height: 100%;margin: 0 auto;float: none;width: 100% !important;max-width: 480px"
                                                                                          align="center" border="0"
-                                                                                         src="images/PAL Logo Final.png"
+                                                                                         src="../../webapp/resources/img/PAL%20Logo%20Final.png"
                                                                                          alt="Image" title="Image"
                                                                                          width="480">
                                                                                 </a>

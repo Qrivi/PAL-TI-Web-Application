@@ -8,7 +8,7 @@
     <body class="hold-transition login-page">
         <div class="login-box">
             <div class="login-logo">
-                <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
+                <a href="<c:url value="/"/>"><img src="<c:url value="/resources/img/logo.png"/>" width="100%"/></a>
             </div>
             <jsp:include page="../include/util/generic_message.jsp"/>
             <c:if test="${not empty error}">

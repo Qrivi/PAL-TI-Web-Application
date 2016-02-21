@@ -11,7 +11,7 @@
     <body class="hold-transition login-page">
         <div class="register-box">
             <div class="register-logo">
-                <a href="<c:url value="/"/>"><b>PAL - TI</b></a>
+                <a href="<c:url value="/"/>"><img src="<c:url value="/resources/img/logo.png"/>" width="100%"/></a>
             </div>
             <div class="register-box-body">
                 <p class="login-box-msg">Register a new membership</p>
