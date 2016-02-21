@@ -15,7 +15,7 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="${param.title == "students" ? "active" : "" }"><a href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
             <li class="${param.title == "courses" ? "active" : "" }"><a href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
-            <li class="${param.title == "rooms" ? "active" : "" }"><a href="<c:url value="/admin/rooms"/>"><span>Rooms</span></a></li>
+            <li class="${param.title == "courses" ? "active" : "" }"><a href="<c:url value="/admin/rooms"/>"><span>Rooms</span></a></li>
         </ul>
     </div>
 </aside>

@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="student" property="principal"/>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -35,7 +36,7 @@
                 </td>
                 <td>
                     <c:choose>
-                        <c:when test="${course.isSubscribed(SessionAuth.student)}">
+                        <c:when test="${course.isSubscribed(student)}">
                             <form  action="<c:url value="/course/unsubscribe/${course.id}" />" method="POST">
                                 <input type="submit" value="Unsubscribe"/>
                             </form>
