@@ -38,7 +38,7 @@ public class LessonController
     public ModelAndView getLessonOfCourse( @PathVariable( value = "id" ) int id )
     {
         Course course = service.getCourseById(id);
-        return new ModelAndView( "lesson", "lessons", service.getLessons(course) );
+        return new ModelAndView( "lesson", "lessons", service.getUpcomingLessons(course) );
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
@@ -92,7 +92,7 @@ public class LessonController
         return "redirect:/booking/add";
     }
 
-    @RequestMapping( value = "/reviews/lesson/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/reviews/lesson/{id}", method = RequestMethod.GET )
     public ModelAndView getReviews( @PathVariable( value = "id" ) int id )
     {
         Lesson l = service.getLessonById( id );
