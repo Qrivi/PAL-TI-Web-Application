@@ -5,6 +5,7 @@ import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
+import be.peerassistedlearningti.web.model.util.Timeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -41,6 +42,9 @@ public class DashboardController {
         //Add reviews to modelmap
         Tutor tutor = current.getTutor();
         map.addAttribute("reviews", service.getReviews(tutor));
+
+        //Add Timeline to modelmap
+        map.addAttribute("timeline", new Timeline(current));
 
         return new ModelAndView("dashboard", map);
     }
