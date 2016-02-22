@@ -19,23 +19,20 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping( value = "/profile" )
-@PreAuthorize( "hasRole('ROLE_USER')" )
-public class ProfileController
-{
-
+@RequestMapping(value = "/dashboard")
+@PreAuthorize("hasRole('ROLE_USER')")
+public class DashboardController {
     @Autowired
     private PALService service;
 
-    @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView modifyStudentProfile( Authentication auth )
-    {
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView getDashboard(Authentication auth) {
         Student current = (Student) auth.getPrincipal();
         ModelMap map = new ModelMap();
         //Add ProfileForm object to modelmap
         ProfileForm profile = new ProfileForm();
-        profile.setName( current.getName() );
-        profile.setEmail( current.getEmail() );
+        profile.setName(current.getName());
+        profile.setEmail(current.getEmail());
         map.addAttribute("profile", profile);
 
         //Add Student object to modelmap
@@ -45,31 +42,29 @@ public class ProfileController
         Tutor tutor = current.getTutor();
         map.addAttribute("reviews", service.getReviews(tutor));
 
-        return new ModelAndView( "profile", map );
+        return new ModelAndView("dashboard", map);
     }
 
-    @RequestMapping( method = RequestMethod.POST )
-    public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "profile" );
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView modifyStudentProfile(@Valid @ModelAttribute("profile") ProfileForm form, BindingResult result) {
+        if (result.hasErrors())
+            return new ModelAndView("dashboard");
 
         Student student = SessionAuth.getStudent();
 
-        student.setName( form.getName() );
-        student.setEmail( form.getEmail() );
-        if ( !form.getNewPassword()
-                .isEmpty() )
-        {
-            student.setPassword( form.getNewPassword() );
+        student.setName(form.getName());
+        student.setEmail(form.getEmail());
+        if (!form.getNewPassword()
+                .isEmpty()) {
+            student.setPassword(form.getNewPassword());
         }
 
         //TODO update session only if db is updated w/o errors
-        service.updateStudent( student );
-        SessionAuth.setStudent( student );
+        service.updateStudent(student);
+        SessionAuth.setStudent(student);
 
 
-        return new ModelAndView( "profile" );
+        return new ModelAndView("dashboard");
     }
 
 }

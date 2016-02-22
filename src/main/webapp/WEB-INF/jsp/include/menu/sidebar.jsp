@@ -15,19 +15,21 @@
             <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <li class="header">ADMIN NAVIGATION</li>
                 <li class="${param.title == "students" ? "active" : "" }"><a
-                        href="<c:url value="/admin/students"/>"><span>Students</span></a></li>
+                        href="<c:url value="/admin/students"/>"><i class="fa  fa-cog"></i><span> Students</span></a>
+                </li>
                 <li class="${param.title == "courses" ? "active" : "" }"><a
-                        href="<c:url value="/admin/courses"/>"><span>Courses</span></a></li>
+                        href="<c:url value="/admin/courses"/>"><i class="fa  fa-cog"></i><span> Courses</span></a></li>
                 <li class="${param.title == "rooms" ? "active" : "" }"><a
-                        href="<c:url value="/admin/rooms"/>"><span>Rooms</span></a></li>
+                        href="<c:url value="/admin/rooms"/>"><i class="fa  fa-cog"></i>span> Rooms</span></a></li>
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_TUTOR')">
                 <li class="header">TUTOR NAVIGATION</li>
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_USER')">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="${param.title == "profile" ? "active" : "" }"><a
-                        href="<c:url value="/profile"/>"><span>Profile</span></a></li>
+                <li class="${param.title == "dashboard" ? "active" : "" }"><a
+                        href="<c:url value="/dashboard"/>"><i class="fa  fa-dashboard"></i><span> Dashboard</span></a>
+                </li>
             </sec:authorize>
         </ul>
     </div>

@@ -4,13 +4,13 @@
 
 <html>
     <jsp:include page="include/head.jsp">
-        <jsp:param value="Profile" name="title"/>
+        <jsp:param value="Dashboard" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
     <div class="wrapper">
         <jsp:include page="include/menu/main-header.jsp"/>
         <jsp:include page="include/menu/sidebar.jsp">
-            <jsp:param value="profile" name="title"/>
+            <jsp:param value="dashboard" name="title"/>
         </jsp:include>
         <!-- Content header (Page header) -->
         <div class="content-wrapper" style="min-height: 1126px;">
