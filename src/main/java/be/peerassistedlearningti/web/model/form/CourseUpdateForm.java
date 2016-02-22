@@ -8,7 +8,7 @@ public class CourseUpdateForm
     private String name;
     private String shortName;
     private String curriculum;
-    private int year;
+    private Integer year;
 
     public CourseUpdateForm() {}
 
@@ -37,7 +37,7 @@ public class CourseUpdateForm
         this.curriculum = curriculum;
     }
 
-    public void setYear( int year )
+    public void setYear( Integer year )
     {
         this.year = year;
     }
@@ -67,7 +67,7 @@ public class CourseUpdateForm
         return curriculum;
     }
 
-    public int getYear()
+    public Integer getYear()
     {
         return year;
     }

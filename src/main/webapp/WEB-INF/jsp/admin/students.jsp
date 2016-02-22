@@ -57,7 +57,8 @@
                                                             <td>${student.email}</td>
                                                             <td>${student.type}</td>
                                                             <td>
-                                                                <form class="small" action="<c:url value="/admin/students/remove/${student.id}" />" method="POST">
+                                                                <form class="small" action="<c:url value="/admin/students/${student.id}" />" method="POST">
+                                                                    <input type="hidden" name="_method" value="delete">
                                                                     <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
                                                                 </form>
                                                                 <button class="btn btn-sm update" data-id="${student.id}"><i class="fa fa-pencil"></i></button>
@@ -91,6 +92,7 @@
                                                 <c:set var="passwordError"><form:errors path="password"/></c:set>
                                                 <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
                                                 <c:set var="typeError"><form:errors path="type"/></c:set>
+                                                <form:errors element="div" cssClass="alert alert-danger"/>
                                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                                     <form:errors path="name" element="label"/>
                                                     <form:input path="name" class="form-control" placeholder="Name"/>
@@ -129,17 +131,18 @@
                                     <h3 class="box-title">Update a Student</h3>
                                     <div class="box-tools pull-right">
                                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                            <i class="fa fa-minus"></i></button>
+                                            <i class="fa fa-minus"></i>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <form:form method="post" action="/admin/students/update" commandName="updateStudent" enctype="application/x-www-form-urlencoded">
+                                            <form:form method="put" commandName="updateStudent" enctype="application/x-www-form-urlencoded">
                                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                                 <c:set var="emailError"><form:errors path="email"/></c:set>
-                                                <c:set var="passwordError"><form:errors path="password"/><form:errors/></c:set>
-                                                <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/><form:errors/></c:set>
+                                                <c:set var="passwordError"><form:errors path="password"/></c:set>
+                                                <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
                                                 <c:set var="typeError"><form:errors path="type"/></c:set>
                                                 <form:errors element="div" cssClass="alert alert-danger"/>
                                                 <form:hidden path="id" class="form-control"/>

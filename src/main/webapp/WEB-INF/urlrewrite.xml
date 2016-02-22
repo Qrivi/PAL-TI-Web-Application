@@ -5,6 +5,8 @@
     <rule>
         <condition type="request-uri" operator="notequal">\.[a-z]+$</condition>
         <condition type="method" name="POST" operator="notequal">POST</condition>
+        <condition type="method" name="PUT" operator="notequal">PUT</condition>
+        <condition type="method" name="DELETE" operator="notequal">DELETE</condition>
         <from>(.*)$</from>
         <to>$1.htm</to>
     </rule>

@@ -4,6 +4,8 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.CourseForm;
 import be.peerassistedlearningti.web.model.form.CourseUpdateForm;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -52,48 +54,45 @@ public class CourseCRUDController extends AdminController
         return new ModelAndView( "redirect:/admin/courses" );
     }
 
-    @RequestMapping( value = "/courses/update", method = RequestMethod.POST )
-    public String updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, RedirectAttributes attr )
+    @RequestMapping( value = "/courses", method = RequestMethod.PUT )
+    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-        {
-            attr.addFlashAttribute( "org.springframework.validation.BindingResult.updateCourse", result );
-            attr.addFlashAttribute( "updateCourse", form );
-            return "redirect:/admin/courses";
-        }
+            return new ModelAndView( "admin/courses", fillModel( model ) );
 
         Integer id = form.getId();
 
         if ( id == null )
-            return "redirect:/admin/courses";
+            return new ModelAndView( "admin/courses", fillModel( model ) );
 
         Course c = service.getCourseById( id );
 
         if ( c == null )
-            return "redirect:/admin/courses";
+            return new ModelAndView( "admin/courses", fillModel( model ) );
 
         String code = form.getCode();
-        String name = form.getName();
-        String shortName = form.getShortName();
-        String curriculum = form.getCurriculum();
-        int year = form.getYear();
 
-        if ( code != null && !code.isEmpty() )
-            c.setCode( code );
-        if ( name != null && !name.isEmpty() )
-            c.setName( name );
-        if ( shortName != null && !shortName.isEmpty() )
-            c.setShortName( shortName );
-        if ( curriculum != null && !curriculum.isEmpty() )
-            c.setCurriculum( curriculum );
+        if ( !StringUtils.isEmpty( code ) )
+        {
+            Course c2 = service.getCourseByCode( code );
+            if ( c2 != null && !c.equals( c2 ) )
+            {
+                result.reject( "CheckCodeExists.CourseUpdateForm.code" );
+                return new ModelAndView( "admin/courses", fillModel( model ) );
+            }
+        }
 
-        c.setYear( year );
+        c.setCode( StringUtils.defaultIfEmpty( code, c.getCode() ) );
+        c.setName( StringUtils.defaultIfEmpty( form.getName(), c.getName() ) );
+        c.setShortName( StringUtils.defaultIfEmpty( form.getShortName(), c.getShortName() ) );
+        c.setCurriculum( StringUtils.defaultIfEmpty( form.getCurriculum(), c.getCurriculum() ) );
+        c.setYear( ObjectUtils.defaultIfNull( form.getYear(), c.getYear() ) );
 
         service.updateCourse( c );
-        return "redirect:/admin/courses";
+        return new ModelAndView( "redirect:/admin/courses" );
     }
 
-    @RequestMapping( value = "/courses/remove/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/courses/{id}", method = RequestMethod.DELETE )
     public String removeCourse( @PathVariable( value = "id" ) int id )
     {
         Course c = service.getCourseById( id );

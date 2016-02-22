@@ -56,7 +56,8 @@
                                                             <td>${room.campus}</td>
                                                             <td>${room.type}</td>
                                                             <td>
-                                                                <form class="small" action="<c:url value="/admin/rooms/remove/${room.id}" />" method="POST">
+                                                                <form class="small" action="<c:url value="/admin/rooms/${room.id}" />" method="POST">
+                                                                    <input type="hidden" name="_method" value="delete">
                                                                     <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
                                                                 </form>
                                                                 <button class="btn btn-sm update" data-id="${room.id}"><i class="fa fa-pencil"></i></button>
@@ -127,7 +128,7 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <form:form method="post" commandName="updateRoom" action="/admin/rooms/update" enctype="application/x-www-form-urlencoded">
+                                            <form:form method="put" commandName="updateRoom" enctype="application/x-www-form-urlencoded">
                                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                                 <c:set var="campusError"><form:errors path="campus"/></c:set>
                                                 <c:set var="typeError"><form:errors path="type"/></c:set>

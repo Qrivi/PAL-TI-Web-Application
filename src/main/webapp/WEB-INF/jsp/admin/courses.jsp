@@ -65,7 +65,8 @@
                                                             <td>${course.year}</td>
                                                             <td>${course.subscribers.size()}</td>
                                                             <td>
-                                                                <form class="small" action="<c:url value="/admin/courses/remove/${course.id}" />" method="POST">
+                                                                <form class="small" action="<c:url value="/admin/courses/${course.id}" />" method="POST">
+                                                                    <input type="hidden" name="_method" value="delete">
                                                                     <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
                                                                 </form>
                                                                 <button class="btn btn-sm update" data-id="${course.id}"><i class="fa fa-pencil"></i></button>
@@ -140,7 +141,7 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <form:form method="post" action="/admin/courses/update" commandName="updateCourse" enctype="application/x-www-form-urlencoded">
+                                            <form:form method="put" commandName="updateCourse" enctype="application/x-www-form-urlencoded">
                                                 <c:set var="codeError"><form:errors path="code"/></c:set>
                                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                                 <c:set var="shortNameError"><form:errors path="shortName"/></c:set>

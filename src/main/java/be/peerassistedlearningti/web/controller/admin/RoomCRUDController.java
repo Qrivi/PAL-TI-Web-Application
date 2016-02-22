@@ -6,6 +6,8 @@ import be.peerassistedlearningti.model.RoomType;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.RoomForm;
 import be.peerassistedlearningti.web.model.form.RoomUpdateForm;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -57,42 +59,31 @@ public class RoomCRUDController extends AdminController
         return new ModelAndView( "redirect:/admin/rooms" );
     }
 
-    @RequestMapping( value = "/rooms/update", method = RequestMethod.POST )
-    public String updateRoom( @Valid @ModelAttribute( "updateStudent" ) RoomUpdateForm form, BindingResult result, RedirectAttributes attr )
+    @RequestMapping( value = "/rooms", method = RequestMethod.PUT )
+    public ModelAndView updateRoom( @Valid @ModelAttribute( "updateStudent" ) RoomUpdateForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-        {
-            attr.addFlashAttribute( "org.springframework.validation.BindingResult.updateStudent", result );
-            attr.addFlashAttribute( "updateStudent", form );
-            return "redirect:/admin/rooms";
-        }
+            return new ModelAndView( "admin/rooms", fillModel( model ) );
 
         Integer id = form.getId();
 
         if ( id == null )
-            return "redirect:/admin/rooms";
+            return new ModelAndView( "admin/rooms", fillModel( model ) );
 
         Room r = service.getRoomById( id );
 
         if ( r == null )
-            return "redirect:/admin/rooms";
+            return new ModelAndView( "admin/rooms", fillModel( model ) );
 
-        String name = form.getName();
-        Campus campus = form.getCampus();
-        RoomType type = form.getType();
-
-        if ( name != null && !name.isEmpty() )
-            r.setName( name );
-        if ( campus != null )
-            r.setCampus( campus );
-        if ( type != null )
-            r.setType( type );
+        r.setName( StringUtils.defaultIfEmpty( form.getName(), r.getName() ) );
+        r.setCampus( ObjectUtils.defaultIfNull( form.getCampus(), r.getCampus() ) );
+        r.setType( ObjectUtils.defaultIfNull( form.getType(), r.getType() ) );
 
         service.updateRoom( r );
-        return "redirect:/admin/rooms";
+        return new ModelAndView( "redirect:/admin/rooms" );
     }
 
-    @RequestMapping( value = "/rooms/remove/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/rooms/{id}", method = RequestMethod.DELETE )
     public String removeRoom( @PathVariable( value = "id" ) int id )
     {
         Room r = service.getRoomById( id );

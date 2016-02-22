@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class StudentUpdateForm
 {
 
-    private Integer id;
+    private Integer id = -1;
     private String name;
     private String email;
     private String password;

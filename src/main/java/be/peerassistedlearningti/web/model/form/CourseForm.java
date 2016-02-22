@@ -1,12 +1,16 @@
 package be.peerassistedlearningti.web.model.form;
 
+import be.peerassistedlearningti.web.model.validation.CheckCodeIsUnique;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 public class CourseForm
 {
 
+    @CheckCodeIsUnique( message = "{CheckCodeIsUnique.CourseForm.code}" )
     @NotEmpty( message = "{NotEmpty.CourseForm.code}" )
     private String code;
 
@@ -16,11 +20,12 @@ public class CourseForm
     @NotEmpty( message = "{NotEmpty.CourseForm.shortName}" )
     private String shortName;
 
-    @NotEmpty(message = "{NotEmpty.CourseForm.curriculum}")
+    @NotEmpty( message = "{NotEmpty.CourseForm.curriculum}" )
     private String curriculum;
 
-    @Min(value = 1, message = "{Min.CourseForm.year}")
-    private int year;
+    @NotNull( message = "{NotNull.CourseForm.year}" )
+    @Min( value = 1, message = "{Min.CourseForm.year}" )
+    private Integer year;
 
     public CourseForm() {}
 
@@ -39,11 +44,13 @@ public class CourseForm
         this.shortName = shortName;
     }
 
-    public void setCurriculum(String curriculum) {
+    public void setCurriculum( String curriculum )
+    {
         this.curriculum = curriculum;
     }
 
-    public void setYear(int year) {
+    public void setYear( Integer year )
+    {
         this.year = year;
     }
 
@@ -62,11 +69,13 @@ public class CourseForm
         return shortName;
     }
 
-    public String getCurriculum() {
+    public String getCurriculum()
+    {
         return curriculum;
     }
 
-    public int getYear() {
+    public Integer getYear()
+    {
         return year;
     }
 }
