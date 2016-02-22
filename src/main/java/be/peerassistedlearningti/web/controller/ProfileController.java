@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.controller;
 
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
@@ -40,6 +41,9 @@ public class ProfileController
         //Add Student object to modelmap
         map.addAttribute("user", current);
 
+        //Add reviews to modelmap
+        Tutor tutor = current.getTutor();
+        map.addAttribute("reviews", service.getReviews(tutor));
 
         return new ModelAndView( "profile", map );
     }

@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="include/head.jsp">
-    <jsp:param value="Login" name="title"/>
+    <jsp:param value="Reviews" name="title"/>
 </jsp:include>
 
 <table>
@@ -23,7 +23,7 @@
                 <td>${review.date}</td>
                 <td>
                     <c:when test="${review.anonymous}">Anonymous</c:when>
-                    <c:otherwise>${review.student}</c:otherwise>
+                    <c:otherwise>${review.student.name}</c:otherwise>
                 </td>
                 <td>${review.contentScore}</td>
                 <td>${review.tutorScore}</td>

@@ -21,7 +21,7 @@ import javax.validation.Valid;
 import java.time.LocalTime;
 
 @Controller
-@RequestMapping( value = "lesson" )
+@RequestMapping( value = "/lesson" )
 public class LessonController
 {
 
