@@ -20,7 +20,7 @@ public class Timeline {
     private SortedSet<TimelineObject> objects = new TreeSet<TimelineObject>(new TimelineObjectCmp());
 
     public Timeline(Student student) {
-        objects.addAll(service.getPastLessons(student.getEmail()));
+        objects.addAll(service.getPastLessons(student));
         objects.addAll(service.getReviewsForStudent(student));
     }
 
