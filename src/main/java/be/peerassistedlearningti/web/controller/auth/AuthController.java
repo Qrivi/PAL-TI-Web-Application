@@ -56,7 +56,7 @@ public class AuthController
     }
 
     @RequestMapping( value = "/register", method = RequestMethod.POST )
-    public ModelAndView registerStudent( @Valid @ModelAttribute( "register" ) StudentForm form, BindingResult result )
+    public ModelAndView registerStudent( @Valid @ModelAttribute( "register" ) RegisterForm form, BindingResult result )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "auth/register" );
