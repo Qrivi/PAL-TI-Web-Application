@@ -41,7 +41,7 @@
                                                         <th>Curriculum</th>
                                                         <th>Year</th>
                                                         <th>Subscribers</th>
-                                                        <th data-orderable="false">Delete</th>
+                                                        <th data-orderable="false">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
@@ -52,7 +52,7 @@
                                                         <th>Curriculum</th>
                                                         <th>Year</th>
                                                         <th>Subscribers</th>
-                                                        <th>Delete</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
@@ -66,9 +66,9 @@
                                                             <td>${course.subscribers.size()}</td>
                                                             <td>
                                                                 <form class="small" action="<c:url value="/admin/courses/remove/${course.id}" />" method="POST">
-                                                                    <button class="btn btn-sm">Delete</button>
+                                                                    <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
                                                                 </form>
-                                                                <button class="btn btn-sm update" data-id="${course.id}">Update</button>
+                                                                <button class="btn btn-sm update" data-id="${course.id}"><i class="fa fa-pencil"></i></button>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>

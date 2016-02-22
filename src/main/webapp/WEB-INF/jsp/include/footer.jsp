@@ -3,13 +3,6 @@
 <script src="<c:url value="/resources/global.js"/>"></script>
 <script>
     $( function () {
-        $( 'input' ).iCheck( {
-            checkboxClass : 'icheckbox_square-blue' ,
-            radioClass    : 'iradio_square-blue' ,
-            increaseArea  : '20%' // optional
-        } );
-    } );
-    $( function () {
         $( "#datetimepicker1" ).datetimepicker( {
             locale : 'nl'
         } );

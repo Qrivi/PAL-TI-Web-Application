@@ -1,63 +1,44 @@
 <groups xmlns="http://www.isdc.ro/wro">
-    <!-- Common css libraries -->
-    <group name="bootstrap-css">
+    <!-- App -->
+    <group name="app">
+        <css>/WEB-INF/resources/app/css/app.css</css>
+        <js>/WEB-INF/resources/app/css/app.js</js>
+    </group>
+    <!-- Libraries -->
+    <group name="libraries">
+        <!-- bootstrap-css -->
         <css>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</css>
-    </group>
-    <group name="font-awesome">
+        <!-- font-awesome -->
         <css>https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css</css>
-    </group>
-    <group name="ion-icons">
+        <!-- ion-icons -->
         <css>https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css</css>
-    </group>
-    <group name="admin-lte-css">
-        <css>/assets/dist/css/AdminLTE.min.css</css>
-        <css>/assets/dist/css/skins/skin-blue.min.css</css>
+        <!-- admin-lte-css -->
+        <css>/WEB-INF/resources/dist/css/AdminLTE.min.css</css>
+        <css>/WEB-INF/resources/dist/css/skins/skin-blue.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
-    </group>
-    <group name="datetime-picker-css">
+        <!-- datetime-picker-css -->
         <css>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css</css>
-    </group>
-    <group name="data-tables-css">
+        <!-- data-tables-css -->
         <css>https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css</css>
-    </group>
-    <!-- Common js libraries -->
-    <group name="bootstrap-js">
-        <js>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</js>
-    </group>
-    <group name="jquery">
+        <!-- jquery -->
         <js>https://code.jquery.com/jquery-2.2.0.min.js</js>
-    </group>
-    <group name="admin-lte-js">
-        <js>/assets/dist/js/app.js</js>
+        <!-- bootstrap-js -->
+        <js>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</js>
+        <!-- admin-lte-js -->
+        <js>/WEB-INF/resources/dist/js/app.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
-    </group>
-    <group name="moment-js">
+        <!-- moment-js -->
         <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/nl.js</js>
-    </group>
-    <group name="datetime-picker-js">
+        <!-- datetime-picker-js -->
         <js>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js</js>
-    </group>
-    <group name="data-tables-js">
+        <!-- data-tables-js -->
         <js>https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js</js>
         <js>https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js</js>
     </group>
     <!-- Global -->
     <group name="global">
-        <!-- css -->
-        <group-ref>bootstrap-css</group-ref>
-        <group-ref>font-awesome</group-ref>
-        <group-ref>ion-icons</group-ref>
-        <group-ref>datetime-picker-css</group-ref>
-        <group-ref>data-tables-css</group-ref>
-        <group-ref>admin-lte-css</group-ref>
-        <css>/assets/app/css/app.css</css>
-        <!-- js -->
-        <group-ref>jquery</group-ref>
-        <group-ref>bootstrap-js</group-ref>
-        <group-ref>moment-js</group-ref>
-        <group-ref>datetime-picker-js</group-ref>
-        <group-ref>data-tables-js</group-ref>
-        <group-ref>admin-lte-js</group-ref>
+        <group-ref>libraries</group-ref>
+        <group-ref>app</group-ref>
     </group>
 </groups>

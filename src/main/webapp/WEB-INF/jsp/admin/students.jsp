@@ -39,7 +39,7 @@
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Type</th>
-                                                        <th data-orderable="false">Delete</th>
+                                                        <th data-orderable="false">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
@@ -47,7 +47,7 @@
                                                         <th>Name</th>
                                                         <th>Email</th>
                                                         <th>Type</th>
-                                                        <th>Delete</th>
+                                                        <th>Actions</th>
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
@@ -58,9 +58,9 @@
                                                             <td>${student.type}</td>
                                                             <td>
                                                                 <form class="small" action="<c:url value="/admin/students/remove/${student.id}" />" method="POST">
-                                                                    <button class="btn btn-sm">Delete</button>
+                                                                    <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
                                                                 </form>
-                                                                <button class="btn btn-sm update" data-id="${student.id}">Update</button>
+                                                                <button class="btn btn-sm update" data-id="${student.id}"><i class="fa fa-pencil"></i></button>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
