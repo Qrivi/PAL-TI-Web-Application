@@ -1,3 +1,5 @@
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -65,7 +67,18 @@
                                     <!-- todo:: show some info -->
                                 </div>
                                 <div class="tab-pane" id="timeline">
-                                    <!-- todo:: show some info  -->
+                                    <ul class="timeline timeline-inverse">
+                                        <li class="time-label">
+                                            <span class="bg-red">
+                                                <%
+                                                    Date dNow = new Date();
+                                                    SimpleDateFormat ft =
+                                                            new SimpleDateFormat("dd MMM. yyyy");
+                                                    out.print(ft.format(dNow));
+                                                %>
+                                            </span>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <div class="tab-pane" id="reviews">
                                     <table>
