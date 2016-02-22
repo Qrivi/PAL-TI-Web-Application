@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<jsp:include page="include/head.jsp">
+    <jsp:param value="Tutor applications" name="title"/>
+</jsp:include>
+
 <form:form method="post" commandName="tutorApply" enctype="multipart/form-data">
     <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
     <div class="form-group">

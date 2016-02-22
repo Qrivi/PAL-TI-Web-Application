@@ -3,7 +3,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <jsp:include page="include/head.jsp">
-    <jsp:param value="Login" name="title"/>
+    <jsp:param value="Add review" name="title"/>
 </jsp:include>
 
 <form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">

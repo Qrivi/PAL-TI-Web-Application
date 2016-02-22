@@ -2,7 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="include/head.jsp">
-    <jsp:param value="Login" name="title"/>
+    <jsp:param value="Tutors" name="title"/>
 </jsp:include>
 
 <table>
