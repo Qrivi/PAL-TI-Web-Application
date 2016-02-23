@@ -36,10 +36,10 @@
                                             <form:form method="post" commandName="tutorApply" enctype="multipart/form-data">
                                                 <c:set var="courseError"><form:errors path="course"/></c:set>
                                                 <c:set var="screenshotError"><form:errors path="screenshot"/></c:set>
-                                                <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
                                                 <div class="form-group has-feedback ${ not empty courseError ? 'has-error' : ''}">
                                                     <form:errors path="course" element="label"/>
                                                     <form:select path="course" class="form-control">
+                                                        <form:option value="None" label="--- Select ---"/>
                                                         <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                                     </form:select>
                                                 </div>

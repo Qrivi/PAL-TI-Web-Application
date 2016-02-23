@@ -11,15 +11,15 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Checks if the given code will be unique in the database
+ * Checks if the given MultiPart file is not empty
  */
 @Target( { METHOD , FIELD , ANNOTATION_TYPE } )
 @Retention( RUNTIME )
-@Constraint( validatedBy = CheckCodeIsUniqueValidator.class )
+@Constraint( validatedBy = NotEmptyMultipartFileValidator.class )
 @Documented
-public @interface CheckCodeIsUnique
+public @interface NotEmptyMultipartFile
 {
-    String message() default "{constraints.checkcodeexists.message}";
+    String message() default "{constraints.notemptymultipartfile.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

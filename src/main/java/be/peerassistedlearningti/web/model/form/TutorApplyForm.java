@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.web.model.validation.NotEmptyMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ public class TutorApplyForm
     @NotNull( message = "{NotNull.TutorApplyForm.course}" )
     private Course course;
 
+    @NotEmptyMultipartFile( message = "{NotEmptyMultipartFile.TutorApplyForm.screenshot}" )
     @NotNull( message = "{NotNull.TutorApplyForm.screenshot}" )
     private MultipartFile screenshot;
 
