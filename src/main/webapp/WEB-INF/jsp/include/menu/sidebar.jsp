@@ -32,6 +32,9 @@
                 <li class="${param.title == "dashboard" ? "active" : "" }"><a
                         href="<c:url value="/dashboard"/>"><i class="fa  fa-dashboard"></i><span>Dashboard</span></a>
                 </li>
+                <li class="${param.title == "apply" ? "active" : "" }"><a
+                        href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>Apply as a tutor</span></a>
+                </li>
             </sec:authorize>
         </ul>
     </div>
