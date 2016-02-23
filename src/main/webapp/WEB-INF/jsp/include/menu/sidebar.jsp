@@ -26,6 +26,9 @@
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_TUTOR')">
                 <li class="header">TUTOR NAVIGATION</li>
+                <li class="${param.title == "add lesson" ? "active" : ""}"><a
+                        href="<c:url value="/dashboard"/>"><i class="fa fa-calendar-plus-o"></i><span>Add a lesson</span></a>
+                </li>
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_USER')">
                 <li class="header">MAIN NAVIGATION</li>
@@ -40,9 +43,6 @@
                 </li>
                 <li class="${param.title == "lessons" ? "active" : ""}"><a
                         href="<c:url value="/dashboard"/>"><i class="fa fa-calendar-check-o"></i><span>Lessons</span></a>
-                </li>
-                <li class="${param.title == "add lesson" ? "active" : ""}"><a
-                        href="<c:url value="/dashboard"/>"><i class="fa fa-calendar-plus-o"></i><span>Add a lesson</span></a>
                 </li>
             </sec:authorize>
         </ul>
