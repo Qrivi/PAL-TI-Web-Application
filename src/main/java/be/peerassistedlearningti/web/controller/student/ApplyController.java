@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 @Controller
@@ -27,30 +28,39 @@ public class ApplyController extends StudentController
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/apply", method = RequestMethod.GET )
-    public ModelAndView applyTutor( Authentication auth, ModelMap model )
+    private ModelMap fillModel( ModelMap model )
     {
-        Student current = (Student) auth.getPrincipal();
-        model.addAttribute( "tutorApply", new TutorApplyForm() );
+        Student current = SessionAuth.getStudent();
+        if ( model.get( "tutorApply" ) == null )
+            model.addAttribute( "tutorApply", new TutorApplyForm() );
+        if ( model.get( "courses" ) == null )
+        {
+            Collection<Course> courses = service.getAllCourses();
+            Collection<Application> applications = new LinkedList<>();
 
-        Collection<Course> courses = service.getAllCourses();
+            applications.addAll( service.getAllPendingApplications( current ) );
+            applications.addAll( service.getAllApprovedApplications( current ) );
 
-        Collection<Application> applications = service.getAllPendingApplications( current );
-        applications.addAll( service.getAllApprovedApplications( current ) );
+            courses.removeAll( applications.stream()
+                    .map( Application::getCourse )
+                    .collect( Collectors.toList() ) );
 
-        courses.removeAll( applications.stream()
-                .map( Application::getCourse )
-                .collect( Collectors.toList() ) );
+            model.addAttribute( "courses", courses );
+        }
+        return model;
+    }
 
-        model.addAttribute( "courses", courses );
-        return new ModelAndView( "student/apply", model );
+    @RequestMapping( value = "/apply", method = RequestMethod.GET )
+    public ModelAndView applyTutor( ModelMap model )
+    {
+        return new ModelAndView( "student/apply", fillModel( model ) );
     }
 
     @RequestMapping( value = "/apply", method = RequestMethod.POST )
     public ModelAndView applyTutor( @Valid @ModelAttribute( "tutorApply" ) TutorApplyForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "student/apply", model );
+            return new ModelAndView( "student/apply", fillModel( model ) );
 
         try
         {
@@ -59,6 +69,7 @@ public class ApplyController extends StudentController
         } catch ( Exception e )
         {
             result.reject( "SaveFile.TutorApplyForm.screenshot" );
+            return new ModelAndView( "student/apply", fillModel( model ) );
         }
 
         return new ModelAndView( "redirect:/apply" );
