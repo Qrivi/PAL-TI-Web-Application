@@ -67,20 +67,6 @@ public class ApplicationCRUDController extends AdminController
         application.reject();
         service.updateApplication( application );
 
-        Tutor tutor = application.getStudent()
-                .getTutor();
-
-        if ( tutor != null )
-        {
-            Course course = application.getCourse();
-            if ( tutor.getCourses()
-                    .contains( course ) )
-            {
-                tutor.removeCourse( course );
-                service.updateTutor( tutor );
-            }
-        }
-
         return "redirect:/admin/applications";
     }
 

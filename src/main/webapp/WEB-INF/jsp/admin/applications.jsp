@@ -92,16 +92,18 @@
                                                     <tr>
                                                         <th>Student</th>
                                                         <th>Course</th>
+                                                        <th>Start Date</th>
+                                                        <th>End Date</th>
                                                         <th>Status</th>
-                                                        <th data-orderable="false">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tfoot>
                                                     <tr>
                                                         <th>Student</th>
                                                         <th>Course</th>
+                                                        <th>Start Date</th>
+                                                        <th>End Date</th>
                                                         <th>Status</th>
-                                                        <th>Actions</th>
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
@@ -109,15 +111,9 @@
                                                         <tr>
                                                             <td>${application.student.name}</td>
                                                             <td>${application.course.name}</td>
+                                                            <td>${application.beginDate}</td>
+                                                            <td>${application.endDate}</td>
                                                             <td>${application.state}</td>
-                                                            <td>
-                                                                <form class="small" action="<c:url value="/admin/applications/approve/${application.id}" />" method="POST">
-                                                                    <button class="btn btn-sm btn-success"><i class="fa fa-thumbs-up"></i></button>
-                                                                </form>
-                                                                <form class="small" action="<c:url value="/admin/applications/reject/${application.id}" />" method="POST">
-                                                                    <button class="btn btn-sm btn-danger"><i class="fa fa-thumbs-down"></i></button>
-                                                                </form>
-                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
