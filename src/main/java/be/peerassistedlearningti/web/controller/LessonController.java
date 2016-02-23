@@ -72,8 +72,9 @@ public class LessonController
             return new ModelAndView( "lesson_add" );
 
         Tutor tutor = SessionAuth.getStudent().getTutor();
-        if (!tutor.getCourses().contains(lessonForm.getCourse())) {
+        if (tutor == null || !tutor.getCourses().contains(lessonForm.getCourse())) {
             result.reject("NoTutor.LessonForm.course");
+            return new ModelAndView( "lesson_add" );
         }
 
         LocalTime time = lessonForm.getDuration();
