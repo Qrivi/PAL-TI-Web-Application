@@ -13,11 +13,10 @@ public class ProfileForm
     private String name;
 
     @NotEmpty( message = "{NotEmpty.ProfileForm.email}" )
-    @CheckEmailIsUnique(allowSessionEmail = true, message = "{CheckEmailIsUnique.ProfileForm.email}")
+    @CheckEmailIsUnique( allowSessionEmail = true, message = "{CheckEmailIsUnique.ProfileForm.email}" )
     @Email( message = "{Email.ProfileForm.email}" )
     private String email;
 
-    @NotEmpty( message = "{NotEmpty.ProfileForm.password}" )
     @CheckWithSessionPassword( message = "{CheckWithSessionPassword.ProfileForm.password}" )
     private String password;
 
@@ -26,7 +25,8 @@ public class ProfileForm
 
     public ProfileForm() {}
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -40,7 +40,7 @@ public class ProfileForm
         return email;
     }
 
-    public void setEmail(String email)
+    public void setEmail( String email )
     {
         this.email = email;
     }
@@ -50,7 +50,7 @@ public class ProfileForm
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword( String password )
     {
         this.password = password;
     }
@@ -60,7 +60,8 @@ public class ProfileForm
         return newPassword;
     }
 
-    public void setNewPassword(String newPassword) {
+    public void setNewPassword( String newPassword )
+    {
         this.newPassword = newPassword;
     }
 
@@ -69,7 +70,7 @@ public class ProfileForm
         return newRepeatPassword;
     }
 
-    public void setNewRepeatPassword(String newRepeatPassword)
+    public void setNewRepeatPassword( String newRepeatPassword )
     {
         this.newRepeatPassword = newRepeatPassword;
     }
