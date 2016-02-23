@@ -17,9 +17,16 @@ public class Timeline {
 
     @Autowired
     private PALService service;
+
     private SortedSet<TimelineObject> objects = new TreeSet<TimelineObject>(new TimelineObjectCmp());
 
-    public Timeline(Student student) {
+    public Timeline() {
+    }
+
+    ;
+
+    public Timeline(Student student, PALService service) {
+        this.service = service;
         objects.addAll(service.getPastLessons(student));
         objects.addAll(service.getReviewsForStudent(student));
     }

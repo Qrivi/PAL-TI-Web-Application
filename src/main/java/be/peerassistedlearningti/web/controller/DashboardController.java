@@ -44,7 +44,7 @@ public class DashboardController {
         map.addAttribute("reviews", service.getReviews(tutor));
 
         //Add Timeline to modelmap
-        map.addAttribute("timeline", new Timeline(current));
+        map.addAttribute("timeline", new Timeline(current, service));
 
         return new ModelAndView("dashboard", map);
     }
