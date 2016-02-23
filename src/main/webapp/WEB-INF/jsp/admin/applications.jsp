@@ -63,6 +63,7 @@
                                                                 <form class="small" action="<c:url value="/admin/applications/reject/${application.id}" />" method="POST">
                                                                     <button class="btn btn-sm btn-danger"><i class="fa fa-thumbs-down"></i></button>
                                                                 </form>
+                                                                <button class="btn btn-sm btn-primary screenshot" data-url="<c:url value="/admin/applications/screenshot/${application.id}.png"/>"><i class="fa fa-picture-o"></i></button>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
@@ -127,11 +128,33 @@
                 </section>
             </div>
         </div>
+        <div class="modal" id="screenshot-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title">Screenshot</h4>
+                    </div>
+                    <div class="modal-body">
+                        <img id="screenshot" width="100%" height="100%" alt="screenshot"/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <jsp:include page="../include/footer.jsp"/>
         <script type="application/javascript">
             $( document ).ready( function () {
                 $( "#pending-application-overview" ).DataTable();
                 $( "#done-application-overview" ).DataTable();
+                $( "#pending-application-overview .screenshot" ).click( function () {
+                    $( '#screenshot-modal' ).modal( 'show' );
+                    var url = $( this ).attr( "data-url" );
+                    $( "#screenshot" ).attr( "src" , url );
+                } );
             } );
         </script>
     </body>
