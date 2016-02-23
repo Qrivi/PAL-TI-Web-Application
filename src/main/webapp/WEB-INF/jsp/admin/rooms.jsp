@@ -56,8 +56,9 @@
                                                             <td>${room.campus}</td>
                                                             <td>${room.type}</td>
                                                             <td>
-                                                                <form class="small" action="<c:url value="/admin/rooms/${room.id}" />" method="POST">
-                                                                    <input type="hidden" name="_method" value="delete">
+                                                                <form class="small" action="<c:url value="/admin/rooms" />" method="POST">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <input type="hidden" name="id" value="${room.id}"/>
                                                                     <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
                                                                 </form>
                                                                 <button class="btn btn-sm update" data-id="${room.id}"><i class="fa fa-pencil"></i></button>

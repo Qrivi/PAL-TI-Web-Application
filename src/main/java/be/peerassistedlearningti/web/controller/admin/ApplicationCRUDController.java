@@ -35,7 +35,7 @@ public class ApplicationCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/applications/approve/{id}", method = RequestMethod.POST )
-    public String approveApplication( @PathVariable( value = "id" ) int id )
+    public ModelAndView approveApplication( @PathVariable( value = "id" ) int id )
     {
         Application application = service.getApplicationById( id );
 
@@ -56,18 +56,18 @@ public class ApplicationCRUDController extends AdminController
             service.updateTutor( tutor );
         }
 
-        return "redirect:/admin/applications";
+        return new ModelAndView( "redirect:/admin/applications" );
     }
 
     @RequestMapping( value = "/applications/reject/{id}", method = RequestMethod.POST )
-    public String rejectApplication( @PathVariable( value = "id" ) int id )
+    public ModelAndView rejectApplication( @PathVariable( value = "id" ) int id )
     {
         Application application = service.getApplicationById( id );
 
         application.reject();
         service.updateApplication( application );
 
-        return "redirect:/admin/applications";
+        return new ModelAndView( "redirect:/admin/applications" );
     }
 
     @RequestMapping( value = "/applications/screenshot/{id}.png", method = RequestMethod.GET )

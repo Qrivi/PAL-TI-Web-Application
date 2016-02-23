@@ -93,11 +93,11 @@ public class StudentCRUDController extends AdminController
         return new ModelAndView( "redirect:/admin/students" );
     }
 
-    @RequestMapping( value = "/students/{id}", method = RequestMethod.DELETE )
-    public String removeStudent( @PathVariable( value = "id" ) int id )
+    @RequestMapping( value = "/students", method = RequestMethod.DELETE )
+    public ModelAndView removeStudent( @RequestParam( required = true ) int id )
     {
         Student s = service.getStudentById( id );
         service.removeStudent( s );
-        return "redirect:/admin/students";
+        return new ModelAndView( "redirect:/admin/students" );
     }
 }
