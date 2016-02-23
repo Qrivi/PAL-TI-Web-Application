@@ -33,10 +33,16 @@
                         href="<c:url value="/dashboard"/>"><i class="fa  fa-dashboard"></i><span>Dashboard</span></a>
                 </li>
                 <li class="${param.title == "booking" ? "active" : "" }"><a
-                        href="<c:url value="/booking"/>"><i class="fa fa-calendar-plus-o"></i><span>Book a lesson</span></a>
+                        href="<c:url value="/booking"/>"><i class="fa fa-pencil-square-o"></i><span>Book a lesson</span></a>
                 </li>
                 <li class="${param.title == "apply" ? "active" : "" }"><a
                         href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>Apply as a tutor</span></a>
+                </li>
+                <li class="${param.title == "lessons" ? "active" : ""}"><a
+                        href="<c:url value="/dashboard"/>"><i class="fa fa-calendar-check-o"></i><span>Lessons</span></a>
+                </li>
+                <li class="${param.title == "add lesson" ? "active" : ""}"><a
+                        href="<c:url value="/dashboard"/>"><i class="fa fa-calendar-plus-o"></i><span>Add a lesson</span></a>
                 </li>
             </sec:authorize>
         </ul>
