@@ -46,9 +46,9 @@ public class CourseController
         return "redirect:/course/overview";
     }
 
-    @RequestMapping( value = "/lessons/course/{id}", method = RequestMethod.GET )
+    /*@RequestMapping( value = "/lessons/course/{id}", method = RequestMethod.GET )
     public String getLessonOfCourse( @PathVariable( value = "id" ) int id )
     {
         return "redirect:/lesson/overview/course/" + id ;
-    }
+    }*/
 }
