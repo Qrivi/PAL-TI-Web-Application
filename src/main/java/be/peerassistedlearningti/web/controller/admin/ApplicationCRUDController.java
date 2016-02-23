@@ -1,13 +1,13 @@
-package be.peerassistedlearningti.web.controller;
+package be.peerassistedlearningti.web.controller.admin;
 
 import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,28 +16,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 @Controller
-@RequestMapping( value = "application" )
-public class ApplicationController
+public class ApplicationCRUDController extends AdminController
 {
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
-    public ModelAndView getApplicationOverviewPage()
+    @RequestMapping( value = "/applications", method = RequestMethod.GET )
+    public ModelAndView getApplicationOverviewPage( ModelMap model )
     {
-        return new ModelAndView( "application", "applications", service.getAllPendingApplications() );
+        model.addAttribute( "pendingApplications", service.getAllPendingApplications() );
+        model.addAttribute( "doneApplications", service.getAllDoneApplications() );
+        return new ModelAndView( "admin/applications", model );
     }
 
-    @RequestMapping( value = "/approve/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/applications/approve/{id}", method = RequestMethod.POST )
     public String approveApplication( @PathVariable( value = "id" ) int id )
     {
         Application application = service.getApplicationById( id );
@@ -56,14 +53,13 @@ public class ApplicationController
         } else
         {
             tutor.addCourse( application.getCourse() );
+            service.updateTutor( tutor );
         }
 
-        service.updateTutor( tutor );
-
-        return "redirect:/application/overview";
+        return "redirect:/admin/applications";
     }
 
-    @RequestMapping( value = "/reject/{id}", method = RequestMethod.POST )
+    @RequestMapping( value = "/applications/reject/{id}", method = RequestMethod.POST )
     public String rejectApplication( @PathVariable( value = "id" ) int id )
     {
         Application application = service.getApplicationById( id );
@@ -71,10 +67,10 @@ public class ApplicationController
         application.reject();
         service.updateApplication( application );
 
-        return "redirect:/application/overview";
+        return "redirect:/admin/applications";
     }
 
-    @RequestMapping( value = "/screenshot/{id}", method = RequestMethod.GET )
+    @RequestMapping( value = "/applications/screenshot/{id}.png", method = RequestMethod.GET )
     @ResponseBody
     public void getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
@@ -84,6 +80,6 @@ public class ApplicationController
                     .getScreenshot() );
             IOUtils.copy( is, response.getOutputStream() );
             response.flushBuffer();
-        } catch ( Exception e ) {}
+        } catch ( Exception e ) { }
     }
 }
