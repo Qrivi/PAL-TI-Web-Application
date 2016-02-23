@@ -14,26 +14,27 @@ import java.util.Date;
 
 public class LessonForm
 {
-    @NotEmpty( message = "{NotNull.LessonForm.name}" )
+    @NotEmpty( message = "{NotEmpty.LessonForm.name}" )
     private String name;
 
-    @NotEmpty( message = "{NotNull.LessonForm.description}" )
+    @NotEmpty( message = "{NotEmpty.LessonForm.description}" )
     private String description;
 
     @NotNull( message = "{NotNull.LessonForm.date}" )
     private Date date;
 
-    //@Min( value = 1, message = "{Min.LessonForm.duration}" )
+    @NotNull( message = "{NotNull.LessonForm.duration}" )
     @DateTimeFormat( pattern = "hh:mm" )
     private LocalTime duration;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
     private Course course;
 
-    //@Min( value = 1, message = "{Min.LessonForm.maxParticipants}" )
-    private String maxParticipants;
+    @NotNull( message = "{NotNull.LessonForm.maxParticipants}" )
+    @Min( value = 1, message = "{Min.LessonForm.maxParticipants}" )
+    private Integer maxParticipants;
 
-    @NotNull( message = "{NotNull.LessonForm.course}" )
+    @NotNull( message = "{NotNull.LessonForm.room}" )
     private Room room;
 
     @NotNull( message = "{NotNull.LessonForm.backupRoom}" )
@@ -66,7 +67,7 @@ public class LessonForm
         return course;
     }
 
-    public String getMaxParticipants()
+    public Integer getMaxParticipants()
     {
         return maxParticipants;
     }
@@ -106,7 +107,7 @@ public class LessonForm
         this.course = course;
     }
 
-    public void setMaxParticipants( String maxParticipants )
+    public void setMaxParticipants( Integer maxParticipants )
     {
         this.maxParticipants = maxParticipants;
     }

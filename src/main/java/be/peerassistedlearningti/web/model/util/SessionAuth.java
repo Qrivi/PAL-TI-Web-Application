@@ -31,7 +31,8 @@ public class SessionAuth
 
         if ( student.getType().equals( UserType.ADMIN ) )
             authorities.add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
-
+        // TODO add tutor
+        authorities.add( new SimpleGrantedAuthority( "ROLE_TUTOR" ) );
         Authentication auth = new UsernamePasswordAuthenticationToken( student, student.getPassword(), authorities );
 
         SecurityContext securityContext = SecurityContextHolder.getContext();

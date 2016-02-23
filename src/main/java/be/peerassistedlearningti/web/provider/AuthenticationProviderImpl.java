@@ -21,8 +21,10 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
 
     public Authentication authenticate( Authentication auth ) throws AuthenticationException
     {
-        final String email = auth.getName().toLowerCase();
-        final String password = auth.getCredentials().toString();
+        final String email = auth.getName()
+                .toLowerCase();
+        final String password = auth.getCredentials()
+                .toString();
         final Student student;
 
         try
@@ -39,6 +41,8 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
             {
                 {
                     add( new SimpleGrantedAuthority( "ROLE_USER" ) );
+                    // TODO add tutor
+                    add( new SimpleGrantedAuthority( "ROLE_TUTOR" ) );
                     if ( student.getType().equals( UserType.ADMIN ) )
                         add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
                 }
