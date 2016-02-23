@@ -1,3 +1,7 @@
+<%@ page import="be.peerassistedlearningti.model.Lesson" %>
+<%@ page import="be.peerassistedlearningti.model.Review" %>
+<%@ page import="be.peerassistedlearningti.util.TimelineObject" %>
+<%@ page import="be.peerassistedlearningti.web.model.util.Timeline" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
@@ -78,9 +82,87 @@
                                                 %>
                                             </span>
                                         </li>
+                                        <!-- Empty Timeline -->
+                                        <c:if test="${empty timeline.getTimeline()}">
+                                            <li>
+                                                <i class="fa fa-info bg-gray"></i>
+                                                <div class="timeline-item">
+                                                    <h3 class="timeline-header">Timeline info</h3>
+                                                    <div class="timeline-body"><p>This page will show you your history,
+                                                        This doesn't only contains all the lessons you went to but also
+                                                        contains all the reviews you've posted.</p></div>
+                                                </div>
+                                                </i>
+                                            </li>
+                                        </c:if>
+                                        <!-- Begin timeline items -->
+                                        <%
+                                            for(TimelineObject object : ((Timeline)request.getAttribute("timeline")).getTimeline()){
+                                                if(object instanceof Lesson){
+                                                    request.setAttribute("lessonObject", (Lesson) object);
+                                                    request.setAttribute("reviewObject", null);
+                                                }else{
+                                                    request.setAttribute("reviewObject", (Review) object);
+                                                    request.setAttribute("lessonObject", null);
+                                                }
+                                        %><!-- Begin loop timeline items -->
                                         <li>
+                                            <c:choose>
+                                                <c:when test="${lessonObject != null}">
+                                                    <!-- Is a Lesson object -->
+                                                    <i class="fa fa-calendar-check-o bg-blue"></i>
+                                                    <div class="timeline-item">
+                                                            <span class="time">
+                                                                <i class="fa fa-clock-o"></i>
+                                                                <c:out value="${lessonObject.getTimelineDate()}"/>
+                                                            </span>
+                                                    </div>
+                                                    <h3 class="timeline-header">You finished: <c:out
+                                                            value="${lessonObject.name}"/></h3>
+                                                    <div class="timeline-body">
+                                                        <div class="row">
+                                                            <!-- shortname -->
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="small-box bg-purple">
+                                                                    <div class="inner">
+                                                                        <h3>Course</h3>
+                                                                        <p><c:out
+                                                                                value="${lessonObject.course.shortName}"/></p>
+                                                                    </div>
+                                                                    <div class="icon">
+                                                                        <i class="fa fa-book"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- tutor -->
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <div class="small-box bg-blue">
+                                                                    <div class="inner">
+                                                                        <h3>Tutor</h3>
+                                                                        <p><c:out
+                                                                                value="${lessonObject.course.shortName}"/></p>
+                                                                    </div>
+                                                                    <div class="icon">
+                                                                        <i class="fa fa-user"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                                                <p><c:out value="${lessonObject.description}"/></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <!-- Is a Review object -->
 
+                                                </c:otherwise>
+
+                                            </c:choose>
                                         </li>
+                                        <% }%><!-- End loop timeline items -->
+                                        <!-- End timeline items -->
+                                        <li><i class="fa fa-clock-o bg-gray"></i></li>
                                     </ul>
                                 </div>
                                 <div class="tab-pane" id="reviews">
