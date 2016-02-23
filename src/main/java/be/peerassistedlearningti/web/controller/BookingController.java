@@ -1,68 +1,32 @@
 package be.peerassistedlearningti.web.controller;
 
-import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.form.BookingForm;
+import be.peerassistedlearningti.web.controller.student.StudentController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashSet;
-
 // TODO change this mapping to lesson/{id}/booking
 @Controller
 @RequestMapping( value = "/booking" )
-public class BookingController
+public class BookingController extends StudentController
 {
-    /*
+
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/overview", method = RequestMethod.GET )
-    public ModelAndView getBookingOverviewPage()
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView getBookingPage()
     {
-        return new ModelAndView( "booking", "bookings", service.getAllBookings() );
+        ModelMap map = new ModelMap();
+        map.addAttribute("lessons", service.getAllLessons());
+
+        return new ModelAndView("booking", map);
     }
-
-    @RequestMapping( value = "/add", method = RequestMethod.GET )
-    public ModelAndView getBookingAddPage()
-    {
-        // Get from lesson
-        final Course course = new Course( "MX2506", ".NET Programeren", ".NET", "", 1 );
-        // Get from session
-        final Student student = new Student( "David", "123", "davidopdebeeck@hotmail.com", UserType.ADMIN );
-        // Get from lesson
-        Tutor tutor = new Tutor( student, new HashSet<Course>()
-        {{ add( course );}} );
-        // Get from lesson
-        Room room = new Room( "2.25", Campus.PROXIMUS, RoomType.PLAIN );
-
-        Lesson lesson = new Lesson( new Date(), "LINQ", "Working with LINQ.", 60L, course, 5, tutor, room, room );
-
-        service.addCourse( course );
-        service.addStudent( student );
-        service.addTutor( tutor );
-        service.addRoom( room );
-        service.addLesson( lesson );
-
-        BookingForm form = new BookingForm();
-        form.setStudent( student );
-        form.setLesson( lesson );
-
-        ModelMap model = new ModelMap();
-        model.addAttribute( "booking", form );
-
-        return new ModelAndView( "booking_add", model );
-    }
-
+/*
     @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
     public String removeBooking( @PathVariable( value = "id" ) int id )
     {
@@ -83,5 +47,5 @@ public class BookingController
 
         return new ModelAndView( "redirect:/booking/overview" );
     }
-    */
+*/
 }
