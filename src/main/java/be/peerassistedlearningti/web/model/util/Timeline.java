@@ -1,13 +1,10 @@
 package be.peerassistedlearningti.web.model.util;
 
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.util.TimelineObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import be.peerassistedlearningti.common.model.archivable.Archivable;
 
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 /**
@@ -15,31 +12,25 @@ import java.util.TreeSet;
  */
 public class Timeline {
 
-    @Autowired
-    private PALService service;
-
-    private SortedSet<TimelineObject> objects = new TreeSet<TimelineObject>(new TimelineObjectCmp());
+    private Set<Archivable> archivables;
 
     public Timeline() {
+        archivables = new TreeSet<Archivable>(new ArchiveCmp());
     }
 
-    ;
-
-    public Timeline(Student student, PALService service) {
-        this.service = service;
-        objects.addAll(service.getPastLessons(student));
-        objects.addAll(service.getReviewsForStudent(student));
+    public boolean addAll(Collection<? extends Archivable> archivables) {
+        return this.archivables.addAll(archivables);
     }
 
-    public Set<TimelineObject> getTimeline() {
-        return objects;
+    public Set<Archivable> getArchivables() {
+        return archivables;
     }
 
     //Comparator
-    private class TimelineObjectCmp implements Comparator<TimelineObject> {
+    private class ArchiveCmp implements Comparator<Archivable> {
 
-        public int compare(TimelineObject o1, TimelineObject o2) {
-            return o1.getTimelineDate().compareTo(o2.getTimelineDate());
+        public int compare(Archivable o1, Archivable o2) {
+            return o1.getArchiveDate().compareTo(o2.getArchiveDate());
         }
     }
 }
