@@ -71,8 +71,13 @@
                                             <td>${lesson.duration}</td>
                                             <td>
                                                 <div class="progress progress-xs">
-                                                    <div class="progress-bar progress-bar-primary"
-                                                         style="width: ${  lesson.bookings.size()/lesson.maxParticipants*100}%"></div>
+                                                    <div class="progress-bar progress-bar-
+                                                        <c:choose>
+                                                            <c:when test="${(lesson.bookings.size()/lesson.maxParticipants*100) < 60}">success</c:when>
+                                                            <c:when test="${(lesson.bookings.size()/lesson.maxParticipants*100) > 60}">warning</c:when>
+                                                            <c:when test="${(lesson.bookings.size()/lesson.maxParticipants*100) = 100}">danger</c:when>
+                                                        </c:choose>"
+                                                         style="width: ${lesson.bookings.size()/lesson.maxParticipants*100}%"></div>
                                                 </div>
                                                     ${lesson.bookings.size()}/${lesson.maxParticipants}
                                             </td>
