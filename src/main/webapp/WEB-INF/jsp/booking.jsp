@@ -71,11 +71,12 @@
                                             <td>${lesson.duration}</td>
                                             <td>
                                                 <div class="progress progress-xs">
-                                                    <div class="progress-bar progress-bar-
+                                                    <div class="progress-bar
+                                                        <c:set var="percentage" value="${lesson.bookings.size()/lesson.maxParticipants*100}"/>
                                                         <c:choose>
-                                                            <c:when test="${(lesson.bookings.size()/lesson.maxParticipants*100) < 60}">success</c:when>
-                                                            <c:when test="${(lesson.bookings.size()/lesson.maxParticipants*100) > 60}">warning</c:when>
-                                                            <c:when test="${(lesson.bookings.size()/lesson.maxParticipants*100) = 100}">danger</c:when>
+                                                            <c:when test="${percentage < 60}">progress-bar-success</c:when>
+                                                            <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
+                                                            <c:when test="${percentage == 100}">progress-bar-danger</c:when>
                                                         </c:choose>"
                                                          style="width: ${lesson.bookings.size()/lesson.maxParticipants*100}%"></div>
                                                 </div>
@@ -83,11 +84,19 @@
                                             </td>
                                             <td>${lesson.tutor.student.name}</td>
                                             <td>
-                                                <c:if test="${lesson.bookings.size() >= lesson.maxParticipants}">
-                                                    <form action="<c:url value="/booking/register/${lesson.id}" />"
-                                                          method="POST">
-                                                        <input type="submit" value="Register"/>
-                                                    </form>
+                                                <c:if test="${percentage < 100 and not myOpenBookings.contains(lesson)}">
+                                                    <button class="btn btn-block btn-success btn-sm"
+                                                            action="<c:url value="/booking/register/${lesson.id}" />"
+                                                            method="POST" value="Register">
+                                                        <i class="fa fa-plus"></i> Register
+                                                    </button>
+                                                </c:if>
+                                                <c:if test="${myOpenBookings.contains(lesson)}">
+                                                    <button class="btn btn-block btn-success btn-sm"
+                                                            action="<c:url value="/booking/unregister/${lesson.id}" />"
+                                                            method="POST">
+                                                        <i class="fa fa-trash"></i> Unregister
+                                                    </button>
                                                 </c:if>
                                             </td>
                                             <td></td>
@@ -104,5 +113,10 @@
     </div>
 </div>
 <jsp:include page="include/footer.jsp"/>
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#lesson-overview").DataTable();
+    });
+</script>
 </body>
 </html>
