@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 // TODO change this mapping to lesson/{id}/booking
 @Controller
@@ -33,7 +32,7 @@ public class BookingController extends StudentController
     }
 
     @RequestMapping(value = "/register/{lessonId}", method = RequestMethod.POST)
-    public ModelAndView addBooking(@PathVariable(value = "lessonId") int lessonId, RedirectAttributes redirectAttributes) {
+    public ModelAndView addBooking(@PathVariable(value = "lessonId") int lessonId) {
         Lesson lesson = service.getLessonById(lessonId);
         if (lesson == null) {
             return new ModelAndView("redirect:/booking");

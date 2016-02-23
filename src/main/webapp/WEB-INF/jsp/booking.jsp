@@ -50,6 +50,7 @@
                                         <th>Duration</th>
                                         <th>Participants</th>
                                         <th>Tutor</th>
+                                        <th data-orderable="false">Actions</th>
                                     </tr>
                                     </thead>
                                     <tfoot>
@@ -60,6 +61,7 @@
                                         <th>Duration</th>
                                         <th>Participants</th>
                                         <th>Tutor</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
@@ -85,21 +87,22 @@
                                             <td>${lesson.tutor.student.name}</td>
                                             <td>
                                                 <c:if test="${percentage < 100 and not myOpenBookings.contains(lesson)}">
-                                                    <button class="btn btn-block btn-success btn-sm"
-                                                            action="<c:url value="/booking/register/${lesson.id}" />"
-                                                            method="POST" value="Register">
-                                                        <i class="fa fa-plus"></i> Register
-                                                    </button>
+                                                    <form action="<c:url value="/booking/register/${lesson.id}" />"
+                                                          method="POST">
+                                                        <button type="submit" class="btn btn-block btn-success btn-sm">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </form>
                                                 </c:if>
                                                 <c:if test="${myOpenBookings.contains(lesson)}">
-                                                    <button class="btn btn-block btn-success btn-sm"
-                                                            action="<c:url value="/booking/unregister/${lesson.id}" />"
-                                                            method="POST">
-                                                        <i class="fa fa-trash"></i> Unregister
-                                                    </button>
+                                                    <form action="<c:url value="/booking/unregister/${lesson.id}" />"
+                                                          method="POST">
+                                                        <button class="btn btn-block btn-success btn-sm">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
                                                 </c:if>
                                             </td>
-                                            <td></td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -115,7 +118,7 @@
 <jsp:include page="include/footer.jsp"/>
 <script type="application/javascript">
     $(document).ready(function () {
-        $("#lesson-overview").DataTable();
+        $("#lessons-overview").DataTable();
     });
 </script>
 </body>
