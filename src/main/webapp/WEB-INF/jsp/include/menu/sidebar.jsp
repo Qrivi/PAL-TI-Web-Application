@@ -42,7 +42,7 @@
                         href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>Apply as a tutor</span></a>
                 </li>
                 <li class="${param.title == "lessons" ? "active" : ""}"><a
-                        href="<c:url value="/dashboard"/>"><i class="fa fa-calendar-check-o"></i><span>Lessons</span></a>
+                        href="<c:url value="/lessons"/>"><i class="fa fa-calendar-check-o"></i><span>Lessons</span></a>
                 </li>
             </sec:authorize>
         </ul>
