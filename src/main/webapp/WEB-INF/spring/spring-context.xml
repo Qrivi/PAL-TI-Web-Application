@@ -64,8 +64,6 @@
 
     <bean id="resetMail" class="be.peerassistedlearningti.web.model.util.ResetMail"/>
 
-    <!-- Timeline -->
-    <bean id="timeline" class="be.peerassistedlearningti.web.model.util.Timeline"/>
 
     <!-- Java Mail -->
 

@@ -29,6 +29,7 @@ public class DashboardController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getDashboard(Authentication auth) {
         Student current = (Student) auth.getPrincipal();
+
         ModelMap map = new ModelMap();
         //Add ProfileForm object to modelmap
         ProfileForm profile = new ProfileForm();
@@ -41,10 +42,15 @@ public class DashboardController {
 
         //Add reviews to modelmap
         Tutor tutor = current.getTutor();
-        map.addAttribute("reviews", service.getReviews(tutor));
+        if (tutor != null)
+            map.addAttribute("reviews", service.getReviews(tutor));
 
         //Add Timeline to modelmap
-        map.addAttribute("timeline", new Timeline(current, service));
+        Timeline timeline = new Timeline();
+        timeline.addAll(service.getPastLessons(current));
+        timeline.addAll(service.getReviewsForStudent(current));
+
+        map.addAttribute("timeline", timeline);
 
         return new ModelAndView("dashboard", map);
     }
