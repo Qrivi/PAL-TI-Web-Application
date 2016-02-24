@@ -4,7 +4,7 @@
     <div class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<c:url value="/resources/img/profile_pic.jpg"/>" class="img-circle" alt="User Image">
+                <img src="<c:url value="/dashboard/avatar.png"/>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p><sec:authentication property="principal.name"/></p>

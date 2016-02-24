@@ -5,10 +5,13 @@ import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import be.peerassistedlearningti.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @FieldMatch( first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ProfileForm.newPassword.newRepeatPassword}" )
 public class ProfileForm
 {
+    private MultipartFile avatar;
+
     @NotEmpty( message = "{NotEmpty.ProfileForm.name}" )
     private String name;
 
@@ -24,6 +27,16 @@ public class ProfileForm
     private String newRepeatPassword;
 
     public ProfileForm() {}
+
+    public MultipartFile getAvatar()
+    {
+        return avatar;
+    }
+
+    public void setAvatar( MultipartFile avatar )
+    {
+        this.avatar = avatar;
+    }
 
     public String getName()
     {
