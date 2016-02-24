@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class TutorCRUDController {
+public class TutorCRUDController extends AdminController{
     @Autowired
     private PALService service;
 
-    @RequestMapping( value = "/tutors", method = RequestMethod.GET )
+    @RequestMapping(value = "/tutors",method = RequestMethod.GET )
     public ModelAndView getTutorOverviewPage(ModelMap model )
     {
         return new ModelAndView("admin/tutors", "tutors", service.getAllTutors() );

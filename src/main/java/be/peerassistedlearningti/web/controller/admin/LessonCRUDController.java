@@ -8,6 +8,7 @@ import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.LessonForm;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.time.LocalTime;
 
-public class LessonController {
+@Controller
+public class LessonCRUDController extends AdminController{
     @Autowired
     private PALService service;
 
@@ -36,21 +38,13 @@ public class LessonController {
     @RequestMapping( value = "lessons", method = RequestMethod.GET )
     public ModelAndView getLessonOverviewPage()
     {
-        return new ModelAndView( "lesson", "lessons", service.getAllLessons() );
-    }
-
-    @RequestMapping( value = "/lessons", method = RequestMethod.DELETE )
-    public String removeLesson( @RequestParam( value = "id" ) int id )
-    {
-        Lesson l = service.getLessonById( id );
-        service.removeLesson( l );
-        return "redirect:/lesson/overview";
+        return new ModelAndView( "admin/lessons", "lessons", service.getAllLessons() );
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
     public ModelAndView getLessonAddPage( ModelMap model )
     {
-        return new ModelAndView( "tutor/lesson_add", fillModel( model ) );
+        return new ModelAndView( "admin/lesson_add", fillModel( model ) );
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.POST )
@@ -72,6 +66,14 @@ public class LessonController {
 
         service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
 
-        return new ModelAndView( "redirect:/lessons" );
+        return new ModelAndView( "redirect:admin/lessons" );
+    }
+
+    @RequestMapping( value = "/lessons", method = RequestMethod.DELETE )
+    public String removeLesson( @RequestParam( value = "id" ) int id )
+    {
+        Lesson l = service.getLessonById( id );
+        service.removeLesson( l );
+        return "redirect:/admin/lessons";
     }
 }

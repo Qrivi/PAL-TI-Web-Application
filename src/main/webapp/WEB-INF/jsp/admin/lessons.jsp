@@ -5,13 +5,13 @@
 
 <html>
     <jsp:include page="../include/head.jsp">
-        <jsp:param value="Dashboard" name="Lessons"/>
+        <jsp:param value="Lessons" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
             <jsp:include page="../include/menu/main-header.jsp"/>
             <jsp:include page="../include/menu/sidebar.jsp">
-                <jsp:param value="dashboard" name="Lessons"/>
+                <jsp:param value="lessons" name="title"/>
             </jsp:include>
             <!-- Content header (Page header) -->
             <div class="content-wrapper" style="min-height: 1126px;">
