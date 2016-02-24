@@ -1,11 +1,15 @@
 package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.common.model.validation.FieldMatch;
+import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import be.peerassistedlearningti.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Collection;
+import java.util.Set;
 
 @FieldMatch( first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ProfileForm.newPassword.newRepeatPassword}" )
 public class ProfileForm
@@ -25,7 +29,7 @@ public class ProfileForm
 
     private String newPassword;
     private String newRepeatPassword;
-    private int[] subscriptions;
+    private Set<Course> subscriptions;
 
     public ProfileForm() {}
 
@@ -39,11 +43,13 @@ public class ProfileForm
         this.avatar = avatar;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName( String name )
+    {
         this.name = name;
     }
 
@@ -87,11 +93,13 @@ public class ProfileForm
         this.newRepeatPassword = newRepeatPassword;
     }
 
-    public int[] getSubscriptions() {
+    public Set<Course> getSubscriptions()
+    {
         return subscriptions;
     }
 
-    public void setSubscriptions(int[] subscriptions) {
+    public void setSubscriptions( Set<Course> subscriptions )
+    {
         this.subscriptions = subscriptions;
     }
 }
