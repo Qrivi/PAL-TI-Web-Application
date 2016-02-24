@@ -1,5 +1,6 @@
 package be.peerassistedlearningti.web.controller.student;
 
+import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 @Controller
 @RequestMapping(value = "/dashboard")
@@ -89,6 +92,13 @@ public class DashboardController {
                 result.reject("SaveFile.ProfileForm.avatar");
                 return new ModelAndView("student/dashboard", fillModel(model));
             }
+        }
+        if (form.getSubscriptions().length != 0) {
+            Set<Course> subscribtionSet = new HashSet<>();
+            for (int id : form.getSubscriptions()) {
+                subscribtionSet.add(service.getCourseById(id));
+            }
+            student.setSubscriptions(subscribtionSet);
         }
 
         service.updateStudent(student);
