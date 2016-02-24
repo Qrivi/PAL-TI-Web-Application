@@ -23,6 +23,8 @@
                         href="<c:url value="/admin/rooms"/>"><i class="fa fa-building"></i><span> Rooms</span></a></li>
                 <li class="${param.title == "applications" ? "active" : "" }"><a
                         href="<c:url value="/admin/applications"/>"><i class="fa fa-file-text"></i><span> Applications</span></a></li>
+                <li class="${param.title == "tutors" ? "active" : "" }"><a
+                        href="<c:url value="/admin/tutors"/>"><i class="fa fa-file-text"></i><span> Tutors</span></a></li>
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_TUTOR')">
                 <li class="header">TUTOR NAVIGATION</li>
