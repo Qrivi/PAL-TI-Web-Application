@@ -35,7 +35,7 @@
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.ejb.entitymanager_factory_name">PAL-FN</prop>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
             </props>
         </property>
         <!-- Set base package of your entities -->
