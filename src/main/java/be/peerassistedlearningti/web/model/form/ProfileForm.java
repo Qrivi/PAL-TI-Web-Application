@@ -22,56 +22,55 @@ public class ProfileForm
 
     private String newPassword;
     private String newRepeatPassword;
+    private int[] subscriptions;
 
     public ProfileForm() {}
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName( String name )
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail( String email )
-    {
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword()
-    {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword( String password )
-    {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getNewPassword()
-    {
+    public String getNewPassword() {
         return newPassword;
     }
 
-    public void setNewPassword( String newPassword )
-    {
+    public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
     }
 
-    public String getNewRepeatPassword()
-    {
+    public String getNewRepeatPassword() {
         return newRepeatPassword;
     }
 
-    public void setNewRepeatPassword( String newRepeatPassword )
-    {
+    public void setNewRepeatPassword(String newRepeatPassword) {
         this.newRepeatPassword = newRepeatPassword;
+    }
+
+    public int[] getSubscriptions() {
+        return subscriptions;
+    }
+
+    public void setSubscriptions(int[] subscriptions) {
+        this.subscriptions = subscriptions;
     }
 }

@@ -50,6 +50,9 @@ public class DashboardController {
         timeline.addAll(service.getPastLessons(current));
         timeline.addAll(service.getReviewsForStudent(current));
 
+        //Add courses to modelmap
+        map.addAttribute("courses", service.getAllCourses());
+
         map.addAttribute("timeline", timeline);
 
         return new ModelAndView("student/dashboard", map);
@@ -61,7 +64,6 @@ public class DashboardController {
             return new ModelAndView("student/dashboard");
 
         Student student = SessionAuth.getStudent();
-
         student.setName(form.getName());
         student.setEmail(form.getEmail());
         if (!form.getNewPassword()

@@ -187,28 +187,49 @@
                                             </tbody>
                                         </table>
                                     </div>
+                                    <!-- settings tab content-->
                                     <div class="tab-pane" id="settings">
                                         <form:form class="form-horizontal" method="post" commandName="profile"
                                                    enctype="application/x-www-form-urlencoded">
                                             <c:set var="nameError"><form:errors path="name"/></c:set>
                                             <c:set var="emailError"><form:errors path="email"/></c:set>
+                                            <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
                                             <c:set var="nameError"><form:errors path="name"/></c:set>
                                             <c:set var="passwordError"><form:errors path="password"/></c:set>
                                             <c:set var="newPasswordError"><form:errors path="newPassword"/><form:errors/></c:set>
                                             <c:set var="newRepeatPasswordError"><form:errors path="newRepeatPassword"/><form:errors/></c:set>
                                             <form:errors element="div" cssClass="alert alert-danger"/>
+                                            <!-- name field-->
                                             <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
                                                 <label for="name" class="col-sm-2 control-label">Name</label>
                                                 <div class="col-sm-10">
                                                     <form:input path="name" class="form-control" placeholder="Name"/>
                                                 </div>
                                             </div>
+                                            <!-- email field-->
                                             <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
                                                 <label for="email" class="col-sm-2 control-label">Email</label>
                                                 <div class="col-sm-10">
                                                     <form:input path="email" class="form-control" placeholder="Email"/>
                                                 </div>
                                             </div>
+                                            <!-- subscriptions field -->
+                                            <div class="form-group ${ not empty subscriptionsError ? 'has-error' : ''}">
+                                                <label for="subscriptions"
+                                                       class="col-sm-2 control-label">Subscriptions</label>
+                                                <div class="col-sm-10">
+                                                    <form:select id="subscriptions" path="subscriptions"
+                                                                 class="form-control select2 select2-hidden-accessible"
+                                                                 multiple="multiple" data-placeholder="Subscriptions"
+                                                                 style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                        <c:forEach var="course" items="${courses}">
+                                                            <form:option
+                                                                    value="${course.id}">${course.name}</form:option>
+                                                        </c:forEach>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                            <!-- password field -->
                                             <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
                                                 <label for="password" class="col-sm-2 control-label">Current
                                                     password</label>
@@ -217,6 +238,7 @@
                                                                    placeholder="Password"/>
                                                 </div>
                                             </div>
+                                            <!-- new password field -->
                                             <div class="form-group ${ not empty newPasswordError ? 'has-error' : ''}">
                                                 <label for="newPassword" class="col-sm-2 control-label">New password</label>
                                                 <div class="col-sm-10">
@@ -224,6 +246,7 @@
                                                                    placeholder="New password"/>
                                                 </div>
                                             </div>
+                                            <!-- new password repeat field -->
                                             <div class="form-group ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
                                                 <label for="newRepeatPassword" class="col-sm-2 control-label">Repeat
                                                     password</label>
@@ -249,6 +272,7 @@
         <jsp:include page="../include/footer.jsp"/>
         <script>
             $( document ).ready( function () {
+                $("#subscriptions").select2();
                 $( function () {
                     $( 'a[data-toggle="tab"]' ).on( 'click' , function ( e ) {
                         console.log( $( e.target ).attr( 'href' ) );
