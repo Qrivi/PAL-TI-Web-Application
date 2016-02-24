@@ -49,15 +49,7 @@ public class DashboardController
             ProfileForm profile = new ProfileForm();
             profile.setName( current.getName() );
             profile.setEmail( current.getEmail() );
-            int[] subArr = new int[ current.getSubscriptions()
-                    .size() ];
-            int i = 0;
-            for ( Course sub : current.getSubscriptions() )
-            {
-                subArr[ i ] = sub.getId();
-                i++;
-            }
-            profile.setSubscriptions( subArr );
+            profile.setSubscriptions( current.getSubscriptions() );
             model.addAttribute( "profile", profile );
         }
         if ( model.get( "user" ) == null )
@@ -118,15 +110,8 @@ public class DashboardController
                 return new ModelAndView( "student/dashboard", fillModel( model ) );
             }
         }
-        if ( form.getSubscriptions().length != 0 )
-        {
-            Set<Course> subscribtionSet = new HashSet<>();
-            for ( int id : form.getSubscriptions() )
-            {
-                subscribtionSet.add( service.getCourseById( id ) );
-            }
-            student.setSubscriptions( subscribtionSet );
-        }
+
+        student.setSubscriptions( form.getSubscriptions() );
 
         service.updateStudent( student );
         SessionAuth.setStudent( student );

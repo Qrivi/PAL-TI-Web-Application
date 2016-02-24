@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-<jsp:include page="../include/head.jsp">
+    <jsp:include page="../include/head.jsp">
         <jsp:param value="Dashboard" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
@@ -232,10 +232,7 @@
                                                                  class="form-control select2 select2-hidden-accessible"
                                                                  multiple="multiple" data-placeholder="Subscriptions"
                                                                  style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                        <c:forEach var="course" items="${courses}">
-                                                            <form:option
-                                                                    value="${course.id}">${course.name}</form:option>
-                                                        </c:forEach>
+                                                        <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                                     </form:select>
                                                 </div>
                                             </div>
@@ -283,7 +280,7 @@
         <jsp:include page="../include/footer.jsp"/>
         <script>
             $( document ).ready( function () {
-                $("#subscriptions").select2();
+                $( "#subscriptions" ).select2();
                 $( function () {
                     $( 'a[data-toggle="tab"]' ).on( 'click' , function ( e ) {
                         console.log( $( e.target ).attr( 'href' ) );

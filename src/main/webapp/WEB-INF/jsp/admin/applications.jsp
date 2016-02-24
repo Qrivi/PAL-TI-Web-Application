@@ -148,7 +148,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-info">You can click on the screenshot to zoom in.</div>
-                        <img id="screenshot" width="100%" height="100%" alt="screenshot" class="zoomTarget"/>
+                        <a id="screenshot-url" href="image_big.jpg">
+                            <img id="screenshot" width="100%" height="100%" alt="screenshot"/>
+                        </a>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -165,6 +167,12 @@
                     $( '#screenshot-modal' ).modal( 'show' );
                     var url = $( this ).attr( "data-url" );
                     $( "#screenshot" ).attr( "src" , url );
+                    $( "#screenshot-url" ).attr( "href" , url );
+                } );
+                $( "#screenshot" ).fancybox( {
+                    afterClose : function () {
+                        $( "#screenshot" ).css( "display" , "block" );
+                    }
                 } );
             } );
         </script>
