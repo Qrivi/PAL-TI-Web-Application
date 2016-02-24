@@ -216,6 +216,7 @@
                                             </div>
                                             <!-- email field-->
                                             <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
+                                                    ${subscriptions}
                                                 <form:label path="email"
                                                             class="col-sm-2 control-label">Email</form:label>
                                                 <div class="col-sm-10">

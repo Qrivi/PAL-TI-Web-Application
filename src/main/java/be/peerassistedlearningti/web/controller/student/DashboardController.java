@@ -43,6 +43,13 @@ public class DashboardController {
             ProfileForm profile = new ProfileForm();
             profile.setName(current.getName());
             profile.setEmail(current.getEmail());
+            int[] subArr = new int[current.getSubscriptions().size()];
+            int i = 0;
+            for (Course sub : current.getSubscriptions()) {
+                subArr[i] = sub.getId();
+                i++;
+            }
+            profile.setSubscriptions(subArr);
             model.addAttribute("profile", profile);
         }
         if (model.get("user") == null) {
