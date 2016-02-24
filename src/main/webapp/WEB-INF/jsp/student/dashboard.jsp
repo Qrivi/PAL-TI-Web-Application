@@ -27,7 +27,7 @@
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
                                     <img class="profile-user-img img-responsive img-circle"
-                                         src="<c:url value="/resources/img/profile_pic.jpg"/>" alt="User profile picture">
+                                         src="<c:url value="/dashboard/avatar.png"/>" alt="User profile picture">
 
                                     <h3 class="profile-username text-center"><c:out value="${user.name}"/></h3>
 
@@ -189,8 +189,8 @@
                                     </div>
                                     <!-- settings tab content-->
                                     <div class="tab-pane" id="settings">
-                                        <form:form class="form-horizontal" method="post" commandName="profile"
-                                                   enctype="application/x-www-form-urlencoded">
+                                        <form:form class="form-horizontal" method="put" commandName="profile"
+                                                   enctype="multipart/form-data">
                                             <c:set var="nameError"><form:errors path="name"/></c:set>
                                             <c:set var="emailError"><form:errors path="email"/></c:set>
                                             <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
@@ -201,14 +201,23 @@
                                             <form:errors element="div" cssClass="alert alert-danger"/>
                                             <!-- name field-->
                                             <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
-                                                <label for="name" class="col-sm-2 control-label">Name</label>
+                                                <form:label path="avatar"
+                                                            class="col-sm-2 control-label">Avatar</form:label>
+                                                <div class="col-sm-10">
+                                                    <form:input path="avatar" type="file" class="form-control"
+                                                                placeholder="Avatar"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
+                                                <form:label path="name" class="col-sm-2 control-label">Name</form:label>
                                                 <div class="col-sm-10">
                                                     <form:input path="name" class="form-control" placeholder="Name"/>
                                                 </div>
                                             </div>
                                             <!-- email field-->
                                             <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
-                                                <label for="email" class="col-sm-2 control-label">Email</label>
+                                                <form:label path="email"
+                                                            class="col-sm-2 control-label">Email</form:label>
                                                 <div class="col-sm-10">
                                                     <form:input path="email" class="form-control" placeholder="Email"/>
                                                 </div>
@@ -231,16 +240,17 @@
                                             </div>
                                             <!-- password field -->
                                             <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
-                                                <label for="password" class="col-sm-2 control-label">Current
-                                                    password</label>
+                                                <form:label path="password"
+                                                            class="col-sm-2 control-label">Current Password</form:label>
                                                 <div class="col-sm-10">
                                                     <form:password path="password" class="form-control"
-                                                                   placeholder="Password"/>
+                                                                   placeholder="Current Password"/>
                                                 </div>
                                             </div>
                                             <!-- new password field -->
                                             <div class="form-group ${ not empty newPasswordError ? 'has-error' : ''}">
-                                                <label for="newPassword" class="col-sm-2 control-label">New password</label>
+                                                <form:label path="newPassword"
+                                                            class="col-sm-2 control-label">New password</form:label>
                                                 <div class="col-sm-10">
                                                     <form:password path="newPassword" class="form-control"
                                                                    placeholder="New password"/>
@@ -248,8 +258,8 @@
                                             </div>
                                             <!-- new password repeat field -->
                                             <div class="form-group ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
-                                                <label for="newRepeatPassword" class="col-sm-2 control-label">Repeat
-                                                    password</label>
+                                                <form:label path="newRepeatPassword"
+                                                            class="col-sm-2 control-label">Repeat Password</form:label>
                                                 <div class="col-sm-10">
                                                     <form:password path="newRepeatPassword" class="form-control"
                                                                    placeholder="Repeat Password"/>

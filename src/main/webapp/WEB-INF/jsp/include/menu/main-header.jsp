@@ -16,12 +16,12 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<c:url value="/resources/img/profile_pic.jpg"/>" class="user-image" alt="User Image">
+                        <img src="<c:url value="/dashboard/avatar.png"/>" class="user-image" alt="User Image">
                         <span class="hidden-xs"><sec:authentication property="principal.name"/></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="<c:url value="/resources/img/profile_pic.jpg"/>" class="img-circle" alt="User Image">
+                            <img src="<c:url value="/dashboard/avatar.png"/>" class="img-circle" alt="User Image">
                             <p>
                                 <sec:authentication property="principal.name"/>
                                 <small><sec:authentication property="principal.email"/></small>

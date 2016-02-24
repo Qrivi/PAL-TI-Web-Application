@@ -5,10 +5,13 @@ import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import be.peerassistedlearningti.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 @FieldMatch( first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ProfileForm.newPassword.newRepeatPassword}" )
 public class ProfileForm
 {
+    private MultipartFile avatar;
+
     @NotEmpty( message = "{NotEmpty.ProfileForm.name}" )
     private String name;
 
@@ -26,6 +29,16 @@ public class ProfileForm
 
     public ProfileForm() {}
 
+    public MultipartFile getAvatar()
+    {
+        return avatar;
+    }
+
+    public void setAvatar( MultipartFile avatar )
+    {
+        this.avatar = avatar;
+    }
+
     public String getName() {
         return name;
     }
@@ -34,35 +47,43 @@ public class ProfileForm
         this.name = name;
     }
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail( String email )
+    {
         this.email = email;
     }
 
-    public String getPassword() {
+    public String getPassword()
+    {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword( String password )
+    {
         this.password = password;
     }
 
-    public String getNewPassword() {
+    public String getNewPassword()
+    {
         return newPassword;
     }
 
-    public void setNewPassword(String newPassword) {
+    public void setNewPassword( String newPassword )
+    {
         this.newPassword = newPassword;
     }
 
-    public String getNewRepeatPassword() {
+    public String getNewRepeatPassword()
+    {
         return newRepeatPassword;
     }
 
-    public void setNewRepeatPassword(String newRepeatPassword) {
+    public void setNewRepeatPassword( String newRepeatPassword )
+    {
         this.newRepeatPassword = newRepeatPassword;
     }
 

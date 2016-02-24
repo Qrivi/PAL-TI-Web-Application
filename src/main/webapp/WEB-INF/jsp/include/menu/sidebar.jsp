@@ -4,7 +4,7 @@
     <div class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<c:url value="/resources/img/profile_pic.jpg"/>" class="img-circle" alt="User Image">
+                <img src="<c:url value="/dashboard/avatar.png"/>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p><sec:authentication property="principal.name"/></p>
@@ -24,9 +24,11 @@
                 <li class="${param.title == "applications" ? "active" : "" }"><a
                         href="<c:url value="/admin/applications"/>"><i class="fa fa-file-text"></i><span> Applications</span></a></li>
                 <li class="${param.title == "tutors" ? "active" : "" }"><a
-                        href="<c:url value="/admin/tutors"/>"><i class="fa fa-file-text"></i><span> Tutors</span></a></li>
+                        href="<c:url value="/admin/tutors"/>"><i class="fa fa-briefcase"></i><span> Tutors</span></a>
+                </li>
                 <li class="${param.title == "reviews" ? "active" : "" }"><a
-                        href="<c:url value="/admin/reviews"/>"><i class="fa fa-file-text"></i><span> Reviews</span></a></li>
+                        href="<c:url value="/admin/reviews"/>"><i
+                        class="fa fa-commenting-o"></i><span> Reviews</span></a></li>
                 <li class="${param.title == "lessons" ? "active" : ""}"><a
                         href="<c:url value="/admin/lessons"/>"><i class="fa fa-calendar-check-o"></i><span>Lessons</span></a>
                 </li>

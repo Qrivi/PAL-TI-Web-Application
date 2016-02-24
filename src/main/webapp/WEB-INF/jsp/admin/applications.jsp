@@ -58,12 +58,22 @@
                                                             <td>${application.beginDate}</td>
                                                             <td>
                                                                 <form class="small" action="<c:url value="/admin/applications/approve/${application.id}" />" method="POST">
-                                                                    <button class="btn btn-sm btn-success"><i class="fa fa-thumbs-up"></i></button>
+                                                                    <button class="btn btn-sm btn-success"
+                                                                            data-toggle="tooltip" title="Approve">
+                                                                        <i class="fa fa-thumbs-up"></i>
+                                                                    </button>
                                                                 </form>
                                                                 <form class="small" action="<c:url value="/admin/applications/reject/${application.id}" />" method="POST">
-                                                                    <button class="btn btn-sm btn-danger"><i class="fa fa-thumbs-down"></i></button>
+                                                                    <button class="btn btn-sm btn-danger"
+                                                                            data-toggle="tooltip" title="Reject">
+                                                                        <i class="fa fa-thumbs-down"></i>
+                                                                    </button>
                                                                 </form>
-                                                                <button class="btn btn-sm btn-primary screenshot" data-url="<c:url value="/admin/applications/screenshot/${application.id}.png"/>"><i class="fa fa-picture-o"></i></button>
+                                                                <button class="btn btn-sm btn-primary screenshot"
+                                                                        data-toggle="tooltip" title="Screenshot"
+                                                                        data-url="<c:url value="/admin/applications/screenshot/${application.id}.png"/>">
+                                                                    <i class="fa fa-picture-o"></i>
+                                                                </button>
                                                             </td>
                                                         </tr>
                                                     </c:forEach>
