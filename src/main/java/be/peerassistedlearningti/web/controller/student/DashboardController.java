@@ -10,6 +10,7 @@ import be.peerassistedlearningti.web.model.util.Timeline;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -21,115 +22,144 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-@RequestMapping(value = "/dashboard")
-@PreAuthorize("hasRole('ROLE_USER')")
-public class DashboardController {
+@RequestMapping( value = "/dashboard" )
+@PreAuthorize( "hasRole('ROLE_USER')" )
+public class DashboardController
+{
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel(ModelMap model) {
+    private ModelMap fillModel( ModelMap model )
+    {
         Student current = SessionAuth.getStudent();
         Tutor tutor = current.getTutor();
 
-        if (model.get("profile") == null) {
+        if ( model.get( "profile" ) == null )
+        {
             ProfileForm profile = new ProfileForm();
-            profile.setName(current.getName());
-            profile.setEmail(current.getEmail());
-            int[] subArr = new int[current.getSubscriptions().size()];
+            profile.setName( current.getName() );
+            profile.setEmail( current.getEmail() );
+            int[] subArr = new int[ current.getSubscriptions()
+                    .size() ];
             int i = 0;
-            for (Course sub : current.getSubscriptions()) {
-                subArr[i] = sub.getId();
+            for ( Course sub : current.getSubscriptions() )
+            {
+                subArr[ i ] = sub.getId();
                 i++;
             }
-            profile.setSubscriptions(subArr);
-            model.addAttribute("profile", profile);
+            profile.setSubscriptions( subArr );
+            model.addAttribute( "profile", profile );
         }
-        if (model.get("user") == null) {
-            model.addAttribute("user", current);
+        if ( model.get( "user" ) == null )
+        {
+            model.addAttribute( "user", current );
         }
-        if (tutor != null && model.get("reviews") == null) {
-            model.addAttribute("reviews", service.getReviews(tutor));
+        if ( tutor != null && model.get( "reviews" ) == null )
+        {
+            model.addAttribute( "reviews", service.getReviews( tutor ) );
         }
-        if (model.get("timeline") == null) {
+        if ( model.get( "timeline" ) == null )
+        {
             Timeline timeline = new Timeline();
-            timeline.addAll(service.getPastLessons(current));
-            timeline.addAll(service.getReviewsForStudent(current));
-            model.addAttribute("timeline", timeline);
+            timeline.addAll( service.getPastLessons( current ) );
+            timeline.addAll( service.getReviewsForStudent( current ) );
+            model.addAttribute( "timeline", timeline );
         }
-        if (model.get("courses") == null) {
-            model.addAttribute("courses", service.getAllCourses());
+        if ( model.get( "courses" ) == null )
+        {
+            model.addAttribute( "courses", service.getAllCourses() );
         }
         return model;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView getDashboard(ModelMap model) {
-        return new ModelAndView("student/dashboard", fillModel(model));
+    @RequestMapping( method = RequestMethod.GET )
+    public ModelAndView getDashboard( ModelMap model )
+    {
+        return new ModelAndView( "student/dashboard", fillModel( model ) );
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView modifyStudentProfile(@Valid @ModelAttribute("profile") ProfileForm form, BindingResult result, ModelMap model) {
-        if (result.hasErrors())
-            return new ModelAndView("student/dashboard", fillModel(model));
+    @RequestMapping( method = RequestMethod.POST )
+    public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result, ModelMap model )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "student/dashboard", fillModel( model ) );
 
         Student student = SessionAuth.getStudent();
 
-        student.setName(StringUtils.defaultIfEmpty(form.getName(), student.getName()));
-        student.setEmail(StringUtils.defaultIfEmpty(form.getEmail(), student.getEmail()));
+        student.setName( StringUtils.defaultIfEmpty( form.getName(), student.getName() ) );
+        student.setEmail( StringUtils.defaultIfEmpty( form.getEmail(), student.getEmail() ) );
 
-        if (!form.getNewPassword()
-                .isEmpty()) {
-            student.setPassword(form.getNewPassword());
+        if ( !form.getNewPassword()
+                .isEmpty() )
+        {
+            student.setPassword( form.getNewPassword() );
         }
 
-        if (!form.getAvatar()
-                .isEmpty()) {
-            try {
+        if ( !form.getAvatar()
+                .isEmpty() )
+        {
+            try
+            {
                 MultipartFile avatar = form.getAvatar();
-                student.setAvatar(avatar.getBytes());
-            } catch (Exception e) {
-                result.reject("SaveFile.ProfileForm.avatar");
-                return new ModelAndView("student/dashboard", fillModel(model));
+                student.setAvatar( avatar.getBytes() );
+            } catch ( Exception e )
+            {
+                result.reject( "SaveFile.ProfileForm.avatar" );
+                return new ModelAndView( "student/dashboard", fillModel( model ) );
             }
         }
-        if (form.getSubscriptions().length != 0) {
+        if ( form.getSubscriptions().length != 0 )
+        {
             Set<Course> subscribtionSet = new HashSet<>();
-            for (int id : form.getSubscriptions()) {
-                subscribtionSet.add(service.getCourseById(id));
+            for ( int id : form.getSubscriptions() )
+            {
+                subscribtionSet.add( service.getCourseById( id ) );
             }
-            student.setSubscriptions(subscribtionSet);
+            student.setSubscriptions( subscribtionSet );
         }
 
-        service.updateStudent(student);
-        SessionAuth.setStudent(student);
+        service.updateStudent( student );
+        SessionAuth.setStudent( student );
 
-        return new ModelAndView("redirect:/dashboard");
+        return new ModelAndView( "redirect:/dashboard" );
     }
 
     @ResponseBody
-    @RequestMapping(value = "/avatar.png", method = RequestMethod.GET)
-    public void getScreenshot(HttpServletResponse response) {
+    @RequestMapping( value = "/avatar.png", method = RequestMethod.GET )
+    public void getScreenshot( HttpServletRequest request, HttpServletResponse response )
+    {
         InputStream in = null;
-        try {
+        try
+        {
             Student current = SessionAuth.getStudent();
             byte[] img = current.getAvatar();
 
-            in = new ByteArrayInputStream(img);
-            response.setContentType("image/jpeg");
-            IOUtils.copy(in, response.getOutputStream());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            if (in != null)
-                IOUtils.closeQuietly(in);
+            if ( img == null )
+            {
+                String path = request.getSession()
+                        .getServletContext()
+                        .getRealPath( "/resources/img" ) + "/profile_pic.jpg";
+                in = new FileSystemResource( new File( path ) ).getInputStream();
+            } else
+            {
+                in = new ByteArrayInputStream( img );
+            }
+            response.setContentType( "image/jpeg" );
+            IOUtils.copy( in, response.getOutputStream() );
+        } catch ( Exception e ) { System.out.println( e.getMessage() );} finally
+        {
+            if ( in != null )
+                IOUtils.closeQuietly( in );
         }
     }
 
