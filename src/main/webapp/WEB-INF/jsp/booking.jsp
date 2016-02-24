@@ -92,7 +92,10 @@
                             <c:if test="${empty lessons}">
                                 <div class="alert alert-warning col-sm-4 col-sm-offset-4">
                                     <h4><i class="icon fa fa-frown-o"></i>No lessons</h4>
-                                    There aren't any lessons available.
+                                    <p>There aren't any lessons available, perhaps you should subscribe for a course.
+                                        This way we know which courses need some attention.</p>
+                                    <p>Once we've found a suitable tutor for this course you'll receive an email
+                                        notification.</p>
                                 </div>
                             </c:if>
                             <c:if test="${not empty lessons}">
