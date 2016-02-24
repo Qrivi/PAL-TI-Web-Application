@@ -62,26 +62,4 @@ public class BookingController extends StudentController
             return new ModelAndView("redirect:/booking");
         }
     }
-/*
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
-    public String removeBooking( @PathVariable( value = "id" ) int id )
-    {
-        Booking b = service.getBookingById( id );
-        //Lesson l = service.getLessonById( 1 );
-        //l.removeBooking( b );
-        service.removeBooking( b );
-        return "redirect:/booking/overview";
-    }
-
-    @RequestMapping( value = "/add", method = RequestMethod.POST )
-    public ModelAndView addBooking( @Valid @ModelAttribute( "booking" ) BookingForm form, BindingResult result )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "booking_add" );
-
-        service.addBooking( new Booking( form.getLesson(), form.getStudent() ) );
-
-        return new ModelAndView( "redirect:/booking/overview" );
-    }
-*/
 }

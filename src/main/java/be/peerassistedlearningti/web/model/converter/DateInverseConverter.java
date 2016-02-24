@@ -24,7 +24,6 @@ public class DateInverseConverter implements Converter<Date, String>
             return dateFormat.format( d );
         } catch ( Exception e )
         {
-            e.printStackTrace();
             return null;
         }
     }

@@ -36,6 +36,8 @@
         <!-- data-tables-js -->
         <js>https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js</js>
         <js>https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js</js>
+        <!-- zoomooz -->
+        <js>https://cdnjs.cloudflare.com/ajax/libs/zoomooz/1.1.6/jquery.zoomooz.js</js>
     </group>
     <!-- Global -->
     <group name="global">

@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 @Controller
@@ -70,16 +75,23 @@ public class ApplicationCRUDController extends AdminController
         return new ModelAndView( "redirect:/admin/applications" );
     }
 
-    @RequestMapping( value = "/applications/screenshot/{id}.png", method = RequestMethod.GET )
     @ResponseBody
+    @RequestMapping( value = "/applications/screenshot/{id}.png", method = RequestMethod.GET )
     public void getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
+        InputStream in = null;
         try
         {
-            InputStream is = new ByteArrayInputStream( service.getApplicationById( id )
-                    .getScreenshot() );
-            IOUtils.copy( is, response.getOutputStream() );
-            response.flushBuffer();
-        } catch ( Exception e ) { }
+            Application app = service.getApplicationById( id );
+            byte[] img = app.getScreenshot();
+
+            in = new ByteArrayInputStream( img );
+            response.setContentType( "image/jpeg" );
+            IOUtils.copy( in, response.getOutputStream() );
+        } catch ( Exception e ) {} finally
+        {
+            if ( in != null )
+                IOUtils.closeQuietly( in );
+        }
     }
 }
