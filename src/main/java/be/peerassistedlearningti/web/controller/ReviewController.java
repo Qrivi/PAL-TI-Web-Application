@@ -44,14 +44,6 @@ public class ReviewController
         return new ModelAndView( "review_add", "review", new ReviewForm() );
     }
 
-    @RequestMapping( value = "/remove/{id}", method = RequestMethod.POST )
-    public String removeReview( @PathVariable( value = "id" ) int id )
-    {
-        Review c = service.getReviewById( id );
-        service.removeReview( c );
-        return "redirect:/review/overview";
-    }
-
     @RequestMapping( value = "/add", method = RequestMethod.POST )
     public ModelAndView addReview(@Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result )
     {
@@ -63,6 +55,5 @@ public class ReviewController
 
         return new ModelAndView( "redirect:/review/overview" );
     }
-
 }
 
