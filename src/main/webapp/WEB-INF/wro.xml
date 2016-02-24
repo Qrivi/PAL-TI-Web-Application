@@ -12,6 +12,8 @@
         <css>https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css</css>
         <!-- ion-icons -->
         <css>https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css</css>
+        <!-- Select2 -->
+        <css>https://almsaeedstudio.com/themes/AdminLTE/plugins/select2/select2.min.css</css>
         <!-- admin-lte-css -->
         <css>/WEB-INF/resources/dist/css/AdminLTE.min.css</css>
         <css>/WEB-INF/resources/dist/css/skins/skin-blue.min.css</css>
@@ -28,6 +30,8 @@
         <!-- admin-lte-js -->
         <js>/WEB-INF/resources/dist/js/app.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
+        <!-- Select2 -->
+        <js>https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js</js>
         <!-- moment-js -->
         <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/nl.js</js>
