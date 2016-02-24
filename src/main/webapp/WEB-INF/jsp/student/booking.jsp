@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-<jsp:include page="include/head.jsp">
+<jsp:include page="../include/head.jsp">
     <jsp:param value="Booking" name="title"/>
 </jsp:include>
 <body class="hold-transition skin-blue">
 <div class="wrapper">
-    <jsp:include page="include/menu/main-header.jsp"/>
-    <jsp:include page="include/menu/sidebar.jsp">
+    <jsp:include page="../include/menu/main-header.jsp"/>
+    <jsp:include page="../include/menu/sidebar.jsp">
         <jsp:param value="booking" name="title"/>
     </jsp:include>
     <!-- Content header (Page header) -->
@@ -178,7 +178,7 @@
         </section>
     </div>
 </div>
-<jsp:include page="include/footer.jsp"/>
+<jsp:include page="../include/footer.jsp"/>
 <script type="application/javascript">
     $(document).ready(function () {
         $("#lessons-overview").DataTable();

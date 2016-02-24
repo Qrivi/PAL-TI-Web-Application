@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-    <jsp:include page="include/head.jsp">
+<jsp:include page="../include/head.jsp">
         <jsp:param value="Dashboard" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
-            <jsp:include page="include/menu/main-header.jsp"/>
-            <jsp:include page="include/menu/sidebar.jsp">
+            <jsp:include page="../include/menu/main-header.jsp"/>
+            <jsp:include page="../include/menu/sidebar.jsp">
                 <jsp:param value="dashboard" name="title"/>
             </jsp:include>
             <!-- Content header (Page header) -->
@@ -246,7 +246,7 @@
                 </section>
             </div>
         </div>
-        <jsp:include page="include/footer.jsp"/>
+        <jsp:include page="../include/footer.jsp"/>
         <script>
             $( document ).ready( function () {
                 $( function () {
