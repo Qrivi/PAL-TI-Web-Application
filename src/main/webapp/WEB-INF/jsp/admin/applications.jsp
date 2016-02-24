@@ -16,7 +16,7 @@
             <div class="content-wrapper" style="min-height: 1126px;">
                 <section class="content-header">
                     <h1>
-                        Students
+                        Applications
                     </h1>
                 </section>
                 <section class="content">
@@ -137,7 +137,8 @@
                         <h4 class="modal-title">Screenshot</h4>
                     </div>
                     <div class="modal-body">
-                        <img id="screenshot" width="100%" height="100%" alt="screenshot"/>
+                        <div class="alert alert-info">You can click on the screenshot to zoom in.</div>
+                        <img id="screenshot" width="100%" height="100%" alt="screenshot" class="zoomTarget"/>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

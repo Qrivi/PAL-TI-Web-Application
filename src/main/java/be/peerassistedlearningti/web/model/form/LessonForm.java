@@ -24,7 +24,6 @@ public class LessonForm
     private Date date;
 
     @NotNull( message = "{NotNull.LessonForm.duration}" )
-    @DateTimeFormat( pattern = "hh:mm" )
     private LocalTime duration;
 
     @NotNull( message = "{NotNull.LessonForm.course}" )
