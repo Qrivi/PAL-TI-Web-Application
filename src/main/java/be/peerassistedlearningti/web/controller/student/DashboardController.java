@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.web.controller;
+package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
@@ -52,13 +52,13 @@ public class DashboardController {
 
         map.addAttribute("timeline", timeline);
 
-        return new ModelAndView("dashboard", map);
+        return new ModelAndView("student/dashboard", map);
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView modifyStudentProfile(@Valid @ModelAttribute("profile") ProfileForm form, BindingResult result) {
         if (result.hasErrors())
-            return new ModelAndView("dashboard");
+            return new ModelAndView("student/dashboard");
 
         Student student = SessionAuth.getStudent();
 
@@ -74,7 +74,7 @@ public class DashboardController {
         SessionAuth.setStudent(student);
 
 
-        return new ModelAndView("dashboard");
+        return new ModelAndView("student/dashboard");
     }
 
 }
