@@ -6,6 +6,7 @@ import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,7 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.util.Date;
 
-public class ReviewCRUDController {
+@Controller
+public class ReviewCRUDController extends AdminController{
     @Autowired
     private PALService service;
 

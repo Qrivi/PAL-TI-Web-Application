@@ -5,58 +5,47 @@
 
 <html>
     <jsp:include page="../include/head.jsp">
-        <jsp:param value="Lessons" name="title"/>
+        <jsp:param value="Tutors" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
             <jsp:include page="../include/menu/main-header.jsp"/>
             <jsp:include page="../include/menu/sidebar.jsp">
-                <jsp:param value="lessons" name="title"/>
+                <jsp:param value="tutors" name="title"/>
             </jsp:include>
             <!-- Content header (Page header) -->
             <div class="content-wrapper" style="min-height: 1126px;">
                 <section class="content-header">
                     <h1>
-                        Lessons
+                        Tutors
                     </h1>
                 </section>
                 <!-- main content -->
                 <section class="container container-box">
-                    <div id="table">
+                    <div id=table">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Course</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Duration</th>
-                                    <th>Maximum Participants</th>
                                     <th>Tutor</th>
-                                    <th>Room</th>
-                                    <th>Backup room</th>
-                                    <th>Registered students</th>
+                                    <th>Course</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="lesson" items="${lessons}">
+                                <c:forEach var="tutor" items="${tutors}">
                                     <tr>
-                                        <td>${lesson.name}</td>
-                                        <td>${lesson.course.name}</td>
-                                        <td>${lesson.description}</td>
-                                        <td>${lesson.date}</td>
-                                        <td>${lesson.duration}</td>
-                                        <td>${lesson.maxParticipants}</td>
-                                        <td>${lesson.tutor.student.name}</td>
-                                        <td>${lesson.room.name}</td>
-                                        <td>${lesson.backupRoom.name}</td>
-                                        <td>${lesson.bookings.size()}</td>
+                                        <td>${tutor.student.name}</td>
                                         <td>
-                                            <form action="<c:url value="/lesson/remove/${lesson.id}" />" method="POST">
+                                            <ol>
+                                                <c:forEach var="course" items="${tutor.courses}">
+                                                    <li>${course.name}</li>
+                                                </c:forEach>
+                                            </ol>
+                                        </td>
+                                        <td>
+                                            <form id="command" action="<c:url value="/booking/remove/${tutor.id}" />" method="POST">
                                                 <input type="submit" value="Delete"/>
                                             </form>
                                         </td>
-                                        <td></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -65,6 +54,6 @@
                 </section>
             </div>
         </div>
-        <jsp:include page="../include/footer.jsp"/>
+    <jsp:include page="../include/footer.jsp"/>
     </body>
 </html>
