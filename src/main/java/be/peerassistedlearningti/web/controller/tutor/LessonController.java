@@ -1,11 +1,9 @@
 package be.peerassistedlearningti.web.controller.tutor;
 
-import be.peerassistedlearningti.model.Campus;
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Tutor;
+import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.LessonForm;
+import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +19,8 @@ import java.time.LocalTime;
 public class LessonController extends TutorController
 {
 
+    @Autowired
+    MailSender mailSender;
     @Autowired
     private PALService service;
 
@@ -82,10 +82,17 @@ public class LessonController extends TutorController
 
         LocalTime time = lessonForm.getDuration();
         long duration = time.getHour() * 60 + time.getMinute();
-
-        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
-
+        Lesson lesson = new Lesson(lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom());
+        service.addLesson(lesson);
+        notifySubscribers(lesson);
         return new ModelAndView( "redirect:/lessons" );
+    }
+
+    private void notifySubscribers(Lesson lesson) {
+
+        for (Student subscriber : lesson.getCourse().getSubscribers()) {
+            mailSender.sendNotificationMail(subscriber, lesson);
+        }
     }
 
 }

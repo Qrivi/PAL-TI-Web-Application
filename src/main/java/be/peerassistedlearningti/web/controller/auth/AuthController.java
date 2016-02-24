@@ -6,10 +6,8 @@ import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.RegisterForm;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
-import be.peerassistedlearningti.web.model.form.StudentForm;
+import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.MessageFactory;
-import be.peerassistedlearningti.web.model.util.ResetMail;
-import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,19 +25,13 @@ public class AuthController
 {
 
     @Autowired
-    private PALService service;
+    MailSender mailSender;
 
     //================================================================================
     // region Login
     //================================================================================
-
-    @RequestMapping( value = "/login", method = RequestMethod.GET )
-    public ModelAndView getLoginPage( @RequestParam( value = "error", required = false ) boolean error, ModelMap model )
-    {
-        if ( error )
-            model.addAttribute( "error", true );
-        return new ModelAndView( "auth/login", model );
-    }
+    @Autowired
+    private PALService service;
 
     //================================================================================
     // endregion
@@ -49,22 +41,17 @@ public class AuthController
     // region Register
     //================================================================================
 
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView getLoginPage(@RequestParam(value = "error", required = false) boolean error, ModelMap model) {
+        if (error)
+            model.addAttribute("error", true);
+        return new ModelAndView("auth/login", model);
+    }
+
     @RequestMapping( value = "/register", method = RequestMethod.GET )
     public ModelAndView registerStudent( ModelMap model )
     {
-        return new ModelAndView( "auth/register", "register", new RegisterForm() );
-    }
-
-    @RequestMapping( value = "/register", method = RequestMethod.POST )
-    public ModelAndView registerStudent( @Valid @ModelAttribute( "register" ) RegisterForm form, BindingResult result )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "auth/register" );
-
-        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail()
-                .toLowerCase(), UserType.NORMAL ) );
-
-        return new ModelAndView( "redirect:/auth/login" );
+        return new ModelAndView("auth/register", "register", new RegisterForm());
     }
 
     //================================================================================
@@ -75,14 +62,22 @@ public class AuthController
     // region Reset
     //================================================================================
 
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView registerStudent(@Valid @ModelAttribute("register") RegisterForm form, BindingResult result) {
+        if (result.hasErrors())
+            return new ModelAndView("auth/register");
+
+        service.addStudent(new Student(form.getName(), form.getPassword(), form.getEmail()
+                .toLowerCase(), UserType.NORMAL));
+
+        return new ModelAndView("redirect:/auth/login");
+    }
+
     @RequestMapping( value = "/reset", method = RequestMethod.GET )
     public ModelAndView resetPassword()
     {
         return new ModelAndView( "auth/reset", "resetRequest", new ResetRequestForm() );
     }
-
-    @Autowired
-    ResetMail resetMail;
 
     @RequestMapping( value = "/reset", method = RequestMethod.POST )
     public ModelAndView resetPassword( @Valid @ModelAttribute( "resetRequest" ) ResetRequestForm form, BindingResult result, RedirectAttributes redirectAttributes )
@@ -99,7 +94,7 @@ public class AuthController
             return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
         } else
         {
-            resetMail.sendResetMail( student, student.issuePasswordReset() );
+            mailSender.sendResetMail(student, student.issuePasswordReset());
             service.updateStudent( student );
             redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Mail" ) );
             return new ModelAndView( "redirect:/auth/login" );

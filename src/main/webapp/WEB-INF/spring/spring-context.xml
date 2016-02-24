@@ -62,7 +62,7 @@
 
     <!-- Reset mail -->
 
-    <bean id="resetMail" class="be.peerassistedlearningti.web.model.util.ResetMail"/>
+    <bean id="resetMail" class="be.peerassistedlearningti.web.model.util.MailSender"/>
 
 
     <!-- Java Mail -->
