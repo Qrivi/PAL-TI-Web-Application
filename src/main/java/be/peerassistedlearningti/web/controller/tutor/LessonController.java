@@ -32,11 +32,13 @@ public class LessonController extends TutorController
             model.addAttribute( "lesson", new LessonForm() );
         if (model.get("courses") == null)
             model.addAttribute( "courses", tutor.getCourses() );
-        if (model.get("myLessons") == null) {
-            model.addAttribute("myLessons", tutor.getLessons());
-        }
+        if (model.get("myPastLessons") == null)
+            model.addAttribute("myPastLessons", tutor.getPastLessons());
+        if (model.get("myUpcomingLessons") == null)
+            model.addAttribute("myUpcomingLessons", tutor.getUpcomingLessons());
         if ( model.get( "rooms" ) == null )
             model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
+
         return model;
     }
 
