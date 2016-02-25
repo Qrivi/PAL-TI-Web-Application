@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
+
 // TODO change this mapping to lesson/{id}/booking
 @Controller
 @RequestMapping( value = "/booking" )
@@ -24,9 +26,17 @@ public class BookingController extends StudentController
     public ModelAndView getBookingPage()
     {
         ModelMap map = new ModelMap();
-        map.addAttribute("lessons", service.getUpcomingLessons());
-        map.addAttribute("myOpenBookings", SessionAuth.getStudent().getOpenBookings());
 
+        // Remove lessons where I am tutor
+        if (SessionAuth.getStudent().getTutor() != null) {
+            Collection<Lesson> lessons = service.getUpcomingLessons();
+            lessons.removeAll(SessionAuth.getStudent().getTutor().getLessons());
+            map.addAttribute("lessons", lessons);
+        } else {
+            map.addAttribute("lessons", service.getUpcomingLessons());
+        }
+
+        map.addAttribute("myOpenBookings", SessionAuth.getStudent().getOpenBookings());
         return new ModelAndView("student/booking", map);
     }
 
