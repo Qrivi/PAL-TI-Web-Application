@@ -6,6 +6,7 @@ import be.peerassistedlearningti.web.model.form.LessonForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -88,8 +89,8 @@ public class LessonController extends TutorController
         return new ModelAndView( "redirect:/lessons" );
     }
 
+    @Async
     private void notifySubscribers(Lesson lesson) {
-
         for (Student subscriber : lesson.getCourse().getSubscribers()) {
             mailSender.sendNotificationMail(subscriber, lesson);
         }

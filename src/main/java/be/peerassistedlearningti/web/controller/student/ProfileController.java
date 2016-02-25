@@ -76,6 +76,10 @@ public class ProfileController extends StudentController
     public ModelAndView getOtherProfile( @PathVariable( "id" ) int id, ModelMap model )
     {
         Student student = service.getStudentById( id );
+
+        if ( student == null )
+            return new ModelAndView( "redirect:/profile" );
+
         return new ModelAndView( "student/profile", fillModel( model, student ) );
     }
 

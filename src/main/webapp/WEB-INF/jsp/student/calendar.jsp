@@ -15,11 +15,6 @@
                 <jsp:param value="calendar" name="title"/>
             </jsp:include>
             <div class="content-wrapper">
-                <section class="content-header">
-                    <h1>
-                        Calendar
-                    </h1>
-                </section>
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">

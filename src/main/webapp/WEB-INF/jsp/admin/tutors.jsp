@@ -51,27 +51,27 @@
                                                     </tr>
                                                 </tfoot>
                                                 <tbody>
-                                                <c:forEach var="tutor" items="${tutors}">
-                                                    <tr>
-                                                        <td>${tutor.student.name}</td>
-                                                        <td>
-                                                            <ul>
-                                                                <c:forEach var="course" items="${tutor.courses}">
-                                                                    <li>${course.name}</li>
-                                                                </c:forEach>
-                                                            </ul>
-                                                        </td>
-                                                        <td>
-                                                            <form class="small" action="<c:url value="/admin/tutors" />"
-                                                                  method="POST">
-                                                                <input type="hidden" name="_method" value="delete"/>
-                                                                <input type="hidden" name="id" value="${review.id}"/>
-                                                                <button class="btn btn-sm"><i class="fa fa-trash"></i>
-                                                                </button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
+                                                    <c:forEach var="tutor" items="${tutors}">
+                                                        <tr>
+                                                            <td>${tutor.student.name}</td>
+                                                            <td>
+                                                                <ul>
+                                                                    <c:forEach var="course" items="${tutor.courses}">
+                                                                        <li>${course.name}</li>
+                                                                    </c:forEach>
+                                                                </ul>
+                                                            </td>
+                                                            <td>
+                                                                <form class="small" action="<c:url value="/admin/tutors" />"
+                                                                      method="POST">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <input type="hidden" name="id" value="${tutor.id}"/>
+                                                                    <button class="btn btn-sm"><i class="fa fa-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -83,11 +83,11 @@
                 </section>
             </div>
         </div>
-    <jsp:include page="../include/footer.jsp"/>
+        <jsp:include page="../include/footer.jsp"/>
         <script type="application/javascript">
-            $(document).ready(function () {
-                $("#tutor-overview").DataTable();
-            });
+            $( document ).ready( function () {
+                $( "#tutor-overview" ).DataTable();
+            } );
         </script>
     </body>
 </html>
