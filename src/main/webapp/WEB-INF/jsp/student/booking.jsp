@@ -162,7 +162,7 @@
                                                                     <c:if test="${myOpenBookings.contains(lesson)}">
                                                                         <form action="<c:url value="/booking/unregister/${lesson.id}" />"
                                                                               method="POST">
-                                                                            <button class="btn btn-block btn-success btn-sm">
+                                                                            <button class="btn btn-block btn-danger btn-sm">
                                                                                 <i class="fa fa-trash"></i>
                                                                             </button>
                                                                         </form>
