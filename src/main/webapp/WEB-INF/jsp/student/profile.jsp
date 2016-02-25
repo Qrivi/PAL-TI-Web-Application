@@ -2,22 +2,24 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="auth" property="principal"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <jsp:include page="../include/head.jsp">
-        <jsp:param value="Dashboard" name="title"/>
+        <jsp:param value="Profile" name="title"/>
     </jsp:include>
     <body class="hold-transition skin-blue">
         <div class="wrapper">
             <jsp:include page="../include/menu/main-header.jsp"/>
             <jsp:include page="../include/menu/sidebar.jsp">
-                <jsp:param value="dashboard" name="title"/>
+                <jsp:param value="profile" name="title"/>
             </jsp:include>
             <!-- Content header (Page header) -->
             <div class="content-wrapper" style="min-height: 1126px;">
                 <section class="content-header">
                     <h1>
-                        User Profile
+                        Profile
                     </h1>
                 </section>
                 <!-- main content -->
@@ -27,7 +29,7 @@
                             <div class="box box-primary">
                                 <div class="box-body box-profile">
                                     <img class="profile-user-img img-responsive img-circle"
-                                         src="<c:url value="/dashboard/avatar.png"/>" alt="User profile picture">
+                                         src="<c:url value="/profile/${user.id}/avatar.png"/>" alt="User profile picture">
 
                                     <h3 class="profile-username text-center"><c:out value="${user.name}"/></h3>
 
@@ -48,7 +50,7 @@
                                         </li>
                                     </ul>
                                     <!-- todo:: link to students agenda -->
-                                    <a href="#" class="btn btn-primary btn-block"><b>Agenda</b></a>
+                                    <a href="<c:url value="/calendar"/>" class="btn btn-primary btn-block"><b>Calendar</b></a>
                                 </div>
                             </div>
                         </div>
@@ -59,9 +61,11 @@
                                                           aria-expanded="true">Activity</a></li>
                                     <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a>
                                     </li>
-                                    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                                    <c:if test="${user == auth}">
+                                        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                                    </c:if>
                                 </ul>
-                                <div class="tab-content">
+                                <section class="tab-content">
                                     <div class="tab-pane active" id="activity">
                                         <!-- todo:: show some info -->
                                     </div>
@@ -188,8 +192,9 @@
                                         </table>
                                     </div>
                                     <!-- settings tab content-->
+                                    <c:if test="${user == auth}">
                                     <div class="tab-pane" id="settings">
-                                        <form:form class="form-horizontal" method="put" commandName="profile"
+                                        <form:form class="form-horizontal" method="put" action="/profile" commandName="profile"
                                                    enctype="multipart/form-data">
                                             <c:set var="nameError"><form:errors path="name"/></c:set>
                                             <c:set var="emailError"><form:errors path="email"/></c:set>
@@ -204,8 +209,7 @@
                                                 <form:label path="avatar"
                                                             class="col-sm-2 control-label">Avatar</form:label>
                                                 <div class="col-sm-10">
-                                                    <form:input path="avatar" type="file" class="form-control"
-                                                                placeholder="Avatar"/>
+                                                    <form:input path="avatar" type="file" placeholder="Avatar"/>
                                                 </div>
                                             </div>
                                             <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
@@ -216,17 +220,17 @@
                                             </div>
                                             <!-- email field-->
                                             <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
-                                                    ${subscriptions}
                                                 <form:label path="email"
                                                             class="col-sm-2 control-label">Email</form:label>
                                                 <div class="col-sm-10">
                                                     <form:input path="email" class="form-control" placeholder="Email"/>
                                                 </div>
                                             </div>
+                                            <hr class="separator"/>
                                             <!-- subscriptions field -->
                                             <div class="form-group ${ not empty subscriptionsError ? 'has-error' : ''}">
-                                                <label for="subscriptions"
-                                                       class="col-sm-2 control-label">Subscriptions</label>
+                                                <form:label path="subscriptions"
+                                                            class="col-sm-2 control-label">Subscriptions</form:label>
                                                 <div class="col-sm-10">
                                                     <form:select id="subscriptions" path="subscriptions"
                                                                  class="form-control select2 select2-hidden-accessible"
@@ -236,15 +240,7 @@
                                                     </form:select>
                                                 </div>
                                             </div>
-                                            <!-- password field -->
-                                            <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
-                                                <form:label path="password"
-                                                            class="col-sm-2 control-label">Current Password</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:password path="password" class="form-control"
-                                                                   placeholder="Current Password"/>
-                                                </div>
-                                            </div>
+                                            <hr class="separator"/>
                                             <!-- new password field -->
                                             <div class="form-group ${ not empty newPasswordError ? 'has-error' : ''}">
                                                 <form:label path="newPassword"
@@ -263,6 +259,16 @@
                                                                    placeholder="Repeat Password"/>
                                                 </div>
                                             </div>
+                                            <hr class="separator"/>
+                                            <!-- password field -->
+                                            <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
+                                                <form:label path="password"
+                                                            class="col-sm-2 control-label">Current Password</form:label>
+                                                <div class="col-sm-10">
+                                                    <form:password path="password" class="form-control"
+                                                                   placeholder="Current Password"/>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <div class="col-sm-offset-10 col-sm-2">
                                                     <button type="submit" class="btn btn-default pull-right">Change</button>
@@ -270,12 +276,13 @@
                                             </div>
                                         </form:form>
                                     </div>
-                                </div>
+                                    </c:if>
                             </div>
                         </div>
                     </div>
-                </section>
             </div>
+            </section>
+        </div>
         </div>
         <jsp:include page="../include/footer.jsp"/>
         <script>
@@ -284,7 +291,6 @@
                 $( function () {
                     $( 'a[data-toggle="tab"]' ).on( 'click' , function ( e ) {
                         console.log( $( e.target ).attr( 'href' ) );
-                        //save the latest tab using a cookie:
                         $.cookie( 'last_tab' , $( e.target ).attr( 'href' ) );
                     } );
                     var lastTab = $.cookie( 'last_tab' );

@@ -1,13 +1,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<sec:authentication var="auth" property="principal"/>
 <aside class="main-sidebar">
     <div class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<c:url value="/dashboard/avatar.png"/>" class="img-circle" alt="User Image">
+                <img src="<c:url value="/profile/${auth.id}/avatar.png"/>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p><sec:authentication property="principal.name"/></p>
+                <p>${auth.name}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -41,8 +42,11 @@
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_USER')">
                 <li class="header">MAIN NAVIGATION</li>
-                <li class="${param.title == "dashboard" ? "active" : "" }"><a
-                        href="<c:url value="/dashboard"/>"><i class="fa  fa-dashboard"></i><span>Dashboard</span></a>
+                <li class="${param.title == "profile" ? "active" : "" }"><a
+                        href="<c:url value="/profile"/>"><i class="fa fa-user"></i><span>Profile</span></a>
+                </li>
+                <li class="${param.title == "calendar" ? "active" : "" }"><a
+                        href="<c:url value="/calendar"/>"><i class="fa fa-calendar"></i><span>Calendar</span></a>
                 </li>
                 <li class="${param.title == "booking" ? "active" : "" }"><a
                         href="<c:url value="/booking"/>"><i class="fa fa-pencil-square-o"></i><span>Book a lesson</span></a>

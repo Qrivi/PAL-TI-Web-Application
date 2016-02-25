@@ -99,7 +99,7 @@
                                                 <div class="form-group has-feedback ${ not empty screenshotError ? 'has-error' : ''}">
                                                     <p>Screenshot of your points:</p>
                                                     <form:errors path="screenshot" element="label"/>
-                                                    <form:input path="screenshot" type="file" class="form-control" placeholder="Screenshot"/>
+                                                    <form:input path="screenshot" type="file" placeholder="Screenshot"/>
                                                 </div>
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-primary pull-right">Apply</button>
@@ -116,11 +116,16 @@
         </div>
         <jsp:include page="../include/footer.jsp"/>
         <script type="application/javascript">
-            $(document).ready(function () {
-                $("#course-overview").DataTable({
-                    "order": [[ 5, "desc" ]]
-                });
-            });
+            $( document ).ready( function () {
+                $( "#course-overview" ).DataTable( {
+                    "order" : [
+                        [
+                            5 ,
+                            "desc"
+                        ]
+                    ]
+                } );
+            } );
 
         </script>
     </body>

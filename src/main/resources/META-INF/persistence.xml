@@ -18,6 +18,7 @@
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.ejb.entitymanager_factory_name" value="PAL-FN"/>
+            <property name="hibernate.event.merge.entity_copy_observer" value="allow"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform"/>
         </properties>
     </persistence-unit>

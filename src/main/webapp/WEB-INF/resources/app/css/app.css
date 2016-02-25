@@ -21,3 +21,7 @@ form.small {
     margin-bottom: 0;
 }
 
+input[type=file] {
+    padding: 6px 0;
+}
+

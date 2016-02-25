@@ -13,13 +13,13 @@
             <jsp:include page="../include/menu/sidebar.jsp">
                 <jsp:param value="lessons" name="title"/>
             </jsp:include>
-            <div class="content-wrapper" style="min-height: 1126px;">
+            <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
                         Lessons
                     </h1>
                 </section>
-                <section class="container container-box">
+                <section class="content">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box">
@@ -81,7 +81,10 @@
                                                             <td>${lesson.bookings.size()}</td>
                                                             <td>
                                                                 <form action="<c:url value="/lesson/remove/${lesson.id}" />" method="POST">
-                                                                    <input type="submit" value="Delete"/>
+                                                                    <button class="btn btn-sm" data-toggle="tooltip"
+                                                                            title="Delete">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </button>
                                                                 </form>
                                                             </td>
                                                         </tr>
@@ -99,9 +102,9 @@
         </div>
         <jsp:include page="../include/footer.jsp"/>
         <script type="application/javascript">
-            $(document).ready(function () {
-                $("#lesson-overview").DataTable();
-            });
+            $( document ).ready( function () {
+                $( "#lesson-overview" ).DataTable();
+            } );
         </script>
     </body>
 </html>

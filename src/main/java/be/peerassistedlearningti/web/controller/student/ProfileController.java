@@ -1,6 +1,5 @@
 package be.peerassistedlearningti.web.controller.student;
 
-import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
@@ -15,10 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,33 +24,29 @@ import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
-@RequestMapping( value = "/dashboard" )
-@PreAuthorize( "hasRole('ROLE_USER')" )
-public class DashboardController
+@RequestMapping( value = "/profile" )
+public class ProfileController extends StudentController
 {
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model )
+    private ModelMap fillModel( ModelMap model, Student student )
     {
-        Student current = SessionAuth.getStudent();
-        Tutor tutor = current.getTutor();
+        Tutor tutor = student.getTutor();
 
         if ( model.get( "profile" ) == null )
         {
             ProfileForm profile = new ProfileForm();
-            profile.setName( current.getName() );
-            profile.setEmail( current.getEmail() );
-            profile.setSubscriptions( current.getSubscriptions() );
+            profile.setName( student.getName() );
+            profile.setEmail( student.getEmail() );
+            profile.setSubscriptions( student.getSubscriptions() );
             model.addAttribute( "profile", profile );
         }
         if ( model.get( "user" ) == null )
         {
-            model.addAttribute( "user", current );
+            model.addAttribute( "user", student );
         }
         if ( tutor != null && model.get( "reviews" ) == null )
         {
@@ -63,8 +55,8 @@ public class DashboardController
         if ( model.get( "timeline" ) == null )
         {
             Timeline timeline = new Timeline();
-            timeline.addAll( service.getPastLessons( current ) );
-            timeline.addAll( service.getReviewsForStudent( current ) );
+            timeline.addAll( service.getPastLessons( student ) );
+            timeline.addAll( service.getReviewsForStudent( student ) );
             model.addAttribute( "timeline", timeline );
         }
         if ( model.get( "courses" ) == null )
@@ -75,16 +67,23 @@ public class DashboardController
     }
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getDashboard( ModelMap model )
+    public ModelAndView getProfile( ModelMap model )
     {
-        return new ModelAndView( "student/dashboard", fillModel( model ) );
+        return new ModelAndView( "student/profile", fillModel( model, SessionAuth.getStudent() ) );
+    }
+
+    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
+    public ModelAndView getOtherProfile( @PathVariable( "id" ) int id, ModelMap model )
+    {
+        Student student = service.getStudentById( id );
+        return new ModelAndView( "student/profile", fillModel( model, student ) );
     }
 
     @RequestMapping( method = RequestMethod.POST )
     public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "student/dashboard", fillModel( model ) );
+            return new ModelAndView( "student/profile", fillModel( model, SessionAuth.getStudent() ) );
 
         Student student = SessionAuth.getStudent();
 
@@ -107,7 +106,7 @@ public class DashboardController
             } catch ( Exception e )
             {
                 result.reject( "SaveFile.ProfileForm.avatar" );
-                return new ModelAndView( "student/dashboard", fillModel( model ) );
+                return new ModelAndView( "student/profile", fillModel( model, student ) );
             }
         }
 
@@ -116,24 +115,24 @@ public class DashboardController
         service.updateStudent( student );
         SessionAuth.setStudent( student );
 
-        return new ModelAndView( "redirect:/dashboard" );
+        return new ModelAndView( "redirect:/profile" );
     }
 
     @ResponseBody
-    @RequestMapping( value = "/avatar.png", method = RequestMethod.GET )
-    public void getScreenshot( HttpServletRequest request, HttpServletResponse response )
+    @RequestMapping( value = "/{id}/avatar.png", method = RequestMethod.GET )
+    public void getScreenshot( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
     {
         InputStream in = null;
         try
         {
-            Student current = SessionAuth.getStudent();
-            byte[] img = current.getAvatar();
+            Student student = service.getStudentById( id );
+            byte[] img = student.getAvatar();
 
             if ( img == null )
             {
                 String path = request.getSession()
                         .getServletContext()
-                        .getRealPath( "/resources/img" ) + "/profile_pic.jpg";
+                        .getRealPath( "/resources/img" ) + "/default_profile.jpg";
                 in = new FileSystemResource( new File( path ) ).getInputStream();
             } else
             {

@@ -13,7 +13,7 @@
             <jsp:include page="../include/menu/sidebar.jsp">
                 <jsp:param value="students" name="title"/>
             </jsp:include>
-            <div class="content-wrapper" style="min-height: 1126px;">
+            <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
                         Students
