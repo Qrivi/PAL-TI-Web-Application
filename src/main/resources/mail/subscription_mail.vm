@@ -135,7 +135,7 @@
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
                                         If you would like to stop receiving mail notifications for
-                                        <<${lesson.course.name}>>, kindly unsubscribe for this course.
+                                        ${lesson.course.name}, kindly unsubscribe for this course.
                                         <br/>
                                         This can be done on: dashboard -> settings -> subscriptions
                                     </td>

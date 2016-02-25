@@ -39,6 +39,10 @@
                 <li class="${param.title == "lesson_add" ? "active" : ""}"><a
                         href="<c:url value="/tutor/lessons/add"/>"><i class="fa fa-calendar-plus-o"></i><span>Add a lesson</span></a>
                 </li>
+                <li class="${param.title == "tutor_lessons" ? "active" : ""}"><a
+                        href="<c:url value="/tutor/lessons"/>"><i
+                        class="fa fa-calendar-plus-o"></i><span>My lessons</span></a>
+                </li>
             </sec:authorize>
             <sec:authorize access="hasRole('ROLE_USER')">
                 <li class="header">MAIN NAVIGATION</li>

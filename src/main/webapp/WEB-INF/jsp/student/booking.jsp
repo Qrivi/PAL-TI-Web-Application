@@ -43,7 +43,7 @@
                                         </c:if>
                                         <c:if test="${not empty myOpenBookings}">
                                             <c:forEach var="booking" items="${myOpenBookings}">
-                                                <div class="col-sm-4">
+                                                <div class="col-md-4 col-sm-6 col-xs-12">
                                                     <div class="info-box bg-blue-gradient">
                                                         <div class="pull-right">
                                                             <form action="<c:url value="/booking/unregister/${booking.id}" />"
