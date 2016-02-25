@@ -13,7 +13,7 @@
             <jsp:include page="../include/menu/sidebar.jsp">
                 <jsp:param value="reviews" name="title"/>
             </jsp:include>
-            <div class="content-wrapper" style="min-height: 1126px;">
+            <div class="content-wrapper">
                 <section class="content-header">
                     <h1>
                         Reviews
@@ -65,10 +65,7 @@
                                                         <tr>
                                                             <td>${review.lesson.name}</td>
                                                             <td>${review.date}</td>
-                                                            <td>
-                                                                <c:when test="${review.anonymous}">Anonymous</c:when>
-                                                                <c:otherwise>${review.student.name}</c:otherwise>
-                                                            </td>
+                                                            <td>${review.student.name}</td>
                                                             <td>${review.contentScore}</td>
                                                             <td>${review.tutorScore}</td>
                                                             <td>${review.engagementScore}</td>
