@@ -43,9 +43,10 @@ public class BookingController extends StudentController
     @RequestMapping(value = "/register/{lessonId}", method = RequestMethod.POST)
     public ModelAndView addBooking(@PathVariable(value = "lessonId") int lessonId) {
         Lesson lesson = service.getLessonById(lessonId);
-        if (lesson == null) {
-            return new ModelAndView("redirect:/booking");
-        } else if (SessionAuth.getStudent().getBookings().contains(lesson)) {
+        if (lesson == null ||
+                SessionAuth.getStudent().getBookings().contains(lesson) ||
+                lesson.getBookings().size() == lesson.getMaxParticipants() ||
+                lesson.getTutor().getStudent().equals(SessionAuth.getStudent())) {
             return new ModelAndView("redirect:/booking");
         } else {
             lesson.addBooking(SessionAuth.getStudent());
@@ -59,9 +60,8 @@ public class BookingController extends StudentController
     @RequestMapping(value = "/unregister/{lessonId}", method = RequestMethod.POST)
     public ModelAndView removeBooking(@PathVariable(value = "lessonId") int lessonId) {
         Lesson lesson = service.getLessonById(lessonId);
-        if (lesson == null) {
-            return new ModelAndView("redirect:/booking");
-        } else if (!SessionAuth.getStudent().getBookings().contains(lesson)) {
+        if (lesson == null ||
+                !SessionAuth.getStudent().getBookings().contains(lesson)) {
             return new ModelAndView("redirect:/booking");
         } else {
             lesson.removeBooking(SessionAuth.getStudent());
