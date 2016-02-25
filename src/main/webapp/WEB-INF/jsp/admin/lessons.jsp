@@ -80,7 +80,9 @@
                                                             <td>${lesson.backupRoom.name}</td>
                                                             <td>${lesson.bookings.size()}</td>
                                                             <td>
-                                                                <form action="<c:url value="/lesson/remove/${lesson.id}" />" method="POST">
+                                                                <form action="<c:url value="/admin/lessons" />" method="POST">
+                                                                    <input type="hidden" name="_method" value="delete"/>
+                                                                    <input type="hidden" name="id" value="${lesson.id}"/>
                                                                     <button class="btn btn-sm" data-toggle="tooltip"
                                                                             title="Delete">
                                                                         <i class="fa fa-trash"></i>

@@ -18,55 +18,15 @@ import javax.validation.Valid;
 import java.time.LocalTime;
 
 @Controller
-public class LessonCRUDController extends AdminController{
+public class LessonCRUDController extends AdminController
+{
     @Autowired
     private PALService service;
-
-    private ModelMap fillModel( ModelMap model )
-    {
-        if ( model.get( "lesson" ) == null )
-            model.addAttribute( "lesson", new LessonForm() );
-        if ( model.get( "courses" ) == null ){
-            Tutor tutor = SessionAuth.getStudent().getTutor();
-            model.addAttribute( "courses", tutor.getCourses() );
-        }
-        if ( model.get( "rooms" ) == null )
-            model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
-        return model;
-    }
 
     @RequestMapping( value = "lessons", method = RequestMethod.GET )
     public ModelAndView getLessonOverviewPage()
     {
         return new ModelAndView( "admin/lessons", "lessons", service.getAllLessons() );
-    }
-
-    @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
-    public ModelAndView getLessonAddPage( ModelMap model )
-    {
-        return new ModelAndView( "admin/lesson_add", fillModel( model ) );
-    }
-
-    @RequestMapping( value = "/lessons/add", method = RequestMethod.POST )
-    public ModelAndView addLesson(@Valid @ModelAttribute( "lesson" ) LessonForm lessonForm, BindingResult result, ModelMap model )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "tutor/lesson_add", fillModel( model ) );
-
-        Tutor tutor = SessionAuth.getStudent().getTutor();
-
-        if ( tutor == null || !tutor.getCourses().contains( lessonForm.getCourse() ) )
-        {
-            result.reject( "NoTutor.LessonForm.course" );
-            return new ModelAndView( "tutor/lesson_add", fillModel( model ) );
-        }
-
-        LocalTime time = lessonForm.getDuration();
-        long duration = time.getHour() * 60 + time.getMinute();
-
-        service.addLesson( new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom() ) );
-
-        return new ModelAndView( "redirect:admin/lessons" );
     }
 
     @RequestMapping( value = "/lessons", method = RequestMethod.DELETE )
