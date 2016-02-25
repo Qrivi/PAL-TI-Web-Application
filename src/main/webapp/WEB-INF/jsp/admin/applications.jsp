@@ -71,7 +71,7 @@
                                                                 </form>
                                                                 <button class="btn btn-sm btn-primary screenshot"
                                                                         data-toggle="tooltip" title="Screenshot"
-                                                                        data-url="<c:url value="/admin/applications/screenshot/${application.id}.png"/>">
+                                                                        data-url="<c:url value="/resources/applications/${application.id}/screenshot.png"/>">
                                                                     <i class="fa fa-picture-o"></i>
                                                                 </button>
                                                             </td>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="alert alert-info">You can click on the screenshot to zoom in.</div>
-                        <a id="screenshot-url" href="image_big.jpg">
+                        <a id="screenshot-url">
                             <img id="screenshot" width="100%" height="100%" alt="screenshot"/>
                         </a>
                     </div>

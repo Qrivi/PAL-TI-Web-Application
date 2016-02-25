@@ -56,7 +56,7 @@
                                                         <a href="<c:url value="/profile/${booking.tutor.id}"/>" alt="Tutor info">
                                                     <span class="info-box-icon">
                                                         <img class="img-circle"
-                                                             src="<c:url value="/profile/${booking.tutor.id}/avatar.png"/>"
+                                                             src="<c:url value="/resources/students/${booking.tutor.id}/avatar.png"/>"
                                                              alt="Tutor profile picture" style="padding:10px;">
                                                     </span>
                                                         </a>

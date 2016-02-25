@@ -22,7 +22,7 @@
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form method="post" action="<c:url value="/auth/checklogin"/>">
                     <div class="form-group has-feedback">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                        <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
@@ -33,7 +33,7 @@
                         <div class="col-xs-8">
                             <div class="checkbox icheck">
                                 <label>
-                                    <input type="checkbox" name="remember-me"> <span>Remember Me</span>
+                                    <input type="checkbox" id="remember-me"> <span>Remember Me</span>
                                 </label>
                             </div>
                         </div>
@@ -54,6 +54,35 @@
                     radioClass    : 'iradio_square-blue' ,
                     increaseArea  : '20%' // optional
                 } );
+                $( 'input' ).on( 'ifChanged' , function ( event ) { $( event.target ).trigger( 'change' ); } );
+            } );
+            $( document ).ready( function () {
+                var rCookie = $.cookie( "remember" ) === 'true';
+                var eCookie = ($.cookie( "email" ) === undefined) ? "" : $.cookie( "email" );
+                var rElement = $( "#remember-me" );
+                var eElement = $( "#email" );
+
+                if ( rElement.length == 0 )
+                    return;
+
+                if ( rCookie ) {
+                    $( eElement ).val( eCookie );
+                    $( 'input' ).iCheck( 'check' );
+                }
+
+                $( rElement ).change( function () { remember(); } );
+                $( eElement ).change( function () { remember(); } );
+
+                function remember () {
+                    if ( $( rElement ).is( ':checked' ) ) {
+                        $.cookie( "email" , $( eElement ).val() , { expires : 14 } );
+                        $.cookie( "remember" , true , { expires : 14 } );
+                    }
+                    else {
+                        $.cookie( "email" , null );
+                        $.cookie( "remember" , null );
+                    }
+                }
             } );
         </script>
     </body>

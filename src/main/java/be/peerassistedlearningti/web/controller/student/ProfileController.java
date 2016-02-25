@@ -121,34 +121,4 @@ public class ProfileController extends StudentController
 
         return new ModelAndView( "redirect:/profile" );
     }
-
-    @ResponseBody
-    @RequestMapping( value = "/{id}/avatar.png", method = RequestMethod.GET )
-    public void getScreenshot( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
-    {
-        InputStream in = null;
-        try
-        {
-            Student student = service.getStudentById( id );
-            byte[] img = student.getAvatar();
-
-            if ( img == null )
-            {
-                String path = request.getSession()
-                        .getServletContext()
-                        .getRealPath( "/resources/img" ) + "/default_profile.jpg";
-                in = new FileSystemResource( new File( path ) ).getInputStream();
-            } else
-            {
-                in = new ByteArrayInputStream( img );
-            }
-            response.setContentType( "image/jpeg" );
-            IOUtils.copy( in, response.getOutputStream() );
-        } catch ( Exception e ) { System.out.println( e.getMessage() );} finally
-        {
-            if ( in != null )
-                IOUtils.closeQuietly( in );
-        }
-    }
-
 }

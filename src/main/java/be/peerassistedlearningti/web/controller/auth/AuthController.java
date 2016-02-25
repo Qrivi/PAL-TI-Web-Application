@@ -38,14 +38,26 @@ public class AuthController
     //================================================================================
 
     //================================================================================
-    // region Register
+    // region Login
     //================================================================================
 
     @RequestMapping( value = "/login", method = RequestMethod.GET )
-    public ModelAndView getLoginPage( @RequestParam( value = "error", required = false ) boolean error, ModelMap model )
+    public ModelAndView getLoginPage( @RequestParam( value = "error", required = false ) boolean error, @RequestParam( value = "different_user", required = false ) boolean differentUser, @CookieValue( value = "remember", required = false ) String remember, @CookieValue( value = "email", required = false ) String email, ModelMap model )
     {
         if ( error )
             model.addAttribute( "error", true );
+        if ( !differentUser && remember != null && Boolean.valueOf( remember ) )
+        {
+            if ( email != null )
+            {
+                Student current = service.getStudentByEmail( email );
+                if ( current != null )
+                {
+                    model.addAttribute( "user", current );
+                    return new ModelAndView( "auth/lockscreen", model );
+                }
+            }
+        }
         return new ModelAndView( "auth/login", model );
     }
 

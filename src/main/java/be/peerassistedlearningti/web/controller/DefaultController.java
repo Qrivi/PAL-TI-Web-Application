@@ -15,8 +15,7 @@ public class DefaultController
     @RequestMapping( method = RequestMethod.GET )
     public String getDefaultPage()
     {
-
-        return "Default page";
+        return "redirect:/profile";
     }
 
 }

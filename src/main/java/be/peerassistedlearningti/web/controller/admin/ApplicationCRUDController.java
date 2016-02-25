@@ -74,24 +74,4 @@ public class ApplicationCRUDController extends AdminController
 
         return new ModelAndView( "redirect:/admin/applications" );
     }
-
-    @ResponseBody
-    @RequestMapping( value = "/applications/screenshot/{id}.png", method = RequestMethod.GET )
-    public void getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
-    {
-        InputStream in = null;
-        try
-        {
-            Application app = service.getApplicationById( id );
-            byte[] img = app.getScreenshot();
-
-            in = new ByteArrayInputStream( img );
-            response.setContentType( "image/jpeg" );
-            IOUtils.copy( in, response.getOutputStream() );
-        } catch ( Exception e ) {} finally
-        {
-            if ( in != null )
-                IOUtils.closeQuietly( in );
-        }
-    }
 }

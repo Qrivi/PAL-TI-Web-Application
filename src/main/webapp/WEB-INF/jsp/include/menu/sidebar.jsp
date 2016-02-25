@@ -5,7 +5,7 @@
     <div class="sidebar">
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<c:url value="/profile/${auth.id}/avatar.png"/>" class="img-circle" alt="User Image">
+                <img src="<c:url value="/resources/students/${auth.id}/avatar.png"/>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>${auth.name}</p>
