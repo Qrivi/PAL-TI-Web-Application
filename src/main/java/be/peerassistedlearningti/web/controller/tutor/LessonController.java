@@ -10,7 +10,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -48,19 +51,27 @@ public class LessonController extends TutorController
         return new ModelAndView("tutor/lessons", fillModel(model));
     }
 
-    @RequestMapping( value = "/overview/course/{id}", method = RequestMethod.GET )
-    public ModelAndView getLessonOfCourse( @PathVariable( value = "id" ) int id )
+    @RequestMapping(value = "/lesson/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView showEditPage(ModelMap model)
     {
-        Course course = service.getCourseById( id );
-        return new ModelAndView( "lesson", "lessons", service.getUpcomingLessons( course ) );
+        return new ModelAndView("tutor/lesson_edit", fillModel(model));
     }
 
-    @RequestMapping( value = "/lessons", method = RequestMethod.DELETE )
-    public String removeLesson( @RequestParam( value = "id" ) int id )
+    @RequestMapping(value = "/lesson/info/{id}", method = RequestMethod.GET)
+    public ModelAndView showInfoPage(ModelMap model) {
+        return new ModelAndView("tutor/lesson_info", fillModel(model));
+    }
+
+    @RequestMapping(value = "/lesson/remove/{id}", method = RequestMethod.POST)
+    public String removeLesson(@PathVariable(value = "id") int id)
     {
-        Lesson l = service.getLessonById( id );
-        service.removeLesson( l );
-        return "redirect:/lesson/overview";
+        Lesson lesson = service.getLessonById(id);
+        if (lesson == null || !lesson.getTutor().getStudent().equals(SessionAuth.getStudent()))
+            return "redirect:/lessons";
+
+        service.removeLesson(lesson);
+        //TODO:: success message
+        return "redirect:/lessons";
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
@@ -98,6 +109,13 @@ public class LessonController extends TutorController
         for (Student subscriber : lesson.getCourse().getSubscribers()) {
             mailSender.sendNotificationMail(subscriber, lesson);
         }
+    }
+
+    //TODO:: nodig ?
+    @RequestMapping(value = "/overview/course/{id}", method = RequestMethod.GET)
+    public ModelAndView getLessonOfCourse(@PathVariable(value = "id") int id) {
+        Course course = service.getCourseById(id);
+        return new ModelAndView("lesson", "lessons", service.getUpcomingLessons(course));
     }
 
 }
