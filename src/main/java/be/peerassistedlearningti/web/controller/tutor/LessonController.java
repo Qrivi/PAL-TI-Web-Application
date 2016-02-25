@@ -27,21 +27,23 @@ public class LessonController extends TutorController
 
     private ModelMap fillModel( ModelMap model )
     {
+        Tutor tutor = SessionAuth.getStudent().getTutor();
         if ( model.get( "lesson" ) == null )
             model.addAttribute( "lesson", new LessonForm() );
-        if ( model.get( "courses" ) == null ){
-            Tutor tutor = SessionAuth.getStudent().getTutor();
+        if (model.get("courses") == null)
             model.addAttribute( "courses", tutor.getCourses() );
+        if (model.get("myLessons") == null) {
+            model.addAttribute("myLessons", tutor.getLessons());
         }
         if ( model.get( "rooms" ) == null )
             model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
         return model;
     }
 
-    @RequestMapping( value = "lessons", method = RequestMethod.GET )
-    public ModelAndView getLessonOverviewPage()
+    @RequestMapping(value = "/lessons", method = RequestMethod.GET)
+    public ModelAndView getLessonOverviewPage(ModelMap model)
     {
-        return new ModelAndView( "lesson", "lessons", service.getAllLessons() );
+        return new ModelAndView("tutor/lessons", fillModel(model));
     }
 
     @RequestMapping( value = "/overview/course/{id}", method = RequestMethod.GET )
