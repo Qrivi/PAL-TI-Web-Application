@@ -58,7 +58,10 @@
                             <div id="tabs" class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
                                     <!-- activity tab button-->
-                                    <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a></li>
+                                    <c:if test="${user == auth}">
+                                        <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a>
+                                        </li>
+                                    </c:if>
                                     <!-- timeline tab button-->
                                     <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
                                     <!-- settings tab button-->
@@ -68,13 +71,16 @@
                                 </ul>
                                 <section class="tab-content">
                                     <!-- activity tab content-->
-                                    <div class="tab-pane active" id="activity">
+                                    <c:if test="${user == auth}">
+                                        <div class="tab-pane active" id="activity">
                                         <c:forEach var="lesson" items="${user.closedBookings}">
                                             <div class="box box-widget">
                                                 <div class="box-header with-border">
                                                     <div class="user-block">
                                                         <!-- class="img-circle" ? -->
-                                                        <img class="profile-user-img img-responsive img-circle" src="<c:url value="/profile/${lesson.tutor.student.id}/avatar.png"/>" alt="User profile picture">
+                                                        <img class="profile-user-img img-responsive img-circle"
+                                                             src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
+                                                             alt="User profile picture">
                                                         <span class="username"><a href="#">${lesson.tutor.student.name}</a></span>
                                                         <span class="description">${lesson.name} - ${lesson.date}</span>
                                                     </div>
@@ -134,6 +140,7 @@
                                             </div>
                                         </c:forEach>
                                     </div>
+                                    </c:if>
                                     <!-- timeline tab content-->
                                     <div class="tab-pane" id="timeline">
                                         <ul class="timeline timeline-inverse">
