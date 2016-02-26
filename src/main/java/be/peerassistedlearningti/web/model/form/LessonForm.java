@@ -1,14 +1,12 @@
 package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Room;
-import be.peerassistedlearningti.model.Tutor;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -41,9 +39,28 @@ public class LessonForm
 
     public LessonForm() {}
 
+    public LessonForm(Lesson lesson) {
+        name = lesson.getName();
+        description = lesson.getDescription();
+        date = lesson.getDate();
+        int hours = (int) lesson.getDuration() / 60;
+        int minutes = (int) lesson.getDuration() % 60;
+        duration = LocalTime.of(hours, minutes);
+        course = lesson.getCourse();
+        maxParticipants = lesson.getMaxParticipants();
+        room = lesson.getRoom();
+        backupRoom = lesson.getBackupRoom();
+
+    }
+
     public String getName()
     {
         return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
     }
 
     public String getDescription()
@@ -51,9 +68,19 @@ public class LessonForm
         return description;
     }
 
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
     public Date getDate()
     {
         return date;
+    }
+
+    public void setDate(Date date)
+    {
+        this.date = date;
     }
 
     public LocalTime getDuration()
@@ -61,9 +88,19 @@ public class LessonForm
         return duration;
     }
 
+    public void setDuration(LocalTime duration)
+    {
+        this.duration = duration;
+    }
+
     public Course getCourse()
     {
         return course;
+    }
+
+    public void setCourse(Course course)
+    {
+        this.course = course;
     }
 
     public Integer getMaxParticipants()
@@ -71,49 +108,24 @@ public class LessonForm
         return maxParticipants;
     }
 
+    public void setMaxParticipants(Integer maxParticipants)
+    {
+        this.maxParticipants = maxParticipants;
+    }
+
     public Room getRoom()
     {
         return room;
     }
 
+    public void setRoom(Room room)
+    {
+        this.room = room;
+    }
+
     public Room getBackupRoom()
     {
         return backupRoom;
-    }
-
-    public void setName( String name )
-    {
-        this.name = name;
-    }
-
-    public void setDescription( String description )
-    {
-        this.description = description;
-    }
-
-    public void setDate( Date date )
-    {
-        this.date = date;
-    }
-
-    public void setDuration( LocalTime duration )
-    {
-        this.duration = duration;
-    }
-
-    public void setCourse( Course course )
-    {
-        this.course = course;
-    }
-
-    public void setMaxParticipants( Integer maxParticipants )
-    {
-        this.maxParticipants = maxParticipants;
-    }
-
-    public void setRoom( Room room )
-    {
-        this.room = room;
     }
 
     public void setBackupRoom( Room backupRoom )

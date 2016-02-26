@@ -35,10 +35,6 @@ public class LessonController extends TutorController
             model.addAttribute( "lesson", new LessonForm() );
         if (model.get("courses") == null)
             model.addAttribute( "courses", tutor.getCourses() );
-        if (model.get("myPastLessons") == null)
-            model.addAttribute("myPastLessons", tutor.getPastLessons());
-        if (model.get("myUpcomingLessons") == null)
-            model.addAttribute("myUpcomingLessons", tutor.getUpcomingLessons());
         if ( model.get( "rooms" ) == null )
             model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
 
@@ -48,12 +44,22 @@ public class LessonController extends TutorController
     @RequestMapping(value = "/lessons", method = RequestMethod.GET)
     public ModelAndView getLessonOverviewPage(ModelMap model)
     {
+        Tutor tutor = SessionAuth.getStudent().getTutor();
+        model.addAttribute("myPastLessons", tutor.getPastLessons());
+        model.addAttribute("myUpcomingLessons", tutor.getUpcomingLessons());
         return new ModelAndView("tutor/lessons", fillModel(model));
     }
 
     @RequestMapping(value = "/lesson/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView showEditPage(ModelMap model)
+    public ModelAndView showEditPage(@PathVariable(value = "id") int id, ModelMap model)
     {
+        Lesson myLesson = service.getLessonById(id);
+        //Not my lesson
+        if (!SessionAuth.getStudent().getTutor().equals(myLesson.getTutor())) {
+            return new ModelAndView("redirect:/lessons");
+        }
+        model.addAttribute("lesson", new LessonForm(myLesson));
+        model.addAttribute("bookings", myLesson.getBookings());
         return new ModelAndView("tutor/lesson_edit", fillModel(model));
     }
 
@@ -63,15 +69,15 @@ public class LessonController extends TutorController
     }
 
     @RequestMapping(value = "/lesson/remove/{id}", method = RequestMethod.POST)
-    public String removeLesson(@PathVariable(value = "id") int id)
+    public ModelAndView removeLesson(@PathVariable(value = "id") int id)
     {
         Lesson lesson = service.getLessonById(id);
         if (lesson == null || !lesson.getTutor().getStudent().equals(SessionAuth.getStudent()))
-            return "redirect:/lessons";
+            return new ModelAndView("redirect:/lessons");
 
         service.removeLesson(lesson);
         //TODO:: success message
-        return "redirect:/lessons";
+        return new ModelAndView("redirect:/lessons");
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
