@@ -120,7 +120,7 @@
                                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                                     <form:errors path="type" element="label"/>
                                                     <form:select path="type" class="form-control">
-                                                        <form:option value="None" label="--- Select ---"/>
+                                                        <form:option value="None" label="--- User Type ---"/>
                                                         <form:options items="${userTypes}"/>
                                                     </form:select>
                                                 </div>
@@ -173,7 +173,7 @@
                                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                                     <form:errors path="type" element="label"/>
                                                     <form:select path="type" class="form-control">
-                                                        <form:option value="None" label="--- Select ---"/>
+                                                        <form:option value="None" label="--- User Type ---"/>
                                                         <form:options items="${userTypes}"/>
                                                     </form:select>
                                                 </div>
