@@ -52,23 +52,25 @@
                                             <b>Subscriptions</b> <a class="pull-right"><c:out
                                                 value="${user.subscriptions == null ? 0 : user.subscriptions.size()}"/></a>
                                         </li>
-                                        <li class="list-group-item">
-                                            <div class="input-group col-md-12">
-                                                <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <c:if test="${user.tutor != null}">
+                                        <c:if test="${user == auth}">
                                             <li class="list-group-item">
                                                 <div class="input-group col-md-12">
-                                                    <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
+                                                    <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
+                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
                                                     </span>
                                                 </div>
                                             </li>
+                                            <c:if test="${user.tutor != null}">
+                                                <li class="list-group-item">
+                                                    <div class="input-group col-md-12">
+                                                        <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </c:if>
                                         </c:if>
                                     </ul>
                                     <a href="<c:url value="/calendar"/>" class="btn btn-primary btn-block"><b>Calendar</b></a>
