@@ -54,7 +54,7 @@
                                         </li>
                                         <li class="list-group-item">
                                             <div class="input-group col-md-12">
-                                                <input id="booking-calendar" type="text" value="${baseURL}resources/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
+                                                <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
                                                 </span>
@@ -63,7 +63,7 @@
                                         <c:if test="${user.tutor != null}">
                                             <li class="list-group-item">
                                                 <div class="input-group col-md-12">
-                                                    <input id="lesson-calendar" type="text" value="${baseURL}resources/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
+                                                    <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
                                                     </span>
