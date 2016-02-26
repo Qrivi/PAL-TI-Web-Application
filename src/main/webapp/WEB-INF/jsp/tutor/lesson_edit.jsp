@@ -201,11 +201,12 @@
     </div>
 </div>
 <jsp:include page="../include/footer.jsp"/>
-<c:if test="${editable}">
+<c:if test="${!editable}">
     <script>
-        $("#FormControl :input").prop('readonly', true);
+        $( "input, select, textarea" ).each(function() {
+            $( this ).prop('disabled', true);
+        });
     </script>
 </c:if>
 </body>
 </html>
-
