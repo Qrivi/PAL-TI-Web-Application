@@ -30,50 +30,50 @@ public class ReviewForm {
     @Max(value = 10, message = "{NotEmpty.CourseForm.atmosphereScore}")
     private int atmosphereScore;
 
-    boolean anonymous;
+    private boolean anonymous;
 
     public String getText() {
         return text;
-    }
-
-    public int getContentScore() {
-        return contentScore;
-    }
-
-    public int getTutorScore() {
-        return tutorScore;
-    }
-
-    public int getEngagementScore() {
-        return engagementScore;
-    }
-
-    public int getAtmosphereScore() {
-        return atmosphereScore;
-    }
-
-    public boolean isAnonymous() {
-        return anonymous;
     }
 
     public void setText(String text) {
         this.text = text;
     }
 
+    public int getContentScore() {
+        return contentScore;
+    }
+
     public void setContentScore(int contentScore) {
         this.contentScore = contentScore;
+    }
+
+    public int getTutorScore() {
+        return tutorScore;
     }
 
     public void setTutorScore(int tutorScore) {
         this.tutorScore = tutorScore;
     }
 
+    public int getEngagementScore() {
+        return engagementScore;
+    }
+
     public void setEngagementScore(int engagementScore) {
         this.engagementScore = engagementScore;
     }
 
+    public int getAtmosphereScore() {
+        return atmosphereScore;
+    }
+
     public void setAtmosphereScore(int atmosphereScore) {
         this.atmosphereScore = atmosphereScore;
+    }
+
+    public boolean isAnonymous() {
+        return anonymous;
     }
 
     public void setAnonymous(boolean anonymous) {
