@@ -26,6 +26,7 @@
         <querydsl.version>3.6.5</querydsl.version>
         <wro.version>1.7.9</wro.version>
         <rome.version>1.5.1</rome.version>
+        <ical.version>2.0-beta1</ical.version>
     </properties>
 
     <dependencies>
@@ -157,6 +158,12 @@
             <groupId>com.rometools</groupId>
             <artifactId>rome</artifactId>
             <version>${rome.version}</version>
+        </dependency>
+        <!-- ICal -->
+        <dependency>
+            <groupId>org.mnode.ical4j</groupId>
+            <artifactId>ical4j</artifactId>
+            <version>${ical.version}</version>
         </dependency>
     </dependencies>
 

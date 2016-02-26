@@ -2,10 +2,8 @@ package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.util.CalendarEvent;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -27,10 +24,6 @@ public class CalendarController extends StudentController
     @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getCalendar( ModelMap model )
     {
-        Student current = SessionAuth.getStudent();
-        model.addAttribute( "bookings", current.getOpenBookings() );
-        model.addAttribute( "lessons", current.getTutor()
-                .getUpcomingLessons() );
         return new ModelAndView( "student/calendar", model );
     }
 
