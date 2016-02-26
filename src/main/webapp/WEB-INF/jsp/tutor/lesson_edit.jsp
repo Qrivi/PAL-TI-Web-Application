@@ -133,7 +133,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary pull-right">Change</button>
+                                            <c:if test="${editable}">
+                                                <button type="submit" class="btn btn-primary pull-right">Change</button>
+                                            </c:if>
                                         </div>
                                     </form:form>
                                 </div>
@@ -199,6 +201,11 @@
     </div>
 </div>
 <jsp:include page="../include/footer.jsp"/>
+<c:if test="${editable}">
+    <script>
+        $("#FormControl :input").prop('readonly', true);
+    </script>
+</c:if>
 </body>
 </html>
 
