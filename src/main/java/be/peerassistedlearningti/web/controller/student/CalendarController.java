@@ -29,7 +29,7 @@ public class CalendarController extends StudentController
 
     @ResponseBody
     @RequestMapping( value = "/events", method = RequestMethod.GET )
-    public List<CalendarEvent> getCalendarEvents( ModelMap model )
+    public List<CalendarEvent> getCalendarEvents()
     {
         Student current = SessionAuth.getStudent();
         List<CalendarEvent> events = new ArrayList<>();
@@ -37,11 +37,14 @@ public class CalendarController extends StudentController
                 .stream()
                 .map( lesson -> convert( lesson, "#428bca" ) )
                 .collect( Collectors.toList() ) );
-        events.addAll( current.getTutor()
-                .getUpcomingLessons()
-                .stream()
-                .map( lesson -> convert( lesson, "#5cb85c" ) )
-                .collect( Collectors.toList() ) );
+        if ( current.getTutor() != null )
+        {
+            events.addAll( current.getTutor()
+                    .getUpcomingLessons()
+                    .stream()
+                    .map( lesson -> convert( lesson, "#5cb85c" ) )
+                    .collect( Collectors.toList() ) );
+        }
         return events;
     }
 

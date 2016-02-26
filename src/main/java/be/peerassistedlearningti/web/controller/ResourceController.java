@@ -17,10 +17,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -89,11 +86,15 @@ public class ResourceController
 
     @ResponseBody
     @RequestMapping( value = "/students/{id}/bookings.ics", method = RequestMethod.GET )
-    public void getBookingsICal( @PathVariable( value = "id" ) int id, HttpServletResponse response )
+    public void getBookingsICal( @PathVariable( value = "id" ) int id, @RequestParam( value = "token", required = true ) String token, HttpServletResponse response )
     {
         Student s = service.getStudentById( id );
 
         if ( s == null )
+            return;
+
+        if ( !s.getSecurityToken()
+                .equals( token ) )
             return;
 
         try
@@ -105,11 +106,15 @@ public class ResourceController
 
     @ResponseBody
     @RequestMapping( value = "/students/{id}/lessons.ics", method = RequestMethod.GET )
-    public void getLessonsICal( @PathVariable( value = "id" ) int id, HttpServletResponse response )
+    public void getLessonsICal( @PathVariable( value = "id" ) int id, @RequestParam( value = "token", required = true ) String token, HttpServletResponse response )
     {
         Student s = service.getStudentById( id );
 
         if ( s == null )
+            return;
+
+        if ( !s.getSecurityToken()
+                .equals( token ) )
             return;
 
         if ( s.getTutor() == null )

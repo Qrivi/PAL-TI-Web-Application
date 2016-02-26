@@ -1,9 +1,12 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication var="auth" property="principal"/>
+<c:set var="req" value="${pageContext.request}"/>
+<c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <jsp:include page="../include/head.jsp">
@@ -39,18 +42,35 @@
                                     <ul class="list-group list-group-unbordered">
                                         <li class="list-group-item">
                                             <b>Closed bookings</b> <a class="pull-right"><c:out
-                                                value="${user.getClosedBookings().size()}"/></a>
+                                                value="${user.closedBookings.size()}"/></a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Open bookings</b> <a class="pull-right"><c:out
-                                                value="${user.getOpenBookings().size()}"/></a>
+                                                value="${user.openBookings.size()}"/></a>
                                         </li>
                                         <li class="list-group-item">
                                             <b>Subscriptions</b> <a class="pull-right"><c:out
-                                                value="${user.getSubscriptions().size()}"/></a>
+                                                value="${user.subscriptions == null ? 0 : user.subscriptions.size}"/></a>
                                         </li>
+                                        <li class="list-group-item">
+                                            <div class="input-group col-md-12">
+                                                <input id="booking-calendar" type="text" value="${baseURL}resources/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
+                                                </span>
+                                            </div>
+                                        </li>
+                                        <c:if test="${user.tutor != null}">
+                                            <li class="list-group-item">
+                                                <div class="input-group col-md-12">
+                                                    <input id="lesson-calendar" type="text" value="${baseURL}resources/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </c:if>
                                     </ul>
-                                    <!-- todo:: link to students agenda -->
                                     <a href="<c:url value="/calendar"/>" class="btn btn-primary btn-block"><b>Calendar</b></a>
                                 </div>
                             </div>
@@ -352,16 +372,6 @@
         </div>
         <jsp:include page="../include/footer.jsp"/>
         <script>
-            $(function () {
-                $('input').iCheck({
-                    checkboxClass: 'icheckbox_square-blue',
-                    radioClass: 'iradio_square-blue',
-                    increaseArea: '20%' // optional
-                });
-                $('input').on('ifChanged', function (event) {
-                    $(event.target).trigger('change');
-                });
-            });
             $( document ).ready( function () {
                 $( "#subscriptions" ).select2();
                 $( function () {
@@ -378,6 +388,10 @@
                     }
                 } );
             } );
+            function copyToClipboard ( elementId ) {
+                document.getElementById( elementId ).select();
+                document.execCommand( "copy" );
+            }
         </script>
     </body>
 </html>
