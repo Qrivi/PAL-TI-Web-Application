@@ -3,8 +3,11 @@ package be.peerassistedlearningti.web.controller.tutor;
 import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.LessonForm;
+import be.peerassistedlearningti.web.model.form.StudentUpdateForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -60,12 +63,17 @@ public class LessonController extends TutorController
         }
         model.addAttribute("lesson", new LessonForm(myLesson));
         model.addAttribute("bookings", myLesson.getBookings());
+        model.addAttribute("editable", true);
         return new ModelAndView("tutor/lesson_edit", fillModel(model));
     }
 
     @RequestMapping(value = "/lesson/info/{id}", method = RequestMethod.GET)
-    public ModelAndView showInfoPage(ModelMap model) {
-        return new ModelAndView("tutor/lesson_info", fillModel(model));
+    public ModelAndView showInfoPage(@PathVariable(value = "id") int id, ModelMap model) {
+        Lesson myLesson = service.getLessonById(id);
+
+        model.addAttribute("lesson", new LessonForm(myLesson));
+        model.addAttribute("editable", false);
+        return new ModelAndView("tutor/lesson_edit", fillModel(model));
     }
 
     @RequestMapping(value = "/lesson/remove/{id}", method = RequestMethod.POST)
