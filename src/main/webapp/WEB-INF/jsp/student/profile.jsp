@@ -50,7 +50,7 @@
                                         </li>
                                         <li class="list-group-item">
                                             <b>Subscriptions</b> <a class="pull-right"><c:out
-                                                value="${user.subscriptions == null ? 0 : user.subscriptions.size}"/></a>
+                                                value="${user.subscriptions == null ? 0 : user.subscriptions.size()}"/></a>
                                         </li>
                                         <li class="list-group-item">
                                             <div class="input-group col-md-12">
