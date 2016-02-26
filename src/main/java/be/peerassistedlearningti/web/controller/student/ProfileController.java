@@ -1,29 +1,28 @@
 package be.peerassistedlearningti.web.controller.student;
 
+import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Review;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
+import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import be.peerassistedlearningti.web.model.util.Timeline;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
+import java.util.Date;
 
 @Controller
 @RequestMapping( value = "/profile" )
@@ -51,6 +50,9 @@ public class ProfileController extends StudentController
         if ( tutor != null && model.get( "reviews" ) == null )
         {
             model.addAttribute( "reviews", service.getReviews( tutor ) );
+        }
+        if (model.get("review") == null) {
+            model.addAttribute("review", new ReviewForm());
         }
         if ( model.get( "timeline" ) == null )
         {
@@ -120,5 +122,19 @@ public class ProfileController extends StudentController
         SessionAuth.setStudent( student );
 
         return new ModelAndView( "redirect:/profile" );
+    }
+
+    @RequestMapping(value = "/lesson/{id}/reviews/add", method = RequestMethod.POST)
+    public ModelAndView addReview(@PathVariable(value = "id") int id, @Valid @ModelAttribute("review") ReviewForm reviewForm, BindingResult result, ModelMap model) {
+        Lesson lesson = service.getLessonById(id);
+        if (lesson == null || !lesson.getBookings().contains(SessionAuth.getStudent())) {
+            return new ModelAndView("redirect:/profile");
+        } else if (result.hasErrors()) {
+            return new ModelAndView("/profile", fillModel(model, SessionAuth.getStudent()));
+        }
+        Review review = new Review(reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm.getAtmosphereScore(), reviewForm.isAnonymous(), new Date());
+        service.addReview(review);
+        model.addAttribute("addedReview", review.getId());
+        return new ModelAndView("/profile", fillModel(model, SessionAuth.getStudent()));
     }
 }
