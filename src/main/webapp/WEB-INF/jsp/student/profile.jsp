@@ -140,16 +140,19 @@
                                                     <!-- /.box-footer  -->
                                                     <div class="box-footer">
                                                         <!-- TODO:: add controller functionality -->
-                                                        <form action="#" method="post">
+                                                        <form action="" method="post">
                                                             <img class="img-responsive img-circle img-sm"
                                                                  src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
                                                                  alt="Alt Text">
                                                             <!-- .img-push is used to add margin to elements next to floating images -->
                                                             <div class="img-push row">
+                                                                <input type="number" min="0" max="10" placeholder="Content Score">
+                                                                <input type="number" min="0" max="10" placeholder="Tutor Score">
+                                                                <input type="number" min="0" max="10" placeholder="Engagement Score">
+                                                                <input type="number" min="0" max="10" placeholder="Atmosphere Score">
                                                                 <input type="text"
                                                                        class="form-control input-sm col-md-12"
                                                                        placeholder="Press enter to post comment">
-                                                                <!-- TODO:: add score fields -->
                                                             </div>
                                                         </form>
                                                     </div>
