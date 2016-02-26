@@ -57,18 +57,84 @@
                         <div class="col-md-9">
                             <div id="tabs" class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a href="#activity" data-toggle="tab"
-                                                          aria-expanded="true">Activity</a></li>
-                                    <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a>
-                                    </li>
+                                    <!-- activity tab button-->
+                                    <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a></li>
+                                    <!-- timeline tab button-->
+                                    <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
+                                    <!-- settings tab button-->
                                     <c:if test="${user == auth}">
                                         <li><a href="#settings" data-toggle="tab">Settings</a></li>
                                     </c:if>
                                 </ul>
                                 <section class="tab-content">
+                                    <!-- activity tab content-->
                                     <div class="tab-pane active" id="activity">
-                                        <!-- todo:: show some info -->
+                                        <c:forEach var="lesson" items="${user.closedBookings}">
+                                            <div class="box box-widget">
+                                                <div class="box-header with-border">
+                                                    <div class="user-block">
+                                                        <!-- class="img-circle" ? -->
+                                                        <img class="profile-user-img img-responsive img-circle" src="<c:url value="/profile/${lesson.tutor.student.id}/avatar.png"/>" alt="User profile picture">
+                                                        <span class="username"><a href="#">${lesson.tutor.student.name}</a></span>
+                                                        <span class="description">${lesson.name} - ${lesson.date}</span>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <div class="box-tools">
+                                                        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
+                                                            <i class="fa fa-circle-o"></i></button>
+                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                        </button>
+                                                        <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
+                                                    </div>
+                                                    <!-- /.box-tools -->
+                                                </div>
+                                                <!-- /.box-header -->
+                                                <div class="box-body">
+                                                    <!-- post text -->
+                                                    <p>${lesson.description}</p>
+                                                    <!-- Social sharing buttons -->
+                                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-comment-o"></i> Give review</button>
+                                                    <span class="pull-right text-muted">${lesson.reviews.size()} reviews</span>
+                                                </div>
+                                                <!-- /.box-body -->
+                                                <div class="box-footer box-comments">
+                                                    <!-- /.box-comment -->
+                                                    <c:forEach var="review" items="${lesson.reviews}">
+                                                    <div class="box-comment">
+                                                        <!-- User image -->
+                                                        <img class="profile-user-img img-responsive img-circle" src="<c:url value="/profile/${review.student.id}/avatar.png"/>" alt="User profile picture">
+
+                                                        <div class="comment-text">
+                                                                    <span class="username">
+
+                                                                        <span class="text-muted pull-right">8:03 PM Today</span>
+                                                                    </span><!-- /.username -->
+                                                            Content: ${review.contentScore}
+                                                            Tutor: ${review.tutorScore}
+                                                            Engagement: ${review.engagementScore}
+                                                            Atmosphere: ${review.atmosphereScore}
+                                                                ${review.text}
+                                                        </div>
+                                                        <!-- /.comment-text -->
+                                                    </div>
+                                                    <!-- /.box-comment -->
+                                                </div>
+                                                </c:forEach>
+                                                <!-- /.box-footer -->
+                                                <div class="box-footer">
+                                                    <form action="#" method="post">
+                                                        <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+                                                        <!-- .img-push is used to add margin to elements next to floating images -->
+                                                        <div class="img-push">
+                                                            <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <!-- /.box-footer -->
+                                            </div>
+                                        </c:forEach>
                                     </div>
+                                    <!-- timeline tab content-->
                                     <div class="tab-pane" id="timeline">
                                         <ul class="timeline timeline-inverse">
                                             <!-- Empty Timeline -->
@@ -154,135 +220,98 @@
                                             <li><i class="fa fa-clock-o bg-gray"></i></li>
                                         </ul>
                                     </div>
-                                    <div class="tab-pane" id="reviews">
-                                        <table>
-                                            <thead>
-                                                <th>Lesson</th>
-                                                <th>Date</th>
-                                                <th>Student</th>
-                                                <th>Content Score</th>
-                                                <th>Tutor Score</th>
-                                                <th>Engagement Score</th>
-                                                <th>Atmosphere Score</th>
-                                                <th>Comment</th>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach var="review" items="${reviews}">
-                                                    <tr>
-                                                        <td>${review.lesson.name}</td>
-                                                        <td>${review.date}</td>
-                                                        <td>
-                                                            <c:when test="${review.anonymous}">Anonymous</c:when>
-                                                            <c:otherwise>${review.student.name}</c:otherwise>
-                                                        </td>
-                                                        <td>${review.contentScore}</td>
-                                                        <td>${review.tutorScore}</td>
-                                                        <td>${review.engagementScore}</td>
-                                                        <td>${review.atmosphereScore}</td>
-                                                        <td>${review.text}</td>
-                                                        </ts>
-                                                        <td>
-                                                            <form id="command" action="<c:url value="/review/remove/${review.id}" />" method="POST">
-                                                                <input type="submit" value="Delete"/>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                    </div>
                                     <!-- settings tab content-->
                                     <c:if test="${user == auth}">
-                                    <div class="tab-pane" id="settings">
-                                        <form:form class="form-horizontal" method="put" action="/profile" commandName="profile"
-                                                   enctype="multipart/form-data">
-                                            <c:set var="nameError"><form:errors path="name"/></c:set>
-                                            <c:set var="emailError"><form:errors path="email"/></c:set>
-                                            <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
-                                            <c:set var="nameError"><form:errors path="name"/></c:set>
-                                            <c:set var="passwordError"><form:errors path="password"/></c:set>
-                                            <c:set var="newPasswordError"><form:errors path="newPassword"/><form:errors/></c:set>
-                                            <c:set var="newRepeatPasswordError"><form:errors path="newRepeatPassword"/><form:errors/></c:set>
-                                            <form:errors element="div" cssClass="alert alert-danger"/>
-                                            <!-- name field-->
-                                            <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
-                                                <form:label path="avatar"
-                                                            class="col-sm-2 control-label">Avatar</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:input path="avatar" type="file" placeholder="Avatar"/>
+                                        <div class="tab-pane" id="settings">
+                                            <form:form class="form-horizontal" method="put" action="/profile" commandName="profile"
+                                                       enctype="multipart/form-data">
+                                                <c:set var="nameError"><form:errors path="name"/></c:set>
+                                                <c:set var="emailError"><form:errors path="email"/></c:set>
+                                                <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
+                                                <c:set var="nameError"><form:errors path="name"/></c:set>
+                                                <c:set var="passwordError"><form:errors path="password"/></c:set>
+                                                <c:set var="newPasswordError"><form:errors path="newPassword"/><form:errors/></c:set>
+                                                <c:set var="newRepeatPasswordError"><form:errors path="newRepeatPassword"/><form:errors/></c:set>
+                                                <form:errors element="div" cssClass="alert alert-danger"/>
+                                                <!-- name field-->
+                                                <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
+                                                    <form:label path="avatar"
+                                                                class="col-sm-2 control-label">Avatar</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:input path="avatar" type="file" placeholder="Avatar"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
-                                                <form:label path="name" class="col-sm-2 control-label">Name</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:input path="name" class="form-control" placeholder="Name"/>
+                                                <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
+                                                    <form:label path="name" class="col-sm-2 control-label">Name</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:input path="name" class="form-control" placeholder="Name"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- email field-->
-                                            <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
-                                                <form:label path="email"
-                                                            class="col-sm-2 control-label">Email</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:input path="email" class="form-control" placeholder="Email"/>
+                                                <!-- email field-->
+                                                <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
+                                                    <form:label path="email"
+                                                                class="col-sm-2 control-label">Email</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:input path="email" class="form-control" placeholder="Email"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <hr class="separator"/>
-                                            <!-- subscriptions field -->
-                                            <div class="form-group ${ not empty subscriptionsError ? 'has-error' : ''}">
-                                                <form:label path="subscriptions"
-                                                            class="col-sm-2 control-label">Subscriptions</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:select id="subscriptions" path="subscriptions"
-                                                                 class="form-control select2 select2-hidden-accessible"
-                                                                 multiple="multiple" data-placeholder="Subscriptions"
-                                                                 style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                        <form:options items="${courses}" itemValue="id" itemLabel="name"/>
-                                                    </form:select>
+                                                <hr class="separator"/>
+                                                <!-- subscriptions field -->
+                                                <div class="form-group ${ not empty subscriptionsError ? 'has-error' : ''}">
+                                                    <form:label path="subscriptions"
+                                                                class="col-sm-2 control-label">Subscriptions</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:select id="subscriptions" path="subscriptions"
+                                                                     class="form-control select2 select2-hidden-accessible"
+                                                                     multiple="multiple" data-placeholder="Subscriptions"
+                                                                     style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                            <form:options items="${courses}" itemValue="id" itemLabel="name"/>
+                                                        </form:select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <hr class="separator"/>
-                                            <!-- new password field -->
-                                            <div class="form-group ${ not empty newPasswordError ? 'has-error' : ''}">
-                                                <form:label path="newPassword"
-                                                            class="col-sm-2 control-label">New password</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:password path="newPassword" class="form-control"
-                                                                   placeholder="New password"/>
+                                                <hr class="separator"/>
+                                                <!-- new password field -->
+                                                <div class="form-group ${ not empty newPasswordError ? 'has-error' : ''}">
+                                                    <form:label path="newPassword"
+                                                                class="col-sm-2 control-label">New password</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:password path="newPassword" class="form-control"
+                                                                       placeholder="New password"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- new password repeat field -->
-                                            <div class="form-group ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
-                                                <form:label path="newRepeatPassword"
-                                                            class="col-sm-2 control-label">Repeat Password</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:password path="newRepeatPassword" class="form-control"
-                                                                   placeholder="Repeat Password"/>
+                                                <!-- new password repeat field -->
+                                                <div class="form-group ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
+                                                    <form:label path="newRepeatPassword"
+                                                                class="col-sm-2 control-label">Repeat Password</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:password path="newRepeatPassword" class="form-control"
+                                                                       placeholder="Repeat Password"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <hr class="separator"/>
-                                            <!-- password field -->
-                                            <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
-                                                <form:label path="password"
-                                                            class="col-sm-2 control-label">Current Password</form:label>
-                                                <div class="col-sm-10">
-                                                    <form:password path="password" class="form-control"
-                                                                   placeholder="Current Password"/>
+                                                <hr class="separator"/>
+                                                <!-- password field -->
+                                                <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
+                                                    <form:label path="password"
+                                                                class="col-sm-2 control-label">Current Password</form:label>
+                                                    <div class="col-sm-10">
+                                                        <form:password path="password" class="form-control"
+                                                                       placeholder="Current Password"/>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-offset-10 col-sm-2">
-                                                    <button type="submit" class="btn btn-default pull-right">Change</button>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-10 col-sm-2">
+                                                        <button type="submit" class="btn btn-default pull-right">Change</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form:form>
-                                    </div>
+                                            </form:form>
+                                        </div>
                                     </c:if>
+                                </section>
                             </div>
                         </div>
                     </div>
+                </section>
             </div>
-            </section>
-        </div>
         </div>
         <jsp:include page="../include/footer.jsp"/>
         <script>
