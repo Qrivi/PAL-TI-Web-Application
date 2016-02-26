@@ -146,10 +146,10 @@
                                                                  alt="Alt Text">
                                                             <!-- .img-push is used to add margin to elements next to floating images -->
                                                             <div class="img-push row">
-                                                                <input type="number" min="0" max="10" placeholder="Content Score">
-                                                                <input type="number" min="0" max="10" placeholder="Tutor Score">
-                                                                <input type="number" min="0" max="10" placeholder="Engagement Score">
-                                                                <input type="number" min="0" max="10" placeholder="Atmosphere Score">
+                                                                Content Score: <input type="number" min="1" max="10">
+                                                                Tutor Score: <input type="number" min="1" max="10">
+                                                                Engagement Score: <input type="number" min="1" max="10>
+                                                                Atmosphere Score: <input type="number" min="1" max="10" >
                                                                 <input type="text"
                                                                        class="form-control input-sm col-md-12"
                                                                        placeholder="Press enter to post comment">
