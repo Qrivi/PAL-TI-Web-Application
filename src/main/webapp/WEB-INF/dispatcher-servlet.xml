@@ -43,4 +43,29 @@
         </property>
     </bean>
 
+    <!-- Allows for json and xml output -->
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="webBindingInitializer">
+            <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+                <property name="validator">
+                    <bean class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.feed.AtomFeedHttpMessageConverter"/>
+                <bean class="org.springframework.http.converter.feed.RssChannelHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
 </beans>

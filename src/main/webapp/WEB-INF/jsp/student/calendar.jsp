@@ -39,21 +39,7 @@
                     } ,
                     editable   : false ,
                     eventLimit : true ,
-                    events     : [
-                        <c:forEach var="item" items="${bookings}" varStatus="loop">
-                        <jsp:useBean id="dateValue" class="java.util.Date"/>
-                        <jsp:setProperty name="dateValue" property="time" value="${(item.date.time + item.duration*60*1000)}"/>
-                        <fmt:formatDate var="start" pattern="YYYY-MM-dd HH:mm:SS" value="${item.date}"/>
-                        <fmt:formatDate var="end" pattern="YYYY-MM-dd HH:mm:SS" value="${dateValue}"/>
-                        {
-                            title : '${item.name}' ,
-                            start : '${start}' ,
-                            end   : '${end}'
-                        }
-                        <c:if test="${loop.index < bookings.size() - 1}"> ,
-                        </c:if>
-                        </c:forEach>
-                    ]
+                    events     : "/calendar/events"
                 } );
             } );
         </script>

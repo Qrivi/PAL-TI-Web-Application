@@ -25,6 +25,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <querydsl.version>3.6.5</querydsl.version>
         <wro.version>1.7.9</wro.version>
+        <rome.version>1.5.1</rome.version>
     </properties>
 
     <dependencies>
@@ -150,6 +151,12 @@
             <groupId>ro.isdc.wro4j</groupId>
             <artifactId>wro4j-core</artifactId>
             <version>${wro.version}</version>
+        </dependency>
+        <!-- rome tools -->
+        <dependency>
+            <groupId>com.rometools</groupId>
+            <artifactId>rome</artifactId>
+            <version>${rome.version}</version>
         </dependency>
     </dependencies>
 

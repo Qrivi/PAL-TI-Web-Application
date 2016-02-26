@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DefaultController
 {
 
-    @ResponseBody
     @RequestMapping( method = RequestMethod.GET )
     public String getDefaultPage()
     {

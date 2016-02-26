@@ -1,27 +1,66 @@
 package be.peerassistedlearningti.web.controller.student;
 
+import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.util.CalendarEvent;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( value = "/calendar" )
 public class CalendarController extends StudentController
 {
-
-    @Autowired
-    private PALService service;
-
     @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getCalendar( ModelMap model )
     {
-        return new ModelAndView( "student/calendar", "bookings", SessionAuth.getStudent()
-                .getOpenBookings() );
+        Student current = SessionAuth.getStudent();
+        model.addAttribute( "bookings", current.getOpenBookings() );
+        model.addAttribute( "lessons", current.getTutor()
+                .getUpcomingLessons() );
+        return new ModelAndView( "student/calendar", model );
     }
 
+    @ResponseBody
+    @RequestMapping( value = "/events", method = RequestMethod.GET )
+    public List<CalendarEvent> getCalendarEvents( ModelMap model )
+    {
+        Student current = SessionAuth.getStudent();
+        List<CalendarEvent> events = new ArrayList<>();
+        events.addAll( current.getOpenBookings()
+                .stream()
+                .map( lesson -> convert( lesson, "#428bca" ) )
+                .collect( Collectors.toList() ) );
+        events.addAll( current.getTutor()
+                .getUpcomingLessons()
+                .stream()
+                .map( lesson -> convert( lesson, "#5cb85c" ) )
+                .collect( Collectors.toList() ) );
+        return events;
+    }
+
+    private CalendarEvent convert( Lesson lesson, String color )
+    {
+        DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd HH:mm:SS" );
+        CalendarEvent event = new CalendarEvent();
+        event.setTitle( lesson.getName() );
+        event.setStart( dateFormat.format( lesson.getDate() ) );
+        event.setEnd( dateFormat.format( new Date( lesson.getDate()
+                .getTime() + lesson.getDuration() * 60 * 1000 ) ) );
+        event.setColor( color );
+        return event;
+    }
 }
