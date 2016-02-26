@@ -28,7 +28,7 @@
                     <div class="input-group">
                         <input type="password" name="password" class="form-control" placeholder="password">
                         <div class="input-group-btn">
-                            <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+                            <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
                         </div>
                     </div>
                 </form>
