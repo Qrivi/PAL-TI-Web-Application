@@ -73,73 +73,89 @@
                                     <!-- activity tab content-->
                                     <c:if test="${user == auth}">
                                         <div class="tab-pane active" id="activity">
-                                        <c:forEach var="lesson" items="${user.closedBookings}">
-                                            <div class="box box-widget">
-                                                <div class="box-header with-border">
-                                                    <div class="user-block">
-                                                        <!-- class="img-circle" ? -->
-                                                        <img class="profile-user-img img-responsive img-circle"
-                                                             src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
-                                                             alt="User profile picture">
-                                                        <span class="username"><a href="#">${lesson.tutor.student.name}</a></span>
-                                                        <span class="description">${lesson.name} - ${lesson.date}</span>
+                                            <c:if test="${empty user.closedBookings}">
+                                                <div class="alert alert-info col-sm-4 col-sm-offset-4">
+                                                    <h4><i class="icon fa fa-info-circle"></i>No closed bookings</h4>
+                                                    Once you've finished a lesson, you will be able to post a review
+                                                    here.
+                                                </div>
+                                            </c:if>
+                                            <c:forEach var="lesson" items="${user.closedBookings}">
+                                                <div class="box box-default">
+                                                    <div class="box-header with-border">
+                                                        <div class="user-block">
+                                                            <img class="profile-user-img img-responsive img-circle"
+                                                                 src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
+                                                                 alt="User profile picture">
+                                                            <span class="username"><a
+                                                                    href="#">${lesson.tutor.student.name}</a></span>
+                                                            <span class="description">${lesson.course.name} - <fmt:formatDate
+                                                                    pattern="HH:mm dd MMMMMMMMM YYYY"
+                                                                    value="${lesson.date}"/> </span>
+                                                        </div>
+                                                        <!-- /.user-block -->
+                                                        <div class="box-tools">
+                                                            <button type="button" class="btn btn-box-tool"
+                                                                    data-widget="collapse">
+                                                                <i class="fa fa-minus"></i>
+                                                            </button>
+                                                        </div>
+                                                        <!-- /.box-tools -->
                                                     </div>
-                                                    <!-- /.user-block -->
-                                                    <div class="box-tools">
-                                                        <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">
-                                                            <i class="fa fa-circle-o"></i></button>
-                                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                                    <!-- /.box-header -->
+                                                    <div class="box-body">
+                                                        <!-- post text -->
+                                                        <strong>${lesson.name}</strong>
+                                                        <p>${lesson.description}</p>
+                                                        <!-- Social sharing buttons -->
+                                                        <button type="button" class="btn btn-default btn-xs"><i
+                                                                class="fa fa-comment-o"></i> Give review
                                                         </button>
-                                                        <!-- <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
+                                                        <span class="pull-right badge bg-gray">${lesson.reviews.size()} reviews</span>
                                                     </div>
-                                                    <!-- /.box-tools -->
-                                                </div>
-                                                <!-- /.box-header -->
-                                                <div class="box-body">
-                                                    <!-- post text -->
-                                                    <p>${lesson.description}</p>
-                                                    <!-- Social sharing buttons -->
-                                                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-comment-o"></i> Give review</button>
-                                                    <span class="pull-right text-muted">${lesson.reviews.size()} reviews</span>
-                                                </div>
-                                                <!-- /.box-body -->
-                                                <div class="box-footer box-comments">
-                                                    <!-- /.box-comment -->
-                                                    <c:forEach var="review" items="${lesson.reviews}">
-                                                    <div class="box-comment">
-                                                        <!-- User image -->
-                                                        <img class="profile-user-img img-responsive img-circle" src="<c:url value="/profile/${review.student.id}/avatar.png"/>" alt="User profile picture">
-
-                                                        <div class="comment-text">
-                                                                    <span class="username">
-
-                                                                        <span class="text-muted pull-right">8:03 PM Today</span>
-                                                                    </span><!-- /.username -->
-                                                            Content: ${review.contentScore}
-                                                            Tutor: ${review.tutorScore}
-                                                            Engagement: ${review.engagementScore}
-                                                            Atmosphere: ${review.atmosphereScore}
-                                                                ${review.text}
+                                                    <!-- /.box-body -->
+                                                    <c:if test="${not empty lesson.reviews}">
+                                                        <div class="box-footer box-comments">
+                                                            <c:forEach var="review" items="${lesson.reviews}">
+                                                                <div class="box-comment">
+                                                                    <!-- User image -->
+                                                                    <img class="img-circle img-sm"
+                                                                         src="<c:url value="/resources/students/${review.student.id}/avatar.png"/>"
+                                                                         alt="User Image">
+                                                                    <div class="comment-text">
+                                                                          <span class="username">
+                                                                            ${review.student.name}
+                                                                            <span class="text-muted pull-right"><fmt:formatDate
+                                                                                    pattern="HH:mm dd MMMMMMMMM YYYY"
+                                                                                    value="${review.date}"/></span>
+                                                                          </span><!-- /.username -->
+                                                                            ${review.text}
+                                                                        <!--TODO:: show scores -->
+                                                                    </div>
+                                                                    <!-- /.comment-text -->
+                                                                </div>
+                                                            </c:forEach>
                                                         </div>
-                                                        <!-- /.comment-text -->
+                                                    </c:if>
+                                                    <!-- /.box-footer  -->
+                                                    <div class="box-footer">
+                                                        <!-- TODO:: add controller functionality -->
+                                                        <form action="#" method="post">
+                                                            <img class="img-responsive img-circle img-sm"
+                                                                 src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
+                                                                 alt="Alt Text">
+                                                            <!-- .img-push is used to add margin to elements next to floating images -->
+                                                            <div class="img-push row">
+                                                                <input type="text"
+                                                                       class="form-control input-sm col-md-12"
+                                                                       placeholder="Press enter to post comment">
+                                                                <!-- TODO:: add score fields -->
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    <!-- /.box-comment -->
                                                 </div>
-                                                </c:forEach>
-                                                <!-- /.box-footer -->
-                                                <div class="box-footer">
-                                                    <form action="#" method="post">
-                                                        <img class="img-responsive img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
-                                                        <!-- .img-push is used to add margin to elements next to floating images -->
-                                                        <div class="img-push">
-                                                            <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                                <!-- /.box-footer -->
-                                            </div>
-                                        </c:forEach>
-                                    </div>
+                                            </c:forEach>
+                                        </div>
                                     </c:if>
                                     <!-- timeline tab content-->
                                     <div class="tab-pane" id="timeline">
