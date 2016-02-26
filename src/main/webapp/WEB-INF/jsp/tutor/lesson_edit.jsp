@@ -133,6 +133,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <button type="submit" class="btn btn-primary pull-right">Back</button>
                                             <c:if test="${editable}">
                                                 <button type="submit" class="btn btn-primary pull-right">Change</button>
                                             </c:if>
@@ -201,12 +202,23 @@
     </div>
 </div>
 <jsp:include page="../include/footer.jsp"/>
-<c:if test="${!editable}">
-    <script>
-        $( "input, select, textarea" ).each(function() {
-            $( this ).prop('disabled', true);
-        });
-    </script>
-</c:if>
+<c:choose>
+    <c:when test="${!editable}">
+        <script>
+            $( "input, select, textarea" ).each(function() {
+                $( this ).prop('disabled', true);
+            });
+        </script>
+    </c:when>
+    <c:otherwise>
+        <script>
+            $( document ).ready( function () {
+            $( "#datetimepicker" ).datetimepicker( {
+            locale : 'nl'
+            } );
+            } );
+        </script>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>
