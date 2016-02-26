@@ -88,7 +88,7 @@ public class ResourceController
     }
 
     @ResponseBody
-    @RequestMapping( value = "/students/{id}/bookings.csv", method = RequestMethod.GET )
+    @RequestMapping( value = "/students/{id}/bookings.ics", method = RequestMethod.GET )
     public void getBookingsICal( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
         Student s = service.getStudentById( id );
@@ -104,7 +104,7 @@ public class ResourceController
     }
 
     @ResponseBody
-    @RequestMapping( value = "/students/{id}/lessons.csv", method = RequestMethod.GET )
+    @RequestMapping( value = "/students/{id}/lessons.ics", method = RequestMethod.GET )
     public void getLessonsICal( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
         Student s = service.getStudentById( id );
