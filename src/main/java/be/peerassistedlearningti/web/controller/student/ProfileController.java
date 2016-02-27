@@ -133,17 +133,39 @@ public class ProfileController extends StudentController
         return new ModelAndView( "redirect:/profile" );
     }
 
+    @RequestMapping(value = "/lesson/{id}/reviews/add", method = RequestMethod.GET)
+    public ModelAndView addReview(@PathVariable(value = "id") int id, ModelMap model) {
+        Student current = SessionAuth.getStudent();
+        Lesson lesson = service.getLessonById(id);
+        //I did not go this lesson
+        if(!lesson.getBookings().contains(current)){
+            return new ModelAndView("redirect:/profile");
+        }
+        return new ModelAndView("student/review_add", fillModel(model, current));
+    }
+
     @RequestMapping(value = "/lesson/{id}/reviews/add", method = RequestMethod.POST)
     public ModelAndView addReview(@PathVariable(value = "id") int id, @Valid @ModelAttribute("review") ReviewForm reviewForm, BindingResult result, ModelMap model) {
+        Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById(id);
-        if (lesson == null || !lesson.getBookings().contains(SessionAuth.getStudent())) {
+        //I did not go this lesson
+        if (lesson == null || !lesson.getBookings().contains(current)) {
             return new ModelAndView("redirect:/profile");
         } else if (result.hasErrors()) {
-            return new ModelAndView("/profile", fillModel(model, SessionAuth.getStudent()));
+            return new ModelAndView("student/review_add", fillModel(model, current));
         }
-        Review review = new Review(reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm.getAtmosphereScore(), reviewForm.isAnonymous(), new Date());
+        Review review = new Review(
+                reviewForm.getText(),
+                SessionAuth.getStudent(),
+                lesson,
+                reviewForm.getContentScore(),
+                reviewForm.getTutorScore(),
+                reviewForm.getEngagementScore(),
+                reviewForm.getAtmosphereScore(),
+                reviewForm.isAnonymous(),
+                new Date()
+        );
         service.addReview(review);
-        model.addAttribute("addedReview", review.getId());
-        return new ModelAndView("/profile", fillModel(model, SessionAuth.getStudent()));
+        return new ModelAndView("redirect:/profile", fillModel(model, current));
     }
 }
