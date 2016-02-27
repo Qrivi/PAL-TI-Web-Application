@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+    <!-- BASIC -->
+
+    <definition name="basic" template="/WEB-INF/tiles/template/basic-template.jsp">
+        <put-attribute name="header" value="/WEB-INF/tiles/template/basic/header.jsp"/>
+        <put-attribute name="sidebar" value="/WEB-INF/tiles/template/basic/sidebar.jsp"/>
+        <put-list-attribute name="stylesheets">
+            <add-attribute value="/resources/global.css"/>
+        </put-list-attribute>
+        <put-list-attribute name="javascripts">
+            <add-attribute value="/resources/global.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="student/profile" extends="basic">
+        <put-attribute name="page_title" value="Profile"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="profile" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/student/profile.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/profile.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- AUTHENTICATION -->
+
+    <definition name="auth" template="/WEB-INF/tiles/template/auth-template.jsp">
+        <put-attribute name="header" value="/WEB-INF/tiles/template/auth/header.jsp"/>
+        <put-list-attribute name="stylesheets">
+            <add-attribute value="/resources/global.css"/>
+        </put-list-attribute>
+        <put-list-attribute name="javascripts">
+            <add-attribute value="/resources/global.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="auth/login" extends="auth">
+        <put-attribute name="page_title" value="Login"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auth/login.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/login.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="auth/register" extends="auth">
+        <put-attribute name="page_title" value="Register"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auth/register.jsp"/>
+    </definition>
+
+    <definition name="auth/reset" extends="auth">
+        <put-attribute name="page_title" value="Password Reset"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auth/reset.jsp"/>
+    </definition>
+
+    <definition name="auth/reset_validation" extends="auth">
+        <put-attribute name="page_title" value="Password Reset"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auth/reset_validation.jsp"/>
+    </definition>
+
+    <definition name="auth/lockscreen" extends="auth">
+        <put-attribute name="page_title" value="Login"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auth/lockscreen.jsp"/>
+    </definition>
+
+</tiles-definitions>

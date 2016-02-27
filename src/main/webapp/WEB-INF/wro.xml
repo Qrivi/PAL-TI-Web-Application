@@ -23,7 +23,7 @@
         <!-- calendar -->
         <css>https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css</css>
         <!-- admin-lte-css -->
-        <css>/WEB-INF/resources/dist/css/AdminLTE.min.css</css>
+        <css>/WEB-INF/resources/dist/css/AdminLTE.css</css>
         <css>/WEB-INF/resources/dist/css/skins/skin-blue.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
         <!-- jquery -->
