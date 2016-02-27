@@ -138,7 +138,7 @@ public class ProfileController extends StudentController
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById(id);
         //I did not go this lesson or lesson is not in the past
-        if(lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().after(new Date())){
+        if(lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().before(new Date())){
             return new ModelAndView("redirect:/profile");
         }
         return new ModelAndView("student/review_add", fillModel(model, current));
@@ -149,7 +149,7 @@ public class ProfileController extends StudentController
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById(id);
         //I did not go this lesson or lesson is not in the past
-        if (lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().after(new Date())) {
+        if (lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().before(new Date())) {
             return new ModelAndView("redirect:/profile");
         } else if (result.hasErrors()) {
             return new ModelAndView("student/review_add", fillModel(model, current));
