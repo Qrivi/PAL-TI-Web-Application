@@ -137,8 +137,8 @@ public class ProfileController extends StudentController
     public ModelAndView addReview(@PathVariable(value = "id") int id, ModelMap model) {
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById(id);
-        //I did not go this lesson
-        if(!lesson.getBookings().contains(current)){
+        //I did not go this lesson or lesson is not in the past
+        if(lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().after(new Date())){
             return new ModelAndView("redirect:/profile");
         }
         return new ModelAndView("student/review_add", fillModel(model, current));
@@ -148,8 +148,8 @@ public class ProfileController extends StudentController
     public ModelAndView addReview(@PathVariable(value = "id") int id, @Valid @ModelAttribute("review") ReviewForm reviewForm, BindingResult result, ModelMap model) {
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById(id);
-        //I did not go this lesson
-        if (lesson == null || !lesson.getBookings().contains(current)) {
+        //I did not go this lesson or lesson is not in the past
+        if (lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().after(new Date())) {
             return new ModelAndView("redirect:/profile");
         } else if (result.hasErrors()) {
             return new ModelAndView("student/review_add", fillModel(model, current));
