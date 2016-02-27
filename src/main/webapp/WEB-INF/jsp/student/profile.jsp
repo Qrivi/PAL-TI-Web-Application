@@ -122,62 +122,23 @@
                                                 <p>${lesson.description}</p>
                                             </div>
                                             <div class="box-footer">
-                                                <form:form action="/profile/lesson/${lesson.id}/review/add"
-                                                           commandName="review" method="post"
-                                                           class="form-horizontal">
-                                                    <div class="row">
-                                                        <div class="col-md-1">
-                                                            <div class="row">
-                                                                <div class="col-md-offset-2 col-md-10">
-                                                                    <img class="img-responsive img-circle img-sm"
-                                                                         src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
-                                                                         alt="Alt Text">
-                                                                </div>
-                                                                <div class="col-md-1">
-                                                                    <form:checkbox class="col-md-1"
-                                                                                   path="anonymous"
-                                                                                   aria-label="..."/>
-                                                                </div>
-                                                                <span class="col-md-11">Anonymous</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-11">
-                                                            <!-- .img-push is used to add margin to elements next to floating images -->
-                                                            <div class="img-push row">
-                                                                <div class="col-md-3">
-                                                                            <span>Content Score:<span>
-                                                                                    <form:input path="contentScore"
-                                                                                                type="number" min="1"
-                                                                                                max="10"/>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                            <span>Tutor Score:<span>
-                                                                                    <form:input path="tutorScore"
-                                                                                                type="number" min="1"
-                                                                                                max="10"/>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                            <span>Engagement Score:<span>
-                                                                                    <form:input path="engagementScore"
-                                                                                                type="number" min="1"
-                                                                                                max="10"/>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <sapn>Atmosphere Score:<span>
-                                                                            <form:input path="atmosphereScore"
-                                                                                        type="number" min="1"
-                                                                                        max="10"/>
-                                                                </div>
-                                                                <div class="col-md-12">
-                                                                    <form:input path="text" type="text"
-                                                                                class="form-control"
-                                                                                aria-label="..."/>
-                                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <div class="row">
+                                                            <div class="col-md-offset-2 col-md-10">
+                                                                <img class="img-responsive img-circle img-sm"
+                                                                     src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
+                                                                     alt="Alt Text">
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-11">
+                                                        <!-- .img-push is used to add margin to elements next to floating images -->
+                                                        <div class="img-push row">
 
-                                                </form:form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
