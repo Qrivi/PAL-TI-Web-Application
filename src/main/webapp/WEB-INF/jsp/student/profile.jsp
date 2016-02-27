@@ -116,6 +116,26 @@
                                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                                         <div class="img-push row">
                                                             <!-- todo add current review + edit button or add add review button -->
+                                                            <c:choose>
+                                                                <c:when test="${lessonReview.review != null}">
+                                                                    <div class="row">
+                                                                        <div class="col-md-10">
+                                                                            ${lessonReview.review.text}
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <a href="/profile/lesson/${lessonReview.lesson.id}/reviews/add" class="btn btn-default pull-right">
+                                                                                <i class="fa fa-commenting-o"> Edit review</i>
+                                                                            </a>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <a href="/profile/lesson/${lessonReview.lesson.id}/reviews/add" class="btn btn-default pull-right">
+                                                                        <i class="fa fa-commenting-o"> Add review</i>
+                                                                    </a>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                         </div>
                                                     </div>
                                                 </div>

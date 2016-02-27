@@ -18,22 +18,22 @@ $(document).ready(function() {
      * creates the star rating
      */
     $("#contentScore").rateYo({
-        rating: 0,
+        rating: $("#contentScoreInput").val(),
         maxValue: 10,
         halfStar: true
     });
     $("#atmosphereScore").rateYo({
-        rating: 0,
+        rating: $("#atmosphereScoreInput").val(),
         maxValue: 10,
         halfStar: true
     });
     $("#tutorScore").rateYo({
-        rating: 0,
+        rating: $("#tutorScoreInput").val(),
         maxValue: 10,
         halfStar: true
     });
     $("#engagementScore").rateYo({
-        rating: 0,
+        rating: $("#engagementScoreInput").val(),
         maxValue: 10,
         halfStar: true
     });
