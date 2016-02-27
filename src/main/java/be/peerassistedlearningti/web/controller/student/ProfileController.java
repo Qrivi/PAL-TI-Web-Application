@@ -61,6 +61,7 @@ public class ProfileController extends StudentController
             {
                 list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( student, lesson ) ) );
             }
+            model.addAttribute("lessonReviews", list);
         }
         if ( model.get( "review" ) == null )
         {
