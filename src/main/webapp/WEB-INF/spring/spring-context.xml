@@ -6,14 +6,19 @@
         xmlns:context="http://www.springframework.org/schema/context"
         xmlns:spring-data="http://www.springframework.org/schema/data/jpa"
         xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
-        xmlns="http://www.springframework.org/schema/beans"
+        xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
 
         xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
     http://www.springframework.org/schema/data/jpa
-    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/jee
+    http://www.springframework.org/schema/jee/spring-jee.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task.xsd">
 
     <context:annotation-config/>
     <context:component-scan base-package="be.peerassistedlearningti"/>
@@ -56,6 +61,14 @@
 
     <spring-data:repositories base-package="be.peerassistedlearningti.repository, be.peerassistedlearningti.service"/>
 
+    <!-- Task Executor -->
+
+    <task:annotation-driven/>
+
+    <!-- Student utils -->
+
+    <bean class="be.peerassistedlearningti.web.model.util.StudentUtils"/>
+
     <!-- Message factory -->
 
     <bean class="be.peerassistedlearningti.web.model.util.MessageFactory"/>
@@ -63,7 +76,6 @@
     <!-- Reset mail -->
 
     <bean id="resetMail" class="be.peerassistedlearningti.web.model.util.MailSender"/>
-
 
     <!-- Java Mail -->
 

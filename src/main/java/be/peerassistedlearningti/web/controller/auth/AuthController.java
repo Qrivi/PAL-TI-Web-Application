@@ -8,6 +8,7 @@ import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.MessageFactory;
+import be.peerassistedlearningti.web.model.util.StudentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -75,32 +76,11 @@ public class AuthController
             return new ModelAndView( "auth/register" );
 
         service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail()
-                .toLowerCase(), createProfileIdentifier( form.getName() ), UserType.NORMAL ) );
+                .toLowerCase(), StudentUtils.createProfileIdentifier( form.getName() ), UserType.NORMAL ) );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Register" ) );
 
         return new ModelAndView( "redirect:/auth/login" );
-    }
-
-    private String createProfileIdentifier( String name )
-    {
-        name = name.trim()
-                .toLowerCase()
-                .replaceAll( " ", "." );
-        Student s = service.getStudentByProfileIdentifier( name );
-
-        if ( s == null )
-            return name;
-
-        if ( Character.isDigit( name.charAt( name.length() - 1 ) ) )
-        {
-            int i = Character.getNumericValue( name.charAt( name.length() - 1 ) );
-            name = name.substring( 0, name.length() - 1 );
-            return name + ( i + 1 );
-        } else
-        {
-            return createProfileIdentifier( name + ".1" );
-        }
     }
 
     //================================================================================
