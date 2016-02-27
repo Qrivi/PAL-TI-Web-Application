@@ -113,7 +113,7 @@
                                             <form:label path="backupRoom">Backup room :
                                                 <c:if test="${not empty backupRoomError}">
                                                     <span
-                                                        class="text-danger">${backupRoomError}
+                                                            class="text-danger">${backupRoomError}
                                                     </span>
                                                 </c:if>
                                             </form:label>
@@ -126,7 +126,8 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary pull-right">Back</button>
-                                    <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>Change</button>
+                                    <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>
+                                    Change</button>
                                 </div>
                             </form:form>
                         </div>
@@ -168,7 +169,7 @@
                                 <div class="col-md-2 col-sm-3 col-xs-6">
                                     <li style="padding-bottom: 10px;">
                                         <a class="users-list-name"
-                                           href="<c:url value="/profile/${student.id}"/>">
+                                           href="<c:url value="/profile/${student.profileIdentifier}"/>">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <img class="profile-user-img img-circle"

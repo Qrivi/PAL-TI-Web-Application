@@ -54,14 +54,17 @@ public class ProfileController extends StudentController
         {
             model.addAttribute( "reviews", service.getReviewsForStudent( student ) );
         }
-        if(model.get("lessonReviews") == null){
+        if ( model.get( "lessonReviews" ) == null )
+        {
             List<LessonReviewWrapper> list = new ArrayList<>();
-            for(Lesson lesson: student.getClosedBookings()){
-                list.add(new LessonReviewWrapper(lesson,service.getReviewsForStudentAndLesson(student,lesson)));
+            for ( Lesson lesson : student.getClosedBookings() )
+            {
+                list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( student, lesson ) ) );
             }
         }
-        if (model.get("review") == null) {
-            model.addAttribute("review", new ReviewForm());
+        if ( model.get( "review" ) == null )
+        {
+            model.addAttribute( "review", new ReviewForm() );
         }
         if ( model.get( "timeline" ) == null )
         {
@@ -78,15 +81,16 @@ public class ProfileController extends StudentController
     }
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getProfile( ModelMap model )
+    public ModelAndView getProfile()
     {
-        return new ModelAndView( "student/profile", fillModel( model, SessionAuth.getStudent() ) );
+        return new ModelAndView( "redirect:/profile/" + SessionAuth.getStudent()
+                .getProfileIdentifier() );
     }
 
-    @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public ModelAndView getOtherProfile( @PathVariable( "id" ) int id, ModelMap model )
+    @RequestMapping( value = "/{identifier:.+}", method = RequestMethod.GET )
+    public ModelAndView getProfile( @PathVariable( "identifier" ) String id, ModelMap model )
     {
-        Student student = service.getStudentById( id );
+        Student student = service.getStudentByProfileIdentifier( id );
 
         if ( student == null )
             return new ModelAndView( "redirect:/profile" );
@@ -94,13 +98,23 @@ public class ProfileController extends StudentController
         return new ModelAndView( "student/profile", fillModel( model, student ) );
     }
 
-    @RequestMapping( method = RequestMethod.POST )
-    public ModelAndView modifyStudentProfile( @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result, ModelMap model )
+    @RequestMapping( value = "/{identifier:.+}", method = RequestMethod.POST )
+    public ModelAndView modifyStudentProfile( @PathVariable( "identifier" ) String id, @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "student/profile", fillModel( model, SessionAuth.getStudent() ) );
 
         Student student = SessionAuth.getStudent();
+        Student s = service.getStudentByProfileIdentifier( id );
+
+        if ( !s.equals( student ) )
+            return new ModelAndView( "redirect:/profile" );
+
+        if ( !form.getName()
+                .equals( student.getName() ) )
+        {
+            student.setProfileIdentifier( createProfileIdentifier( form.getName() ) );
+        }
 
         student.setName( StringUtils.defaultIfEmpty( form.getName(), student.getName() ) );
         student.setEmail( StringUtils.defaultIfEmpty( form.getEmail(), student.getEmail() ) );
@@ -133,39 +147,59 @@ public class ProfileController extends StudentController
         return new ModelAndView( "redirect:/profile" );
     }
 
-    @RequestMapping(value = "/lesson/{id}/reviews/add", method = RequestMethod.GET)
-    public ModelAndView addReview(@PathVariable(value = "id") int id, ModelMap model) {
-        Student current = SessionAuth.getStudent();
-        Lesson lesson = service.getLessonById(id);
-        //I did not go this lesson or lesson is not in the past
-        if(lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().before(new Date())){
-            return new ModelAndView("redirect:/profile");
+    private String createProfileIdentifier( String name )
+    {
+        name = name.trim()
+                .toLowerCase()
+                .replaceAll( " ", "." );
+        Student s = service.getStudentByProfileIdentifier( name );
+
+        if ( s == null )
+            return name;
+
+        if ( Character.isDigit( name.charAt( name.length() - 1 ) ) )
+        {
+            int i = Character.getNumericValue( name.charAt( name.length() - 1 ) );
+            name = name.substring( 0, name.length() - 1 );
+            return name + ( i + 1 );
+        } else
+        {
+            return createProfileIdentifier( name + ".1" );
         }
-        return new ModelAndView("student/review_add", fillModel(model, current));
     }
 
-    @RequestMapping(value = "/lesson/{id}/reviews/add", method = RequestMethod.POST)
-    public ModelAndView addReview(@PathVariable(value = "id") int id, @Valid @ModelAttribute("review") ReviewForm reviewForm, BindingResult result, ModelMap model) {
+    @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.GET )
+    public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
+    {
         Student current = SessionAuth.getStudent();
-        Lesson lesson = service.getLessonById(id);
+        Lesson lesson = service.getLessonById( id );
         //I did not go this lesson or lesson is not in the past
-        if (lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().before(new Date())) {
-            return new ModelAndView("redirect:/profile");
-        } else if (result.hasErrors()) {
-            return new ModelAndView("student/review_add", fillModel(model, current));
+        if ( lesson == null || !lesson.getBookings()
+                .contains( current ) || !lesson.getDate()
+                .before( new Date() ) )
+        {
+            return new ModelAndView( "redirect:/profile" );
         }
-        Review review = new Review(
-                reviewForm.getText(),
-                SessionAuth.getStudent(),
-                lesson,
-                reviewForm.getContentScore(),
-                reviewForm.getTutorScore(),
-                reviewForm.getEngagementScore(),
-                reviewForm.getAtmosphereScore(),
-                reviewForm.isAnonymous(),
-                new Date()
-        );
-        service.addReview(review);
-        return new ModelAndView("redirect:/profile", fillModel(model, current));
+        return new ModelAndView( "student/review_add", fillModel( model, current ) );
+    }
+
+    @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.POST )
+    public ModelAndView addReview( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result, ModelMap model )
+    {
+        Student current = SessionAuth.getStudent();
+        Lesson lesson = service.getLessonById( id );
+        //I did not go this lesson or lesson is not in the past
+        if ( lesson == null || !lesson.getBookings()
+                .contains( current ) || !lesson.getDate()
+                .before( new Date() ) )
+        {
+            return new ModelAndView( "redirect:/profile" );
+        } else if ( result.hasErrors() )
+        {
+            return new ModelAndView( "student/review_add", fillModel( model, current ) );
+        }
+        Review review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm.getAtmosphereScore(), reviewForm.isAnonymous(), new Date() );
+        service.addReview( review );
+        return new ModelAndView( "redirect:/profile", fillModel( model, current ) );
     }
 }

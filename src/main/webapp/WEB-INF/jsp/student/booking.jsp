@@ -41,7 +41,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <a href="<c:url value="/profile/${booking.tutor.student.id}"/>" alt="Tutor info">
+                                        <a href="<c:url value="/profile/${booking.tutor.student.profileIdentifier}"/>" alt="Tutor info">
                                                     <span class="info-box-icon">
                                                         <img class="img-circle"
                                                              src="<c:url value="/resources/students/${booking.tutor.student.id}/avatar.png"/>"

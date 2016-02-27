@@ -29,15 +29,15 @@
         </put-list-attribute>
     </definition>
 
-<definition name="student/review_add" extends="basic">
-    <put-attribute name="page_title" value="Review"/>
-    <put-attribute name="page_description" value=""/>
-    <put-attribute name="nav_item" value="profile" cascade="true"/>
-    <put-attribute name="content" value="/WEB-INF/jsp/student/review_add.jsp"/>
-    <put-list-attribute name="javascripts" inherit="true">
-        <add-attribute value="/resources/js/review_add.js"/>
-    </put-list-attribute>
-</definition>
+    <definition name="student/review_add" extends="basic">
+        <put-attribute name="page_title" value="Review"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="profile" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/student/review_add.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/review_add.js"/>
+        </put-list-attribute>
+    </definition>
 
     <definition name="student/calendar" extends="basic">
         <put-attribute name="page_title" value="Calendar"/>
@@ -52,7 +52,7 @@
     <definition name="student/booking" extends="basic">
         <put-attribute name="page_title" value="Booking"/>
         <put-attribute name="page_description" value=""/>
-        <put-attribute name="nav_item" value="calendar" cascade="true"/>
+        <put-attribute name="nav_item" value="booking" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/booking.jsp"/>
         <put-list-attribute name="javascripts" inherit="true">
             <add-attribute value="/resources/js/booking.js"/>

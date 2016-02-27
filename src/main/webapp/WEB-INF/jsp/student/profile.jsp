@@ -218,7 +218,7 @@
                         <div class="tab-pane" id="settings">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <form:form class="form-horizontal" method="put" action="/profile" commandName="profile"
+                                    <form:form class="form-horizontal" method="put" commandName="profile"
                                                enctype="multipart/form-data">
                                         <c:set var="nameError"><form:errors path="name"/></c:set>
                                         <c:set var="emailError"><form:errors path="email"/></c:set>
