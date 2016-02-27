@@ -7,6 +7,7 @@ import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
+import be.peerassistedlearningti.web.model.util.LessonReviewWrapper;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import be.peerassistedlearningti.web.model.util.Timeline;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping( value = "/profile" )
@@ -49,7 +52,13 @@ public class ProfileController extends StudentController
         }
         if ( tutor != null && model.get( "reviews" ) == null )
         {
-            model.addAttribute( "reviews", service.getReviews( tutor ) );
+            model.addAttribute( "reviews", service.getReviewsForStudent( student ) );
+        }
+        if(model.get("lessonReviews") == null){
+            List<LessonReviewWrapper> list = new ArrayList<>();
+            for(Lesson lesson: student.getClosedBookings()){
+                list.add(new LessonReviewWrapper(lesson,service.getReviewsForStudentAndLesson(student,lesson)));
+            }
         }
         if (model.get("review") == null) {
             model.addAttribute("review", new ReviewForm());
