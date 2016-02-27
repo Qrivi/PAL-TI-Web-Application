@@ -26,20 +26,15 @@
                         <div class="row">
                             <!-- contentScore field -->
                             <div class="col-md-3 col-sm-6">
+                                <span class="control-label">Content</span>
                                 <div class="form-group" >
                                     <div id="contentScore" ></div>
                                     <form:input  id="contentScoreInput" type="hidden" min="1" max="10" path="contentScore" class="form-control" placeholder="Content score"/>
                                 </div>
                             </div>
-                            <!-- tutorScore field -->
-                            <div class="col-md-3 col-sm-6">
-                                <div class="form-group" >
-                                    <div id="tutorScore"></div>
-                                    <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore" class="form-control rateYo" placeholder="Tutor score"/>
-                                </div>
-                            </div>
                             <!-- engagementScore field -->
                             <div class="col-md-3 col-sm-6">
+                                <span class="control-label">Engagement</span>
                                 <div class="form-group" >
                                     <div id="engagementScore" ></div>
                                     <form:input id="engagementScoreInput" type="hidden" min="1" max="10" path="engagementScore" class="form-control rateYo" placeholder="Engagement score"/>
@@ -47,9 +42,18 @@
                             </div>
                             <!-- AtmosphereScore field -->
                             <div class="col-md-3 col-sm-6">
+                                <span class="control-label">Atmosphere</span>
                                 <div class="form-group" >
                                     <div id="atmosphereScore" ></div>
                                     <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10" path="AtmosphereScore" class="form-control rateYo" placeholder="Atmosphere score"/>
+                                </div>
+                            </div>
+                            <!-- tutorScore field -->
+                            <div class="col-md-3 col-sm-6">
+                                <span class="control-label">Tutor</span>
+                                <div class="form-group" >
+                                    <div id="tutorScore"></div>
+                                    <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore" class="form-control rateYo" placeholder="Tutor score"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
