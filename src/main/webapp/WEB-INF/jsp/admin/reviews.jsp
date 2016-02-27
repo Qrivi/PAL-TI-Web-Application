@@ -65,7 +65,7 @@
                                                       method="POST">
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${review.id}"/>
-                                                    <button class="btn btn-sm"><i class="fa fa-trash"></i>
+                                                    <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i>
                                                     </button>
                                                 </form>
                                             </td>

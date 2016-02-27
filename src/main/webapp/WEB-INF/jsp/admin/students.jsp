@@ -49,14 +49,11 @@
                                                 <form class="small" action="<c:url value="/admin/students" />" method="POST">
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${student.id}"/>
-                                                    <button class="btn btn-sm" data-toggle="tooltip"
-                                                            title="Delete">
+                                                    <button class="btn btn-sm" data-toggle="tooltip" title="Delete">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                                <button class="btn btn-sm update"
-                                                        data-id="${student.id}" data-toggle="tooltip"
-                                                        title="Edit">
+                                                <button class="btn btn-sm update" data-id="${student.id}" data-toggle="tooltip" title="Edit">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
                                             </td>
