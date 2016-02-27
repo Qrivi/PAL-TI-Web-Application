@@ -27,15 +27,8 @@ public class AuthController
     @Autowired
     MailSender mailSender;
 
-    //================================================================================
-    // region Login
-    //================================================================================
     @Autowired
-    private PALService service;
-
-    //================================================================================
-    // endregion
-    //================================================================================
+    PALService service;
 
     //================================================================================
     // region Login
@@ -61,10 +54,53 @@ public class AuthController
         return new ModelAndView( "auth/login", model );
     }
 
+    //================================================================================
+    // endregion
+    //================================================================================
+
+    //================================================================================
+    // region Register
+    //================================================================================
+
     @RequestMapping( value = "/register", method = RequestMethod.GET )
     public ModelAndView registerStudent( ModelMap model )
     {
         return new ModelAndView( "auth/register", "register", new RegisterForm() );
+    }
+
+    @RequestMapping( value = "/register", method = RequestMethod.POST )
+    public ModelAndView registerStudent( @Valid @ModelAttribute( "register" ) RegisterForm form, BindingResult result, RedirectAttributes redirectAttributes )
+    {
+        if ( result.hasErrors() )
+            return new ModelAndView( "auth/register" );
+
+        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail()
+                .toLowerCase(), createProfileIdentifier( form.getName() ), UserType.NORMAL ) );
+
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Register" ) );
+
+        return new ModelAndView( "redirect:/auth/login" );
+    }
+
+    private String createProfileIdentifier( String name )
+    {
+        name = name.trim()
+                .toLowerCase()
+                .replaceAll( " ", "." );
+        Student s = service.getStudentByProfileIdentifier( name );
+
+        if ( s == null )
+            return name;
+
+        if ( Character.isDigit( name.charAt( name.length() - 1 ) ) )
+        {
+            int i = Character.getNumericValue( name.charAt( name.length() - 1 ) );
+            name = name.substring( 0, name.length() - 1 );
+            return name + ( i + 1 );
+        } else
+        {
+            return createProfileIdentifier( name + ".1" );
+        }
     }
 
     //================================================================================
@@ -74,20 +110,6 @@ public class AuthController
     //================================================================================
     // region Reset
     //================================================================================
-
-    @RequestMapping( value = "/register", method = RequestMethod.POST )
-    public ModelAndView registerStudent( @Valid @ModelAttribute( "register" ) RegisterForm form, BindingResult result, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "auth/register" );
-
-        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail()
-                .toLowerCase(), UserType.NORMAL ) );
-
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Register" ) );
-
-        return new ModelAndView( "redirect:/auth/login" );
-    }
 
     @RequestMapping( value = "/reset", method = RequestMethod.GET )
     public ModelAndView resetPassword()

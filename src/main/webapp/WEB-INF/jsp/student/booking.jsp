@@ -41,7 +41,7 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <a href="<c:url value="/profile/${booking.tutor.student.id}"/>" alt="Tutor info">
+                                        <a href="<c:url value="/profile/${booking.tutor.student.profileIdentifier}"/>" alt="Tutor info">
                                                     <span class="info-box-icon">
                                                         <img class="img-circle"
                                                              src="<c:url value="/resources/students/${booking.tutor.student.id}/avatar.png"/>"
@@ -122,7 +122,7 @@
                                                 <td>${lesson.name}</td>
                                                 <td>${lesson.course.name}</td>
                                                 <td>${lesson.date}</td>
-                                                <td>${lesson.duration}</td>
+                                                <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
                                                 <td>
                                                     <div class="progress progress-xs">
                                                         <div class="progress-bar

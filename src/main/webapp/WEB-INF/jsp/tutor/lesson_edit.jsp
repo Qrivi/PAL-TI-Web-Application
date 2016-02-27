@@ -125,7 +125,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary pull-right">Back</button>
+                                    <a href="<c:url value="/tutor/lessons"/>" class="btn btn-primary pull-right"><span>Back</span></a>
                                     <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>Change</button>
                                 </div>
                             </form:form>
@@ -142,12 +142,11 @@
                     <div class=" col-md-10 progress">
                         <c:set var="percentage" value="${bookings.size()/lesson.maxParticipants*100}"/>
                         <div class="progress-bar progress-bar-striped active
-                                        <c:choose>
-                                            <c:when test="${percentage < 60}">progress-bar-success</c:when>
-                                            <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
-                                            <c:when test="${percentage == 100}">progress-bar-danger</c:when>
-                                        </c:choose>"
-                             style="width: ${bookings.size()/lesson.maxParticipants*100}%"></div>
+                            <c:choose>
+                                <c:when test="${percentage < 60}">progress-bar-success</c:when>
+                                <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
+                                <c:when test="${percentage == 100}">progress-bar-danger</c:when>
+                            </c:choose>" style="width: ${bookings.size()/lesson.maxParticipants*100}%"></div>
                     </div>
                     <div class="box-tools pull-right col-md-1">
                         <span class="label label-danger">${bookings.size()} bookings</span>
