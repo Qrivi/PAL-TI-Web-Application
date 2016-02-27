@@ -15,12 +15,27 @@
 <section class="content">
     <div class="row">
         <!-- lesson info -->
+
         <div class="col-md-12">
-            <!-- todo add lesson info -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Lesson</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
         </div>
         <!-- review form -->
         <div class="col-md-12">
-            <div class="box">
+            <div class="box box-primary">
                 <form:form method="post" commandName="review" enctype="application/x-www-form-urlencoded">
                     <div class="box-body">
                         <div class="row">

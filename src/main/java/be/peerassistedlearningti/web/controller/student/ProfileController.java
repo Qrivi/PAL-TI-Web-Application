@@ -141,6 +141,7 @@ public class ProfileController extends StudentController
         if(lesson == null || !lesson.getBookings().contains(current) || !lesson.getDate().before(new Date())){
             return new ModelAndView("redirect:/profile");
         }
+        model.addAttribute("lesson", lesson);
         return new ModelAndView("student/review_add", fillModel(model, current));
     }
 
