@@ -17,6 +17,8 @@
         </put-list-attribute>
     </definition>
 
+    <!-- BASIC - STUDENT -->
+
     <definition name="student/profile" extends="basic">
         <put-attribute name="page_title" value="Profile"/>
         <put-attribute name="page_description" value=""/>
@@ -26,6 +28,151 @@
             <add-attribute value="/resources/js/profile.js"/>
         </put-list-attribute>
     </definition>
+
+    <definition name="student/calendar" extends="basic">
+        <put-attribute name="page_title" value="Calendar"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="calendar" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/student/calendar.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/calendar.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="student/booking" extends="basic">
+        <put-attribute name="page_title" value="Booking"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="calendar" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/student/booking.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/booking.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="student/apply" extends="basic">
+        <put-attribute name="page_title" value="Apply"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="apply" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/student/apply.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/apply.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- BASIC - TUTOR -->
+
+    <definition name="tutor/lesson_add" extends="basic">
+        <put-attribute name="page_title" value="Add a Lesson"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="tutor_lesson_add" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/tutor/lesson_add.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/lesson.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="tutor/lesson_edit" extends="basic">
+        <put-attribute name="page_title" value="Edit a Lesson"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="tutor_lesson_add" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/tutor/lesson_edit.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/lesson.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="tutor/lesson_info" extends="basic">
+        <put-attribute name="page_title" value="Info for a Lesson"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="tutor_lesson_add" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/tutor/lesson_edit.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/lesson.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="tutor/lessons" extends="basic">
+        <put-attribute name="page_title" value="Lessons"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="tutor_lessons" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/tutor/lessons.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/tutor_lessons.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <!-- BASIC - ADMIN -->
+
+    <definition name="admin/students" extends="basic">
+        <put-attribute name="page_title" value="Students"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="students" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/students.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/students.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="admin/applications" extends="basic">
+        <put-attribute name="page_title" value="Applications"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="applications" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/applications.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/applications.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="admin/courses" extends="basic">
+        <put-attribute name="page_title" value="Courses"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="courses" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/courses.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/courses.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="admin/lessons" extends="basic">
+        <put-attribute name="page_title" value="Lessons"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="courses" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/lessons.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/lessons.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="admin/reviews" extends="basic">
+        <put-attribute name="page_title" value="Reviews"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="reviews" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/reviews.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/reviews.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="admin/rooms" extends="basic">
+        <put-attribute name="page_title" value="Rooms"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="rooms" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/rooms.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/rooms.js"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="admin/tutors" extends="basic">
+        <put-attribute name="page_title" value="Tutors"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="tutors" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/tutors.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/tutors.js"/>
+        </put-list-attribute>
+    </definition>
+
 
     <!-- AUTHENTICATION -->
 
