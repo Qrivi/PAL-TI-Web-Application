@@ -113,7 +113,7 @@
                                             <form:label path="backupRoom">Backup room :
                                                 <c:if test="${not empty backupRoomError}">
                                                     <span
-                                                            class="text-danger">${backupRoomError}
+                                                        class="text-danger">${backupRoomError}
                                                     </span>
                                                 </c:if>
                                             </form:label>
@@ -125,9 +125,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary pull-right">Back</button>
-                                    <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>
-                                    Change</button>
+                                    <a href="<c:url value="/tutor/lessons"/>" class="btn btn-primary pull-right"><span>Back</span></a>
+                                    <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>Change</button>
                                 </div>
                             </form:form>
                         </div>
@@ -143,12 +142,11 @@
                     <div class=" col-md-10 progress">
                         <c:set var="percentage" value="${bookings.size()/lesson.maxParticipants*100}"/>
                         <div class="progress-bar progress-bar-striped active
-                                        <c:choose>
-                                            <c:when test="${percentage < 60}">progress-bar-success</c:when>
-                                            <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
-                                            <c:when test="${percentage == 100}">progress-bar-danger</c:when>
-                                        </c:choose>"
-                             style="width: ${bookings.size()/lesson.maxParticipants*100}%"></div>
+                            <c:choose>
+                                <c:when test="${percentage < 60}">progress-bar-success</c:when>
+                                <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
+                                <c:when test="${percentage == 100}">progress-bar-danger</c:when>
+                            </c:choose>" style="width: ${bookings.size()/lesson.maxParticipants*100}%"></div>
                     </div>
                     <div class="box-tools pull-right col-md-1">
                         <span class="label label-danger">${bookings.size()} bookings</span>
@@ -169,7 +167,7 @@
                                 <div class="col-md-2 col-sm-3 col-xs-6">
                                     <li style="padding-bottom: 10px;">
                                         <a class="users-list-name"
-                                           href="<c:url value="/profile/${student.profileIdentifier}"/>">
+                                           href="<c:url value="/profile/${student.id}"/>">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <img class="profile-user-img img-circle"

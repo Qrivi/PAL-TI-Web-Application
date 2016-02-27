@@ -62,7 +62,7 @@
                                             <td>${lesson.course.name}</td>
                                             <td>${lesson.description}</td>
                                             <td>${lesson.date}</td>
-                                            <td>${lesson.duration}</td>
+                                            <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
                                             <td>${lesson.maxParticipants}</td>
                                             <td>${lesson.tutor.student.name}</td>
                                             <td>${lesson.room.name}</td>

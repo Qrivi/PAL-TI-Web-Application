@@ -93,7 +93,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Date</th>
-                                            <th>Duration (in minutes)</th>
+                                            <th>Duration</th>
                                             <th>Course</th>
                                             <th>Participants</th>
                                             <th>Room</th>
@@ -119,7 +119,7 @@
                                                 <td>${lesson.name}</td>
                                                 <td><fmt:formatDate pattern="EEE. dd/MM/YYYY HH:mm"
                                                                     value="${lesson.date}"/></td>
-                                                <td>${lesson.duration}</td>
+                                                <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
                                                 <td>${lesson.course.name}</td>
                                                 <td>
                                                     <div class="progress progress-xs">
