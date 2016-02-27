@@ -21,6 +21,14 @@ form.small {
     margin-bottom: 0;
 }
 
+.form-horizontal {
+    margin-bottom: 0;
+}
+
+.form-horizontal > .form-group:last-child {
+    margin-bottom: 0;
+}
+
 input[type=file] {
     padding: 6px 0;
 }

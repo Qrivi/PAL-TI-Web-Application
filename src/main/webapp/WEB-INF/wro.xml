@@ -10,8 +10,6 @@
         <css>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</css>
         <!-- font-awesome -->
         <css>https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css</css>
-        <!-- ion-icons -->
-        <css>https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css</css>
         <!-- Select2 -->
         <css>https://almsaeedstudio.com/themes/AdminLTE/plugins/select2/select2.min.css</css>
         <!-- datetime-picker-css -->
