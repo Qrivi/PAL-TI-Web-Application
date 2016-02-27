@@ -68,26 +68,26 @@
                     <c:if test="${user == auth}">
                         <div class="tab-pane" id="activity">
                             <div class="row">
-                                <c:if test="${empty user.closedBookings}">
+                                <c:if test="${empty lessonReviews}">
                                     <div class="alert alert-info col-sm-4 col-sm-offset-4">
                                         <h4><i class="icon fa fa-info-circle"></i>No closed bookings</h4>
                                         Once you've finished a lesson, you will be able to post a review
                                         here.
                                     </div>
                                 </c:if>
-                                <c:forEach var="lesson" items="${user.closedBookings}">
+                                <c:forEach var="lessonReview" items="${lessonReviews}">
                                     <div class="col-md-12">
                                         <div class="box box-default">
                                             <div class="box-header with-border">
                                                 <div class="user-block">
                                                     <img class="profile-user-img img-responsive img-circle"
-                                                         src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
+                                                         src="<c:url value="/resources/students/${lessonReview.lesson.tutor.student.id}/avatar.png"/>"
                                                          alt="User profile picture">
                                                             <span class="username"><a
-                                                                    href="#">${lesson.tutor.student.name}</a></span>
-                                                            <span class="description">${lesson.course.name} - <fmt:formatDate
+                                                                    href="#">${lessonReview.lesson.tutor.student.name}</a></span>
+                                                            <span class="description">${lessonReview.lesson.course.name} - <fmt:formatDate
                                                                     pattern="HH:mm dd MMMMMMMMM YYYY"
-                                                                    value="${lesson.date}"/> </span>
+                                                                    value="${lessonReview.lesson.date}"/> </span>
                                                 </div>
                                                 <div class="box-tools">
                                                     <button type="button" class="btn btn-box-tool"
@@ -98,8 +98,8 @@
                                             </div>
                                             <div class="box-body">
                                                 <!-- post text -->
-                                                <strong>${lesson.name}</strong>
-                                                <p>${lesson.description}</p>
+                                                <strong>${lessonReview.lesson.name}</strong>
+                                                <p>${lessonReview.lesson.description}</p>
                                             </div>
                                             <div class="box-footer">
                                                 <div class="row">
@@ -115,7 +115,7 @@
                                                     <div class="col-md-11">
                                                         <!-- .img-push is used to add margin to elements next to floating images -->
                                                         <div class="img-push row">
-
+                                                            <!-- todo add current review + edit button or add add review button -->
                                                         </div>
                                                     </div>
                                                 </div>
