@@ -57,9 +57,13 @@
                                                 <form class="small" action="<c:url value="/admin/courses" />" method="POST">
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${course.id}"/>
-                                                    <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
+                                                    <button class="btn btn-sm" data-toggle="tooltip" title="Delete">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
                                                 </form>
-                                                <button class="btn btn-sm update" data-id="${course.id}"><i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-sm update" data-id="${course.id}" data-toggle="tooltip" title="Edit">
+                                                    <i class="fa fa-pencil"></i>
+                                                </button>
                                             </td>
                                         </tr>
                                     </c:forEach>

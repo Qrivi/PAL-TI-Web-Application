@@ -59,7 +59,7 @@
                                     <c:forEach var="lesson" items="${lessons}">
                                         <tr>
                                             <td>${lesson.name}</td>
-                                            <td>${lesson.course.name}</td>
+                                            <td>${lesson.course.shortName}</td>
                                             <td>${lesson.description}</td>
                                             <td>${lesson.date}</td>
                                             <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
@@ -73,7 +73,7 @@
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${lesson.id}"/>
                                                     <button class="btn btn-sm" data-toggle="tooltip"
-                                                            title="Delete">
+                                                            title="Delete" data-toggle="tooltip" title="Delete">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>

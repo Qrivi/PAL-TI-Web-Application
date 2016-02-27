@@ -5,7 +5,6 @@ package be.peerassistedlearningti.web.model.util;
  */
 public class CalendarEvent
 {
-
     private String title;
     private String start;
     private String end;

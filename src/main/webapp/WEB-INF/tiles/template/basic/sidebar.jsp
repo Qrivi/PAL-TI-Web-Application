@@ -48,7 +48,7 @@
         <sec:authorize access="hasRole('ROLE_USER')">
             <li class="header">MAIN NAVIGATION</li>
             <li class="${nav_item == "profile" ? "active" : "" }"><a
-                    href="<c:url value="/profile"/>"><i class="fa fa-user"></i><span>Profile</span></a>
+                    href="<c:url value="/profile/${auth.profileIdentifier}"/>"><i class="fa fa-user"></i><span>Profile</span></a>
             </li>
             <li class="${nav_item == "calendar" ? "active" : "" }"><a
                     href="<c:url value="/calendar"/>"><i class="fa fa-calendar"></i><span>Calendar</span></a>
