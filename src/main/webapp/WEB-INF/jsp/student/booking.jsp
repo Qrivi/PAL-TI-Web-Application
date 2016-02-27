@@ -122,7 +122,7 @@
                                                 <td>${lesson.name}</td>
                                                 <td>${lesson.course.name}</td>
                                                 <td>${lesson.date}</td>
-                                                <td>${lesson.duration}</td>
+                                                <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
                                                 <td>
                                                     <div class="progress progress-xs">
                                                         <div class="progress-bar
