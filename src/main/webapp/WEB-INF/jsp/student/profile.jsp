@@ -40,26 +40,6 @@
                             <b>Subscriptions</b> <a class="pull-right"><c:out
                                 value="${user.subscriptions == null ? 0 : user.subscriptions.size()}"/></a>
                         </li>
-                        <c:if test="${user == auth}">
-                            <li class="list-group-item">
-                                <div class="input-group col-md-12">
-                                    <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
-                                                    </span>
-                                </div>
-                            </li>
-                            <c:if test="${user.tutor != null}">
-                                <li class="list-group-item">
-                                    <div class="input-group col-md-12">
-                                        <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
-                                                        <span class="input-group-btn">
-                                                            <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
-                                                        </span>
-                                    </div>
-                                </li>
-                            </c:if>
-                        </c:if>
                     </ul>
                     <a href="<c:url value="/calendar"/>" class="btn btn-primary btn-block"><b>Calendar</b></a>
                 </div>
@@ -282,6 +262,33 @@
                                                              style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                     <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                                 </form:select>
+                                            </div>
+                                        </div>
+                                        <hr class="separator"/>
+                                        <c:if test="${user.tutor != null}">
+                                            <!-- lesson calendar field -->
+                                            <div class="form-group has-feedback">
+                                                <label for="lesson-calendar" class="col-sm-2 control-label">Lesson Calendar</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group">
+                                                        <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
+                                                        <span class="input-group-btn">
+                                                            <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                        <!-- booking calendar field -->
+                                        <div class="form-group has-feedback">
+                                            <label for="booking-calendar" class="col-sm-2 control-label">Booking Calendar</label>
+                                            <div class="col-sm-10">
+                                                <div class="input-group">
+                                                    <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                         <hr class="separator"/>
