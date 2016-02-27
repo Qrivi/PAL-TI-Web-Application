@@ -86,99 +86,104 @@
                 <section class="tab-content">
                     <!-- activity tab content-->
                     <c:if test="${user == auth}">
-                        <div class="tab-pane active" id="activity">
-                            <c:if test="${empty user.closedBookings}">
-                                <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                                    <h4><i class="icon fa fa-info-circle"></i>No closed bookings</h4>
-                                    Once you've finished a lesson, you will be able to post a review
-                                    here.
-                                </div>
-                            </c:if>
-                            <c:forEach var="lesson" items="${user.closedBookings}">
-                                <div class="box box-default">
-                                    <div class="box-header with-border">
-                                        <div class="user-block">
-                                            <img class="profile-user-img img-responsive img-circle"
-                                                 src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
-                                                 alt="User profile picture">
+                        <div class="tab-pane" id="activity">
+                            <div class="row">
+                                <c:if test="${empty user.closedBookings}">
+                                    <div class="alert alert-info col-sm-4 col-sm-offset-4">
+                                        <h4><i class="icon fa fa-info-circle"></i>No closed bookings</h4>
+                                        Once you've finished a lesson, you will be able to post a review
+                                        here.
+                                    </div>
+                                </c:if>
+                                <c:forEach var="lesson" items="${user.closedBookings}">
+                                    <div class="col-md-12">
+                                        <div class="box box-default">
+                                            <div class="box-header with-border">
+                                                <div class="user-block">
+                                                    <img class="profile-user-img img-responsive img-circle"
+                                                         src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
+                                                         alt="User profile picture">
                                                             <span class="username"><a
                                                                     href="#">${lesson.tutor.student.name}</a></span>
                                                             <span class="description">${lesson.course.name} - <fmt:formatDate
                                                                     pattern="HH:mm dd MMMMMMMMM YYYY"
                                                                     value="${lesson.date}"/> </span>
-                                        </div>
-                                        <div class="box-tools">
-                                            <button type="button" class="btn btn-box-tool"
-                                                    data-widget="collapse">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="box-body">
-                                        <!-- post text -->
-                                        <strong>${lesson.name}</strong>
-                                        <p>${lesson.description}</p>
-                                    </div>
-                                    <div class="box-footer">
-                                        <form:form action="/profile/lesson/${lesson.id}/review/add"
-                                                   commandName="review" method="post"
-                                                   class="form-horizontal">
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    <div class="row">
-                                                        <div class="col-md-offset-2 col-md-10">
-                                                            <img class="img-responsive img-circle img-sm"
-                                                                 src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
-                                                                 alt="Alt Text">
-                                                        </div>
-                                                        <div class="col-md-1">
-                                                            <form:checkbox class="col-md-1"
-                                                                           path="anonymous"
-                                                                           aria-label="..."/>
-                                                        </div>
-                                                        <span class="col-md-11">Anonymous</span>
-                                                    </div>
                                                 </div>
-                                                <div class="col-md-11">
-                                                    <!-- .img-push is used to add margin to elements next to floating images -->
-                                                    <div class="img-push row">
-                                                        <div class="col-md-3">
+                                                <div class="box-tools">
+                                                    <button type="button" class="btn btn-box-tool"
+                                                            data-widget="collapse">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <!-- post text -->
+                                                <strong>${lesson.name}</strong>
+                                                <p>${lesson.description}</p>
+                                            </div>
+                                            <div class="box-footer">
+                                                <form:form action="/profile/lesson/${lesson.id}/review/add"
+                                                           commandName="review" method="post"
+                                                           class="form-horizontal">
+                                                    <div class="row">
+                                                        <div class="col-md-1">
+                                                            <div class="row">
+                                                                <div class="col-md-offset-2 col-md-10">
+                                                                    <img class="img-responsive img-circle img-sm"
+                                                                         src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
+                                                                         alt="Alt Text">
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <form:checkbox class="col-md-1"
+                                                                                   path="anonymous"
+                                                                                   aria-label="..."/>
+                                                                </div>
+                                                                <span class="col-md-11">Anonymous</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <!-- .img-push is used to add margin to elements next to floating images -->
+                                                            <div class="img-push row">
+                                                                <div class="col-md-3">
                                                                             <span>Content Score:<span>
                                                                                     <form:input path="contentScore"
                                                                                                 type="number" min="1"
                                                                                                 max="10"/>
-                                                        </div>
-                                                        <div class="col-md-3">
+                                                                </div>
+                                                                <div class="col-md-3">
                                                                             <span>Tutor Score:<span>
                                                                                     <form:input path="tutorScore"
                                                                                                 type="number" min="1"
                                                                                                 max="10"/>
-                                                        </div>
-                                                        <div class="col-md-3">
+                                                                </div>
+                                                                <div class="col-md-3">
                                                                             <span>Engagement Score:<span>
                                                                                     <form:input path="engagementScore"
                                                                                                 type="number" min="1"
                                                                                                 max="10"/>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <sapn>Atmosphere Score:<span>
-                                                                    <form:input path="atmosphereScore"
-                                                                                type="number" min="1"
-                                                                                max="10"/>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <form:input path="text" type="text"
-                                                                        class="form-control"
-                                                                        aria-label="..."/>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <sapn>Atmosphere Score:<span>
+                                                                            <form:input path="atmosphereScore"
+                                                                                        type="number" min="1"
+                                                                                        max="10"/>
+                                                                </div>
+                                                                <div class="col-md-12">
+                                                                    <form:input path="text" type="text"
+                                                                                class="form-control"
+                                                                                aria-label="..."/>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
 
-                                        </form:form>
+                                                </form:form>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </c:forEach>
+                                </c:forEach>
+                            </div>
+
                         </div>
                     </c:if>
                     <!-- timeline tab content-->
