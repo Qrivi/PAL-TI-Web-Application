@@ -7,7 +7,7 @@
 <sec:authentication var="auth" property="principal"/>
 <c:set var="req" value="${pageContext.request}"/>
 <c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
-
+<c:set var="disabled" value="${editable ? '' : 'disabled'}"/>
 <section class="content-header">
     <h1>
         Profile
@@ -236,87 +236,91 @@
                     <!-- settings tab content-->
                     <c:if test="${user == auth}">
                         <div class="tab-pane" id="settings">
-                            <form:form class="form-horizontal" method="put" action="/profile" commandName="profile"
-                                       enctype="multipart/form-data">
-                                <c:set var="nameError"><form:errors path="name"/></c:set>
-                                <c:set var="emailError"><form:errors path="email"/></c:set>
-                                <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
-                                <c:set var="nameError"><form:errors path="name"/></c:set>
-                                <c:set var="passwordError"><form:errors path="password"/></c:set>
-                                <c:set var="newPasswordError"><form:errors path="newPassword"/><form:errors/></c:set>
-                                <c:set var="newRepeatPasswordError"><form:errors path="newRepeatPassword"/><form:errors/></c:set>
-                                <form:errors element="div" cssClass="alert alert-danger"/>
-                                <!-- name field-->
-                                <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
-                                    <form:label path="avatar"
-                                                class="col-sm-2 control-label">Avatar</form:label>
-                                    <div class="col-sm-10">
-                                        <form:input path="avatar" type="file" placeholder="Avatar"/>
-                                    </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form:form class="form-horizontal" method="put" action="/profile" commandName="profile"
+                                               enctype="multipart/form-data">
+                                        <c:set var="nameError"><form:errors path="name"/></c:set>
+                                        <c:set var="emailError"><form:errors path="email"/></c:set>
+                                        <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
+                                        <c:set var="nameError"><form:errors path="name"/></c:set>
+                                        <c:set var="passwordError"><form:errors path="password"/></c:set>
+                                        <c:set var="newPasswordError"><form:errors path="newPassword"/><form:errors/></c:set>
+                                        <c:set var="newRepeatPasswordError"><form:errors path="newRepeatPassword"/><form:errors/></c:set>
+                                        <form:errors element="div" cssClass="alert alert-danger"/>
+                                        <!-- name field-->
+                                        <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
+                                            <form:label path="avatar"
+                                                        class="col-sm-2 control-label">Avatar</form:label>
+                                            <div class="col-sm-10">
+                                                <form:input path="avatar" type="file" placeholder="Avatar"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
+                                            <form:label path="name" class="col-sm-2 control-label">Name</form:label>
+                                            <div class="col-sm-10">
+                                                <form:input path="name" class="form-control" placeholder="Name"/>
+                                            </div>
+                                        </div>
+                                        <!-- email field-->
+                                        <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
+                                            <form:label path="email"
+                                                        class="col-sm-2 control-label">Email</form:label>
+                                            <div class="col-sm-10">
+                                                <form:input path="email" class="form-control" placeholder="Email"/>
+                                            </div>
+                                        </div>
+                                        <hr class="separator"/>
+                                        <!-- subscriptions field -->
+                                        <div class="form-group has-feedback ${ not empty subscriptionsError ? 'has-error' : ''}">
+                                            <form:label path="subscriptions"
+                                                        class="col-sm-2 control-label">Subscriptions</form:label>
+                                            <div class="col-sm-10">
+                                                <form:select id="subscriptions" path="subscriptions"
+                                                             class="form-control select2 select2-hidden-accessible"
+                                                             multiple="multiple" data-placeholder="Subscriptions"
+                                                             style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                    <form:options items="${courses}" itemValue="id" itemLabel="name"/>
+                                                </form:select>
+                                            </div>
+                                        </div>
+                                        <hr class="separator"/>
+                                        <!-- new password field -->
+                                        <div class="form-group has-feedback ${ not empty newPasswordError ? 'has-error' : ''}">
+                                            <form:label path="newPassword"
+                                                        class="col-sm-2 control-label">New password</form:label>
+                                            <div class="col-sm-10">
+                                                <form:password path="newPassword" class="form-control"
+                                                               placeholder="New password"/>
+                                            </div>
+                                        </div>
+                                        <!-- new password repeat field -->
+                                        <div class="form-group has-feedback ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
+                                            <form:label path="newRepeatPassword"
+                                                        class="col-sm-2 control-label">Repeat Password</form:label>
+                                            <div class="col-sm-10">
+                                                <form:password path="newRepeatPassword" class="form-control"
+                                                               placeholder="Repeat Password"/>
+                                            </div>
+                                        </div>
+                                        <hr class="separator"/>
+                                        <!-- password field -->
+                                        <div class="form-group has-feedback ${ not empty passwordError ? 'has-error' : ''}">
+                                            <form:label path="password"
+                                                        class="col-sm-2 control-label">Current Password</form:label>
+                                            <div class="col-sm-10">
+                                                <form:password path="password" class="form-control"
+                                                               placeholder="Current Password"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-10 col-sm-2">
+                                                <button type="submit" class="btn btn-default pull-right">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </form:form>
                                 </div>
-                                <div class="form-group ${ not empty nameError ? 'has-error' : ''}">
-                                    <form:label path="name" class="col-sm-2 control-label">Name</form:label>
-                                    <div class="col-sm-10">
-                                        <form:input path="name" class="form-control" placeholder="Name"/>
-                                    </div>
-                                </div>
-                                <!-- email field-->
-                                <div class="form-group ${ not empty emailError ? 'has-error' : ''}">
-                                    <form:label path="email"
-                                                class="col-sm-2 control-label">Email</form:label>
-                                    <div class="col-sm-10">
-                                        <form:input path="email" class="form-control" placeholder="Email"/>
-                                    </div>
-                                </div>
-                                <hr class="separator"/>
-                                <!-- subscriptions field -->
-                                <div class="form-group ${ not empty subscriptionsError ? 'has-error' : ''}">
-                                    <form:label path="subscriptions"
-                                                class="col-sm-2 control-label">Subscriptions</form:label>
-                                    <div class="col-sm-10">
-                                        <form:select id="subscriptions" path="subscriptions"
-                                                     class="form-control select2 select2-hidden-accessible"
-                                                     multiple="multiple" data-placeholder="Subscriptions"
-                                                     style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                            <form:options items="${courses}" itemValue="id" itemLabel="name"/>
-                                        </form:select>
-                                    </div>
-                                </div>
-                                <hr class="separator"/>
-                                <!-- new password field -->
-                                <div class="form-group ${ not empty newPasswordError ? 'has-error' : ''}">
-                                    <form:label path="newPassword"
-                                                class="col-sm-2 control-label">New password</form:label>
-                                    <div class="col-sm-10">
-                                        <form:password path="newPassword" class="form-control"
-                                                       placeholder="New password"/>
-                                    </div>
-                                </div>
-                                <!-- new password repeat field -->
-                                <div class="form-group ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
-                                    <form:label path="newRepeatPassword"
-                                                class="col-sm-2 control-label">Repeat Password</form:label>
-                                    <div class="col-sm-10">
-                                        <form:password path="newRepeatPassword" class="form-control"
-                                                       placeholder="Repeat Password"/>
-                                    </div>
-                                </div>
-                                <hr class="separator"/>
-                                <!-- password field -->
-                                <div class="form-group ${ not empty passwordError ? 'has-error' : ''}">
-                                    <form:label path="password"
-                                                class="col-sm-2 control-label">Current Password</form:label>
-                                    <div class="col-sm-10">
-                                        <form:password path="password" class="form-control"
-                                                       placeholder="Current Password"/>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-offset-10 col-sm-2">
-                                        <button type="submit" class="btn btn-default pull-right">Change</button>
-                                    </div>
-                                </div>
-                            </form:form>
+                            </div>
                         </div>
                     </c:if>
                 </section>
