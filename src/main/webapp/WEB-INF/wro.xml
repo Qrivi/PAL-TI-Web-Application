@@ -6,6 +6,7 @@
     </group>
     <!-- Libraries -->
     <group name="libraries">
+
         <!-- bootstrap-css -->
         <css>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</css>
         <!-- font-awesome -->
@@ -20,6 +21,8 @@
         <css>https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css</css>
         <!-- calendar -->
         <css>https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.min.css</css>
+        <!--RateYo star rating -->
+        <css>https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.css</css>
         <!-- admin-lte-css -->
         <css>/WEB-INF/resources/dist/css/AdminLTE.css</css>
         <css>/WEB-INF/resources/dist/css/skins/skin-blue.min.css</css>
@@ -46,6 +49,8 @@
         <js>https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.js</js>
         <!-- calendar -->
         <js>https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js</js>
+        <!--RateYo star rating -->
+        <js>https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js</js>
     </group>
     <!-- Global -->
     <group name="global">

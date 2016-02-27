@@ -180,7 +180,8 @@ public class ProfileController extends StudentController
         {
             return new ModelAndView( "redirect:/profile" );
         }
-        return new ModelAndView( "student/review_add", fillModel( model, current ) );
+        model.addAttribute("lesson", lesson);
+        return new ModelAndView("student/review_add", fillModel(model, current));
     }
 
     @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.POST )
