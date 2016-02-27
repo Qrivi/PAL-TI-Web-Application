@@ -41,9 +41,10 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
             {
                 {
                     add( new SimpleGrantedAuthority( "ROLE_USER" ) );
-                    // TODO add tutor
-                    add( new SimpleGrantedAuthority( "ROLE_TUTOR" ) );
-                    if ( student.getType().equals( UserType.ADMIN ) )
+                    if ( student.getTutor() != null )
+                        add( new SimpleGrantedAuthority( "ROLE_TUTOR" ) );
+                    if ( student.getType()
+                            .equals( UserType.ADMIN ) )
                         add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
                 }
             } );

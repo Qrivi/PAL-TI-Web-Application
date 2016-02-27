@@ -14,6 +14,11 @@
 <!-- main content -->
 <section class="content">
     <div class="row">
+        <!-- lesson info -->
+        <div class="col-md-12">
+            <!-- todo add lesson info -->
+        </div>
+        <!-- review form -->
         <div class="col-md-12">
             <div class="box">
                 <form:form method="post" commandName="review" enctype="application/x-www-form-urlencoded">
@@ -46,7 +51,8 @@
                             <div class="col-md-12">
                                 <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
                                 <div class="form-group">
-                                    <form:input path="text" class="form-control" placeholder="Comment"/>
+                                    <form:textarea id="review_text" path="text" maxlength="140" minlength="10" class="form-control" placeholder="Comment"/>
+                                    <div id="review_text_feedback" class="label label-default"></div>
                                 </div>
                             </div>
                         </div>
