@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class MailSender
      * @param student The student to send the mail to
      * @param token   The reset password token
      */
+    @Async
     public void sendResetMail( final Student student, final String token )
     {
         MimeMessagePreparator preparator = mimeMessage -> {
@@ -53,6 +55,7 @@ public class MailSender
      * @param student The student to send the mail to
      * @param lesson  The lesson of the notification
      */
+    @Async
     public void sendNotificationMail( final Student student, final Lesson lesson )
     {
         MimeMessagePreparator preparator = mimeMessage -> {

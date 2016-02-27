@@ -116,12 +116,11 @@ public class LessonController extends TutorController
         Lesson lesson = new Lesson( lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm
                 .getRoom(), lessonForm.getBackupRoom() );
         service.addLesson( lesson );
-        //notifySubscribers( lesson );
+        notifySubscribers( lesson );
         return new ModelAndView( "redirect:/tutor/lessons" );
     }
 
-    @Async
-    public void notifySubscribers( Lesson lesson )
+    private void notifySubscribers( Lesson lesson )
     {
         for ( Student subscriber : lesson.getCourse().getSubscribers() )
         {
