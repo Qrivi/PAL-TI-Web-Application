@@ -16,6 +16,9 @@ import net.fortuna.ical4j.util.UidGenerator;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,51 +40,46 @@ public class ResourceController
 
     @ResponseBody
     @RequestMapping( value = "/students/{id}/avatar.png", method = RequestMethod.GET )
-    public void getAvatar( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
+    public HttpEntity<byte[]> getAvatar( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
     {
-        InputStream in = null;
-        try
-        {
-            Student student = service.getStudentById( id );
-            byte[] img = student.getAvatar();
+        Student student = service.getStudentById( id );
+        byte[] img = student.getAvatar();
 
-            if ( img == null )
-            {
-                String path = request.getSession()
-                        .getServletContext()
-                        .getRealPath( "/resources/img" ) + "/default_profile.jpg";
-                in = new FileSystemResource( new File( path ) ).getInputStream();
-            } else
-            {
-                in = new ByteArrayInputStream( img );
-            }
-            response.setContentType( "image/jpeg" );
-            IOUtils.copy( in, response.getOutputStream() );
-        } catch ( Exception e ) { System.out.println( e.getMessage() );} finally
+        if ( img == null )
         {
-            if ( in != null )
-                IOUtils.closeQuietly( in );
+            try
+            {
+                String path = request.getSession().getServletContext().getRealPath( "/resources/img" ) + "/default_profile.jpg";
+                InputStream in = new FileSystemResource( new File( path ) ).getInputStream();
+                img = IOUtils.toByteArray( in );
+            } catch ( Exception e )
+            {
+                img = new byte[ 0 ];
+            }
         }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType( MediaType.IMAGE_JPEG );
+        headers.setContentLength( img.length );
+        return new HttpEntity<>( img, headers );
     }
 
     @ResponseBody
     @RequestMapping( value = "/applications/{id}/screenshot.png", method = RequestMethod.GET )
-    public void getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
+    public HttpEntity<byte[]> getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
-        InputStream in = null;
-        try
-        {
-            Application app = service.getApplicationById( id );
-            byte[] img = app.getScreenshot();
+        Application app = service.getApplicationById( id );
+        byte[] img = app.getScreenshot();
 
-            in = new ByteArrayInputStream( img );
-            response.setContentType( "image/jpeg" );
-            IOUtils.copy( in, response.getOutputStream() );
-        } catch ( Exception e ) {} finally
+        if ( img == null )
         {
-            if ( in != null )
-                IOUtils.closeQuietly( in );
+            img = new byte[ 0 ];
         }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType( MediaType.IMAGE_JPEG );
+        headers.setContentLength( img.length );
+        return new HttpEntity<>( img, headers );
     }
 
     @ResponseBody
@@ -93,15 +91,16 @@ public class ResourceController
         if ( s == null )
             return;
 
-        if ( !s.getSecurityToken()
-                .equals( token ) )
+        if ( !s.getSecurityToken().equals( token ) )
             return;
 
         try
         {
             net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", s.getOpenBookings() );
-            outputCalendar( calendar, response.getOutputStream() );
-        } catch ( IOException e ) {}
+            CalendarOutputter outputter = new CalendarOutputter();
+            outputter.setValidating( false );
+            outputter.output( calendar, response.getOutputStream() );
+        } catch ( IOException | ValidationException e ) {}
     }
 
     @ResponseBody
@@ -113,8 +112,7 @@ public class ResourceController
         if ( s == null )
             return;
 
-        if ( !s.getSecurityToken()
-                .equals( token ) )
+        if ( !s.getSecurityToken().equals( token ) )
             return;
 
         if ( s.getTutor() == null )
@@ -122,46 +120,56 @@ public class ResourceController
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", s.getTutor()
-                    .getLessons() );
-            outputCalendar( calendar, response.getOutputStream() );
-        } catch ( IOException e ) {}
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", s.getTutor().getLessons() );
+
+            CalendarOutputter outputter = new CalendarOutputter();
+            outputter.setValidating( false );
+            outputter.output( calendar, response.getOutputStream() );
+        } catch ( IOException | ValidationException e ) {}
     }
 
+    /**
+     * Generates a calendar with the specified id and using the specified lessons
+     *
+     * @param id    The product id of the calendar
+     * @param items The lessons of the calendar
+     * @return A calendar with the specified id and using the specified lessons
+     */
     private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Set<Lesson> items )
     {
-        TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance()
-                .createRegistry();
+        // Set the timezone to 'Europe/Brussels'
+        TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
         TimeZone timezone = registry.getTimeZone( "Europe/Brussels" );
         VTimeZone tz = timezone.getVTimeZone();
 
+        // Set the product id
         net.fortuna.ical4j.model.Calendar icsCalendar = new net.fortuna.ical4j.model.Calendar();
-        icsCalendar.getProperties()
-                .add( new ProdId( id ) );
-        icsCalendar.getProperties()
-                .add( CalScale.GREGORIAN );
+        icsCalendar.getProperties().add( new ProdId( id ) );
+        icsCalendar.getProperties().add( CalScale.GREGORIAN );
 
+        // Iterate over the lessons
         for ( Lesson lesson : items )
         {
+            // Set the start date
             java.util.Calendar startDate = new GregorianCalendar();
             startDate.setTimeZone( timezone );
             startDate.setTime( lesson.getDate() );
 
+            // Set the end date
             java.util.Calendar endDate = new GregorianCalendar();
             endDate.setTimeZone( timezone );
-            endDate.setTime( new Date( lesson.getDate()
-                    .getTime() + lesson.getDuration() * 60 * 1000 ) );
+            endDate.setTime( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) );
 
+            // Create the event
             String eventName = lesson.getName();
             DateTime start = new DateTime( startDate.getTime() );
             DateTime end = new DateTime( endDate.getTime() );
-            VEvent booking = new VEvent( start, end, eventName );
+            VEvent event = new VEvent( start, end, eventName );
 
-            // add timezone info..
-            booking.getProperties()
-                    .add( tz.getTimeZoneId() );
+            // Add timezone info to the event
+            event.getProperties().add( tz.getTimeZoneId() );
 
-            // generate unique identifier..
+            // Generate unique identifier for the event
             UidGenerator ug = null;
             try
             {
@@ -169,43 +177,29 @@ public class ResourceController
             } catch ( SocketException e ) { }
 
             Uid uid = ug.generateUid();
-            booking.getProperties()
-                    .add( uid );
+            event.getProperties().add( uid );
 
-            Student tutor = lesson.getTutor()
-                    .getStudent();
+            // Add the tutor as an organizer
+            Student tutor = lesson.getTutor().getStudent();
             Organizer organizer = new Organizer( URI.create( "mailto:" + tutor.getEmail() ) );
-            organizer.getParameters()
-                    .add( Role.REQ_PARTICIPANT );
-            organizer.getParameters()
-                    .add( new Cn( tutor.getName() ) );
-            booking.getProperties()
-                    .add( organizer );
+            organizer.getParameters().add( Role.REQ_PARTICIPANT );
+            organizer.getParameters().add( new Cn( tutor.getName() ) );
+            event.getProperties().add( organizer );
 
+            // Iterate over the bookings
             for ( Student s : lesson.getBookings() )
             {
+                // Add the student as a participant
                 Attendee attendee = new Attendee( URI.create( "mailto:" + s.getEmail() ) );
-                attendee.getParameters()
-                        .add( Role.REQ_PARTICIPANT );
-                attendee.getParameters()
-                        .add( new Cn( s.getName() ) );
-                booking.getProperties()
-                        .add( attendee );
+                attendee.getParameters().add( Role.REQ_PARTICIPANT );
+                attendee.getParameters().add( new Cn( s.getName() ) );
+                event.getProperties().add( attendee );
             }
 
-            icsCalendar.getComponents()
-                    .add( booking );
+            // Add the event to the calendar
+            icsCalendar.getComponents().add( event );
         }
         return icsCalendar;
     }
 
-    private void outputCalendar( net.fortuna.ical4j.model.Calendar calendar, OutputStream out )
-    {
-        try
-        {
-            CalendarOutputter outputter = new CalendarOutputter();
-            outputter.setValidating( false );
-            outputter.output( calendar, out );
-        } catch ( IOException | ValidationException e ) {}
-    }
 }
