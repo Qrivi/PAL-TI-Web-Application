@@ -37,7 +37,7 @@
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_TUTOR')">
             <li class="header">TUTOR NAVIGATION</li>
-            <li class="${nav_item == "lesson_add" ? "active" : ""}"><a
+            <li class="${nav_item == "tutor_lesson_add" ? "active" : ""}"><a
                     href="<c:url value="/tutor/lessons/add"/>"><i class="fa fa-calendar-plus-o"></i><span>Add a lesson</span></a>
             </li>
             <li class="${nav_item == "tutor_lessons" ? "active" : ""}"><a
