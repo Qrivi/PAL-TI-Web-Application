@@ -32,6 +32,10 @@ public class ReviewForm {
 
     private boolean anonymous;
 
+
+    public ReviewForm() {
+    }
+
     public String getText() {
         return text;
     }
