@@ -37,14 +37,14 @@
                                 <div class="form-group has-feedback">
                                     <form:label path="name">Name : <c:if test="${not empty nameError}"><span
                                             class="text-danger">${nameError}</span></c:if></form:label>
-                                    <form:input path="name" class="form-control" placeholder="Name"/>
+                                    <form:input path="name" class="form-control" placeholder="Name" disabled="${!editable}"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <form:label path="description">Description : <c:if
                                             test="${not empty descriptionError}"><span
                                             class="text-danger">${descriptionError}</span></c:if></form:label>
                                     <form:textarea path="description" class="form-control"
-                                                   placeholder="Description" rows="5"/>
+                                                   placeholder="Description" rows="5" disabled="${!editable}"/>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
@@ -54,10 +54,10 @@
                                         <div class="form-group has-feedback">
                                             <div class="input-group date" id="datetimepicker">
                                                 <form:input path="date" type="text" class="form-control"
-                                                            placeholder="Lesson date"/>
-                                                                <span class="input-group-addon">
-                                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                                </span>
+                                                            placeholder="Lesson date" disabled="${!editable}"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                                     test="${not empty courseError}"><span
                                                     class="text-danger">${courseError}</span></c:if></form:label>
                                             <form:select path="course" class="form-control"
-                                                         placeholder="Course">
+                                                         placeholder="Course" disabled="${!editable}">
                                                 <form:option value="" label="--- Course ---"/>
                                                 <form:options items="${courses}" itemValue="id"
                                                               itemLabel="name"/>
@@ -83,7 +83,7 @@
                                                         class="text-danger">${maxParticipantsError}</span></c:if></form:label>
                                             <form:input path="maxParticipants" type="number" min="1"
                                                         class="form-control"
-                                                        placeholder="Maximum number of participants"/>
+                                                        placeholder="Maximum number of participants" disabled="${!editable}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -92,7 +92,7 @@
                                                     test="${not empty durationError}"><span
                                                     class="text-danger">${durationError}</span></c:if></form:label>
                                             <form:input path="duration" type="time" class="form-control"
-                                                        placeholder="Lesson duration"/>
+                                                        placeholder="Lesson duration" disabled="${!editable}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
                                             <form:label path="room">Room : <c:if
                                                     test="${not empty roomError}"><span
                                                     class="text-danger">${roomError}</span></c:if></form:label>
-                                            <form:select path="room" class="form-control" placeholder="Room">
+                                            <form:select path="room" class="form-control" placeholder="Room" disabled="${!editable}">
                                                 <form:option value="" label="--- Room ---"/>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
@@ -110,10 +110,14 @@
                                     </div>
                                     <div class="form-group has-feedback">
                                         <div class="col-md-6">
-                                            <form:label path="backupRoom">Backup room : <c:if
-                                                    test="${not empty backupRoomError}"><span
-                                                    class="text-danger">${backupRoomError}</span></c:if></form:label>
-                                            <form:select path="backupRoom" class="form-control">
+                                            <form:label path="backupRoom">Backup room :
+                                                <c:if test="${not empty backupRoomError}">
+                                                    <span
+                                                        class="text-danger">${backupRoomError}
+                                                    </span>
+                                                </c:if>
+                                            </form:label>
+                                            <form:select path="backupRoom" class="form-control" disabled="${!editable}">
                                                 <form:option value="" label="--- Backup Room ---"/>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
@@ -122,9 +126,7 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary pull-right">Back</button>
-                                    <c:if test="${editable}">
-                                        <button type="submit" class="btn btn-primary pull-right">Change</button>
-                                    </c:if>
+                                    <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>Change</button>
                                 </div>
                             </form:form>
                         </div>
