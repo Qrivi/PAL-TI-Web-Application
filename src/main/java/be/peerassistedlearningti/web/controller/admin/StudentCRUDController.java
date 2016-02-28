@@ -5,6 +5,7 @@ import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import be.peerassistedlearningti.web.model.form.StudentUpdateForm;
+import be.peerassistedlearningti.web.model.util.StudentUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,8 @@ public class StudentCRUDController extends AdminController
         if ( result.hasErrors() )
             return new ModelAndView( "admin/students", fillModel( model ) );
 
-        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), studentForm.getType() ) );
+        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), StudentUtils.createProfileIdentifier( studentForm.getName() ), studentForm
+                .getType() ) );
 
         return new ModelAndView( "redirect:/admin/students" );
     }

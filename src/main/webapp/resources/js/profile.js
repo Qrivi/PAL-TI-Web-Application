@@ -2,7 +2,6 @@ $( document ).ready( function () {
     $( "#subscriptions" ).select2();
     $( function () {
         $( 'a[data-toggle="tab"]' ).on( 'click' , function ( e ) {
-            console.log( $( e.target ).attr( 'href' ) );
             $.cookie( 'last_tab' , $( e.target ).attr( 'href' ) );
         } );
         var lastTab = $.cookie( 'last_tab' );

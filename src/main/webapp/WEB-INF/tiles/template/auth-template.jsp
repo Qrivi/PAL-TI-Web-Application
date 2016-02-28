@@ -29,7 +29,7 @@
             <tiles:insertAttribute name="header"/>
         </header>
         <main>
-            <jsp:include page="basic/message.jsp"/>
+            <jsp:include page="auth/message.jsp"/>
             <tiles:insertAttribute name="content"/>
         </main>
         <c:forEach var="script" items="${javascripts}">
