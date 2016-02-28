@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Collection;
 
-// TODO change this mapping to lesson/{id}/booking
 @Controller
 @RequestMapping( value = "/booking" )
 public class BookingController extends StudentController
