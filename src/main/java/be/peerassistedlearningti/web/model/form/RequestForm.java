@@ -16,7 +16,7 @@ public class RequestForm {
     private int upvotes;
 
     @NotNull(message = "{NotNull.Request.description}")
-    @Size( min = 10, max = 300, message = "{Size.Review.text}" )
+    @Size( min = 10, max = 300, message = "{Size.Request.text}" )
     private String description;
 
     @Valid
