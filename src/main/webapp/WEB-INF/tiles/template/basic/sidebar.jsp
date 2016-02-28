@@ -56,6 +56,9 @@
             <li class="${nav_item == "booking" ? "active" : "" }"><a
                     href="<c:url value="/booking"/>"><i class="fa fa-pencil-square-o"></i><span>Book a lesson</span></a>
             </li>
+            <li class="${nav_item == "request" ? "active" : "" }"><a
+                    href="<c:url value="/lesson/request"/>"><i class="fa fa-plus-square-o"></i><span>Request a lesson</span></a>
+            </li>
             <li class="${nav_item == "apply" ? "active" : "" }"><a
                     href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>Apply for Tutoring</span></a>
             </li>
