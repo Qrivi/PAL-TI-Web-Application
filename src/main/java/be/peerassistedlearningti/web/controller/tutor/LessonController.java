@@ -85,7 +85,7 @@ public class LessonController extends TutorController
 
         service.removeLesson(lesson);
         //TODO:: success message
-        return new ModelAndView("redirect:/lessons");
+        return new ModelAndView("redirect:/tutor/lessons");
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
@@ -115,7 +115,7 @@ public class LessonController extends TutorController
         Lesson lesson = new Lesson(lessonForm.getDate(), lessonForm.getName(), lessonForm.getDescription(), duration, lessonForm.getCourse(), lessonForm.getMaxParticipants(), tutor, lessonForm.getRoom(), lessonForm.getBackupRoom());
         service.addLesson(lesson);
         notifySubscribers(lesson);
-        return new ModelAndView( "redirect:/lessons" );
+        return new ModelAndView( "redirect:/tutor/lessons" );
     }
 
     @Async
@@ -129,7 +129,7 @@ public class LessonController extends TutorController
     @RequestMapping(value = "/overview/course/{id}", method = RequestMethod.GET)
     public ModelAndView getLessonOfCourse(@PathVariable(value = "id") int id) {
         Course course = service.getCourseById(id);
-        return new ModelAndView("lesson", "lessons", service.getUpcomingLessons(course));
+        return new ModelAndView("tutor/lesson", "lessons", service.getUpcomingLessons(course));
     }
 
 }
