@@ -7,27 +7,27 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class ReviewForm {
-    @NotEmpty(message = "{NotEmpty.CourseForm.text}")
+    @NotEmpty(message = "{NotEmpty.ReviewForm.text}")
     private String text;
 
     @NotNull( message = "{NotNull.ReviewForm.contentScore}" )
-    @Min(value = 1, message = "{NotEmpty.CourseForm.contentScore}")
-    @Max(value = 10, message = "{NotEmpty.CourseForm.contentScore}")
+    @Min(value = 1, message = "{NotEmpty.ReviewForm.contentScore}")
+    @Max(value = 10, message = "{NotEmpty.ReviewForm.contentScore}")
     private int contentScore;
 
     @NotNull( message = "{NotNull.ReviewForm.tutorScore}" )
-    @Min(value = 1, message = "{NotEmpty.CourseForm.tutorScore}")
-    @Max(value = 10, message = "{NotEmpty.CourseForm.tutorScore}")
+    @Min(value = 1, message = "{NotEmpty.ReviewForm.tutorScore}")
+    @Max(value = 10, message = "{NotEmpty.ReviewForm.tutorScore}")
     private int tutorScore;
 
     @NotNull( message = "{NotNull.ReviewForm.engagementScore}" )
-    @Min(value = 1, message = "{NotEmpty.CourseForm.engagementScore}")
-    @Max(value = 10, message = "{NotEmpty.CourseForm.engagementScore}")
+    @Min(value = 1, message = "{NotEmpty.ReviewForm.engagementScore}")
+    @Max(value = 10, message = "{NotEmpty.ReviewForm.engagementScore}")
     private int engagementScore;
 
     @NotNull( message = "{NotNull.ReviewForm.atmosphereScore}" )
-    @Min(value = 1, message = "{NotEmpty.CourseForm.atmosphereScore}")
-    @Max(value = 10, message = "{NotEmpty.CourseForm.atmosphereScore}")
+    @Min(value = 1, message = "{NotEmpty.ReviewForm.atmosphereScore}")
+    @Max(value = 10, message = "{NotEmpty.ReviewForm.atmosphereScore}")
     private int atmosphereScore;
 
     private boolean anonymous;
