@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:mvc="http://www.springframework.org/schema/mvc"
         xmlns:context="http://www.springframework.org/schema/context"
-        xmlns:spring-data="http://www.springframework.org/schema/data/jpa"
+        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
         xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
         xmlns="http://www.springframework.org/schema/beans" xmlns:task="http://www.springframework.org/schema/task"
 
@@ -22,6 +22,10 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="be.peerassistedlearningti"/>
+
+    <!-- Base package of the repository and service interfaces -->
+
+    <jpa:repositories base-package="be.peerassistedlearningti.repository, be.peerassistedlearningti.service"/>
 
     <!-- Spring Data -->
 
@@ -55,11 +59,7 @@
 
     <!-- Enable annotation driven transaction management -->
 
-    <tx:annotation-driven/>
-
-    <!-- Base package of the repository and service interfaces -->
-
-    <spring-data:repositories base-package="be.peerassistedlearningti.repository, be.peerassistedlearningti.service"/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- Task Executor -->
 
