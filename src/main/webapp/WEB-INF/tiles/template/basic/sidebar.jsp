@@ -48,7 +48,7 @@
         <sec:authorize access="hasRole('ROLE_USER')">
             <li class="header">MAIN NAVIGATION</li>
             <li class="${nav_item == "profile" ? "active" : "" }"><a
-                    href="<c:url value="/profile"/>"><i class="fa fa-user"></i><span>Profile</span></a>
+                    href="<c:url value="/profile/${auth.profileIdentifier}"/>"><i class="fa fa-user"></i><span>Profile</span></a>
             </li>
             <li class="${nav_item == "calendar" ? "active" : "" }"><a
                     href="<c:url value="/calendar"/>"><i class="fa fa-calendar"></i><span>Calendar</span></a>
@@ -56,8 +56,11 @@
             <li class="${nav_item == "booking" ? "active" : "" }"><a
                     href="<c:url value="/booking"/>"><i class="fa fa-pencil-square-o"></i><span>Book a lesson</span></a>
             </li>
+            <li class="${nav_item == "request" ? "active" : "" }"><a
+                    href="<c:url value="/request"/>"><i class="fa fa-plus-square-o"></i><span>Request a lesson</span></a>
+            </li>
             <li class="${nav_item == "apply" ? "active" : "" }"><a
-                    href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>Apply as a tutor</span></a>
+                    href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>Apply for Tutoring</span></a>
             </li>
         </sec:authorize>
     </ul>

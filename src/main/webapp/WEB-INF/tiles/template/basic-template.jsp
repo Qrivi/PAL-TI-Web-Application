@@ -33,6 +33,7 @@
                 <tiles:insertAttribute name="sidebar"/>
             </aside>
             <main class="content-wrapper">
+                <jsp:include page="basic/message.jsp"/>
                 <tiles:insertAttribute name="content"/>
             </main>
         </div>

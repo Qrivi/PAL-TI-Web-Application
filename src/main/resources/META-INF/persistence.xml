@@ -15,6 +15,7 @@
         <class>be.peerassistedlearningti.model.Campus</class>
         <class>be.peerassistedlearningti.model.Application</class>
         <class>be.peerassistedlearningti.model.Review</class>
+        <class>be.peerassistedlearningti.model.Request</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.ejb.entitymanager_factory_name" value="PAL-FN"/>

@@ -30,7 +30,7 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="<c:url value="/profile"/>" class="btn btn-default btn-flat">Profile</a>
+                                <a href="<c:url value="/profile/${auth.profileIdentifier}"/>" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right" onclick="document.forms['logout'].submit(); return false;">
                                 <form id="logout" class="small" action="<c:url value="/auth/logout"/>" method="post">

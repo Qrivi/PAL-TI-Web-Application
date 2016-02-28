@@ -11,10 +11,48 @@ $( function () {
     $( 'input' ).on( 'ifChanged' , function ( event ) { $( event.target ).trigger( 'change' ); } );
 } );
 
-/**
- * Count characters remaining on the review text field
- */
+
 $(document).ready(function() {
+
+    /**
+     * creates the star rating
+     */
+    $("#contentScore").rateYo({
+        rating: $("#contentScoreInput").val(),
+        maxValue: 10,
+        halfStar: true
+    });
+    $("#atmosphereScore").rateYo({
+        rating: $("#atmosphereScoreInput").val(),
+        maxValue: 10,
+        halfStar: true
+    });
+    $("#tutorScore").rateYo({
+        rating: $("#tutorScoreInput").val(),
+        maxValue: 10,
+        halfStar: true
+    });
+    $("#engagementScore").rateYo({
+        rating: $("#engagementScoreInput").val(),
+        maxValue: 10,
+        halfStar: true
+    });
+
+    $("#submitReview").click(function () {
+        var $content = $("#contentScore").rateYo();
+        var $atmosphere = $("#atmosphereScore").rateYo();
+        var $tutor = $("#tutorScore").rateYo();
+        var $engagement = $("#engagementScore").rateYo();
+
+        $("#contentScoreInput").val($content.rateYo("rating"));
+        $("#atmosphereScoreInput").val($atmosphere.rateYo("rating"));
+        $("#tutorScoreInput").val($tutor.rateYo("rating"));
+        $("#engagementScoreInput").val($engagement.rateYo("rating"));
+    });
+
+    /**
+     * Count characters remaining on the review text field
+     */
     var text_max = 140;
     $('#review_text_feedback').html(text_max + ' characters remaining');
 
@@ -25,3 +63,4 @@ $(document).ready(function() {
         $('#review_text_feedback').html(text_remaining + ' characters remaining');
     });
 });
+

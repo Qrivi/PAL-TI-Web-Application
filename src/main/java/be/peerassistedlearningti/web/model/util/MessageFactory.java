@@ -36,6 +36,19 @@ public class MessageFactory
     }
 
     /**
+     * Creates a generic success message, with the translated message code and arguments
+     *
+     * @param msg  The message code to be translated
+     * @param args The message arguments
+     * @return A generic success message, with the translated message code
+     */
+    public static GenericMessage createSuccessMessage( String msg, Object[] args )
+    {
+        msg = messageSource.getMessage( msg, args, LocaleContextHolder.getLocale() );
+        return new GenericMessage( msg, GenericMessage.MessageType.success );
+    }
+
+    /**
      * Creates a generic danger message, with the translated message code
      *
      * @param msg The message code to be translated

@@ -9,6 +9,7 @@ import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.LessonReviewWrapper;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
+import be.peerassistedlearningti.web.model.util.StudentUtils;
 import be.peerassistedlearningti.web.model.util.Timeline;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,10 +51,6 @@ public class ProfileController extends StudentController
         {
             model.addAttribute( "user", student );
         }
-        if ( tutor != null && model.get( "reviews" ) == null )
-        {
-            model.addAttribute( "reviews", service.getReviewsForStudent( student ) );
-        }
         if ( model.get( "lessonReviews" ) == null )
         {
             List<LessonReviewWrapper> list = new ArrayList<>();
@@ -61,6 +58,7 @@ public class ProfileController extends StudentController
             {
                 list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( student, lesson ) ) );
             }
+            model.addAttribute("lessonReviews", list);
         }
         if ( model.get( "review" ) == null )
         {
@@ -83,8 +81,7 @@ public class ProfileController extends StudentController
     @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getProfile()
     {
-        return new ModelAndView( "redirect:/profile/" + SessionAuth.getStudent()
-                .getProfileIdentifier() );
+        return new ModelAndView( "redirect:/profile/" + SessionAuth.getStudent().getProfileIdentifier() );
     }
 
     @RequestMapping( value = "/{identifier:.+}", method = RequestMethod.GET )
@@ -110,23 +107,20 @@ public class ProfileController extends StudentController
         if ( !s.equals( student ) )
             return new ModelAndView( "redirect:/profile" );
 
-        if ( !form.getName()
-                .equals( student.getName() ) )
+        if ( !form.getName().equals( student.getName() ) )
         {
-            student.setProfileIdentifier( createProfileIdentifier( form.getName() ) );
+            student.setProfileIdentifier( StudentUtils.createProfileIdentifier( form.getName() ) );
         }
 
         student.setName( StringUtils.defaultIfEmpty( form.getName(), student.getName() ) );
-        student.setEmail( StringUtils.defaultIfEmpty( form.getEmail(), student.getEmail() ) );
+        student.setEmail( StringUtils.defaultIfEmpty( form.getEmail().toLowerCase(), student.getEmail() ) );
 
-        if ( !form.getNewPassword()
-                .isEmpty() )
+        if ( !form.getNewPassword().isEmpty() )
         {
             student.setPassword( form.getNewPassword() );
         }
 
-        if ( !form.getAvatar()
-                .isEmpty() )
+        if ( !form.getAvatar().isEmpty() )
         {
             try
             {
@@ -147,40 +141,29 @@ public class ProfileController extends StudentController
         return new ModelAndView( "redirect:/profile" );
     }
 
-    private String createProfileIdentifier( String name )
-    {
-        name = name.trim()
-                .toLowerCase()
-                .replaceAll( " ", "." );
-        Student s = service.getStudentByProfileIdentifier( name );
-
-        if ( s == null )
-            return name;
-
-        if ( Character.isDigit( name.charAt( name.length() - 1 ) ) )
-        {
-            int i = Character.getNumericValue( name.charAt( name.length() - 1 ) );
-            name = name.substring( 0, name.length() - 1 );
-            return name + ( i + 1 );
-        } else
-        {
-            return createProfileIdentifier( name + ".1" );
-        }
-    }
-
     @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.GET )
     public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
     {
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById( id );
         //I did not go this lesson or lesson is not in the past
-        if ( lesson == null || !lesson.getBookings()
-                .contains( current ) || !lesson.getDate()
-                .before( new Date() ) )
+        if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
         {
             return new ModelAndView( "redirect:/profile" );
         }
-        return new ModelAndView( "student/review_add", fillModel( model, current ) );
+        Review myReview = service.getReviewsForStudentAndLesson(current,lesson);
+        if(myReview !=null){
+            ReviewForm form = new ReviewForm();
+            form.setText(myReview.getText());
+            form.setAnonymous(myReview.isAnonymous());
+            form.setTutorScore(myReview.getTutorScore());
+            form.setContentScore(myReview.getContentScore());
+            form.setAtmosphereScore(myReview.getAtmosphereScore());
+            form.setEngagementScore(myReview.getEngagementScore());
+            model.addAttribute("review",form);
+        }
+        model.addAttribute("lesson", lesson);
+        return new ModelAndView("student/review_add", fillModel(model, current));
     }
 
     @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.POST )
@@ -189,16 +172,25 @@ public class ProfileController extends StudentController
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById( id );
         //I did not go this lesson or lesson is not in the past
-        if ( lesson == null || !lesson.getBookings()
-                .contains( current ) || !lesson.getDate()
-                .before( new Date() ) )
+        if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
         {
             return new ModelAndView( "redirect:/profile" );
         } else if ( result.hasErrors() )
         {
             return new ModelAndView( "student/review_add", fillModel( model, current ) );
         }
-        Review review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm.getAtmosphereScore(), reviewForm.isAnonymous(), new Date() );
+        Review review = service.getReviewsForStudentAndLesson(current,lesson);
+        if(review == null){
+            review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm.getAtmosphereScore(), reviewForm.isAnonymous(), new Date() );
+        }else{
+            review.setText(reviewForm.getText());
+            review.setAnonymous(reviewForm.isAnonymous());
+            review.setContentScore(reviewForm.getContentScore());
+            review.setEngagementScore(reviewForm.getEngagementScore());
+            review.setAtmosphereScore(reviewForm.getAtmosphereScore());
+            review.setTutorScore(reviewForm.getTutorScore());
+        }
+
         service.addReview( review );
         return new ModelAndView( "redirect:/profile", fillModel( model, current ) );
     }

@@ -5,6 +5,7 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.TutorApplyForm;
+import be.peerassistedlearningti.web.model.util.MessageFactory;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.Collection;
@@ -31,6 +33,10 @@ public class ApplyController extends StudentController
         Student current = SessionAuth.getStudent();
         if ( model.get( "tutorApply" ) == null )
             model.addAttribute( "tutorApply", new TutorApplyForm() );
+       /* if ( model.get( "topSubscribedCourses" ) == null )
+            model.addAttribute( "topSubscribedCourses", service.getTopSubscribedCourses( 10 ) );
+        if ( model.get( "lastApplications" ) == null )
+            model.addAttribute( "lastApplications", service.getLastApplications( current, 10 ) );*/
         if ( model.get( "courses" ) == null )
         {
             Collection<Course> courses = service.getAllCourses();
@@ -39,9 +45,7 @@ public class ApplyController extends StudentController
             applications.addAll( service.getAllPendingApplications( current ) );
             applications.addAll( service.getAllApprovedApplications( current ) );
 
-            courses.removeAll( applications.stream()
-                    .map( Application::getCourse )
-                    .collect( Collectors.toList() ) );
+            courses.removeAll( applications.stream().map( Application::getCourse ).collect( Collectors.toList() ) );
 
             model.addAttribute( "courses", courses );
         }
@@ -55,7 +59,7 @@ public class ApplyController extends StudentController
     }
 
     @RequestMapping( value = "/apply", method = RequestMethod.POST )
-    public ModelAndView applyTutor( @Valid @ModelAttribute( "tutorApply" ) TutorApplyForm form, BindingResult result, ModelMap model )
+    public ModelAndView applyTutor( @Valid @ModelAttribute( "tutorApply" ) TutorApplyForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "student/apply", fillModel( model ) );
@@ -69,6 +73,8 @@ public class ApplyController extends StudentController
             result.reject( "SaveFile.TutorApplyForm.screenshot" );
             return new ModelAndView( "student/apply", fillModel( model ) );
         }
+
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplyController.Apply", new Object[]{ form.getCourse().getName() } ) );
 
         return new ModelAndView( "redirect:/apply" );
     }
