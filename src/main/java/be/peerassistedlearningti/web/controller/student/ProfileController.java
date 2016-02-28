@@ -151,7 +151,6 @@ public class ProfileController extends StudentController
         {
             return new ModelAndView( "redirect:/profile" );
         }
-        return new ModelAndView( "student/review_add", fillModel( model, current ) );
         Review myReview = service.getReviewsForStudentAndLesson(current,lesson);
         if(myReview !=null){
             ReviewForm form = new ReviewForm();
