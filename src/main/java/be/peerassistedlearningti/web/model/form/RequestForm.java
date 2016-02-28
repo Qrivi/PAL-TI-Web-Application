@@ -12,22 +12,22 @@ import java.util.Date;
 
 public class RequestForm {
 
-    @Min(value = 0, message = "{Min.Request.upvotes}")
+    @Min(value = 0, message = "{Min.RequestForm.upvotes}")
     private int upvotes;
 
-    @NotNull(message = "{NotNull.Request.description}")
-    @Size( min = 10, max = 300, message = "{Size.Request.text}" )
+    @NotNull(message = "{NotNull.RequestForm.description}")
+    @Size( min = 10, max = 300, message = "{Size.RequestForm.text}" )
     private String description;
 
     @Valid
-    @NotNull(message = "{NotNull.Request.course}")
+    @NotNull(message = "{NotNull.RequestForm.course}")
     private Course course;
 
     @Valid
-    @NotNull(message = "{NotNull.Request.student}")
+    @NotNull(message = "{NotNull.RequestForm.student}")
     private Student student;
 
-    @NotNull(message = "{NotNull.Request.creationDate}")
+    @NotNull(message = "{NotNull.RequestForm.creationDate}")
     private Date creationDate;
 
     public RequestForm() {
