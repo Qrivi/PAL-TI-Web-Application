@@ -9,7 +9,6 @@
         <class>be.peerassistedlearningti.model.Course</class>
         <class>be.peerassistedlearningti.model.Tutor</class>
         <class>be.peerassistedlearningti.model.Lesson</class>
-        <class>be.peerassistedlearningti.model.Booking</class>
         <class>be.peerassistedlearningti.model.Room</class>
         <class>be.peerassistedlearningti.model.RoomType</class>
         <class>be.peerassistedlearningti.model.Campus</class>
@@ -18,8 +17,6 @@
         <class>be.peerassistedlearningti.model.Request</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="hibernate.ejb.entitymanager_factory_name" value="PAL-FN"/>
-            <property name="hibernate.event.merge.entity_copy_observer" value="allow"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform"/>
         </properties>
     </persistence-unit>
