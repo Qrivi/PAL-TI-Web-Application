@@ -1,16 +1,25 @@
-package be.peerassistedlearningti.web.model.util;
+package be.peerassistedlearningti.web.model.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents a calendar event
  */
-public class CalendarEvent
+public class CalendarDTO
 {
+    @JsonProperty( index = 0, value = "title" )
     private String title;
+
+    @JsonProperty( index = 1, value = "start" )
     private String start;
+
+    @JsonProperty( index = 2, value = "end" )
     private String end;
+
+    @JsonProperty( index = 3, value = "color" )
     private String color;
 
-    public CalendarEvent() {}
+    public CalendarDTO() {}
 
     public void setTitle( String title )
     {

@@ -1,9 +1,12 @@
-package be.peerassistedlearningti.web.model.util;
+package be.peerassistedlearningti.web.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+/**
+ * Represents a review
+ */
 public class ReviewDTO
 {
     @JsonProperty( index = 0, value = "student_id" )
@@ -15,22 +18,25 @@ public class ReviewDTO
     @JsonProperty( index = 2, value = "tutor_name" )
     private String tutorName;
 
-    @JsonProperty( index = 3, value = "course_name" )
+    @JsonProperty( index = 3, value = "tutor_profile_identifier" )
+    private String tutorProfileIdentifier;
+
+    @JsonProperty( index = 4, value = "course_name" )
     private String courseName;
 
-    @JsonProperty( index = 4, value = "lesson_id" )
+    @JsonProperty( index = 5, value = "lesson_id" )
     private int lessonId;
 
-    @JsonProperty( index = 5, value = "lesson_name" )
+    @JsonProperty( index = 6, value = "lesson_name" )
     private String lessonName;
 
-    @JsonProperty( index = 6, value = "lesson_description" )
+    @JsonProperty( index = 7, value = "lesson_description" )
     private String lessonDescription;
 
-    @JsonProperty( index = 7, value = "lesson_date" )
+    @JsonProperty( index = 8, value = "lesson_date" )
     private Date lessonDate;
 
-    @JsonProperty( index = 8, value = "text" )
+    @JsonProperty( index = 9, value = "text" )
     private String text;
 
     @JsonProperty( index = 9, value = "done" )
@@ -38,11 +44,12 @@ public class ReviewDTO
 
     public ReviewDTO() {}
 
-    public ReviewDTO( int studentId, int tutorId, String tutorName, String courseName, int lessonId, String lessonName, String lessonDescription, Date lessonDate, String text, boolean done )
+    public ReviewDTO( int studentId, int tutorId, String tutorName, String tutorProfileIdentifier, String courseName, int lessonId, String lessonName, String lessonDescription, Date lessonDate, String text, boolean done )
     {
         this.studentId = studentId;
         this.tutorId = tutorId;
         this.tutorName = tutorName;
+        this.tutorProfileIdentifier = tutorProfileIdentifier;
         this.courseName = courseName;
         this.lessonId = lessonId;
         this.lessonName = lessonName;
@@ -65,6 +72,11 @@ public class ReviewDTO
     public String getTutorName()
     {
         return tutorName;
+    }
+
+    public String getTutorProfileIdentifier()
+    {
+        return tutorProfileIdentifier;
     }
 
     public String getCourseName()

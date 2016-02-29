@@ -5,14 +5,15 @@ import be.peerassistedlearningti.model.Review;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.dto.LessonTimelineDTO;
+import be.peerassistedlearningti.web.model.dto.ReviewDTO;
+import be.peerassistedlearningti.web.model.dto.TimelineDTO;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -21,11 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -50,17 +47,6 @@ public class ProfileController extends StudentController
         if ( model.get( "user" ) == null )
         {
             model.addAttribute( "user", student );
-        }
-        if ( model.get( "review" ) == null )
-        {
-            model.addAttribute( "review", new ReviewForm() );
-        }
-        if ( model.get( "timeline" ) == null )
-        {
-            Timeline timeline = new Timeline();
-            timeline.addAll( service.getPastBookings( student ) );
-            timeline.addAll( service.getReviewsForStudent( student ) );
-            model.addAttribute( "timeline", timeline );
         }
         if ( model.get( "courses" ) == null )
         {
@@ -145,14 +131,32 @@ public class ProfileController extends StudentController
     public ArrayList<ReviewDTO> getReviews()
     {
         Student current = SessionAuth.getStudent();
-
-        return new ArrayList<>( service.getPastBookings( current ).stream().map( b -> {
+        ArrayList<ReviewDTO> reviews = new ArrayList<>( service.getPastBookings( current ).stream().map( b -> {
             Review review = service.getReviewsForStudentAndLesson( current, b );
             String text = ( review != null ? review.getText() : null );
             Student tutor = b.getTutor().getStudent();
-            return new ReviewDTO( current.getId(), tutor.getId(), tutor.getName(), b.getCourse().getName(), b.getId(), b.getName(), b.getDescription(), b.getDate(), text, service
-                    .getReviewsForStudentAndLesson( current, b ) != null );
+            return new ReviewDTO( current.getId(), tutor.getId(), tutor.getName(), tutor.getProfileIdentifier(), b.getCourse().getName(), b.getId(), b.getName(), b.getDescription(), b
+                    .getDate(), text, service.getReviewsForStudentAndLesson( current, b ) != null );
         } ).collect( Collectors.toSet() ) );
+
+        Collections.sort( reviews, ( o1, o2 ) -> o1.getLessonDate().compareTo( o2.getLessonDate() ) );
+
+        return reviews;
+    }
+
+    @ResponseBody
+    @RequestMapping( value = "/timeline", method = RequestMethod.GET, produces = "application/json" )
+    public ArrayList<TimelineDTO> getTimeline()
+    {
+        Student current = SessionAuth.getStudent();
+        ArrayList<TimelineDTO> timeline = new ArrayList<>( service.getPastBookings( current ).stream().map( b -> {
+            Student tutor = b.getTutor().getStudent();
+            return new LessonTimelineDTO( b.getCourse().getName(), tutor.getName(), b.getName(), b.getDescription(), b.getDate() );
+        } ).collect( Collectors.toSet() ) );
+
+        Collections.sort( timeline, ( o1, o2 ) -> o1.getArchiveDate().compareTo( o2.getArchiveDate() ) );
+
+        return timeline;
     }
 
     //================================================================================

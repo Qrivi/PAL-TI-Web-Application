@@ -22,11 +22,8 @@
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle"
                          src="<c:url value="/resources/students/${user.id}/avatar.png"/>" alt="User profile picture">
-
                     <h3 class="profile-username text-center"><c:out value="${user.name}"/></h3>
-
-                    <p class="text-muted text-center">User: <c:out value="${user.type}"/></p>
-
+                    <p class="text-muted text-center"><c:out value="${user.email}"/></p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
                             <b>Past bookings</b> <a class="pull-right"><c:out
@@ -71,20 +68,6 @@
                     <!-- timeline tab content-->
                     <div class="tab-pane" id="timeline">
                         <ul class="timeline timeline-inverse">
-                            <!-- Empty Timeline -->
-                            <c:if test="${empty timeline.archivables}">
-                                <li>
-                                    <i class="fa fa-info bg-gray"></i>
-                                    <div class="timeline-item">
-                                        <h3 class="timeline-header">Timeline info</h3>
-                                        <div class="timeline-body"><p>This page will show you your history,
-                                            This doesn't only contains all the lessons you went to but also
-                                            contains all the reviews you've posted.</p></div>
-                                    </div>
-                                    </i>
-                                </li>
-                            </c:if>
-
                             <c:forEach var="archivable" items="${timeline.archivables}">
                                 <li class="time-label">
                                                 <span class="bg-red">
@@ -148,10 +131,7 @@
                                     </c:choose>
                                 </li>
                             </c:forEach>
-
-
                             <!-- End timeline items -->
-                            <li><i class="fa fa-clock-o bg-gray"></i></li>
                         </ul>
                     </div>
                     <!-- settings tab content-->
