@@ -21,53 +21,60 @@ public class BookingController extends StudentController
     @Autowired
     private PALService service;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getBookingPage()
     {
         ModelMap map = new ModelMap();
 
         // Remove lessons where I am tutor
-        if (SessionAuth.getStudent().getTutor() != null) {
+        if ( SessionAuth.getStudent().getTutor() != null )
+        {
             Collection<Lesson> lessons = service.getUpcomingLessons();
-            lessons.removeAll(SessionAuth.getStudent().getTutor().getLessons());
-            map.addAttribute("lessons", lessons);
-        } else {
-            map.addAttribute("lessons", service.getUpcomingLessons());
+            lessons.removeAll( service.getLessons( SessionAuth.getStudent().getTutor() ) );
+            map.addAttribute( "lessons", lessons );
+        } else
+        {
+            map.addAttribute( "lessons", service.getUpcomingLessons() );
         }
 
-        map.addAttribute("myOpenBookings", SessionAuth.getStudent().getOpenBookings());
-        return new ModelAndView("student/booking", map);
+        map.addAttribute( "myOpenBookings", service.getUpcomingBookings( SessionAuth.getStudent() ) );
+        return new ModelAndView( "student/booking", map );
     }
 
-    @RequestMapping(value = "/register/{lessonId}", method = RequestMethod.POST)
-    public ModelAndView addBooking(@PathVariable(value = "lessonId") int lessonId) {
-        Lesson lesson = service.getLessonById(lessonId);
-        if (lesson == null ||
-                SessionAuth.getStudent().getBookings().contains(lesson) ||
+    @RequestMapping( value = "/register/{lessonId}", method = RequestMethod.POST )
+    public ModelAndView addBooking( @PathVariable( value = "lessonId" ) int lessonId )
+    {
+        Lesson lesson = service.getLessonById( lessonId );
+        if ( lesson == null ||
+                service.hasBooking( SessionAuth.getStudent(), lesson ) ||
                 lesson.getBookings().size() == lesson.getMaxParticipants() ||
-                lesson.getTutor().getStudent().equals(SessionAuth.getStudent())) {
-            return new ModelAndView("redirect:/booking");
-        } else {
-            lesson.addBooking(SessionAuth.getStudent());
-            service.updateLesson(lesson);
-            SessionAuth.setStudent(service.getStudentById(SessionAuth.getStudent().getId()));
+                lesson.getTutor().getStudent().equals( SessionAuth.getStudent() ) )
+        {
+            return new ModelAndView( "redirect:/booking" );
+        } else
+        {
+            lesson.addBooking( SessionAuth.getStudent() );
+            service.updateLesson( lesson );
+            SessionAuth.setStudent( service.getStudentById( SessionAuth.getStudent().getId() ) );
             //TODO:: add success message
-            return new ModelAndView("redirect:/booking");
+            return new ModelAndView( "redirect:/booking" );
         }
     }
 
-    @RequestMapping(value = "/unregister/{lessonId}", method = RequestMethod.POST)
-    public ModelAndView removeBooking(@PathVariable(value = "lessonId") int lessonId) {
-        Lesson lesson = service.getLessonById(lessonId);
-        if (lesson == null ||
-                !SessionAuth.getStudent().getBookings().contains(lesson)) {
-            return new ModelAndView("redirect:/booking");
-        } else {
-            lesson.removeBooking(SessionAuth.getStudent());
-            service.updateLesson(lesson);
-            SessionAuth.setStudent(service.getStudentById(SessionAuth.getStudent().getId()));
+    @RequestMapping( value = "/unregister/{lessonId}", method = RequestMethod.POST )
+    public ModelAndView removeBooking( @PathVariable( value = "lessonId" ) int lessonId )
+    {
+        Lesson lesson = service.getLessonById( lessonId );
+        if ( lesson == null || !service.hasBooking( SessionAuth.getStudent(), lesson ) )
+        {
+            return new ModelAndView( "redirect:/booking" );
+        } else
+        {
+            lesson.removeBooking( SessionAuth.getStudent() );
+            service.updateLesson( lesson );
+            SessionAuth.setStudent( service.getStudentById( SessionAuth.getStudent().getId() ) );
             //TODO:: add success message
-            return new ModelAndView("redirect:/booking");
+            return new ModelAndView( "redirect:/booking" );
         }
     }
 }

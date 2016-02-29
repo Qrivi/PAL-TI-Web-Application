@@ -56,7 +56,7 @@ public class ProfileController extends StudentController
         if ( model.get( "lessonReviews" ) == null )
         {
             List<LessonReviewWrapper> list = new ArrayList<>();
-            for ( Lesson lesson : student.getClosedBookings() )
+            for ( Lesson lesson : service.getPastBookings( student ) )
             {
                 list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( student, lesson ) ) );
             }
@@ -69,13 +69,21 @@ public class ProfileController extends StudentController
         if ( model.get( "timeline" ) == null )
         {
             Timeline timeline = new Timeline();
-            timeline.addAll( service.getPastLessons( student ) );
+            timeline.addAll( service.getPastBookings( student ) );
             timeline.addAll( service.getReviewsForStudent( student ) );
             model.addAttribute( "timeline", timeline );
         }
         if ( model.get( "courses" ) == null )
         {
             model.addAttribute( "courses", service.getAllCourses() );
+        }
+        if ( model.get( "pastBookings" ) == null )
+        {
+            model.addAttribute( "pastBookings", service.getPastBookings( student ).size() );
+        }
+        if ( model.get( "upcomingBookings" ) == null )
+        {
+            model.addAttribute( "upcomingBookings", service.getUpcomingBookings( student ).size() );
         }
         return model;
     }

@@ -2,8 +2,10 @@ package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.util.CalendarEvent;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,9 @@ import java.util.stream.Collectors;
 @RequestMapping( value = "/calendar" )
 public class CalendarController extends StudentController
 {
+    @Autowired
+    PALService service;
+
     @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getCalendar( ModelMap model )
     {
@@ -33,17 +38,10 @@ public class CalendarController extends StudentController
     {
         Student current = SessionAuth.getStudent();
         List<CalendarEvent> events = new ArrayList<>();
-        events.addAll( current.getBookings()
-                .stream()
-                .map( lesson -> convert( lesson, "#428bca" ) )
-                .collect( Collectors.toList() ) );
+        events.addAll( service.getUpcomingBookings( current ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
         if ( current.getTutor() != null )
         {
-            events.addAll( current.getTutor()
-                    .getLessons()
-                    .stream()
-                    .map( lesson -> convert( lesson, "#5cb85c" ) )
-                    .collect( Collectors.toList() ) );
+            events.addAll( service.getLessons( SessionAuth.getStudent().getTutor() ).stream().map( lesson -> convert( lesson, "#5cb85c" ) ).collect( Collectors.toList() ) );
         }
         return events;
     }
@@ -54,8 +52,7 @@ public class CalendarController extends StudentController
         CalendarEvent event = new CalendarEvent();
         event.setTitle( lesson.getName() );
         event.setStart( dateFormat.format( lesson.getDate() ) );
-        event.setEnd( dateFormat.format( new Date( lesson.getDate()
-                .getTime() + lesson.getDuration() * 60 * 1000 ) ) );
+        event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
         event.setColor( color );
         return event;
     }
