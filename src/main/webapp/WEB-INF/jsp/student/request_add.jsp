@@ -26,6 +26,7 @@
                 </div>
                 <form:form action="/request/add" method="POST" commandName="request">
                 <c:set var="courseError"><form:errors path="course"/></c:set>
+                    <c:set var="titleError"><form:errors path="title"/></c:set>
                 <c:set var="descriptionError"><form:errors path="description"/></c:set>
                     <div class="box-body">
                         <div class="row">
@@ -36,7 +37,11 @@
                                         Please check if your request doesn't already exist.
                                     </div>
                                 </div>
-                                <div class="col-md-12"></div>
+                                <div class="col-md-12 form-group">
+                                    <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
+                                    <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
+                                    <div id="request_title_feedback" class="label label-default"></div>
+                                </div>
                                 <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                                     <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
                                     <form:select path="course" class="form-control" placeholder="Course">
