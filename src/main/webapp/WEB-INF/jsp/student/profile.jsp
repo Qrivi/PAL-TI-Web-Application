@@ -29,12 +29,12 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Closed bookings</b> <a class="pull-right"><c:out
-                                value="${user.closedBookings.size()}"/></a>
+                            <b>Past bookings</b> <a class="pull-right"><c:out
+                                value="${pastBookings}"/></a>
                         </li>
                         <li class="list-group-item">
-                            <b>Open bookings</b> <a class="pull-right"><c:out
-                                value="${user.openBookings.size()}"/></a>
+                            <b>Upcoming bookings</b> <a class="pull-right"><c:out
+                                value="${upcomingBookings}"/></a>
                         </li>
                         <li class="list-group-item">
                             <b>Subscriptions</b> <a class="pull-right"><c:out
@@ -120,7 +120,7 @@
                                                                     <div class="row">
                                                                         <div class="col-md-10">
                                                                             <!--todo add scores -->
-                                                                            ${lessonReview.review.text}
+                                                                                ${lessonReview.review.text}
                                                                         </div>
                                                                         <div class="col-md-12">
                                                                             <a href="/profile/lesson/${lessonReview.lesson.id}/reviews/add" class="btn btn-default pull-right">

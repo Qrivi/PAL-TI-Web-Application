@@ -96,7 +96,7 @@ public class ResourceController
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", s.getOpenBookings() );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", service.getPastBookings( s ) );
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
             outputter.output( calendar, response.getOutputStream() );
@@ -120,7 +120,7 @@ public class ResourceController
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", s.getTutor().getLessons() );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getLessons( s.getTutor() ) );
 
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
@@ -135,7 +135,7 @@ public class ResourceController
      * @param items The lessons of the calendar
      * @return A calendar with the specified id and using the specified lessons
      */
-    private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Set<Lesson> items )
+    private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Collection<Lesson> items )
     {
         // Set the timezone to 'Europe/Brussels'
         TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();

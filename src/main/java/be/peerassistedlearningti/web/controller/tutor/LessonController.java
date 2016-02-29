@@ -49,8 +49,8 @@ public class LessonController extends TutorController
     public ModelAndView getLessonOverviewPage( ModelMap model )
     {
         Tutor tutor = SessionAuth.getStudent().getTutor();
-        model.addAttribute( "myPastLessons", tutor.getPastLessons() );
-        model.addAttribute( "myUpcomingLessons", tutor.getUpcomingLessons() );
+        model.addAttribute( "myPastLessons", service.getPastLessons( tutor ) );
+        model.addAttribute( "myUpcomingLessons", service.getUpcomingLessons( tutor ) );
         return new ModelAndView( "tutor/lessons", fillModel( model ) );
     }
 
