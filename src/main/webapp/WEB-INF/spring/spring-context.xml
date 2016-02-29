@@ -21,13 +21,15 @@
     http://www.springframework.org/schema/task/spring-task.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="be.peerassistedlearningti"/>
+    <context:component-scan base-package="be.peerassistedlearningti">
+        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan>
 
     <!-- Base package of the repository and service interfaces -->
 
     <jpa:repositories base-package="be.peerassistedlearningti.repository, be.peerassistedlearningti.service"/>
 
-    <!-- Spring Data -->
+    <!-- Datasource -->
 
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/PAL" expected-type="javax.sql.DataSource"/>
 

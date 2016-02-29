@@ -193,6 +193,23 @@
         </put-list-attribute>
     </definition>
 
+    <!-- ERROR -->
+
+    <definition name="error-page" template="/WEB-INF/tiles/template/error-template.jsp">
+        <put-list-attribute name="stylesheets">
+            <add-attribute value="/resources/global.css"/>
+        </put-list-attribute>
+    </definition>
+
+    <definition name="500" extends="error-page">
+        <put-attribute name="page_title" value="An Error Occurred"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/template/error/500.jsp"/>
+    </definition>
+
+    <definition name="404" extends="error-page">
+        <put-attribute name="page_title" value="Not Found"/>
+        <put-attribute name="content" value="/WEB-INF/tiles/template/error/404.jsp"/>
+    </definition>
 
     <!-- AUTHENTICATION -->
 
