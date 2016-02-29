@@ -68,9 +68,11 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
         <div class="col-md-12 col-sm-12">
             <!-- Open lessons table -->
-            <div class="col-md-12 col-sm-12 box box-default">
+            <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">Lessons</h3>
                     <div class="box-tools pull-right">
@@ -142,7 +144,7 @@
                                                         <form action="<c:url value="/booking/register/${lesson.id}" />"
                                                               method="POST">
                                                             <button type="submit"
-                                                                    class="btn btn-block btn-success btn-sm">
+                                                                    class="btn btn-success btn-sm" data-toggle="tooltip" title="Register">
                                                                 <i class="fa fa-plus"></i>
                                                             </button>
                                                         </form>
@@ -150,7 +152,7 @@
                                                     <c:if test="${myOpenBookings.contains(lesson)}">
                                                         <form action="<c:url value="/booking/unregister/${lesson.id}" />"
                                                               method="POST">
-                                                            <button class="btn btn-block btn-danger btn-sm">
+                                                            <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Unregister">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>
                                                         </form>
