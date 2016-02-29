@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
+/**
+ * Represents a lesson timeline object
+ */
 public class LessonTimelineDTO extends TimelineDTO
 {
     @JsonProperty( index = 0, value = "course_name" )

@@ -7,10 +7,12 @@ import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.dto.LessonTimelineDTO;
 import be.peerassistedlearningti.web.model.dto.ReviewDTO;
+import be.peerassistedlearningti.web.model.dto.ReviewTimelineDTO;
 import be.peerassistedlearningti.web.model.dto.TimelineDTO;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.*;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,23 +36,14 @@ public class ProfileController extends StudentController
 
     private ModelMap fillModel( ModelMap model, Student student )
     {
+        if ( student.equals( SessionAuth.getStudent() ) )
+            model = fillModel2( model, SessionAuth.getStudent() );
+
         Tutor tutor = student.getTutor();
 
-        if ( model.get( "profile" ) == null )
-        {
-            ProfileForm profile = new ProfileForm();
-            profile.setName( student.getName() );
-            profile.setEmail( student.getEmail() );
-            profile.setSubscriptions( student.getSubscriptions() );
-            model.addAttribute( "profile", profile );
-        }
         if ( model.get( "user" ) == null )
         {
             model.addAttribute( "user", student );
-        }
-        if ( model.get( "courses" ) == null )
-        {
-            model.addAttribute( "courses", service.getAllCourses() );
         }
         if ( model.get( "pastBookings" ) == null )
         {
@@ -59,6 +52,23 @@ public class ProfileController extends StudentController
         if ( model.get( "upcomingBookings" ) == null )
         {
             model.addAttribute( "upcomingBookings", service.getUpcomingBookings( student ).size() );
+        }
+        return model;
+    }
+
+    private ModelMap fillModel2( ModelMap model, Student student )
+    {
+        if ( model.get( "profile" ) == null )
+        {
+            ProfileForm profile = new ProfileForm();
+            profile.setName( student.getName() );
+            profile.setEmail( student.getEmail() );
+            profile.setSubscriptions( student.getSubscriptions() );
+            model.addAttribute( "profile", profile );
+        }
+        if ( model.get( "courses" ) == null )
+        {
+            model.addAttribute( "courses", service.getAllCourses() );
         }
         return model;
     }
@@ -149,9 +159,17 @@ public class ProfileController extends StudentController
     public ArrayList<TimelineDTO> getTimeline()
     {
         Student current = SessionAuth.getStudent();
-        ArrayList<TimelineDTO> timeline = new ArrayList<>( service.getPastBookings( current ).stream().map( b -> {
+        ArrayList<TimelineDTO> timeline = new ArrayList<>();
+
+        timeline.addAll( service.getPastBookings( current ).stream().map( b -> {
             Student tutor = b.getTutor().getStudent();
             return new LessonTimelineDTO( b.getCourse().getName(), tutor.getName(), b.getName(), b.getDescription(), b.getDate() );
+        } ).collect( Collectors.toSet() ) );
+
+        timeline.addAll( service.getReviewsForStudent( current ).stream().map( r -> {
+            if ( r.isAnonymous() )
+                return null;
+            return new ReviewTimelineDTO( r.getText(), r.getLesson().getTutor().getStudent().getName(), r.getDate() );
         } ).collect( Collectors.toSet() ) );
 
         Collections.sort( timeline, ( o1, o2 ) -> o1.getArchiveDate().compareTo( o2.getArchiveDate() ) );

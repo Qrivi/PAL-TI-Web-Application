@@ -67,72 +67,7 @@
                     </c:if>
                     <!-- timeline tab content-->
                     <div class="tab-pane" id="timeline">
-                        <ul class="timeline timeline-inverse">
-                            <c:forEach var="archivable" items="${timeline.archivables}">
-                                <li class="time-label">
-                                                <span class="bg-red">
-                                                    <fmt:formatDate pattern="dd MMM. YYYY"
-                                                                    value="${archivable.getArchiveDate()}"/>
-                                                </span>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${archivable.class.simpleName == 'Lesson'}">
-                                            <!-- Is a Lesson object -->
-                                            <i class="fa fa-calendar-check-o bg-blue"></i>
-                                            <div class="timeline-item">
-                                                                <span class="time">
-                                                                    <i class="fa fa-clock-o"></i>
-                                                                    <fmt:formatDate pattern="HH:mm"
-                                                                                    value="${archivable.getArchiveDate()}"/>
-                                                                </span>
-                                                <h3 class="timeline-header">Went to <c:out
-                                                        value="${archivable.name}"/></h3>
-                                                <div class="timeline-body">
-                                                    <div class="row">
-                                                        <!-- lesson name -->
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="small-box bg-purple">
-                                                                <div class="inner">
-                                                                    <h3>Course</h3>
-                                                                    <p><c:out
-                                                                            value="${archivable.course.name}"/></p>
-                                                                </div>
-                                                                <div class="icon">
-                                                                    <i class="fa fa-book"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- tutor -->
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="small-box bg-blue">
-                                                                <div class="inner">
-                                                                    <h3>Tutor</h3>
-                                                                    <p><c:out
-                                                                            value="${archivable.tutor.student.name}"/></p>
-                                                                </div>
-                                                                <div class="icon">
-                                                                    <i class="fa fa-user"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- description -->
-                                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                                            <p><c:out
-                                                                    value="${archivable.description}"/></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${archivable.class.simpleName == 'Review'}">
-                                            <!-- TODO add review timeline object -->
-                                        </c:when>
-                                    </c:choose>
-                                </li>
-                            </c:forEach>
-                            <!-- End timeline items -->
-                        </ul>
+                        <ul class="timeline timeline-inverse"></ul>
                     </div>
                     <!-- settings tab content-->
                     <c:if test="${user == auth}">

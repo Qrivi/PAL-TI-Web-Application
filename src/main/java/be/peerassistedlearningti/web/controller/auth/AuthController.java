@@ -7,7 +7,7 @@ import be.peerassistedlearningti.web.model.form.RegisterForm;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
-import be.peerassistedlearningti.web.model.util.MessageFactory;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import be.peerassistedlearningti.web.model.util.StudentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

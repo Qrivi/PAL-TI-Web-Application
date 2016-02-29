@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.web.model.util;
+package be.peerassistedlearningti.web.model.util.message;
 
 /**
  * Class used to send generic messages between pages

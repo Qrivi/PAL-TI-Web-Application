@@ -1,4 +1,4 @@
-package be.peerassistedlearningti.web.model.util;
+package be.peerassistedlearningti.web.model.util.message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

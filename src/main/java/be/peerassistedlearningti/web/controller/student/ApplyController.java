@@ -5,7 +5,7 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.TutorApplyForm;
-import be.peerassistedlearningti.web.model.util.MessageFactory;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
