@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.lang.reflect.Array;
@@ -154,16 +155,21 @@ public class ProfileController extends StudentController
         } ).collect( Collectors.toSet() ) );
     }
 
+    //================================================================================
+    // region Reviews
+    //================================================================================
+
     @RequestMapping( value = "/reviews/{id}", method = RequestMethod.GET )
     public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
     {
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById( id );
-        //I did not go this lesson or lesson is not in the past
+
         if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
         {
             return new ModelAndView( "redirect:/profile" );
         }
+
         Review myReview = service.getReviewsForStudentAndLesson( current, lesson );
         if ( myReview != null )
         {
@@ -176,23 +182,27 @@ public class ProfileController extends StudentController
             form.setEngagementScore( myReview.getEngagementScore() );
             model.addAttribute( "review", form );
         }
+
         model.addAttribute( "lesson", lesson );
-        return new ModelAndView( "student/review_add", fillModel( model, current ) );
+        return new ModelAndView( "student/review_add", model );
     }
 
-    @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.POST )
-    public ModelAndView addReview( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result, ModelMap model )
+    @RequestMapping( value = "/reviews/{id}", method = RequestMethod.POST )
+    public ModelAndView addReview( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
     {
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById( id );
-        //I did not go this lesson or lesson is not in the past
+
         if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
         {
             return new ModelAndView( "redirect:/profile" );
-        } else if ( result.hasErrors() )
+        }
+
+        if ( result.hasErrors() )
         {
             return new ModelAndView( "student/review_add", fillModel( model, current ) );
         }
+
         Review review = service.getReviewsForStudentAndLesson( current, lesson );
         if ( review == null )
         {
@@ -209,6 +219,12 @@ public class ProfileController extends StudentController
         }
 
         service.addReview( review );
-        return new ModelAndView( "redirect:/profile", fillModel( model, current ) );
+        redirectAttributes
+                .addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ProfileController.Review", new Object[]{ review.getLesson().getTutor().getStudent().getName() } ) );
+        return new ModelAndView( "redirect:/profile/" + current.getProfileIdentifier() );
     }
+
+    //================================================================================
+    // end region
+    //================================================================================
 }
