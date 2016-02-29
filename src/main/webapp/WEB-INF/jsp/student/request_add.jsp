@@ -8,7 +8,7 @@
 
 <section class="content-header">
     <h1>
-        New Request
+        Lesson Request
     </h1>
 </section>
 <!-- main content -->
