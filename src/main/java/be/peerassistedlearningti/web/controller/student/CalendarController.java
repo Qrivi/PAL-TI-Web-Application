@@ -33,14 +33,14 @@ public class CalendarController extends StudentController
     {
         Student current = SessionAuth.getStudent();
         List<CalendarEvent> events = new ArrayList<>();
-        events.addAll( current.getOpenBookings()
+        events.addAll( current.getBookings()
                 .stream()
                 .map( lesson -> convert( lesson, "#428bca" ) )
                 .collect( Collectors.toList() ) );
         if ( current.getTutor() != null )
         {
             events.addAll( current.getTutor()
-                    .getUpcomingLessons()
+                    .getLessons()
                     .stream()
                     .map( lesson -> convert( lesson, "#5cb85c" ) )
                     .collect( Collectors.toList() ) );

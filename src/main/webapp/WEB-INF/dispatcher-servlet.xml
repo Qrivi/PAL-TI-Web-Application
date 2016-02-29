@@ -3,7 +3,6 @@
 <beans
         xmlns="http://www.springframework.org/schema/beans"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:p="http://www.springframework.org/schema/p"
         xmlns:context="http://www.springframework.org/schema/context"
         xmlns:mvc="http://www.springframework.org/schema/mvc"
         xmlns:security="http://www.springframework.org/schema/security"
@@ -17,7 +16,9 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="be.peerassistedlearningti"/>
+    <context:component-scan base-package="be.peerassistedlearningti.web" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <mvc:annotation-driven conversion-service="conversionService" validator="validator"/>
     <security:global-method-security pre-post-annotations="enabled"/>
