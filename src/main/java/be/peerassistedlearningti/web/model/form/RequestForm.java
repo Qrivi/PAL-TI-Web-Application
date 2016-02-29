@@ -9,6 +9,10 @@ import javax.validation.constraints.Size;
 
 public class RequestForm {
 
+    @NotNull(message = "{NotNull.RequestForm.title}")
+    @Size( min = 3, max = 50, message = "{Size.RequestForm.title}" )
+    private String title;
+
     @NotNull(message = "{NotNull.RequestForm.description}")
     @Size( min = 10, max = 300, message = "{Size.RequestForm.text}" )
     private String description;
@@ -18,6 +22,14 @@ public class RequestForm {
     private Course course;
 
     public RequestForm() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {
