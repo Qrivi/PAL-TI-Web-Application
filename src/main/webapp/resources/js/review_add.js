@@ -60,6 +60,20 @@ $(document).ready(function() {
         var text_length = $('#review_text').val().length;
         var text_remaining = text_max - text_length;
 
+        if(text_remaining>=20){
+            $("#review_text_feedback").removeClass("label-danger");
+            $("#review_text_feedback").removeClass("label-warning");
+            $("#review_text_feedback").addClass("label-default");
+        }else if(text_remaining<20 && text_remaining!=0){
+            $("#review_text_feedback").removeClass("label-default");
+            $("#review_text_feedback").removeClass("label-danger");
+            $("#review_text_feedback").addClass("label-warning");
+        }else {
+            $("#review_text_feedback").removeClass("label-default");
+            $("#review_text_feedback").removeClass("label-warning");
+            $("#review_text_feedback").addClass("label-danger");
+        }
+
         $('#review_text_feedback').html(text_remaining + ' characters remaining');
     });
 });
