@@ -7,10 +7,7 @@ import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
-import be.peerassistedlearningti.web.model.util.LessonReviewWrapper;
-import be.peerassistedlearningti.web.model.util.SessionAuth;
-import be.peerassistedlearningti.web.model.util.StudentUtils;
-import be.peerassistedlearningti.web.model.util.Timeline;
+import be.peerassistedlearningti.web.model.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,17 +15,17 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( value = "/profile" )
@@ -52,15 +49,6 @@ public class ProfileController extends StudentController
         if ( model.get( "user" ) == null )
         {
             model.addAttribute( "user", student );
-        }
-        if ( model.get( "lessonReviews" ) == null )
-        {
-            List<LessonReviewWrapper> list = new ArrayList<>();
-            for ( Lesson lesson : service.getPastBookings( student ) )
-            {
-                list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( student, lesson ) ) );
-            }
-            model.addAttribute( "lessonReviews", list );
         }
         if ( model.get( "review" ) == null )
         {
@@ -151,7 +139,22 @@ public class ProfileController extends StudentController
         return new ModelAndView( "redirect:/profile" );
     }
 
-    @RequestMapping( value = "/lesson/{id}/reviews/add", method = RequestMethod.GET )
+    @ResponseBody
+    @RequestMapping( value = "/reviews", method = RequestMethod.GET, produces = "application/json" )
+    public ArrayList<ReviewDTO> getReviews()
+    {
+        Student current = SessionAuth.getStudent();
+
+        return new ArrayList<>( service.getPastBookings( current ).stream().map( b -> {
+            Review review = service.getReviewsForStudentAndLesson( current, b );
+            String text = ( review != null ? review.getText() : null );
+            Student tutor = b.getTutor().getStudent();
+            return new ReviewDTO( current.getId(), tutor.getId(), tutor.getName(), b.getCourse().getName(), b.getId(), b.getName(), b.getDescription(), b.getDate(), text, service
+                    .getReviewsForStudentAndLesson( current, b ) != null );
+        } ).collect( Collectors.toSet() ) );
+    }
+
+    @RequestMapping( value = "/reviews/{id}", method = RequestMethod.GET )
     public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
     {
         Student current = SessionAuth.getStudent();
