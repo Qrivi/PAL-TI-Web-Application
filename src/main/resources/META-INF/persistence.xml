@@ -15,6 +15,7 @@
         <class>be.peerassistedlearningti.model.Application</class>
         <class>be.peerassistedlearningti.model.Review</class>
         <class>be.peerassistedlearningti.model.Request</class>
+        <class>be.peerassistedlearningti.model.Image</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform"/>
