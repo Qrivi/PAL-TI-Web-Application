@@ -7,8 +7,8 @@ import be.peerassistedlearningti.web.model.form.RegisterForm;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
-import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import be.peerassistedlearningti.web.model.util.StudentUtils;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -66,7 +66,9 @@ public class AuthController
     @RequestMapping( value = "/register", method = RequestMethod.GET )
     public ModelAndView registerStudent( ModelMap model )
     {
-        return new ModelAndView( "auth/register", "register", new RegisterForm() );
+        model.addAttribute( "curriculums", service.getCurriculums() );
+        model.addAttribute( "register", new RegisterForm() );
+        return new ModelAndView( "auth/register", model );
     }
 
     @RequestMapping( value = "/register", method = RequestMethod.POST )
@@ -75,7 +77,7 @@ public class AuthController
         if ( result.hasErrors() )
             return new ModelAndView( "auth/register" );
 
-        Student s = new Student( form.getName(), form.getPassword(), form.getEmail().toLowerCase(), StudentUtils.createProfileIdentifier( form.getName() ), UserType.NORMAL );
+        Student s = new Student( form.getName(), form.getPassword(), form.getEmail().toLowerCase(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), UserType.NORMAL );
         s.setLastUpdated( new Date() );
         service.addStudent( s );
 

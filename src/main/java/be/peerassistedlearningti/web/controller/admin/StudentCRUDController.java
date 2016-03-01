@@ -1,7 +1,6 @@
 package be.peerassistedlearningti.web.controller.admin;
 
 import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.UserType;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import be.peerassistedlearningti.web.model.form.StudentUpdateForm;
@@ -12,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -32,6 +34,8 @@ public class StudentCRUDController extends AdminController
             model.addAttribute( "updateStudent", new StudentUpdateForm() );
         if ( model.get( "userTypes" ) == null )
             model.addAttribute( "userTypes", service.getStudentTypes() );
+        if ( model.get( "curriculums" ) == null )
+            model.addAttribute( "curriculums", service.getCurriculums() );
         if ( model.get( "students" ) == null )
             model.addAttribute( "students", service.getAllStudents() );
         return model;
@@ -44,13 +48,13 @@ public class StudentCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/students", method = RequestMethod.POST )
-    public ModelAndView addStudent( @Valid @ModelAttribute( "student" ) StudentForm studentForm, BindingResult result, ModelMap model )
+    public ModelAndView addStudent( @Valid @ModelAttribute( "student" ) StudentForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "admin/students", fillModel( model ) );
 
-        service.addStudent( new Student( studentForm.getName(), studentForm.getPassword(), studentForm.getEmail(), StudentUtils.createProfileIdentifier( studentForm.getName() ), studentForm
-                .getType() ) );
+        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils
+                .createProfileIdentifier( form.getName() ), form.getType() ) );
 
         return new ModelAndView( "redirect:/admin/students" );
     }

@@ -128,6 +128,8 @@
                 <bean class="be.peerassistedlearningti.web.model.converter.UserTypeConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.IntegerConverter"/>
                 <bean class="be.peerassistedlearningti.web.model.converter.IntegerInverseConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.CurriculumConverter"/>
+                <bean class="be.peerassistedlearningti.web.model.converter.CurriculumInverseConverter"/>
             </set>
         </property>
     </bean>
