@@ -10,13 +10,16 @@ public class CalendarDTO
     @JsonProperty( index = 0, value = "title" )
     private String title;
 
-    @JsonProperty( index = 1, value = "start" )
+    @JsonProperty( index = 1, value = "description" )
+    private String description;
+
+    @JsonProperty( index = 2, value = "start" )
     private String start;
 
-    @JsonProperty( index = 2, value = "end" )
+    @JsonProperty( index = 3, value = "end" )
     private String end;
 
-    @JsonProperty( index = 3, value = "color" )
+    @JsonProperty( index = 4, value = "color" )
     private String color;
 
     public CalendarDTO() {}
@@ -24,6 +27,11 @@ public class CalendarDTO
     public void setTitle( String title )
     {
         this.title = title;
+    }
+
+    public void setDescription( String description )
+    {
+        this.description = description;
     }
 
     public void setStart( String start )
@@ -46,6 +54,11 @@ public class CalendarDTO
     public String getTitle()
     {
         return title;
+    }
+
+    public String getDescription()
+    {
+        return description;
     }
 
     public String getColor()

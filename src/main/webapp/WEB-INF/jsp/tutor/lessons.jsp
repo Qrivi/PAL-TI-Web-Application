@@ -34,14 +34,15 @@
                                 <div class="col-md-4 col-sm-6 col-xs-12">
                                     <div class="info-box bg-blue-gradient">
                                         <div class="pull-right">
-                                            <form action="<c:url value="/tutor/lesson/remove/${lesson.id}" />"
-                                                  method="POST">
+                                            <form action="<c:url value="/tutor/lessons/remove" />" method="POST">
+                                                <input type="hidden" name="_method" value="delete"/>
+                                                <input type="hidden" name="id" value="${lesson.id}"/>
                                                 <button class="btn btn-flat btn-danger"><i
                                                         class="fa fa-trash"></i></button>
                                                 </button>
                                             </form>
                                         </div>
-                                        <a href="<c:url value="/tutor/lesson/edit/${lesson.id}"/>"
+                                        <a href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>"
                                            style="cursor:pointer;" alt="Edit lesson ${lesson.name}">
                                             <i class="info-box-icon fa fa-edit"></i>
                                         </a>
@@ -49,7 +50,7 @@
                                             <span class="info-box-text">${lesson.course.shortName}</span>
                                             <span class="info-box-text">${lesson.name}</span>
                                                             <span class="info-box-text">
-                                                                <fmt:formatDate pattern="EEE. dd/MM HH:mm"
+                                                                <fmt:formatDate pattern="EEE. dd/MM hh:mm"
                                                                                 value="${lesson.date}"/> - ${lesson.room.name}
                                                             </span>
                                             <div class="progress">
@@ -69,7 +70,7 @@
         </div>
         <!-- My lesson history -->
         <div class="col-md-12 col-sm-12">
-            <div class="box box-default">
+            <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Lesson history</h3>
                     <div class="box-tools pull-right">
@@ -117,7 +118,7 @@
                                         <c:forEach var="lesson" items="${myPastLessons}">
                                             <tr data-toggle="tooltip" title="${lesson.description}">
                                                 <td>${lesson.name}</td>
-                                                <td><fmt:formatDate pattern="EEE. dd/MM/YYYY HH:mm"
+                                                <td><fmt:formatDate pattern="EEE. dd/MM/YYYY hh:mm"
                                                                     value="${lesson.date}"/></td>
                                                 <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
                                                 <td>${lesson.course.name}</td>
@@ -138,7 +139,7 @@
                                                 <td>${lesson.backupRoom.name}</td>
                                                 <td>
                                                     <a class="btn btn-primary"
-                                                       href="<c:url value="/tutor/lesson/info/${lesson.id}"/>"
+                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>"
                                                        style="cursor:pointer;" alt="Info for lesson ${lesson.name}">
                                                         <i class="fa fa-info"></i>
                                                     </a>

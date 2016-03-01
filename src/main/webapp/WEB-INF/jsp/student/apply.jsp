@@ -10,48 +10,9 @@
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="box">
+            <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Top subscribed courses</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fa fa-minus"></i></button>
-                    </div>
-                </div>
-                <div class="box-body no-padding">
-                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Short name</th>
-                                <th>Curriculum</th>
-                                <th>Year</th>
-                                <th>Subscribers</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="course" items="${topSubscribedCourses}">
-                                <tr>
-                                    <td>${course.code}</td>
-                                    <td>${course.name}</td>
-                                    <td>${course.shortName}</td>
-                                    <td>${course.curriculum}</td>
-                                    <td>${course.year}</td>
-                                    <td>${course.subscribers.size()}</td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Apply for tutoring</h3>
+                    <h3 class="box-title">Submit your application</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -64,19 +25,20 @@
                                 <c:set var="courseError"><form:errors path="course"/></c:set>
                                 <c:set var="screenshotError"><form:errors path="screenshot"/></c:set>
                                 <div class="form-group has-feedback ${ not empty courseError ? 'has-error' : ''}">
-                                    <form:errors path="course" element="label"/>
-                                    <form:select id="courses" path="course" class="form-control select2 select2-hidden-accessible"
+                                    <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                    <form:select path="course" class="form-control select2 select2-hidden-accessible"
                                                  data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <form:option value="" label="--- Course ---"/>
                                         <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty screenshotError ? 'has-error' : ''}">
-                                    <form:errors path="screenshot" element="label"/>
+                                    <form:label path="screenshot">Screenshot : <c:if test="${not empty screenshotError}"><span class="text-danger">${screenshotError}</span></c:if></form:label>
                                     <form:input path="screenshot" type="file" placeholder="Screenshot"/>
                                     <p class="help-block">You can only apply for tutoring when you submit a screenshot of your point for that specific course!</p>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default pull-right">Apply</button>
+                                    <button type="submit" class="btn btn-default pull-right">Submit application</button>
                                 </div>
                             </form:form>
                         </div>
@@ -86,10 +48,41 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Last applications</h3>
+                    <h3 class="box-title">Most subscribed courses</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Subscribers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="course" items="${topSubscribedCourses}">
+                                <tr>
+                                    <td>${course.code}</td>
+                                    <td>${course.name}</td>
+                                    <td>${course.subscribers.size()}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Your applications</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i></button>

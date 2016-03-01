@@ -2,6 +2,7 @@ package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.dto.CalendarDTO;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
@@ -37,20 +38,22 @@ public class CalendarController extends StudentController
     public List<CalendarDTO> getCalendarEvents()
     {
         Student current = SessionAuth.getStudent();
+        Tutor tutor = service.getTutorByStudent( current );
         List<CalendarDTO> events = new ArrayList<>();
+
         events.addAll( service.getUpcomingBookings( current ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
-        if ( current.getTutor() != null )
-        {
-            events.addAll( service.getLessons( SessionAuth.getStudent().getTutor() ).stream().map( lesson -> convert( lesson, "#5cb85c" ) ).collect( Collectors.toList() ) );
-        }
+        if ( tutor != null )
+            events.addAll( service.getLessons( tutor ).stream().map( lesson -> convert( lesson, "#5cb85c" ) ).collect( Collectors.toList() ) );
+
         return events;
     }
 
     private CalendarDTO convert( Lesson lesson, String color )
     {
-        DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd HH:mm:SS" );
+        DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
         event.setTitle( lesson.getName() );
+        event.setDescription( lesson.getDescription() );
         event.setStart( dateFormat.format( lesson.getDate() ) );
         event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
         event.setColor( color );

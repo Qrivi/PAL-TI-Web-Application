@@ -51,7 +51,7 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text">${booking.course.shortName}</span>
                                             <span class="info-box-text">${booking.name}</span>
-                                                <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM HH:mm"
+                                                <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM hh:mm"
                                                                                             value="${booking.date}"/> - ${booking.room.name}</span>
                                             <div class="progress">
                                                 <div class="progress-bar"

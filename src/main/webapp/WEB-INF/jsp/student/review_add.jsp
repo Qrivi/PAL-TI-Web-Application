@@ -64,7 +64,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="pull-right">
-                                        <span class="label label-primary"><fmt:formatDate value="${lesson.date}" pattern="HH:mm dd MMMMMMMMM YYYY"/> - ${lesson.duration}min.</span>
+                                        <span class="label label-primary"><fmt:formatDate value="${lesson.date}" pattern="hh:mm dd MMMMMMMMM YYYY"/> - ${lesson.duration}min.</span>
                                     </div>
                                     <h4>Lesson</h4>
                                     <ul>

@@ -3,7 +3,6 @@ package be.peerassistedlearningti.web.controller.student;
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Review;
 import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.dto.LessonTimelineDTO;
 import be.peerassistedlearningti.web.model.dto.ReviewDTO;
@@ -39,20 +38,13 @@ public class ProfileController extends StudentController
         if ( student.equals( SessionAuth.getStudent() ) )
             model = fillModel2( model, SessionAuth.getStudent() );
 
-        Tutor tutor = student.getTutor();
-
         if ( model.get( "user" ) == null )
-        {
             model.addAttribute( "user", student );
-        }
         if ( model.get( "pastBookings" ) == null )
-        {
             model.addAttribute( "pastBookings", service.getPastBookings( student ).size() );
-        }
         if ( model.get( "upcomingBookings" ) == null )
-        {
             model.addAttribute( "upcomingBookings", service.getUpcomingBookings( student ).size() );
-        }
+
         return model;
     }
 
@@ -67,9 +59,7 @@ public class ProfileController extends StudentController
             model.addAttribute( "profile", profile );
         }
         if ( model.get( "courses" ) == null )
-        {
             model.addAttribute( "courses", service.getAllCourses() );
-        }
         return model;
     }
 

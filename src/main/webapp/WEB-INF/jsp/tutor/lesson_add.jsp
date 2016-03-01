@@ -47,7 +47,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
                                             <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
-                                            <form:select path="course" class="form-control" placeholder="Course">
+                                            <form:select path="course" class="form-control select2 select2-hidden-accessible"
+                                                         data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                 <form:option value="" label="--- Course ---"/>
                                                 <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                             </form:select>
@@ -89,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary pull-right">Add</button>
+                                    <button type="submit" class="btn btn-default pull-right">Make lesson</button>
                                 </div>
                             </form:form>
                         </div>

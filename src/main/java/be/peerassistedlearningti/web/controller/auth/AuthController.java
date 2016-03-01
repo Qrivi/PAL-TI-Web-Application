@@ -75,8 +75,9 @@ public class AuthController
         if ( result.hasErrors() )
             return new ModelAndView( "auth/register" );
 
-        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail()
-                .toLowerCase(), StudentUtils.createProfileIdentifier( form.getName() ), UserType.NORMAL ) );
+        Student s = new Student( form.getName(), form.getPassword(), form.getEmail().toLowerCase(), StudentUtils.createProfileIdentifier( form.getName() ), UserType.NORMAL );
+        s.setLastUpdated( new Date() );
+        service.addStudent( s );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Register" ) );
 
@@ -106,8 +107,7 @@ public class AuthController
         Student student = service.getStudentByEmail( form.getEmail() );
 
         // max 1 reset request an hour
-        if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration()
-                .getTime() - new Date().getTime() > 0 )
+        if ( student.getResetTokenExpiration() != null && student.getResetTokenExpiration().getTime() - new Date().getTime() > 0 )
         {
             return new ModelAndView( "auth/reset", "message", MessageFactory.createDangerMessage( "ReqLimit.AuthController.Token" ) );
         } else

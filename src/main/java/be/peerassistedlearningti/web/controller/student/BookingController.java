@@ -1,6 +1,7 @@
 package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,12 @@ public class BookingController extends StudentController
     {
         ModelMap map = new ModelMap();
 
+        Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
         // Remove lessons where I am tutor
-        if ( SessionAuth.getStudent().getTutor() != null )
+        if ( tutor != null )
         {
             Collection<Lesson> lessons = service.getUpcomingLessons();
-            lessons.removeAll( service.getLessons( SessionAuth.getStudent().getTutor() ) );
+            lessons.removeAll( service.getLessons( tutor ) );
             map.addAttribute( "lessons", lessons );
         } else
         {

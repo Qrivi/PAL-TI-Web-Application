@@ -13,7 +13,7 @@
     <div class="row">
         <!-- edit form -->
         <div class="col-md-12 col-sm-12">
-            <div class="box box-default">
+            <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title">Edit Lesson</h3>
                     <div class="box-tools pull-right">
@@ -24,7 +24,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form:form method="post" commandName="lesson"
+                            <form:form method="put" commandName="lesson"
                                        enctype="application/x-www-form-urlencoded">
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="descriptionError"><form:errors path="description"/></c:set>
@@ -113,7 +113,7 @@
                                             <form:label path="backupRoom">Backup room :
                                                 <c:if test="${not empty backupRoomError}">
                                                     <span
-                                                        class="text-danger">${backupRoomError}
+                                                            class="text-danger">${backupRoomError}
                                                     </span>
                                                 </c:if>
                                             </form:label>
@@ -125,8 +125,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="<c:url value="/tutor/lessons"/>" class="btn btn-primary pull-right"><span>Back</span></a>
-                                    <button type="submit" class="btn btn-primary pull-right" ${editable ? '' : 'disabled'}/>Change</button>
+                                    <c:if test="${editable}">
+                                        <button type="submit" class="btn btn-primary pull-right">Save changes</button>
+                                    </c:if>
+                                    <a href="<c:url value="/tutor/lessons"/>" class="btn btn-default pull-right">Go back</a>
                                 </div>
                             </form:form>
                         </div>
@@ -139,22 +141,8 @@
             <div class="box box-primary">
                 <div class="box-header with-border row">
                     <h3 class="box-title col-md-1">Bookings</h3>
-                    <div class=" col-md-10 progress">
-                        <c:set var="percentage" value="${bookings.size()/lesson.maxParticipants*100}"/>
-                        <div class="progress-bar progress-bar-striped active
-                            <c:choose>
-                                <c:when test="${percentage < 60}">progress-bar-success</c:when>
-                                <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
-                                <c:when test="${percentage == 100}">progress-bar-danger</c:when>
-                            </c:choose>" style="width: ${bookings.size()/lesson.maxParticipants*100}%"></div>
-                    </div>
-                    <div class="box-tools pull-right col-md-1">
-                        <span class="label label-danger">${bookings.size()} bookings</span>
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
-                                class="fa fa-minus"></i></button>
-                    </div>
                 </div>
-                <div class="box-body no-padding">
+                <div class="box-body">
                     <c:if test="${empty bookings}">
                         <div class="alert alert-warning col-sm-4 col-sm-offset-4">
                             <h4><i class="icon fa fa-frown-o"></i>No bookings</h4>
@@ -165,17 +153,18 @@
                         <ul class="row users-list">
                             <c:forEach var="student" items="${bookings}">
                                 <div class="col-md-2 col-sm-3 col-xs-6">
-                                    <li style="padding-bottom: 10px;">
+                                    <li>
                                         <a class="users-list-name"
-                                           href="<c:url value="/profile/${student.id}"/>">
+                                           href="<c:url value="/profile/${student.profileIdentifier}"/>">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <img class="profile-user-img img-circle"
+                                                    <img class="profile-user-img img-circle center-block"
                                                          src="<c:url value="/resources/students/${student.id}/avatar.png"/>"
                                                          alt="User Image">
                                                 </div>
-                                                        <span class="col-md-10"
-                                                              style="margin-left: 10px;">${student.name}</span>
+                                                <div class="col-md-12">
+                                                    <div class="text-center"><span>${student.name}</span></div>
+                                                </div>
                                             </div>
                                         </a>
                                     </li>

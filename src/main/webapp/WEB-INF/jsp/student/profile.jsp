@@ -121,7 +121,7 @@
                                             </div>
                                         </div>
                                         <hr class="separator"/>
-                                        <c:if test="${user.tutor != null}">
+                                        <sec:authorize access="hasRole('ROLE_TUTOR')">
                                             <!-- lesson calendar field -->
                                             <div class="form-group has-feedback">
                                                 <label for="lesson-calendar" class="col-sm-2 control-label">Lesson Calendar</label>
@@ -134,7 +134,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:if>
+                                        </sec:authorize>
                                         <!-- booking calendar field -->
                                         <div class="form-group has-feedback">
                                             <label for="booking-calendar" class="col-sm-2 control-label">Booking Calendar</label>

@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller;
 import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.*;
@@ -118,12 +119,14 @@ public class ResourceController
         if ( !s.getSecurityToken().equals( token ) )
             return;
 
-        if ( s.getTutor() == null )
+        Tutor tutor = service.getTutorByStudent( s );
+
+        if ( tutor == null )
             return;
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getLessons( s.getTutor() ) );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getLessons( tutor ) );
 
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
