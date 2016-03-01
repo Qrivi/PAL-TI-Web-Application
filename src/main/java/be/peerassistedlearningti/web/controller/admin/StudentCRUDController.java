@@ -53,8 +53,7 @@ public class StudentCRUDController extends AdminController
         if ( result.hasErrors() )
             return new ModelAndView( "admin/students", fillModel( model ) );
 
-        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils
-                .createProfileIdentifier( form.getName() ), form.getType() ) );
+        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
 
         return new ModelAndView( "redirect:/admin/students" );
     }
@@ -92,6 +91,7 @@ public class StudentCRUDController extends AdminController
         s.setName( StringUtils.defaultIfEmpty( form.getName(), s.getName() ) );
         s.setEmail( StringUtils.defaultIfEmpty( email, s.getEmail() ) );
         s.setType( ObjectUtils.defaultIfNull( form.getType(), s.getType() ) );
+        s.setCurriculum( ObjectUtils.defaultIfNull( form.getCurriculum(), s.getCurriculum() ) );
 
         if ( !StringUtils.isEmpty( password ) )
             s.setPassword( password );

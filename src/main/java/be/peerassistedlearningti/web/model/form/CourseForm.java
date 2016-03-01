@@ -1,8 +1,8 @@
 package be.peerassistedlearningti.web.model.form;
 
+import be.peerassistedlearningti.model.Curriculum;
 import be.peerassistedlearningti.web.model.validation.CheckCodeIsUnique;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.NumberFormat;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -20,8 +20,8 @@ public class CourseForm
     @NotEmpty( message = "{NotEmpty.CourseForm.shortName}" )
     private String shortName;
 
-    @NotEmpty( message = "{NotEmpty.CourseForm.curriculum}" )
-    private String curriculum;
+    @NotNull( message = "{NotNull.CourseForm.curriculum}" )
+    private Curriculum curriculum;
 
     @NotNull( message = "{NotNull.CourseForm.year}" )
     @Min( value = 1, message = "{Min.CourseForm.year}" )
@@ -44,7 +44,7 @@ public class CourseForm
         this.shortName = shortName;
     }
 
-    public void setCurriculum( String curriculum )
+    public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
     }
@@ -69,7 +69,7 @@ public class CourseForm
         return shortName;
     }
 
-    public String getCurriculum()
+    public Curriculum getCurriculum()
     {
         return curriculum;
     }

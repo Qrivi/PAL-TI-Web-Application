@@ -5,6 +5,7 @@ $( document ).ready( function () {
         $( "#updateStudent #id" ).val( $( this ).attr( "data-id" ) );
         $( "#updateStudent #name" ).val( props[ 0 ].textContent );
         $( "#updateStudent #email" ).val( props[ 1 ].textContent );
-        $( "#updateStudent #type" ).val( props[ 2 ].textContent );
+        $( "#updateStudent #curriculum" ).val( props[ 2 ].textContent );
+        $( "#updateStudent #type" ).val( props[ 3 ].textContent );
     } );
 } );

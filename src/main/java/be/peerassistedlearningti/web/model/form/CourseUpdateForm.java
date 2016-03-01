@@ -1,5 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
+import be.peerassistedlearningti.model.Curriculum;
+
 public class CourseUpdateForm
 {
 
@@ -7,7 +9,7 @@ public class CourseUpdateForm
     private String code;
     private String name;
     private String shortName;
-    private String curriculum;
+    private Curriculum curriculum;
     private Integer year;
 
     public CourseUpdateForm() {}
@@ -32,7 +34,7 @@ public class CourseUpdateForm
         this.shortName = shortName;
     }
 
-    public void setCurriculum( String curriculum )
+    public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
     }
@@ -62,7 +64,7 @@ public class CourseUpdateForm
         return shortName;
     }
 
-    public String getCurriculum()
+    public Curriculum getCurriculum()
     {
         return curriculum;
     }
