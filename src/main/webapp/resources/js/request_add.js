@@ -46,15 +46,19 @@ $(document).ready(function() {
 
         $('#request_title_feedback').html(text_remaining + ' characters remaining');
     });
-    $('#request_title').focusout(function () {
-        var text_length = $('#request_title').val().length;
-        if (text_length >= 5 && $("#request_course").val() != "") {
-            updateSimilarRequests();
-        }
-    })
+    $('#request_title').focusout(validRequestCheck());
+    $('#request_course').focusout(validRequestCheck());
 
 
 });
+
+function validRequestCheck () {
+    var text_length = $('#request_title').val().length;
+    if (text_length >= 5 && $("#request_course").val() != "") {
+        updateSimilarRequests();
+    }
+}
+
 function updateSimilarRequests() {
     //Animate loading
     var loading_html = "<div class=\"loading\">\n<i class=\"fa fa-refresh fa-spin\"></i>\n</div>";

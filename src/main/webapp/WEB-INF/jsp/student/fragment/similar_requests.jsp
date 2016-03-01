@@ -3,7 +3,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:if test="${not empty similar}">
-    <dev class="panel panel-default">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            Existing requests
+        </div>
         <div class="panel-body table-responsive no-padding">
             <table class="table table-hover">
                 <tbody>
@@ -13,11 +16,11 @@
                         <td><span class="label label-default"><i
                                 class="fa fa-thumbs-up"></i> ${other.request.upvotes}</span></td>
                         <!-- title -->
-                        <td>${other.request.title}</td>
+                        <td>${other.request.upvotes.size()}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
             </table>
         </div>
-    </dev>
+    </div>
 </c:if>
