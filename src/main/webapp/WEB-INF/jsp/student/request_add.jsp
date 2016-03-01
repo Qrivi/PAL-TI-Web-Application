@@ -30,30 +30,30 @@
                 <c:set var="descriptionError"><form:errors path="description"/></c:set>
                     <div class="box-body">
                         <div class="row">
-                                <div class="col-md-offset-4 col-md-4">
-                                    <div class="alert alert-info alert-dismissible">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        <h4><i class="icon fa fa-info"></i> Info</h4>
-                                        Please check if your request doesn't already exist.
-                                    </div>
+                            <div class="col-md-offset-4 col-md-4">
+                                <div class="alert alert-info alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-info"></i> Info</h4>
+                                    Please check if your request doesn't already exist.
                                 </div>
-                                <div class="col-md-12 form-group">
-                                    <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
-                                    <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
-                                    <div id="request_title_feedback" class="label label-default"></div>
-                                </div>
-                                <div class="col-md-3 col-sm-3 col-xs-12 form-group">
-                                    <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
-                                    <form:select path="course" class="form-control" placeholder="Course">
-                                        <form:option value="" label="--- Course ---"/>
-                                        <form:options items="${courses}" itemValue="id" itemLabel="name"/>
-                                    </form:select>
-                                </div>
-                                <div class="col-md-9 col-sm-9 col-xs-12 form-group">
-                                    <form:label path="description">Description : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
-                                    <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="description"/>
-                                    <div id="request_text_feedback" class="label label-default"></div>
-                                </div>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
+                                <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
+                                <div id="request_title_feedback" class="label label-default"></div>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                                <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                <form:select path="course" class="form-control" placeholder="Course">
+                                    <form:option value="" label="--- Course ---"/>
+                                    <form:options items="${courses}" itemValue="id" itemLabel="name"/>
+                                </form:select>
+                            </div>
+                            <div class="col-md-9 col-sm-9 col-xs-12 form-group">
+                                <form:label path="description">Description : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
+                                <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="description"/>
+                                <div id="request_text_feedback" class="label label-default"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="box-footer">

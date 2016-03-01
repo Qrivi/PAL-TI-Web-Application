@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping (value = "/request")
@@ -49,4 +52,7 @@ public class RequestController extends StudentController {
 
         return new ModelAndView("/request",fillModel(model) );
     }
+
+    //TODO:: AJAX for similar requests
+    //http://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/
 }
