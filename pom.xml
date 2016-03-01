@@ -30,15 +30,22 @@
         <tiles.version>3.0.1</tiles.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
         <hibernate-entitymanager.version>4.3.1.Final</hibernate-entitymanager.version>
-        <jackson-annotations-version>2.7.2</jackson-annotations-version>
+        <jackson-annotations.version>2.7.2</jackson-annotations.version>
+        <guava.version>r05</guava.version>
     </properties>
 
     <dependencies>
+        <!-- Guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
         <!-- Jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-annotations-version}</version>
+            <version>${jackson-annotations.version}</version>
         </dependency>
         <!-- velocity -->
         <dependency>
