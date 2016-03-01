@@ -30,7 +30,6 @@ $(document).ready(function() {
     $('#request_title').keyup(function() {
         var text_length = $('#request_title').val().length;
         var text_remaining = title_max - text_length;
-
         if(text_remaining>=5){
             $("#request_title_feedback").removeClass("label-danger");
             $("#request_title_feedback").removeClass("label-warning");
@@ -47,4 +46,34 @@ $(document).ready(function() {
 
         $('#request_title_feedback').html(text_remaining + ' characters remaining');
     });
+    $('#request_title').focusout(function () {
+        var text_length = $('#request_title').val().length;
+        if (text_length >= 5 && $("#request_course").val() != "") {
+            updateSimilarRequests();
+        }
+    })
+
+
 });
+function updateSimilarRequests() {
+    //Animate loading
+    var loading_html = "<div class=\"loading\">\n<i class=\"fa fa-refresh fa-spin\"></i>\n</div>";
+    $("#similar_requests").empty();
+    $(loading_html).hide().appendTo("#similar_requests").fadeIn(500);
+
+    var request = {
+        title: $("#request_title").val(),
+        course: $("#request_course").val()
+    };
+    //Do ajax
+    $.ajax({
+        url: "/request/similar",
+        type: 'POST',
+        dataType: 'html',
+        data: request,
+        success: function (html) {
+            $("#similar_requests").find(".loading").fadeOut(1000);
+            $(html).hide().appendTo("#similar_requests").fadeIn(1000);
+        }
+    });
+}

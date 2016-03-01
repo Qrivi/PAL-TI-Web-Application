@@ -1,0 +1,23 @@
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:if test="${not empty similar}">
+    <dev class="panel panel-default">
+        <div class="panel-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                <c:forEach var="other" items="${similar}">
+                    <tr>
+                        <!-- upvotes -->
+                        <td><span class="label label-default"><i
+                                class="fa fa-thumbs-up"></i> ${other.request.upvotes}</span></td>
+                        <!-- title -->
+                        <td>${other.request.title}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+    </dev>
+</c:if>

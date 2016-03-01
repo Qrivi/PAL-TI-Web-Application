@@ -268,4 +268,8 @@
         <put-attribute name="content" value="/WEB-INF/jsp/student/fragment/timeline.jsp"/>
     </definition>
 
+    <definition name="student/fragment/similar_requests" extends="fragment">
+        <put-attribute name="content" value="/WEB-INF/jsp/student/fragment/similar_requests.jsp"/>
+    </definition>
+
 </tiles-definitions>

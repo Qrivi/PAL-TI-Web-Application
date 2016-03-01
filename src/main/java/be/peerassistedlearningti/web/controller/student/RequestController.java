@@ -1,9 +1,11 @@
 package be.peerassistedlearningti.web.controller.student;
 
 
+import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Request;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.RequestForm;
+import be.peerassistedlearningti.web.model.util.RequestSimilarityWrapper;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping (value = "/request")
@@ -53,6 +56,31 @@ public class RequestController extends StudentController {
         return new ModelAndView("/request",fillModel(model) );
     }
 
-    //TODO:: AJAX for similar requests
-    //http://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/
+
+    @RequestMapping(value = "/similar", method = RequestMethod.POST)
+    public ModelAndView getSimilar(HttpServletRequest req) {
+        String title = req.getParameter("title");
+        String courseId = req.getParameter("course");
+        Course course = service.getCourseById(Integer.parseInt(courseId));
+
+        if (title == null || course == null) {
+            return new ModelAndView("student/fragment/similar_requests");
+        }
+
+        Request newRequest = new Request();
+        newRequest.setCourse(course);
+        newRequest.setTitle(title);
+
+        List<RequestSimilarityWrapper> similar = new LinkedList<>();
+        //todo:: only this year's requests
+        for (Request request : service.getAllRequest(newRequest.getCourse())) {
+            Float similarity = request.getSimilarity(newRequest);
+            System.out.println("similarity=" + similarity);
+            if (similarity >= 0.6)
+                similar.add(new RequestSimilarityWrapper(similarity, request));
+        }
+        Collections.sort(similar);
+        return new ModelAndView("student/fragment/similar_requests", "similar", similar);
+    }
+
 }

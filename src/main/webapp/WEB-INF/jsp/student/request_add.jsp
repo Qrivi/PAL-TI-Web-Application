@@ -37,6 +37,8 @@
                                     Please check if your request doesn't already exist.
                                 </div>
                             </div>
+                            <div id="similar_requests" class="col-md-offset-2 col-md-8 col-sm-12">
+                            </div>
                             <div class="col-md-12 form-group">
                                 <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
                                 <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
@@ -44,7 +46,8 @@
                             </div>
                             <div class="col-md-3 col-sm-3 col-xs-12 form-group">
                                 <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
-                                <form:select path="course" class="form-control" placeholder="Course">
+                                <form:select id="request_course" path="course" class="form-control"
+                                             placeholder="Course">
                                     <form:option value="" label="--- Course ---"/>
                                     <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                 </form:select>
