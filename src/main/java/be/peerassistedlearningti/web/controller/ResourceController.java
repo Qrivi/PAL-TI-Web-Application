@@ -1,13 +1,9 @@
 package be.peerassistedlearningti.web.controller;
 
-import be.peerassistedlearningti.model.Application;
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.Tutor;
+import be.peerassistedlearningti.model.*;
 import be.peerassistedlearningti.service.PALService;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.*;
-import net.fortuna.ical4j.model.TimeZone;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.parameter.Cn;
@@ -25,12 +21,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.SocketException;
 import java.net.URI;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Collection;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Controller
 @RequestMapping( "/resources" )
@@ -45,26 +43,27 @@ public class ResourceController
     public HttpEntity<byte[]> getAvatar( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
     {
         Student student = service.getStudentById( id );
-        byte[] img = student.getAvatar();
+        Image image = service.getAvatarByStudent( student );
+        byte[] bytes = image.getBytes();
 
-        if ( img == null )
+        if ( bytes == null )
         {
             try
             {
                 String path = request.getSession().getServletContext().getRealPath( "/resources/img" ) + "/default_profile.jpg";
                 InputStream in = new FileSystemResource( new File( path ) ).getInputStream();
-                img = IOUtils.toByteArray( in );
+                bytes = IOUtils.toByteArray( in );
             } catch ( Exception e )
             {
-                img = new byte[ 0 ];
+                bytes = new byte[ 0 ];
             }
         }
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
-        headers.setContentLength( img.length );
-        headers.setLastModified( student.getLastUpdated().getTime() );
-        return new HttpEntity<>( img, headers );
+        headers.setContentLength( bytes.length );
+        headers.setLastModified( image.getLastModified().getTime() );
+        return new HttpEntity<>( bytes, headers );
     }
 
     @ResponseBody
@@ -72,18 +71,17 @@ public class ResourceController
     public HttpEntity<byte[]> getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
         Application app = service.getApplicationById( id );
-        byte[] img = app.getScreenshot();
+        Image image = service.getScreenshotByApplication( app );
+        byte[] bytes = image.getBytes();
 
-        if ( img == null )
-        {
-            img = new byte[ 0 ];
-        }
+        if ( bytes == null )
+            bytes = new byte[ 0 ];
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
-        headers.setContentLength( img.length );
-        headers.setLastModified( app.getBeginDate().getTime() );
-        return new HttpEntity<>( img, headers );
+        headers.setContentLength( bytes.length );
+        headers.setLastModified( image.getLastModified().getTime() );
+        return new HttpEntity<>( bytes, headers );
     }
 
     @ResponseBody

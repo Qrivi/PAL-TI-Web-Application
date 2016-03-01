@@ -78,7 +78,6 @@ public class AuthController
             return new ModelAndView( "auth/register" );
 
         Student s = new Student( form.getName(), form.getPassword(), form.getEmail().toLowerCase(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), UserType.NORMAL );
-        s.setLastUpdated( new Date() );
         service.addStudent( s );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.AuthController.Register" ) );
