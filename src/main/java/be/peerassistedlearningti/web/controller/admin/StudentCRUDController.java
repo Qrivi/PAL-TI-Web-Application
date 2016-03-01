@@ -31,7 +31,7 @@ public class StudentCRUDController extends AdminController
         if ( model.get( "updateStudent" ) == null )
             model.addAttribute( "updateStudent", new StudentUpdateForm() );
         if ( model.get( "userTypes" ) == null )
-            model.addAttribute( "userTypes", UserType.values() );
+            model.addAttribute( "userTypes", service.getStudentTypes() );
         if ( model.get( "students" ) == null )
             model.addAttribute( "students", service.getAllStudents() );
         return model;
