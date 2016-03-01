@@ -9,6 +9,7 @@
         <c:set var="emailError"><form:errors path="email"/></c:set>
         <c:set var="passwordError"><form:errors path="password"/></c:set>
         <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
+        <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>
         <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
             <form:errors path="name" element="label"/>
             <form:input path="name" class="form-control" placeholder="Name"/>
@@ -28,6 +29,13 @@
             <form:errors path="repeatPassword" element="label"/>
             <form:password path="repeatPassword" class="form-control" placeholder="Repeat Password"/>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+        </div>
+        <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
+            <form:errors path="curriculum" element="label"/>
+            <form:select path="curriculum" class="form-control">
+                <form:option value="None" label="Curriculum"/>
+                <form:options items="${curriculums}"/>
+            </form:select>
         </div>
         <div class="row">
             <div class="col-xs-4 col-xs-offset-8">
