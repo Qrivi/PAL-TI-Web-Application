@@ -26,15 +26,7 @@ public class SessionAuth
      */
     public static void setStudent( Student student )
     {
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-        authorities.add( new SimpleGrantedAuthority( "ROLE_USER" ) );
-
-        if ( student.getType().equals( UserType.ADMIN ) )
-            authorities.add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
-        if ( student.getTutor() != null )
-            authorities.add( new SimpleGrantedAuthority( "ROLE_TUTOR" ) );
-        Authentication auth = new UsernamePasswordAuthenticationToken( student, student.getPassword(), authorities );
-
+        Authentication auth = new UsernamePasswordAuthenticationToken( student, student.getPassword(), SecurityContextHolder.getContext().getAuthentication().getAuthorities() );
         SecurityContext securityContext = SecurityContextHolder.getContext();
         securityContext.setAuthentication( auth );
         SecurityContextHolder.setContext( securityContext );
@@ -48,8 +40,6 @@ public class SessionAuth
      */
     public static Student getStudent()
     {
-        return (Student) SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getPrincipal();
+        return (Student) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

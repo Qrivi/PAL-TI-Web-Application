@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Date;
 
 @Controller
 public class StudentCRUDController extends AdminController
@@ -91,6 +92,7 @@ public class StudentCRUDController extends AdminController
         if ( !StringUtils.isEmpty( password ) )
             s.setPassword( password );
 
+        s.setLastUpdated( new Date() );
         service.updateStudent( s );
         return new ModelAndView( "redirect:/admin/students" );
     }

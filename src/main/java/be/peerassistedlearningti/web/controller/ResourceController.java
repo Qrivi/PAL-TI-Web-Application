@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller;
 import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.*;
@@ -27,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.SocketException;
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
@@ -61,6 +63,7 @@ public class ResourceController
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
         headers.setContentLength( img.length );
+        headers.setLastModified( student.getLastUpdated().getTime() );
         return new HttpEntity<>( img, headers );
     }
 
@@ -79,6 +82,7 @@ public class ResourceController
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
         headers.setContentLength( img.length );
+        headers.setLastModified( app.getBeginDate().getTime() );
         return new HttpEntity<>( img, headers );
     }
 
@@ -96,7 +100,7 @@ public class ResourceController
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", s.getOpenBookings() );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", service.getPastBookings( s ) );
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
             outputter.output( calendar, response.getOutputStream() );
@@ -115,12 +119,14 @@ public class ResourceController
         if ( !s.getSecurityToken().equals( token ) )
             return;
 
-        if ( s.getTutor() == null )
+        Tutor tutor = service.getTutorByStudent( s );
+
+        if ( tutor == null )
             return;
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", s.getTutor().getLessons() );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getLessons( tutor ) );
 
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
@@ -135,7 +141,7 @@ public class ResourceController
      * @param items The lessons of the calendar
      * @return A calendar with the specified id and using the specified lessons
      */
-    private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Set<Lesson> items )
+    private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Collection<Lesson> items )
     {
         // Set the timezone to 'Europe/Brussels'
         TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();

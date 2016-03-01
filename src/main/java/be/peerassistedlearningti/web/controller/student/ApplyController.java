@@ -5,7 +5,7 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.TutorApplyForm;
-import be.peerassistedlearningti.web.model.util.MessageFactory;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,10 +33,10 @@ public class ApplyController extends StudentController
         Student current = SessionAuth.getStudent();
         if ( model.get( "tutorApply" ) == null )
             model.addAttribute( "tutorApply", new TutorApplyForm() );
-       /* if ( model.get( "topSubscribedCourses" ) == null )
+        if ( model.get( "topSubscribedCourses" ) == null )
             model.addAttribute( "topSubscribedCourses", service.getTopSubscribedCourses( 10 ) );
         if ( model.get( "lastApplications" ) == null )
-            model.addAttribute( "lastApplications", service.getLastApplications( current, 10 ) );*/
+            model.addAttribute( "lastApplications", service.getLastApplications( current, 10 ) );
         if ( model.get( "courses" ) == null )
         {
             Collection<Course> courses = service.getAllCourses();

@@ -47,8 +47,7 @@ public class ApplicationCRUDController extends AdminController
         application.approve();
         service.updateApplication( application );
 
-        Tutor tutor = application.getStudent()
-                .getTutor();
+        Tutor tutor = service.getTutorByStudent( application.getStudent() );
 
         if ( tutor == null )
         {

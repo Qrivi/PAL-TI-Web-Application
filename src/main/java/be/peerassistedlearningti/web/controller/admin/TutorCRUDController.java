@@ -11,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class TutorCRUDController extends AdminController{
+public class TutorCRUDController extends AdminController
+{
     @Autowired
     private PALService service;
 
-    @RequestMapping(value = "/tutors",method = RequestMethod.GET )
-    public ModelAndView getTutorOverviewPage(ModelMap model )
+    @RequestMapping( value = "/tutors", method = RequestMethod.GET )
+    public ModelAndView getTutorOverviewPage( ModelMap model )
     {
-        return new ModelAndView("admin/tutors", "tutors", service.getAllTutors() );
+        return new ModelAndView( "admin/tutors", "tutors", service.getAllTutors() );
     }
 
     @RequestMapping( value = "/tutors", method = RequestMethod.DELETE )

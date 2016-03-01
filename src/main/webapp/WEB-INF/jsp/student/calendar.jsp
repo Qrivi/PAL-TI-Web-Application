@@ -6,7 +6,7 @@
 <section class="content">
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-primary">
+            <div class="box box-primary no-margin">
                 <div class="box-body no-padding">
                     <div id="calendar"></div>
                 </div>

@@ -32,7 +32,7 @@
                         <c:if test="${not empty myOpenBookings}">
                             <c:forEach var="booking" items="${myOpenBookings}">
                                 <div class="col-md-4 col-sm-6 col-xs-12">
-                                    <div class="info-box bg-blue-gradient">
+                                    <div class="info-box bg-gray">
                                         <div class="pull-right">
                                             <form action="<c:url value="/booking/unregister/${booking.id}" />"
                                                   method="POST">
@@ -51,7 +51,7 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text">${booking.course.shortName}</span>
                                             <span class="info-box-text">${booking.name}</span>
-                                                <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM HH:mm"
+                                                <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM hh:mm"
                                                                                             value="${booking.date}"/> - ${booking.room.name}</span>
                                             <div class="progress">
                                                 <div class="progress-bar"

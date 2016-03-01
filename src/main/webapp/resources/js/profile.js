@@ -12,6 +12,20 @@ $( document ).ready( function () {
             $( lastTab ).addClass( 'active' );
         }
     } );
+    $.ajax( {
+        url     : "/profile/timeline" ,
+        success : function ( html ) {
+            $( "#timeline" ).find( ".loading" ).fadeOut( 1000 );
+            $( html ).hide().appendTo( ".timeline" ).fadeIn( 1000 );
+        }
+    } );
+    $.ajax( {
+        url     : "/profile/reviews" ,
+        success : function ( html ) {
+            $( "#activity" ).find( ".loading" ).fadeOut( 1000 );
+            $( html ).hide().appendTo( "#activity" ).fadeIn( 1000 );
+        }
+    } );
 } );
 function copyToClipboard ( elementId ) {
     document.getElementById( elementId ).select();

@@ -22,19 +22,16 @@
                 <div class="box-body box-profile">
                     <img class="profile-user-img img-responsive img-circle"
                          src="<c:url value="/resources/students/${user.id}/avatar.png"/>" alt="User profile picture">
-
                     <h3 class="profile-username text-center"><c:out value="${user.name}"/></h3>
-
-                    <p class="text-muted text-center">User: <c:out value="${user.type}"/></p>
-
+                    <p class="text-muted text-center"><c:out value="${user.email}"/></p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Closed bookings</b> <a class="pull-right"><c:out
-                                value="${user.closedBookings.size()}"/></a>
+                            <b>Past bookings</b> <a class="pull-right"><c:out
+                                value="${pastBookings}"/></a>
                         </li>
                         <li class="list-group-item">
-                            <b>Open bookings</b> <a class="pull-right"><c:out
-                                value="${user.openBookings.size()}"/></a>
+                            <b>Upcoming bookings</b> <a class="pull-right"><c:out
+                                value="${upcomingBookings}"/></a>
                         </li>
                         <li class="list-group-item">
                             <b>Subscriptions</b> <a class="pull-right"><c:out
@@ -67,171 +64,17 @@
                     <!-- activity tab content-->
                     <c:if test="${user == auth}">
                         <div class="tab-pane" id="activity">
-                            <div class="row">
-                                <c:if test="${empty lessonReviews}">
-                                    <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                                        <h4><i class="icon fa fa-info-circle"></i>No closed bookings</h4>
-                                        Once you've finished a lesson, you will be able to post a review
-                                        here.
-                                    </div>
-                                </c:if>
-                                <c:forEach var="lessonReview" items="${lessonReviews}">
-                                    <div class="col-md-12">
-                                        <div class="box box-default">
-                                            <div class="box-header with-border">
-                                                <div class="user-block">
-                                                    <img class="profile-user-img img-responsive img-circle"
-                                                         src="<c:url value="/resources/students/${lessonReview.lesson.tutor.student.id}/avatar.png"/>"
-                                                         alt="User profile picture">
-                                                            <span class="username"><a
-                                                                    href="#">${lessonReview.lesson.tutor.student.name}</a></span>
-                                                            <span class="description">${lessonReview.lesson.course.name} - <fmt:formatDate
-                                                                    pattern="HH:mm dd MMMMMMMMM YYYY"
-                                                                    value="${lessonReview.lesson.date}"/> </span>
-                                                </div>
-                                                <div class="box-tools">
-                                                    <button type="button" class="btn btn-box-tool"
-                                                            data-widget="collapse">
-                                                        <i class="fa fa-minus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <div class="box-body">
-                                                <!-- post text -->
-                                                <strong>${lessonReview.lesson.name}</strong>
-                                                <p>${lessonReview.lesson.description}</p>
-                                            </div>
-                                            <div class="box-footer">
-                                                <div class="row">
-                                                    <div class="col-md-1">
-                                                        <div class="row">
-                                                            <div class="col-md-offset-2 col-md-10">
-                                                                <img class="img-responsive img-circle img-sm"
-                                                                     src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
-                                                                     alt="Alt Text">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-11">
-                                                        <!-- .img-push is used to add margin to elements next to floating images -->
-                                                        <div class="img-push row">
-                                                            <c:choose>
-                                                                <c:when test="${lessonReview.review != null}">
-                                                                    <div class="row">
-                                                                        <div class="col-md-10">
-                                                                            <!--todo add scores -->
-                                                                            ${lessonReview.review.text}
-                                                                        </div>
-                                                                        <div class="col-md-12">
-                                                                            <a href="/profile/lesson/${lessonReview.lesson.id}/reviews/add" class="btn btn-default pull-right">
-                                                                                <i class="fa fa-commenting-o"> Edit review</i>
-                                                                            </a>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <a href="/profile/lesson/${lessonReview.lesson.id}/reviews/add" class="btn btn-default pull-right">
-                                                                        <i class="fa fa-commenting-o"> Add review</i>
-                                                                    </a>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </c:forEach>
+                            <div class="loading">
+                                <i class="fa fa-refresh fa-spin"></i>
                             </div>
-
                         </div>
                     </c:if>
                     <!-- timeline tab content-->
                     <div class="tab-pane" id="timeline">
-                        <ul class="timeline timeline-inverse">
-                            <!-- Empty Timeline -->
-                            <c:if test="${empty timeline.archivables}">
-                                <li>
-                                    <i class="fa fa-info bg-gray"></i>
-                                    <div class="timeline-item">
-                                        <h3 class="timeline-header">Timeline info</h3>
-                                        <div class="timeline-body"><p>This page will show you your history,
-                                            This doesn't only contains all the lessons you went to but also
-                                            contains all the reviews you've posted.</p></div>
-                                    </div>
-                                    </i>
-                                </li>
-                            </c:if>
-
-                            <c:forEach var="archivable" items="${timeline.archivables}">
-                                <li class="time-label">
-                                                <span class="bg-red">
-                                                    <fmt:formatDate pattern="dd MMM. YYYY"
-                                                                    value="${archivable.getArchiveDate()}"/>
-                                                </span>
-                                </li>
-                                <li>
-                                    <c:choose>
-                                        <c:when test="${archivable.class.simpleName == 'Lesson'}">
-                                            <!-- Is a Lesson object -->
-                                            <i class="fa fa-calendar-check-o bg-blue"></i>
-                                            <div class="timeline-item">
-                                                                <span class="time">
-                                                                    <i class="fa fa-clock-o"></i>
-                                                                    <fmt:formatDate pattern="HH:mm"
-                                                                                    value="${archivable.getArchiveDate()}"/>
-                                                                </span>
-                                                <h3 class="timeline-header">Went to <c:out
-                                                        value="${archivable.name}"/></h3>
-                                                <div class="timeline-body">
-                                                    <div class="row">
-                                                        <!-- lesson name -->
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="small-box bg-purple">
-                                                                <div class="inner">
-                                                                    <h3>Course</h3>
-                                                                    <p><c:out
-                                                                            value="${archivable.course.name}"/></p>
-                                                                </div>
-                                                                <div class="icon">
-                                                                    <i class="fa fa-book"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- tutor -->
-                                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                                            <div class="small-box bg-blue">
-                                                                <div class="inner">
-                                                                    <h3>Tutor</h3>
-                                                                    <p><c:out
-                                                                            value="${archivable.tutor.student.name}"/></p>
-                                                                </div>
-                                                                <div class="icon">
-                                                                    <i class="fa fa-user"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- description -->
-                                                        <div class="col-md-12 col-sm-12 col-xs-12">
-                                                            <p><c:out
-                                                                    value="${archivable.description}"/></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </c:when>
-                                        <c:when test="${archivable.class.simpleName == 'Review'}">
-                                            <!-- TODO add review timeline object -->
-                                        </c:when>
-                                    </c:choose>
-                                </li>
-                            </c:forEach>
-
-
-                            <!-- End timeline items -->
-                            <li><i class="fa fa-clock-o bg-gray"></i></li>
-                        </ul>
+                        <div class="loading">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </div>
+                        <ul class="timeline timeline-inverse"></ul>
                     </div>
                     <!-- settings tab content-->
                     <c:if test="${user == auth}">
@@ -285,7 +128,7 @@
                                             </div>
                                         </div>
                                         <hr class="separator"/>
-                                        <c:if test="${user.tutor != null}">
+                                        <sec:authorize access="hasRole('ROLE_TUTOR')">
                                             <!-- lesson calendar field -->
                                             <div class="form-group has-feedback">
                                                 <label for="lesson-calendar" class="col-sm-2 control-label">Lesson Calendar</label>
@@ -298,7 +141,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </c:if>
+                                        </sec:authorize>
                                         <!-- booking calendar field -->
                                         <div class="form-group has-feedback">
                                             <label for="booking-calendar" class="col-sm-2 control-label">Booking Calendar</label>

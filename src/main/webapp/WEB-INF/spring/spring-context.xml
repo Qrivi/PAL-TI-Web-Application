@@ -73,7 +73,7 @@
 
     <!-- Message factory -->
 
-    <bean class="be.peerassistedlearningti.web.model.util.MessageFactory"/>
+    <bean class="be.peerassistedlearningti.web.model.util.message.MessageFactory"/>
 
     <!-- Reset mail -->
 

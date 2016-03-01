@@ -60,3 +60,7 @@ textarea {
 .error-page > .error-content {
     margin-left: 150px;
 }
+
+.btn.pull-right {
+    margin-left: 5px;
+}

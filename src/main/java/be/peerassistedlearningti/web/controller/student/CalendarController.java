@@ -2,8 +2,11 @@ package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.web.model.util.CalendarEvent;
+import be.peerassistedlearningti.model.Tutor;
+import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.dto.CalendarDTO;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 @RequestMapping( value = "/calendar" )
 public class CalendarController extends StudentController
 {
+    @Autowired
+    PALService service;
+
     @RequestMapping( method = RequestMethod.GET )
     public ModelAndView getCalendar( ModelMap model )
     {
@@ -29,33 +35,27 @@ public class CalendarController extends StudentController
 
     @ResponseBody
     @RequestMapping( value = "/events", method = RequestMethod.GET )
-    public List<CalendarEvent> getCalendarEvents()
+    public List<CalendarDTO> getCalendarEvents()
     {
         Student current = SessionAuth.getStudent();
-        List<CalendarEvent> events = new ArrayList<>();
-        events.addAll( current.getBookings()
-                .stream()
-                .map( lesson -> convert( lesson, "#428bca" ) )
-                .collect( Collectors.toList() ) );
-        if ( current.getTutor() != null )
-        {
-            events.addAll( current.getTutor()
-                    .getLessons()
-                    .stream()
-                    .map( lesson -> convert( lesson, "#5cb85c" ) )
-                    .collect( Collectors.toList() ) );
-        }
+        Tutor tutor = service.getTutorByStudent( current );
+        List<CalendarDTO> events = new ArrayList<>();
+
+        events.addAll( service.getUpcomingBookings( current ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
+        if ( tutor != null )
+            events.addAll( service.getLessons( tutor ).stream().map( lesson -> convert( lesson, "#5cb85c" ) ).collect( Collectors.toList() ) );
+
         return events;
     }
 
-    private CalendarEvent convert( Lesson lesson, String color )
+    private CalendarDTO convert( Lesson lesson, String color )
     {
-        DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd HH:mm:SS" );
-        CalendarEvent event = new CalendarEvent();
+        DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
+        CalendarDTO event = new CalendarDTO();
         event.setTitle( lesson.getName() );
+        event.setDescription( lesson.getDescription() );
         event.setStart( dateFormat.format( lesson.getDate() ) );
-        event.setEnd( dateFormat.format( new Date( lesson.getDate()
-                .getTime() + lesson.getDuration() * 60 * 1000 ) ) );
+        event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
         event.setColor( color );
         return event;
     }

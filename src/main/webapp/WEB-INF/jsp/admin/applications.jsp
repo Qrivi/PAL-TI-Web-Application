@@ -134,7 +134,7 @@
                 <h4 class="modal-title">Screenshot</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-primary">You can click on the screenshot to zoom in.</div>
+                <div class="alert alert-info">You can click on the screenshot to zoom in.</div>
                 <a id="screenshot-url">
                     <img id="screenshot" width="100%" height="100%" alt="screenshot"/>
                 </a>

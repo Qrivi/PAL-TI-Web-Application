@@ -38,11 +38,11 @@
         <sec:authorize access="hasRole('ROLE_TUTOR')">
             <li class="header">TUTOR NAVIGATION</li>
             <li class="${nav_item == "tutor_lesson_add" ? "active" : ""}"><a
-                    href="<c:url value="/tutor/lessons/add"/>"><i class="fa fa-calendar-plus-o"></i><span>Add a lesson</span></a>
+                    href="<c:url value="/tutor/lessons/add"/>"><i class="fa fa-calendar-plus-o"></i><span>Make a new lesson</span></a>
             </li>
             <li class="${nav_item == "tutor_lessons" ? "active" : ""}"><a
                     href="<c:url value="/tutor/lessons"/>"><i
-                    class="fa fa-calendar-plus-o"></i><span>My lessons</span></a>
+                    class="fa fa-calendar-o"></i><span>My lessons</span></a>
             </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">

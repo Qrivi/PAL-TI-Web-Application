@@ -156,7 +156,7 @@
     <definition name="admin/lessons" extends="basic">
         <put-attribute name="page_title" value="Lessons"/>
         <put-attribute name="page_description" value=""/>
-        <put-attribute name="nav_item" value="courses" cascade="true"/>
+        <put-attribute name="nav_item" value="lessons" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/lessons.jsp"/>
         <put-list-attribute name="javascripts" inherit="true">
             <add-attribute value="/resources/js/lessons.js"/>
@@ -254,6 +254,18 @@
         <put-attribute name="page_title" value="Login"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="content" value="/WEB-INF/jsp/auth/lockscreen.jsp"/>
+    </definition>
+
+    <!-- Fragments -->
+
+    <definition name="fragment" template="/WEB-INF/tiles/template/fragment-template.jsp"/>
+
+    <definition name="student/fragment/review" extends="fragment">
+        <put-attribute name="content" value="/WEB-INF/jsp/student/fragment/review.jsp"/>
+    </definition>
+
+    <definition name="student/fragment/timeline" extends="fragment">
+        <put-attribute name="content" value="/WEB-INF/jsp/student/fragment/timeline.jsp"/>
     </definition>
 
 </tiles-definitions>
