@@ -27,6 +27,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Curriculum</th>
                                         <th>Type</th>
                                         <th data-orderable="false">Actions</th>
                                     </tr>
@@ -35,6 +36,7 @@
                                     <tr>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Curriculum</th>
                                         <th>Type</th>
                                         <th>Actions</th>
                                     </tr>
@@ -44,6 +46,7 @@
                                         <tr>
                                             <td>${student.name}</td>
                                             <td>${student.email}</td>
+                                            <td>${student.curriculum}</td>
                                             <td>${student.type}</td>
                                             <td>
                                                 <form class="small" action="<c:url value="/admin/students" />" method="POST">
@@ -146,6 +149,7 @@
                                 <c:set var="passwordError"><form:errors path="password"/></c:set>
                                 <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
                                 <c:set var="typeError"><form:errors path="type"/></c:set>
+                                <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>
                                 <form:errors element="div" cssClass="alert alert-danger"/>
                                 <form:hidden path="id" class="form-control"/>
                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
@@ -169,6 +173,13 @@
                                     <form:select path="type" class="form-control">
                                         <form:option value="None" label="--- User Type ---"/>
                                         <form:options items="${userTypes}"/>
+                                    </form:select>
+                                </div>
+                                <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
+                                    <form:errors path="curriculum" element="label"/>
+                                    <form:select path="curriculum" class="form-control">
+                                        <form:option value="None" label="Curriculum"/>
+                                        <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group">

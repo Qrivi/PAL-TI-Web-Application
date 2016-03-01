@@ -4,7 +4,7 @@
 <sec:authentication var="auth" property="principal"/>
 <header class="main-header">
     <a href="<c:url value="/"/>" class="logo">
-        PAL - TI
+        PAL
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">

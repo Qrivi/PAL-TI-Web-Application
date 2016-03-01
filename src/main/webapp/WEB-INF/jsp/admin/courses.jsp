@@ -93,6 +93,7 @@
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="shortNameError"><form:errors path="shortName"/></c:set>
                                 <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>
+                                <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>
                                 <c:set var="yearError"><form:errors path="year"/></c:set>
                                 <div class="form-group has-feedback ${ not empty codeError ? 'has-error' : ''}">
                                     <form:errors path="code" element="label"/>
@@ -108,7 +109,10 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
-                                    <form:input path="curriculum" class="form-control" placeholder="Course curriculum"/>
+                                    <form:select path="curriculum" class="form-control">
+                                        <form:option value="None" label="Curriculum"/>
+                                        <form:options items="${curriculums}"/>
+                                    </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty yearError ? 'has-error' : ''}">
                                     <form:errors path="year" element="label"/>
@@ -141,6 +145,7 @@
                                 <c:set var="shortNameError"><form:errors path="shortName"/></c:set>
                                 <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>
                                 <c:set var="yearError"><form:errors path="year"/></c:set>
+                                <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>
                                 <form:hidden path="id" class="form-control"/>
                                 <div class="form-group has-feedback ${ not empty codeError ? 'has-error' : ''}">
                                     <form:errors path="code" element="label"/>
@@ -156,7 +161,10 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
-                                    <form:input path="curriculum" class="form-control" placeholder="Course curriculum"/>
+                                    <form:select path="curriculum" class="form-control">
+                                        <form:option value="None" label="Curriculum"/>
+                                        <form:options items="${curriculums}"/>
+                                    </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty yearError ? 'has-error' : ''}">
                                     <form:errors path="year" element="label"/>

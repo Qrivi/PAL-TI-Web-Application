@@ -12,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -41,12 +40,12 @@ public class CourseCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.POST )
-    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm courseForm, BindingResult result, ModelMap model )
+    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm form, BindingResult result, ModelMap model )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "admin/courses", fillModel( model ) );
 
-        service.addCourse( new Course( courseForm.getCode(), courseForm.getName(), courseForm.getShortName(), courseForm.getCurriculum(), courseForm.getYear() ) );
+        service.addCourse( new Course( form.getCode(), form.getName(), form.getShortName(), form.getCurriculum(), form.getYear() ) );
 
         return new ModelAndView( "redirect:/admin/courses" );
     }
@@ -82,7 +81,7 @@ public class CourseCRUDController extends AdminController
         c.setCode( StringUtils.defaultIfEmpty( code, c.getCode() ) );
         c.setName( StringUtils.defaultIfEmpty( form.getName(), c.getName() ) );
         c.setShortName( StringUtils.defaultIfEmpty( form.getShortName(), c.getShortName() ) );
-        c.setCurriculum( StringUtils.defaultIfEmpty( form.getCurriculum(), c.getCurriculum() ) );
+        c.setCurriculum( ObjectUtils.defaultIfNull( form.getCurriculum(), c.getCurriculum() ) );
         c.setYear( ObjectUtils.defaultIfNull( form.getYear(), c.getYear() ) );
 
         service.updateCourse( c );
