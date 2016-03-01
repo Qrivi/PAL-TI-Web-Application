@@ -1,12 +1,8 @@
 package be.peerassistedlearningti.web.controller.student;
 
-import be.peerassistedlearningti.model.Review;
+import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
-import be.peerassistedlearningti.web.model.dto.LessonTimelineDTO;
-import be.peerassistedlearningti.web.model.dto.ReviewDTO;
-import be.peerassistedlearningti.web.model.dto.ReviewTimelineDTO;
-import be.peerassistedlearningti.web.model.dto.TimelineDTO;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
 import be.peerassistedlearningti.web.model.util.*;
 import org.apache.commons.lang3.StringUtils;
@@ -121,45 +117,33 @@ public class ProfileController extends StudentController
         return new ModelAndView( "redirect:/profile/" + student.getProfileIdentifier() );
     }
 
-    @ResponseBody
-    @RequestMapping( value = "/reviews", method = RequestMethod.GET, produces = "application/json" )
-    public ArrayList<ReviewDTO> getReviews()
+
+    @RequestMapping( value = "/reviews", method = RequestMethod.GET )
+    public ModelAndView getReviews( ModelMap model )
     {
         Student current = SessionAuth.getStudent();
-        ArrayList<ReviewDTO> reviews = new ArrayList<>( service.getPastBookings( current ).stream().map( b -> {
-            Review review = service.getReviewsForStudentAndLesson( current, b );
-            String text = ( review != null ? review.getText() : null );
-            Student tutor = b.getTutor().getStudent();
-            return new ReviewDTO( current.getId(), tutor.getId(), tutor.getName(), tutor.getProfileIdentifier(), b.getCourse().getName(), b.getId(), b.getName(), b.getDescription(), b
-                    .getDate(), text, service.getReviewsForStudentAndLesson( current, b ) != null );
-        } ).collect( Collectors.toSet() ) );
 
-        Collections.sort( reviews, ( o1, o2 ) -> o1.getLessonDate().compareTo( o2.getLessonDate() ) );
+        List<LessonReviewWrapper> list = new ArrayList<>();
 
-        return reviews;
+        for ( Lesson lesson : service.getPastBookings( current ) )
+            list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( current, lesson ) ) );
+
+        model.addAttribute( "lessonReviews", list );
+        model.addAttribute( "student", SessionAuth.getStudent() );
+
+        return new ModelAndView( "student/fragment/review" );
     }
 
-    @ResponseBody
-    @RequestMapping( value = "/timeline", method = RequestMethod.GET, produces = "application/json" )
-    public ArrayList<TimelineDTO> getTimeline()
+    @RequestMapping( value = "/timeline", method = RequestMethod.GET )
+    public ModelAndView getTimeline( ModelMap model )
     {
         Student current = SessionAuth.getStudent();
-        ArrayList<TimelineDTO> timeline = new ArrayList<>();
-
-        timeline.addAll( service.getPastBookings( current ).stream().map( b -> {
-            Student tutor = b.getTutor().getStudent();
-            return new LessonTimelineDTO( b.getCourse().getName(), tutor.getName(), b.getName(), b.getDescription(), b.getDate() );
-        } ).collect( Collectors.toSet() ) );
-
-        timeline.addAll( service.getReviewsForStudent( current ).stream().map( r -> {
-            if ( r.isAnonymous() )
-                return null;
-            return new ReviewTimelineDTO( r.getText(), r.getLesson().getTutor().getStudent().getName(), r.getDate() );
-        } ).collect( Collectors.toSet() ) );
-
-        Collections.sort( timeline, ( o1, o2 ) -> o1.getArchiveDate().compareTo( o2.getArchiveDate() ) );
-
-        return timeline;
+        Timeline timeline = new Timeline();
+        timeline.addAll( service.getPastBookings( current ) );
+        timeline.addAll( service.getReviewsForStudent( current ) );
+        model.addAttribute( "timeline", timeline );
+        model.addAttribute( "student", SessionAuth.getStudent() );
+        return new ModelAndView( "student/fragment/timeline" );
     }
 
 }

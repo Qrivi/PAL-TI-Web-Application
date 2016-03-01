@@ -63,10 +63,17 @@
                 <section class="tab-content">
                     <!-- activity tab content-->
                     <c:if test="${user == auth}">
-                        <div class="tab-pane" id="activity"></div>
+                        <div class="tab-pane" id="activity">
+                            <div class="loading">
+                                <i class="fa fa-refresh fa-spin"></i>
+                            </div>
+                        </div>
                     </c:if>
                     <!-- timeline tab content-->
                     <div class="tab-pane" id="timeline">
+                        <div class="loading">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </div>
                         <ul class="timeline timeline-inverse"></ul>
                     </div>
                     <!-- settings tab content-->

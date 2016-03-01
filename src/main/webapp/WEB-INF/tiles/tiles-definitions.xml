@@ -256,4 +256,16 @@
         <put-attribute name="content" value="/WEB-INF/jsp/auth/lockscreen.jsp"/>
     </definition>
 
+    <!-- Fragments -->
+
+    <definition name="fragment" template="/WEB-INF/tiles/template/fragment-template.jsp"/>
+
+    <definition name="student/fragment/review" extends="fragment">
+        <put-attribute name="content" value="/WEB-INF/jsp/student/fragment/review.jsp"/>
+    </definition>
+
+    <definition name="student/fragment/timeline" extends="fragment">
+        <put-attribute name="content" value="/WEB-INF/jsp/student/fragment/timeline.jsp"/>
+    </definition>
+
 </tiles-definitions>
