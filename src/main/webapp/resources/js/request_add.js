@@ -46,8 +46,8 @@ $(document).ready(function() {
 
         $('#request_title_feedback').html(text_remaining + ' characters remaining');
     });
-    $('#request_title').focusout(validRequestCheck());
-    $('#request_course').focusout(validRequestCheck());
+    $('#request_title').focusout(validRequestCheck);
+    $('#request_course').focusout(validRequestCheck);
 
 
 });
