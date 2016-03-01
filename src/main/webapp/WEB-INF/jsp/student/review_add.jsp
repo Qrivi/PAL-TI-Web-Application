@@ -149,7 +149,7 @@
                             </div>
                             <div class="col-md-offset-8 col-md-1">
                                 <div class="form-group pull-right no-margin">
-                                    <button id="submitReview" type="submit" class="btn btn-default pull-right">Add</button>
+                                    <button id="submitReview" type="submit" class="btn btn-default pull-right">Post review</button>
                                 </div>
                             </div>
                         </div>

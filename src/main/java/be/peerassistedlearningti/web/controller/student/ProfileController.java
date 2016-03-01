@@ -1,6 +1,5 @@
 package be.peerassistedlearningti.web.controller.student;
 
-import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Review;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
@@ -9,9 +8,7 @@ import be.peerassistedlearningti.web.model.dto.ReviewDTO;
 import be.peerassistedlearningti.web.model.dto.ReviewTimelineDTO;
 import be.peerassistedlearningti.web.model.dto.TimelineDTO;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
-import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.*;
-import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +17,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -166,76 +162,4 @@ public class ProfileController extends StudentController
         return timeline;
     }
 
-    //================================================================================
-    // region Reviews
-    //================================================================================
-
-    @RequestMapping( value = "/reviews/{id}", method = RequestMethod.GET )
-    public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
-    {
-        Student current = SessionAuth.getStudent();
-        Lesson lesson = service.getLessonById( id );
-
-        if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
-        {
-            return new ModelAndView( "redirect:/profile" );
-        }
-
-        Review myReview = service.getReviewsForStudentAndLesson( current, lesson );
-        if ( myReview != null )
-        {
-            ReviewForm form = new ReviewForm();
-            form.setText( myReview.getText() );
-            form.setAnonymous( myReview.isAnonymous() );
-            form.setTutorScore( myReview.getTutorScore() );
-            form.setContentScore( myReview.getContentScore() );
-            form.setAtmosphereScore( myReview.getAtmosphereScore() );
-            form.setEngagementScore( myReview.getEngagementScore() );
-            model.addAttribute( "review", form );
-        }
-
-        model.addAttribute( "lesson", lesson );
-        return new ModelAndView( "student/review_add", model );
-    }
-
-    @RequestMapping( value = "/reviews/{id}", method = RequestMethod.POST )
-    public ModelAndView addReview( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        Student current = SessionAuth.getStudent();
-        Lesson lesson = service.getLessonById( id );
-
-        if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
-        {
-            return new ModelAndView( "redirect:/profile" );
-        }
-
-        if ( result.hasErrors() )
-        {
-            return new ModelAndView( "student/review_add", fillModel( model, current ) );
-        }
-
-        Review review = service.getReviewsForStudentAndLesson( current, lesson );
-        if ( review == null )
-        {
-            review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm
-                    .getAtmosphereScore(), reviewForm.isAnonymous(), new Date() );
-        } else
-        {
-            review.setText( reviewForm.getText() );
-            review.setAnonymous( reviewForm.isAnonymous() );
-            review.setContentScore( reviewForm.getContentScore() );
-            review.setEngagementScore( reviewForm.getEngagementScore() );
-            review.setAtmosphereScore( reviewForm.getAtmosphereScore() );
-            review.setTutorScore( reviewForm.getTutorScore() );
-        }
-
-        service.addReview( review );
-        redirectAttributes
-                .addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ProfileController.Review", new Object[]{ review.getLesson().getTutor().getStudent().getName() } ) );
-        return new ModelAndView( "redirect:/profile/" + current.getProfileIdentifier() );
-    }
-
-    //================================================================================
-    // end region
-    //================================================================================
 }

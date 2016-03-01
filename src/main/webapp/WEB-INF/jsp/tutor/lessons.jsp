@@ -116,7 +116,7 @@
                                     </tfoot>
                                     <tbody>
                                         <c:forEach var="lesson" items="${myPastLessons}">
-                                            <tr data-toggle="tooltip" title="${lesson.description}">
+                                            <tr>
                                                 <td>${lesson.name}</td>
                                                 <td><fmt:formatDate pattern="EEE. dd/MM/YYYY hh:mm"
                                                                     value="${lesson.date}"/></td>
@@ -138,9 +138,8 @@
                                                 <td>${lesson.room.name}</td>
                                                 <td>${lesson.backupRoom.name}</td>
                                                 <td>
-                                                    <a class="btn btn-primary"
-                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>"
-                                                       style="cursor:pointer;" alt="Info for lesson ${lesson.name}">
+                                                    <a class="btn btn-sm btn-primary"
+                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>" alt="Info for lesson ${lesson.name}">
                                                         <i class="fa fa-info"></i>
                                                     </a>
                                                 </td>

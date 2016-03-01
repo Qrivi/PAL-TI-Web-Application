@@ -39,18 +39,18 @@ public class LessonForm
 
     public LessonForm() {}
 
-    public LessonForm(Lesson lesson) {
+    public LessonForm( Lesson lesson )
+    {
         name = lesson.getName();
         description = lesson.getDescription();
         date = lesson.getDate();
         int hours = (int) lesson.getDuration() / 60;
         int minutes = (int) lesson.getDuration() % 60;
-        duration = LocalTime.of(hours, minutes);
+        duration = LocalTime.of( hours, minutes );
         course = lesson.getCourse();
         maxParticipants = lesson.getMaxParticipants();
         room = lesson.getRoom();
         backupRoom = lesson.getBackupRoom();
-
     }
 
     public String getName()
@@ -58,7 +58,7 @@ public class LessonForm
         return name;
     }
 
-    public void setName(String name)
+    public void setName( String name )
     {
         this.name = name;
     }
@@ -68,7 +68,7 @@ public class LessonForm
         return description;
     }
 
-    public void setDescription(String description)
+    public void setDescription( String description )
     {
         this.description = description;
     }
@@ -78,7 +78,7 @@ public class LessonForm
         return date;
     }
 
-    public void setDate(Date date)
+    public void setDate( Date date )
     {
         this.date = date;
     }
@@ -88,7 +88,7 @@ public class LessonForm
         return duration;
     }
 
-    public void setDuration(LocalTime duration)
+    public void setDuration( LocalTime duration )
     {
         this.duration = duration;
     }
@@ -98,7 +98,7 @@ public class LessonForm
         return course;
     }
 
-    public void setCourse(Course course)
+    public void setCourse( Course course )
     {
         this.course = course;
     }
@@ -108,7 +108,7 @@ public class LessonForm
         return maxParticipants;
     }
 
-    public void setMaxParticipants(Integer maxParticipants)
+    public void setMaxParticipants( Integer maxParticipants )
     {
         this.maxParticipants = maxParticipants;
     }
@@ -118,7 +118,7 @@ public class LessonForm
         return room;
     }
 
-    public void setRoom(Room room)
+    public void setRoom( Room room )
     {
         this.room = room;
     }
