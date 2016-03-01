@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.SocketException;
 import java.net.URI;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
@@ -61,6 +62,7 @@ public class ResourceController
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
         headers.setContentLength( img.length );
+        headers.setLastModified( student.getLastUpdated().getTime() );
         return new HttpEntity<>( img, headers );
     }
 
@@ -79,6 +81,7 @@ public class ResourceController
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
         headers.setContentLength( img.length );
+        headers.setLastModified( app.getBeginDate().getTime() );
         return new HttpEntity<>( img, headers );
     }
 

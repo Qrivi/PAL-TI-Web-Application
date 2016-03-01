@@ -42,7 +42,7 @@
             </li>
             <li class="${nav_item == "tutor_lessons" ? "active" : ""}"><a
                     href="<c:url value="/tutor/lessons"/>"><i
-                    class="fa fa-calendar-plus-o"></i><span>My lessons</span></a>
+                    class="fa fa-calendar-o"></i><span>My lessons</span></a>
             </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">

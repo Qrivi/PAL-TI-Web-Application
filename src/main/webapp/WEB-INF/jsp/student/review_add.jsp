@@ -8,7 +8,7 @@
 
 <section class="content-header">
     <h1>
-        New Review
+        Review
     </h1>
 </section>
 <!-- main content -->
@@ -35,11 +35,11 @@
                                             <h4>Tutor</h4>
                                             <ul>
                                                 <li>${lesson.tutor.student.name}</li>
-                                                <li>${lesson.tutor.courses.size()} course${lesson.tutor.courses.size() >1 ?'s' : ''}</li>
+                                                <li>${lesson.tutor.courses.size()} course(s)</li>
                                             </ul>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 pull-right">
-                                            <a href="<c:url value="/profile/${lesson.tutor.student.id}"/>" alt="Tutor info">
+                                            <a href="<c:url value="/profile/${lesson.tutor.student.profileIdentifier}"/>" alt="Tutor info">
                                                 <img class="img-responsive img-circle" src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>" alt="Tutor profile picture" style="padding:10px;max-width: 80px; max-height: 80px;">
                                             </a>
                                         </div>
@@ -139,7 +139,7 @@
                     <div class="box-footer">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="form-group">
+                                <div class="form-group no-margin">
                                     <div class="checkbox icheck">
                                         <label>
                                             <form:checkbox path="Anonymous" class="form-control " placeholder="Anonymous"/> <span>Post anonymous</span>
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="col-md-offset-8 col-md-1">
-                                <div class="form-group pull-right">
+                                <div class="form-group pull-right no-margin">
                                     <button id="submitReview" type="submit" class="btn btn-default pull-right">Add</button>
                                 </div>
                             </div>

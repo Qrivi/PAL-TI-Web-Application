@@ -111,9 +111,7 @@ public class ProfileController extends StudentController
         student.setEmail( StringUtils.defaultIfEmpty( form.getEmail().toLowerCase(), student.getEmail() ) );
 
         if ( !form.getNewPassword().isEmpty() )
-        {
             student.setPassword( form.getNewPassword() );
-        }
 
         if ( !form.getAvatar().isEmpty() )
         {
@@ -129,11 +127,12 @@ public class ProfileController extends StudentController
         }
 
         student.setSubscriptions( form.getSubscriptions() );
+        student.setLastUpdated( new Date() );
 
         service.updateStudent( student );
         SessionAuth.setStudent( student );
 
-        return new ModelAndView( "redirect:/profile" );
+        return new ModelAndView( "redirect:/profile/" + student.getProfileIdentifier() );
     }
 
     @ResponseBody
