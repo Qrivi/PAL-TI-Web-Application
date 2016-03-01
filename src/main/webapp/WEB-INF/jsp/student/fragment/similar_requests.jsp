@@ -14,9 +14,9 @@
                     <tr>
                         <!-- upvotes -->
                         <td><span class="label label-default"><i
-                                class="fa fa-thumbs-up"></i> ${other.request.upvotes}</span></td>
+                                class="fa fa-thumbs-up"></i> ${other.request.upvotes.size()}</span></td>
                         <!-- title -->
-                        <td>${other.request.upvotes.size()}</td>
+                        <td>${other.request.title}</td>
                     </tr>
                 </c:forEach>
                 </tbody>
