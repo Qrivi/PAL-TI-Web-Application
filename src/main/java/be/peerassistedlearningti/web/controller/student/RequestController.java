@@ -74,7 +74,7 @@ public class RequestController extends StudentController {
         List<RequestSimilarityWrapper> similar = new LinkedList<>();
         //todo:: only this year's requests
         for (Request request : service.getAllRequest(newRequest.getCourse())) {
-            Float similarity = request.getSimilarity(newRequest);
+            double similarity = request.getSimilarity(newRequest);
             System.out.println("similarity=" + similarity);
             if (similarity >= 0.6)
                 similar.add(new RequestSimilarityWrapper(similarity, request));

@@ -4,19 +4,19 @@ import be.peerassistedlearningti.model.Request;
 
 
 public class RequestSimilarityWrapper implements Comparable<RequestSimilarityWrapper> {
-    float similarity;
+    double similarity;
     Request request;
 
-    public RequestSimilarityWrapper(float similarity, Request request) {
+    public RequestSimilarityWrapper(double similarity, Request request) {
         this.similarity = similarity;
         this.request = request;
     }
 
-    public float getSimilarity() {
+    public double getSimilarity() {
         return similarity;
     }
 
-    public void setSimilarity(float similarity) {
+    public void setSimilarity(double similarity) {
         this.similarity = similarity;
     }
 
@@ -31,6 +31,6 @@ public class RequestSimilarityWrapper implements Comparable<RequestSimilarityWra
 
     @Override
     public int compareTo(RequestSimilarityWrapper o) {
-        return Float.compare(similarity, o.similarity);
+        return Double.compare(similarity, o.similarity);
     }
 }
