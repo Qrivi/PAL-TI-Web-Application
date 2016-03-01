@@ -39,7 +39,7 @@ public class ReviewController extends StudentController
             return new ModelAndView( "redirect:/profile" );
         }
 
-        Review myReview = service.getReviewsForStudentAndLesson( current, lesson );
+        Review myReview = service.getReviewsByStudentAndLesson( current, lesson );
         if ( myReview != null )
         {
             ReviewForm form = new ReviewForm();
@@ -75,7 +75,7 @@ public class ReviewController extends StudentController
             return new ModelAndView( "student/review_add", model );
         }
 
-        Review review = service.getReviewsForStudentAndLesson( current, lesson );
+        Review review = service.getReviewsByStudentAndLesson( current, lesson );
         if ( review == null )
         {
             review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm

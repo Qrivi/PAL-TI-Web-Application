@@ -52,6 +52,7 @@ public class CalendarController extends StudentController
     {
         DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
+        event.setId( lesson.getId() );
         event.setTitle( lesson.getName() );
         event.setDescription( lesson.getDescription() );
         event.setStart( dateFormat.format( lesson.getDate() ) );

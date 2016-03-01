@@ -7,22 +7,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class CalendarDTO
 {
-    @JsonProperty( index = 0, value = "title" )
+    @JsonProperty( index = 0, value = "id" )
+    private int id;
+
+    @JsonProperty( index = 1, value = "title" )
     private String title;
 
-    @JsonProperty( index = 1, value = "description" )
+    @JsonProperty( index = 2, value = "description" )
     private String description;
 
-    @JsonProperty( index = 2, value = "start" )
+    @JsonProperty( index = 3, value = "start" )
     private String start;
 
-    @JsonProperty( index = 3, value = "end" )
+    @JsonProperty( index = 4, value = "end" )
     private String end;
 
-    @JsonProperty( index = 4, value = "color" )
+    @JsonProperty( index = 5, value = "color" )
     private String color;
 
     public CalendarDTO() {}
+
+    public void setId( int id )
+    {
+        this.id = id;
+    }
 
     public void setTitle( String title )
     {
@@ -49,7 +57,10 @@ public class CalendarDTO
         this.color = color;
     }
 
-    public String getStart() { return start; }
+    public int getId()
+    {
+        return id;
+    }
 
     public String getTitle()
     {
@@ -65,6 +76,8 @@ public class CalendarDTO
     {
         return color;
     }
+
+    public String getStart() { return start; }
 
     public String getEnd()
     {

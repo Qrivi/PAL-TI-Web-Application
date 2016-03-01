@@ -126,7 +126,7 @@ public class ProfileController extends StudentController
         List<LessonReviewWrapper> list = new ArrayList<>();
 
         for ( Lesson lesson : service.getPastBookings( current ) )
-            list.add( new LessonReviewWrapper( lesson, service.getReviewsForStudentAndLesson( current, lesson ) ) );
+            list.add( new LessonReviewWrapper( lesson, service.getReviewsByStudentAndLesson( current, lesson ) ) );
 
         model.addAttribute( "lessonReviews", list );
         model.addAttribute( "student", SessionAuth.getStudent() );
@@ -140,7 +140,7 @@ public class ProfileController extends StudentController
         Student current = SessionAuth.getStudent();
         Timeline timeline = new Timeline();
         timeline.addAll( service.getPastBookings( current ) );
-        timeline.addAll( service.getReviewsForStudent( current ) );
+        timeline.addAll( service.getReviewsByStudent( current ) );
         model.addAttribute( "timeline", timeline );
         model.addAttribute( "student", SessionAuth.getStudent() );
         return new ModelAndView( "student/fragment/timeline" );
