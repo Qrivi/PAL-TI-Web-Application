@@ -102,7 +102,7 @@
                                         <c:forEach var="request" items="${myRequests}">
                                             <tr data-toggle="tooltip" title="${request.request.description}">
                                                 <td class="col-md-1 col-sm-1"><span class="label label-default"><i
-                                                        class="fa fa-thumbs-up"></i> ${request.request.upvotes.size()}</span></td>
+                                                        class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
                                                 <td class="col-md-4 col-sm-4">${request.request.course}</td>
                                                 <td class="col-md-6 col-sm-6">${request.request.title}</td>
                                                 <td class="col-md-1 col-sm-1">

@@ -31,7 +31,6 @@ public class RequestController extends StudentController {
     private ModelMap fillModel(ModelMap model){
         if(model.get("request") == null) {
             model.addAttribute("request", new RequestForm());
-            model.addAttribute("myRequests", service.getRequests(SessionAuth.getStudent()));
         }
         if(model.get("courses") == null)
             model.addAttribute("courses", service.getAllCourses());
@@ -42,6 +41,8 @@ public class RequestController extends StudentController {
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView getRequestPage(ModelMap model)
     {
+        //TODO getRequests(SessionAuth.getStudent())
+        model.addAttribute("myRequests", service.getAllRequests());
         return new ModelAndView("student/request_add",fillModel(model));
     }
 
