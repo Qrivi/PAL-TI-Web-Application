@@ -3,7 +3,7 @@ package be.peerassistedlearningti.web.model.util;
 import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Review;
 
-public class LessonReviewWrapper {
+public class LessonReviewWrapper implements Comparable<LessonReviewWrapper> {
 
     private Lesson lesson;
     private Review review;
@@ -32,5 +32,10 @@ public class LessonReviewWrapper {
 
     public void setReview(Review review) {
         this.review = review;
+    }
+
+    @Override
+    public int compareTo(LessonReviewWrapper o) {
+        return lesson.getDate().compareTo(o.getLesson().getDate());
     }
 }
