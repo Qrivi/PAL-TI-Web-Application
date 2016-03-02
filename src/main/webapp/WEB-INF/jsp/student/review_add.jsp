@@ -92,12 +92,18 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <form:form method="post" commandName="review" enctype="application/x-www-form-urlencoded">
+                    <c:set var="contentScoreError"><form:errors path="contentScore"/></c:set>
+                    <c:set var="engagementScoreError"><form:errors path="engagementScore"/></c:set>
+                    <c:set var="atmosphereScoreError"><form:errors path="atmosphereScore"/></c:set>
+                    <c:set var="tutorScoreError"><form:errors path="tutorScore"/></c:set>
+                    <c:set var="textError"><form:errors path="text"/></c:set>
                     <div class="box-body">
                         <div class="row">
                             <!-- contentScore field -->
                             <div class="col-md-3 col-sm-6">
                                 <span class="control-label">Content</span>
-                                <div class="form-group">
+                                <div class="form-group ${ not empty contentScoreError ? 'has-error' : ''}">
+                                    <form:errors path="contentScore" element="label"/>
                                     <div id="contentScore"></div>
                                     <form:input id="contentScoreInput" type="hidden" min="1" max="10" path="contentScore" class="form-control" placeholder="Content score"/>
                                 </div>
@@ -105,7 +111,8 @@
                             <!-- engagementScore field -->
                             <div class="col-md-3 col-sm-6">
                                 <span class="control-label">Engagement</span>
-                                <div class="form-group">
+                                <div class="form-group ${ not empty engagementScoreError ? 'has-error' : ''}">
+                                    <form:errors path="engagementScore" element="label"/>
                                     <div id="engagementScore"></div>
                                     <form:input id="engagementScoreInput" type="hidden" min="1" max="10" path="engagementScore" class="form-control rateYo" placeholder="Engagement score"/>
                                 </div>
@@ -113,22 +120,24 @@
                             <!-- AtmosphereScore field -->
                             <div class="col-md-3 col-sm-6">
                                 <span class="control-label">Atmosphere</span>
-                                <div class="form-group">
+                                <div class="form-group ${ not empty atmosphereScoreError ? 'has-error' : ''}">
+                                    <form:errors path="atmosphereScore" element="label"/>
                                     <div id="atmosphereScore"></div>
-                                    <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10" path="AtmosphereScore" class="form-control rateYo" placeholder="Atmosphere score"/>
+                                    <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10" path="atmosphereScore" class="form-control rateYo" placeholder="Atmosphere score"/>
                                 </div>
                             </div>
                             <!-- tutorScore field -->
                             <div class="col-md-3 col-sm-6">
                                 <span class="control-label">Tutor</span>
-                                <div class="form-group">
+                                <div class="form-group ${ not empty tutorScoreError ? 'has-error' : ''}">
+                                    <form:errors path="tutorScore" element="label"/>
                                     <div id="tutorScore"></div>
                                     <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore" class="form-control rateYo" placeholder="Tutor score"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <form:errors element="div" delimiter="<br />" path="*" cssClass="alert alert-danger"/>
-                                <div class="form-group">
+                                <div class="form-group ${ not empty textError ? 'has-error' : ''}">
+                                    <form:errors path="text" element="label"/>
                                     <form:textarea id="review_text" path="text" maxlength="140" minlength="10" class="form-control" placeholder="Comment"/>
                                     <div id="review_text_feedback" class="label label-default"></div>
                                 </div>
