@@ -36,6 +36,6 @@ public class LessonReviewWrapper implements Comparable<LessonReviewWrapper> {
 
     @Override
     public int compareTo(LessonReviewWrapper o) {
-        return lesson.getDate().compareTo(o.getLesson().getDate());
+        return o.lesson.getDate().compareTo(lesson.getDate());
     }
 }
