@@ -59,7 +59,7 @@ public class RequestController extends StudentController {
     }
 
     @RequestMapping(value="/upvote/{id}", method = RequestMethod.GET)
-    public void upvote(@PathVariable(value = "id")int id, ModelMap model)
+    public void upvote(@PathVariable(value = "id")int id)
     {
         Request request = service.getRequestById(id);
 
@@ -73,7 +73,7 @@ public class RequestController extends StudentController {
     }
 
     @RequestMapping(value="/undovote/{id}", method = RequestMethod.GET)
-    public void undoVote(@PathVariable(value = "id")int id, ModelMap model)
+    public void undoVote(@PathVariable(value = "id")int id)
     {
         Request request = service.getRequestById(id);
 
