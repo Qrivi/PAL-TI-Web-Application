@@ -99,9 +99,7 @@ public class ProfileController extends StudentController
             return new ModelAndView( "redirect:/profile" );
 
         if ( !form.getName().equals( student.getName() ) )
-        {
             student.setProfileIdentifier( StudentUtils.createProfileIdentifier( form.getName() ) );
-        }
 
         student.setName( StringUtils.defaultIfEmpty( form.getName(), student.getName() ) );
         student.setEmail( StringUtils.defaultIfEmpty( form.getEmail().toLowerCase(), student.getEmail() ) );
@@ -152,7 +150,7 @@ public class ProfileController extends StudentController
         for ( Lesson lesson : service.getPastBookings( current ) )
             list.add( new LessonReviewWrapper( lesson, service.getReviewsByStudentAndLesson( current, lesson ) ) );
 
-        Collections.sort(list);
+        Collections.sort( list );
 
         model.addAttribute( "lessonReviews", list );
         model.addAttribute( "student", SessionAuth.getStudent() );
@@ -160,10 +158,10 @@ public class ProfileController extends StudentController
         return new ModelAndView( "student/fragment/review" );
     }
 
-    @RequestMapping( value = "/timeline", method = RequestMethod.GET )
-    public ModelAndView getTimeline( ModelMap model )
+    @RequestMapping( value = "/{identifier:.+}/timeline", method = RequestMethod.GET )
+    public ModelAndView getTimeline( @PathVariable( "identifier" ) String id, ModelMap model )
     {
-        Student current = SessionAuth.getStudent();
+        Student current = service.getStudentByProfileIdentifier( id );
         Timeline timeline = new Timeline();
         timeline.addAll( service.getPastBookings( current ) );
         timeline.addAll( service.getReviewsByStudent( current ) );

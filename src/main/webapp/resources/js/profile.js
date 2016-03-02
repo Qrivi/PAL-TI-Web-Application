@@ -15,7 +15,7 @@ $( document ).ready( function () {
         }
     } );
     $.ajax( {
-        url     : "/profile/timeline" ,
+        url     : window.location.href + "/timeline" ,
         success : function ( html ) {
             $( "#timeline" ).find( ".loading" ).fadeOut( 1000 );
             $( html ).hide().appendTo( ".timeline" ).fadeIn( 1000 );
@@ -24,8 +24,8 @@ $( document ).ready( function () {
     $.ajax( {
         url     : "/profile/reviews" ,
         success : function ( html ) {
-            $("#reviews").find(".loading").fadeOut(1000);
-            $(html).hide().appendTo("#reviews").fadeIn(1000);
+            $( "#reviews" ).find( ".loading" ).fadeOut( 1000 );
+            $( html ).hide().appendTo( "#reviews" ).fadeIn( 1000 );
         }
     } );
 } );
