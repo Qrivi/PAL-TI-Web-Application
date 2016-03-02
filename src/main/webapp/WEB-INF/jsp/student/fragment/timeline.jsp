@@ -33,34 +33,71 @@
                         <fmt:formatDate pattern="hh:mm"
                                         value="${archivable.getArchiveDate()}"/>
                     </span>
-                    <h3 class="timeline-header">Went to <c:out
-                            value="${archivable.name}"/></h3>
+                    <h3 class="timeline-header">
+                        <c:choose>
+                            <c:when test="${archivable.tutor.student == student}">
+                                Gave
+                            </c:when>
+                            <c:otherwise>
+                                Went to
+                            </c:otherwise>
+                        </c:choose>
+                        <c:out value="${archivable.name}"/>
+                    </h3>
                     <div class="timeline-body">
                         <div class="row">
-                            <!-- lesson name -->
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="small-box bg-purple">
-                                    <div class="inner">
-                                        <h3>Course</h3>
-                                        <p><c:out
-                                                value="${archivable.course.name}"/></p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="fa fa-book"></i>
+                            <!-- course info -->
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="panel panel-default bg-purple-gradient">
+                                    <div class="panel-body">
+                                        <strong>Course</strong>
+                                        <ul class="list-unstyled">
+                                            <li>${archivable.course.code}/${archivable.course.name}</li>
+                                            <li>${archivable.course.curriculum} - ${archivable.course.year}e</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <!-- tutor -->
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class="small-box bg-blue">
-                                    <div class="inner">
-                                        <h3>Tutor</h3>
-                                        <p><c:out
-                                                value="${archivable.tutor.student.name}"/></p>
+                            <!-- lesson info -->
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="panel panel-default bg-purple-gradient">
+                                    <div class="panel-body">
+                                        <strong>Lesson</strong>
+                                        <ul class="list-unstyled">
+                                            <li>${archivable.room.campus}
+                                                - ${archivable.room.name}, ${archivable.backupRoom.campus}
+                                                - ${archivable.backupRoom.name}</li>
+                                            <li>${archivable.duration} minutes - ${archivable.bookings.size()}
+                                                participants
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="icon">
-                                        <i class="fa fa-user"></i>
+                                </div>
+                            </div>
+                            <!-- tutor info -->
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="panel panel-default bg-purple-gradient">
+                                    <div class="panel-body row">
+                                        <div class="col-md-8">
+                                            <strong>Tutor</strong>
+                                            <ul class="list-unstyled">
+                                                <li>${archivable.tutor.student.name}</li>
+                                                <li>${archivable.tutor.courses.size()} courses</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="pull-right">
+                                                <a href="<c:url value="/profile/${archivable.tutor.student.profileIdentifier}"/>">
+                                                    <img class="user-img img-responsive img-circle"
+                                                         src="<c:url value="/resources/students/${archivable.tutor.student.id}/avatar.png"/>"
+                                                         alt="User profile picture"
+                                                         style="max-width: 32px;max-height: 32px;">
+                                                </a>
+                                            </div>
+                                        </div>
+
                                     </div>
+
                                 </div>
                             </div>
                             <!-- description -->
