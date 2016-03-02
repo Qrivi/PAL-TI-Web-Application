@@ -126,6 +126,7 @@ public class BookingController extends StudentController
         event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
         event.setTutorName( lesson.getTutor().getStudent().getName() );
         event.setRegistered( lesson.getBookings().contains( SessionAuth.getStudent() ) );
+        event.setCourseName( lesson.getCourse().getShortName() );
         event.setColor( ( registered ) ? "#5cb85c" : "#428bca" );
 
         return event;

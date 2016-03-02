@@ -29,7 +29,7 @@ $( document ).ready( function () {
         } ,
         removeFilter  : function ( tutor ) {
             var i = calendar.filters.indexOf( tutor );
-            if ( i > 0 )
+            if ( i >= 0 )
                 calendar.filters.splice( i , 1 );
             calendar.refresh();
         } ,
@@ -73,7 +73,9 @@ $( document ).ready( function () {
         eventLimit  : false ,
         eventRender : function ( event , element ) {
             $( '#results' ).text( calendar.fEvents().length );
-            element.find( '.fc-title' ).append( '<br/>' + event.description + '<br />' + event.tutor_name );
+            var title = $( "<span class='title'>" + event.course_name + " - " + element.find( '.fc-title' ).text() + "</span>" );
+            element.find( '.fc-title' ).html( title );
+            element.find( '.fc-title' ).append( '<br/><br/>' + event.description + '<br/><br/>' + event.tutor_name );
             element.click( function () {
                 calendar.selectedEvent = event;
                 showModal( event );
