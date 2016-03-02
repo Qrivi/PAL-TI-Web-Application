@@ -99,26 +99,30 @@ public class BookingController extends StudentController
         if ( courses != null )
         {
             for ( Course course : courses )
-                events.addAll( service.getUpcomingLessons( course ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
+                events.addAll( service.getUpcomingLessons( course ).stream().map( lesson -> convert( lesson ) ).collect( Collectors.toList() ) );
         } else
         {
-            events.addAll( service.getUpcomingLessons( current ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
+            events.addAll( service.getUpcomingLessons( current ).stream().map( lesson -> convert( lesson ) ).collect( Collectors.toList() ) );
         }
 
         return events;
     }
 
-    private CalendarDTO convert( Lesson lesson, String color )
+    private CalendarDTO convert( Lesson lesson )
     {
         DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
+
+        boolean registered = lesson.getBookings().contains( SessionAuth.getStudent() );
 
         event.setId( lesson.getId() );
         event.setTitle( lesson.getName() );
         event.setDescription( lesson.getDescription() );
         event.setStart( dateFormat.format( lesson.getDate() ) );
         event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
-        event.setColor( color );
+        event.setTutorName( lesson.getTutor().getStudent().getName() );
+        event.setRegistered( lesson.getBookings().contains( SessionAuth.getStudent() ) );
+        event.setColor( ( registered ) ? "#5cb85c" : "#428bca" );
 
         return event;
     }
