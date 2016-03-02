@@ -1,6 +1,5 @@
 package be.peerassistedlearningti.web.controller.student;
 
-
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Request;
 import be.peerassistedlearningti.service.PALService;
@@ -109,7 +108,7 @@ public class RequestController extends StudentController {
 
         List<RequestSimilarityWrapper> similar = new LinkedList<>();
         //todo:: only this year's requests
-        for (Request request : service.getAllRequest(newRequest.getCourse())) {
+        for (Request request : service.getRequests(newRequest.getCourse())) {
             double similarity = request.getSimilarity(newRequest);
             System.out.println("similarity=" + similarity);
             if (similarity >= 0.6)
