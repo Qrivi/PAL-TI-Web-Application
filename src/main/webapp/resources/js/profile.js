@@ -24,8 +24,8 @@ $( document ).ready( function () {
     $.ajax( {
         url     : "/profile/reviews" ,
         success : function ( html ) {
-            $( "#activity" ).find( ".loading" ).fadeOut( 1000 );
-            $( html ).hide().appendTo( "#activity" ).fadeIn( 1000 );
+            $("#reviews").find(".loading").fadeOut(1000);
+            $(html).hide().appendTo("#reviews").fadeIn(1000);
         }
     } );
 } );

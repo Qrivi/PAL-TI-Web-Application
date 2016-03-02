@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -150,6 +151,8 @@ public class ProfileController extends StudentController
 
         for ( Lesson lesson : service.getPastBookings( current ) )
             list.add( new LessonReviewWrapper( lesson, service.getReviewsByStudentAndLesson( current, lesson ) ) );
+
+        Collections.sort(list);
 
         model.addAttribute( "lessonReviews", list );
         model.addAttribute( "student", SessionAuth.getStudent() );
