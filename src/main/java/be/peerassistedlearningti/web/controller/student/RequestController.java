@@ -55,7 +55,7 @@ public class RequestController extends StudentController {
         Request request = new Request(form.getTitle(),form.getDescription(),form.getCourse(), SessionAuth.getStudent());
         service.addRequest(request);
         //TODO:: print success message
-        return new ModelAndView("reidrect:/request",fillModel(model) );
+        return new ModelAndView("redirect:/request",fillModel(model) );
     }
 
     @RequestMapping(value="/upvote/{id}", method = RequestMethod.GET)
