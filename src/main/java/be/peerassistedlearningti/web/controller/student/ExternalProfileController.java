@@ -139,9 +139,11 @@ public class ExternalProfileController extends StudentController
         Timeline timeline = new Timeline();
         timeline.addAll( service.getPastBookings( current ) );
         timeline.addAll( service.getReviewsByStudent( current ) );
-
+        if (current.getTutor() != null) {
+            timeline.addAll(service.getPastLessons(current.getTutor()));
+        }
         model.addAttribute( "timeline", timeline );
-        model.addAttribute( "student", SessionAuth.getStudent() );
+        model.addAttribute("student", current);
 
         return new ModelAndView( "student/fragment/timeline" );
     }
