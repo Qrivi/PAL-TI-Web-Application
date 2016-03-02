@@ -18,11 +18,19 @@
             <!-- New request form -->
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Request</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                            <i class="fa fa-minus"></i></button>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h3 class="box-title">Request</h3>
+                        </div>
+                        <div id="loading_similar" class="col-md-10"></div>
+                        <div class="col-md-1">
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <form:form action="/request/add" method="POST" commandName="request">
                 <c:set var="courseError"><form:errors path="course"/></c:set>
