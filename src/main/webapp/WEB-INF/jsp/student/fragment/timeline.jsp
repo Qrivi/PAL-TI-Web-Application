@@ -36,13 +36,13 @@
                     <h3 class="timeline-header">
                         <c:choose>
                             <c:when test="${archivable.tutor.student == student}">
-                                Gave
+                                <div class="label label-success">Gave lesson</div>
                             </c:when>
                             <c:otherwise>
-                                Went to
+                                <div class="label label-primary">Went to lesson</div>
                             </c:otherwise>
                         </c:choose>
-                        <c:out value="${archivable.name}"/>
+                        <c:out value=" ${archivable.name}"/>
                     </h3>
                     <div class="timeline-body">
                         <div class="row">
@@ -110,7 +110,7 @@
                 </div>
             </c:when>
             <c:when test="${archivable.class.simpleName == 'Review'}">
-                <!-- Is a Lesson object -->
+                <!-- Is a Review object -->
                 <i class="fa fa-star bg-blue"></i>
                 <div class="timeline-item">
                     <span class="time">
