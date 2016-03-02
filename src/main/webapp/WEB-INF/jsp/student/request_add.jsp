@@ -89,10 +89,31 @@
                 <div class="box-body">
                     <div class="row">
                         <!--TODO:: finish displaying current users requests/upvotes -->
-                        <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                            <h4><i class="icon fa fa-frown-o"></i>No requests or up-votes</h4>
-                            <p>You haven't made any requests, nor have you up-voted any.</p>
-                        </div>
+                        <c:if test="${empty myRequests}">
+                            <div class="alert alert-info col-sm-4 col-sm-offset-4">
+                                <h4><i class="icon fa fa-frown-o"></i>No requests or up-votes</h4>
+                                <p>You haven't made any requests, nor have you up-voted any.</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${not empty myRequests}">
+                            <div class="panel-body table-responsive no-padding">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <c:forEach var="request" items="${myRequests}">
+                                            <tr data-toggle="tooltip" title="${request.request.description}">
+                                                <td class="col-md-1 col-sm-1"><span class="label label-default"><i
+                                                        class="fa fa-thumbs-up"></i> ${request.request.upvotes.size()}</span></td>
+                                                <td class="col-md-4 col-sm-4">${request.request.course}</td>
+                                                <td class="col-md-6 col-sm-6">${request.request.title}</td>
+                                                <td class="col-md-1 col-sm-1">
+                                                    <a href="/request/${request.request.id}" class="btn btn-info pull-right"><i class="fa fa-info"></i></a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

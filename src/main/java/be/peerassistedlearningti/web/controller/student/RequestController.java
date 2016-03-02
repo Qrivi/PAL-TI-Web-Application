@@ -29,8 +29,10 @@ public class RequestController extends StudentController {
     private PALService service;
 
     private ModelMap fillModel(ModelMap model){
-        if(model.get("request") == null)
+        if(model.get("request") == null) {
             model.addAttribute("request", new RequestForm());
+            model.addAttribute("myRequests", service.getRequests(SessionAuth.getStudent()));
+        }
         if(model.get("courses") == null)
             model.addAttribute("courses", service.getAllCourses());
 
