@@ -28,7 +28,10 @@ public class CalendarDTO
     @JsonProperty( index = 6, value = "registered" )
     private boolean registered;
 
-    @JsonProperty( index = 7, value = "color" )
+    @JsonProperty( index = 7, value = "course_name" )
+    private String courseName;
+
+    @JsonProperty( index = 8, value = "color" )
     private String color;
 
     public CalendarDTO() {}
@@ -68,6 +71,11 @@ public class CalendarDTO
         this.tutorName = tutorName;
     }
 
+    public void setCourseName( String courseName )
+    {
+        this.courseName = courseName;
+    }
+
     public void setRegistered( boolean registered )
     {
         this.registered = registered;
@@ -103,6 +111,11 @@ public class CalendarDTO
     public String getTutorName()
     {
         return tutorName;
+    }
+
+    public String getCourseName()
+    {
+        return courseName;
     }
 
     public boolean isRegistered()

@@ -16,8 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
@@ -52,12 +53,16 @@ public class CalendarController extends StudentController
     {
         DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
+
         event.setId( lesson.getId() );
         event.setTitle( lesson.getName() );
         event.setDescription( lesson.getDescription() );
         event.setStart( dateFormat.format( lesson.getDate() ) );
         event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
+        event.setTutorName( lesson.getTutor().getStudent().getName() );
+        event.setCourseName( lesson.getCourse().getShortName() );
         event.setColor( color );
+
         return event;
     }
 }
