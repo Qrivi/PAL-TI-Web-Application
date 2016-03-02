@@ -73,7 +73,9 @@ $( document ).ready( function () {
         eventLimit  : false ,
         eventRender : function ( event , element ) {
             $( '#results' ).text( calendar.fEvents().length );
-            element.find( '.fc-title' ).append( '<br/>' + event.description + '<br />' + event.tutor_name );
+            var title = $( "<span class='title'>" + event.course_name + " - " + element.find( '.fc-title' ).text() + "</span>" );
+            element.find( '.fc-title' ).html( title );
+            element.find( '.fc-title' ).append( '<br/><br/>' + event.description + '<br/><br/>' + event.tutor_name );
             element.click( function () {
                 calendar.selectedEvent = event;
                 showModal( event );
