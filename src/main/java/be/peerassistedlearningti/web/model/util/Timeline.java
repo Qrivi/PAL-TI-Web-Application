@@ -30,7 +30,7 @@ public class Timeline {
     private class ArchiveCmp implements Comparator<Archivable> {
 
         public int compare(Archivable o1, Archivable o2) {
-            return o1.getArchiveDate().compareTo(o2.getArchiveDate());
+            return o2.getArchiveDate().compareTo(o1.getArchiveDate());
         }
     }
 }
