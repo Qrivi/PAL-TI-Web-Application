@@ -44,6 +44,16 @@ public class RequestController extends StudentController {
         return new ModelAndView("student/request_add",fillModel(model));
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView getRequestInfo(@PathVariable(value = "id") int id, ModelMap model) {
+        Request request = service.getRequestById(id);
+        if (request == null) {
+            return new ModelAndView("redirect:/request", fillModel(model));
+        }
+        model.addAttribute("requested", request);
+        return new ModelAndView("student/request_info", fillModel(model));
+    }
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addRequest(@Valid @ModelAttribute(value = "request") RequestForm form, BindingResult result, ModelMap model)
@@ -57,27 +67,29 @@ public class RequestController extends StudentController {
         return new ModelAndView("redirect:/request",fillModel(model) );
     }
 
-    @RequestMapping(value="/upvote/{id}", method = RequestMethod.GET)
-    public void upvote(@PathVariable(value = "id")int id)
+    @RequestMapping(value = "/upvote/{id}", method = RequestMethod.POST)
+    public ModelAndView upvote(@PathVariable(value = "id") int id, ModelMap model)
     {
         Request request = service.getRequestById(id);
 
         if(request == null)
-            return;
+            return new ModelAndView("redirect:/request", fillModel(model));
         request.upvote(SessionAuth.getStudent());
         service.updateRequest(request);
+        return new ModelAndView("redirect:/request", fillModel(model));
 
     }
 
-    @RequestMapping(value="/undovote/{id}", method = RequestMethod.GET)
-    public void undoVote(@PathVariable(value = "id")int id)
+    @RequestMapping(value = "/undovote/{id}", method = RequestMethod.POST)
+    public ModelAndView undoVote(@PathVariable(value = "id") int id, ModelMap model)
     {
         Request request = service.getRequestById(id);
 
         if(request == null)
-            return;
+            return new ModelAndView("redirect:/request", fillModel(model));
         request.removeUpvote(SessionAuth.getStudent());
         service.updateRequest(request);
+        return new ModelAndView("redirect:/request", fillModel(model));
     }
 
 

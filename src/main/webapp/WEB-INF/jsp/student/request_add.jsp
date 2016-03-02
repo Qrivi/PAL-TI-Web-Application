@@ -30,7 +30,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <form:form action="/request/add" method="POST" commandName="request">
                 <c:set var="courseError"><form:errors path="course"/></c:set>
