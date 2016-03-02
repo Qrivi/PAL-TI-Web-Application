@@ -50,7 +50,7 @@ public class RequestController extends StudentController {
         if(result.hasErrors()){
             return new ModelAndView("/request");
         }
-        Request request = new Request(0, form.getTitle(),form.getDescription(),form.getCourse(), SessionAuth.getStudent());
+        Request request = new Request(form.getTitle(),form.getDescription(),form.getCourse(), SessionAuth.getStudent());
         service.addRequest(request);
 
         return new ModelAndView("/request",fillModel(model) );
