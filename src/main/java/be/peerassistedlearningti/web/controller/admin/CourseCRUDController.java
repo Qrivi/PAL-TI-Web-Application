@@ -4,14 +4,19 @@ import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.CourseForm;
 import be.peerassistedlearningti.web.model.form.CourseUpdateForm;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -40,18 +45,20 @@ public class CourseCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.POST )
-    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm form, BindingResult result, ModelMap model )
+    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "admin/courses", fillModel( model ) );
 
         service.addCourse( new Course( form.getCode(), form.getName(), form.getShortName(), form.getCurriculum(), form.getYear() ) );
 
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Add", new Object[]{ form.getName() } ) );
+
         return new ModelAndView( "redirect:/admin/courses" );
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.PUT )
-    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model )
+    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )
             return new ModelAndView( "admin/courses", fillModel( model ) );
@@ -85,14 +92,18 @@ public class CourseCRUDController extends AdminController
         c.setYear( ObjectUtils.defaultIfNull( form.getYear(), c.getYear() ) );
 
         service.updateCourse( c );
+
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Update", new Object[]{ form.getName() } ) );
+
         return new ModelAndView( "redirect:/admin/courses" );
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.DELETE )
-    public String removeCourse( @RequestParam( required = true ) int id )
+    public String removeCourse( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes )
     {
         Course c = service.getCourseById( id );
         service.removeCourse( c );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Remove", new Object[]{ c.getName() } ) );
         return "redirect:/admin/courses";
     }
 

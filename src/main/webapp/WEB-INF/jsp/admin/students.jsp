@@ -109,7 +109,7 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
-                                    <form:select path="type" class="form-control select2 select2-hidden-accessible"
+                                    <form:select path="type" class="type form-control select2 select2-hidden-accessible"
                                                  data-placeholder="User Type" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${userTypes}"/>
@@ -172,15 +172,16 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
-                                    <form:select path="type" class="form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <form:select path="type" class="type form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="User Type" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${userTypes}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
                                     <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="Curriculum" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>

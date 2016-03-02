@@ -7,7 +7,7 @@ $( document ).ready( function () {
         $( "#updateCourse #code" ).val( props[ 0 ].textContent );
         $( "#updateCourse #name" ).val( props[ 1 ].textContent );
         $( "#updateCourse #shortName" ).val( props[ 2 ].textContent );
-        $( "#updateCourse #curriculum" ).val( props[ 3 ].textContent );
+        $( "#updateCourse #curriculum" ).val( props[ 3 ].textContent ).trigger( "change" );
         $( "#updateCourse #year" ).val( props[ 4 ].textContent );
     } );
 } );
