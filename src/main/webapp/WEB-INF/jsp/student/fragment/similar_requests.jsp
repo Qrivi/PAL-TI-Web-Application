@@ -13,12 +13,12 @@
                 <c:forEach var="other" items="${similar}">
                     <tr data-toggle="tooltip" title="${other.request.description}">
                         <!-- upvotes -->
-                        <td><span class="label label-default"><i
+                        <td class="col-md-1 col-sm-2"><span class="label label-default"><i
                                 class="fa fa-thumbs-up"></i> ${other.request.upvotes.size()}</span></td>
                         <!-- title -->
-                        <td>${other.request.title}</td>
-                        <td>
-                            <a href="/request/${other.request.id}" class="btn btn-info"><i class="fa fa-info"></i></a>
+                        <td class="col-md-6 col-sm-8">${other.request.title}</td>
+                        <td class="col-md-1 col-sm-2">
+                            <a href="/request/${other.request.id}" class="btn btn-info pull-right"><i class="fa fa-info"></i></a>
                         </td>
                     </tr>
                 </c:forEach>

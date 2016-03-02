@@ -55,7 +55,7 @@
                                 <div class="col-md-3">
                                     <strong>Course</strong>
                                     ${requested.course.code}/${requested.course.name}
-                                    ${requested.course.curriculum} - ${requested.course.year}e
+                                    ${requested.course.curriculum} - ${requested.course.year}
                                 </div>
                                 <div class="col-md-6">
                                     <strong>Description</strong>
