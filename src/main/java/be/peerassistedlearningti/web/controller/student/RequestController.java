@@ -3,7 +3,6 @@ package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Request;
-import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.RequestForm;
 import be.peerassistedlearningti.web.model.util.RequestSimilarityWrapper;
@@ -65,10 +64,8 @@ public class RequestController extends StudentController {
 
         if(request == null)
             return;
-        Student current = SessionAuth.getStudent();
-
-        current.upvote(request);
-        service.updateStudent(current);
+        request.upvote(SessionAuth.getStudent());
+        service.updateRequest(request);
 
     }
 
@@ -79,10 +76,8 @@ public class RequestController extends StudentController {
 
         if(request == null)
             return;
-        Student current = SessionAuth.getStudent();
-
-        current.removeUpvote(request);
-        service.updateStudent(current);
+        request.removeUpvote(SessionAuth.getStudent());
+        service.updateRequest(request);
     }
 
 
