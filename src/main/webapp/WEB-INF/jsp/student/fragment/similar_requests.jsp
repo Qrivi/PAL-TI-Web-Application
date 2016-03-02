@@ -11,7 +11,7 @@
             <table class="table table-hover">
                 <tbody>
                 <c:forEach var="other" items="${similar}">
-                    <tr>
+                    <tr data-toggle="tooltip" title="${other.request.description}">
                         <!-- upvotes -->
                         <td><span class="label label-default"><i
                                 class="fa fa-thumbs-up"></i> ${other.request.upvotes.size()}</span></td>
