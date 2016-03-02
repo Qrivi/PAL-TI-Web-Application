@@ -3,4 +3,6 @@ $( document ).ready( function () {
         locale : 'nl'
     } );
     $( "#course" ).select2();
+    $( "#room" ).select2();
+    $( "#backupRoom" ).select2();
 } );

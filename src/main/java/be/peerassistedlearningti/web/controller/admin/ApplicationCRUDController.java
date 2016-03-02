@@ -4,25 +4,17 @@ import be.peerassistedlearningti.model.Application;
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
-import org.apache.commons.io.IOUtils;
+import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 @Controller
@@ -40,7 +32,7 @@ public class ApplicationCRUDController extends AdminController
     }
 
     @RequestMapping( value = "/applications/approve/{id}", method = RequestMethod.POST )
-    public ModelAndView approveApplication( @PathVariable( value = "id" ) int id )
+    public ModelAndView approveApplication( @PathVariable( value = "id" ) int id, RedirectAttributes redirectAttributes )
     {
         Application application = service.getApplicationById( id );
 
@@ -60,16 +52,19 @@ public class ApplicationCRUDController extends AdminController
             service.updateTutor( tutor );
         }
 
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Approved", new Object[]{ application.getId() } ) );
+
         return new ModelAndView( "redirect:/admin/applications" );
     }
 
     @RequestMapping( value = "/applications/reject/{id}", method = RequestMethod.POST )
-    public ModelAndView rejectApplication( @PathVariable( value = "id" ) int id )
+    public ModelAndView rejectApplication( @PathVariable( value = "id" ) int id, RedirectAttributes redirectAttributes )
     {
         Application application = service.getApplicationById( id );
 
         application.reject();
         service.updateApplication( application );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Rejected", new Object[]{ application.getId() } ) );
 
         return new ModelAndView( "redirect:/admin/applications" );
     }
