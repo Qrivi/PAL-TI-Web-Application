@@ -61,9 +61,9 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="${nav_item == "bookingCalendar" ? "active" : "" }"><a href="<c:url value="/booking"/>"><i
+                    <li class="${nav_item == "booking_table" ? "active" : "" }"><a href="<c:url value="/booking/table"/>"><i
                             class="fa fa-th-list"></i> By table</a></li>
-                    <li class="${nav_item == "bookingTable" ? "active" : "" }"><a href="<c:url value="/booking"/>"><i
+                    <li class="${nav_item == "booking_calendar" ? "active" : "" }"><a href="<c:url value="/booking/calendar"/>"><i
                             class="fa fa-calendar"></i> By calendar</a></li>
                 </ul>
             </li>
