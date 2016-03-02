@@ -13,40 +13,30 @@ public class ReviewForm
     @NotNull( message = "{NotNull.ReviewForm.contentScore}" )
     @Min( value = 1, message = "{Min.ReviewForm.contentScore}" )
     @Max( value = 10, message = "{Max.ReviewForm.contentScore}" )
-    private Integer contentScore;
+    private Integer contentScore = 0;
 
     @NotNull( message = "{NotNull.ReviewForm.tutorScore}" )
     @Min( value = 1, message = "{Min.ReviewForm.tutorScore}" )
     @Max( value = 10, message = "{Max.ReviewForm.tutorScore}" )
-    private Integer tutorScore;
+    private Integer tutorScore = 0;
 
     @NotNull( message = "{NotNull.ReviewForm.engagementScore}" )
     @Min( value = 1, message = "{Min.ReviewForm.engagementScore}" )
     @Max( value = 10, message = "{Max.ReviewForm.engagementScore}" )
-    private Integer engagementScore;
+    private Integer engagementScore = 0;
 
     @NotNull( message = "{NotNull.ReviewForm.atmosphereScore}" )
     @Min( value = 1, message = "{Min.ReviewForm.atmosphereScore}" )
     @Max( value = 10, message = "{Max.ReviewForm.atmosphereScore}" )
-    private Integer atmosphereScore;
+    private Integer atmosphereScore = 0;
 
     private boolean anonymous;
 
     public ReviewForm() {}
 
-    public String getText()
-    {
-        return text;
-    }
-
     public void setText( String text )
     {
         this.text = text;
-    }
-
-    public Integer getContentScore()
-    {
-        return contentScore;
     }
 
     public void setContentScore( Integer contentScore )
@@ -54,19 +44,9 @@ public class ReviewForm
         this.contentScore = contentScore;
     }
 
-    public Integer getTutorScore()
-    {
-        return tutorScore;
-    }
-
     public void setTutorScore( Integer tutorScore )
     {
         this.tutorScore = tutorScore;
-    }
-
-    public Integer getEngagementScore()
-    {
-        return engagementScore;
     }
 
     public void setEngagementScore( Integer engagementScore )
@@ -74,23 +54,43 @@ public class ReviewForm
         this.engagementScore = engagementScore;
     }
 
-    public Integer getAtmosphereScore()
-    {
-        return atmosphereScore;
-    }
-
     public void setAtmosphereScore( Integer atmosphereScore )
     {
         this.atmosphereScore = atmosphereScore;
     }
 
-    public boolean isAnonymous()
-    {
-        return anonymous;
-    }
-
     public void setAnonymous( boolean anonymous )
     {
         this.anonymous = anonymous;
+    }
+
+    public String getText()
+    {
+        return text;
+    }
+
+    public Integer getContentScore()
+    {
+        return contentScore;
+    }
+
+    public Integer getTutorScore()
+    {
+        return tutorScore;
+    }
+
+    public Integer getEngagementScore()
+    {
+        return engagementScore;
+    }
+
+    public Integer getAtmosphereScore()
+    {
+        return atmosphereScore;
+    }
+
+    public boolean isAnonymous()
+    {
+        return anonymous;
     }
 }
