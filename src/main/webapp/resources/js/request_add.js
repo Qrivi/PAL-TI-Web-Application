@@ -63,7 +63,7 @@ function updateSimilarRequests() {
     //Animate loading
     var loading_html = "<div class=\"loading\">\n<i class=\"fa fa-refresh fa-spin\"></i>\n</div>";
     $("#similar_requests").empty();
-    $(loading_html).hide().appendTo("#similar_requests").fadeIn(500);
+    $(loading_html).hide().appendTo("#loading_similar").fadeIn(500);
 
     var request = {
         title: $("#request_title").val(),
@@ -76,7 +76,7 @@ function updateSimilarRequests() {
         dataType: 'html',
         data: request,
         success: function (html) {
-            $("#similar_requests").find(".loading").fadeOut(1000);
+            $("#loading_similar").find(".loading").fadeOut(1000);
             $(html).hide().appendTo("#similar_requests").fadeIn(1000);
         }
     });
