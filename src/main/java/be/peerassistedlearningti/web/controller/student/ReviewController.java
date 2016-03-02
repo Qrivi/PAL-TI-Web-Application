@@ -28,6 +28,29 @@ public class ReviewController extends StudentController
     @Autowired
     private PALService service;
 
+    private ModelMap fillModel( ModelMap model, Review review, Lesson lesson )
+    {
+        if ( model.get( "review" ) == null )
+        {
+            ReviewForm form = new ReviewForm();
+            if ( review != null )
+            {
+                form.setText( review.getText() );
+                form.setAnonymous( review.isAnonymous() );
+                form.setTutorScore( review.getTutorScore() );
+                form.setContentScore( review.getContentScore() );
+                form.setAtmosphereScore( review.getAtmosphereScore() );
+                form.setEngagementScore( review.getEngagementScore() );
+            }
+            model.addAttribute( "review", form );
+        }
+        if ( model.get( "lesson" ) == null )
+        {
+            model.addAttribute( "lesson", lesson );
+        }
+        return model;
+    }
+
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
     public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
     {
@@ -35,28 +58,10 @@ public class ReviewController extends StudentController
         Lesson lesson = service.getLessonById( id );
 
         if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
-        {
             return new ModelAndView( "redirect:/profile" );
-        }
 
-        Review myReview = service.getReviewsByStudentAndLesson( current, lesson );
-        if ( myReview != null )
-        {
-            ReviewForm form = new ReviewForm();
-            form.setText( myReview.getText() );
-            form.setAnonymous( myReview.isAnonymous() );
-            form.setTutorScore( myReview.getTutorScore() );
-            form.setContentScore( myReview.getContentScore() );
-            form.setAtmosphereScore( myReview.getAtmosphereScore() );
-            form.setEngagementScore( myReview.getEngagementScore() );
-            model.addAttribute( "review", form );
-        } else
-        {
-            model.addAttribute( "review", new ReviewForm() );
-        }
-
-        model.addAttribute( "lesson", lesson );
-        return new ModelAndView( "student/review_add", model );
+        Review review = service.getReviewsByStudentAndLesson( current, lesson );
+        return new ModelAndView( "student/review_add", fillModel( model, review, lesson ) );
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.POST )
@@ -66,14 +71,10 @@ public class ReviewController extends StudentController
         Lesson lesson = service.getLessonById( id );
 
         if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
-        {
             return new ModelAndView( "redirect:/profile" );
-        }
 
         if ( result.hasErrors() )
-        {
-            return new ModelAndView( "student/review_add", model );
-        }
+            return new ModelAndView( "student/review_add", fillModel( model, null, lesson ) );
 
         Review review = service.getReviewsByStudentAndLesson( current, lesson );
         if ( review == null )
