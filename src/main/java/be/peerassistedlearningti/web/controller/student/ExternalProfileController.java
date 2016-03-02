@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -132,21 +129,24 @@ public class ExternalProfileController extends StudentController
 
 
     @RequestMapping( value = "/timeline", method = RequestMethod.GET )
-    public ModelAndView getTimeline( @PathVariable( "identifier" ) String id, ModelMap model )
+    public ModelAndView getTimeline( @PathVariable( "identifier" ) String id, @RequestParam( value = "offset", required = true ) int offset, @RequestParam( value = "limit", required = true ) int limit, ModelMap model )
     {
         Student current = service.getStudentByProfileIdentifier( id );
 
         Timeline timeline = new Timeline();
-        timeline.addAll( service.getPastBookings( current ) );
-        timeline.addAll( service.getReviewsByStudent( current ) );
-        if (current.getTutor() != null) {
-            timeline.addAll(service.getPastLessons(current.getTutor()));
-            timeline.addAll(service.getReviews(current.getTutor()));
-        }
-        model.addAttribute( "timeline", timeline );
-        model.addAttribute("student", current);
+        timeline.addAll( service.getPastBookings( current, offset, limit ) );
+        timeline.addAll( service.getReviewsByStudent( current, offset, limit ) );
 
-        return new ModelAndView( "student/fragment/timeline" );
+        if ( current.getTutor() != null )
+        {
+            timeline.addAll( service.getPastLessons( current.getTutor(), offset, limit ) );
+            timeline.addAll( service.getReviews( current.getTutor(), offset, limit ) );
+        }
+
+        model.addAttribute( "timeline", timeline );
+        model.addAttribute( "student", current );
+
+        return new ModelAndView( "student/fragment/timeline", model );
     }
 
 }
