@@ -36,13 +36,13 @@
                     <h3 class="timeline-header">
                         <c:choose>
                             <c:when test="${archivable.tutor.student == student}">
-                                Gave
+                                <div class="label label-success">Gave lesson</div>
                             </c:when>
                             <c:otherwise>
-                                Went to
+                                <div class="label label-primary">Went to lesson</div>
                             </c:otherwise>
                         </c:choose>
-                        <c:out value="${archivable.name}"/>
+                        <c:out value=" ${archivable.name}"/>
                     </h3>
                     <div class="timeline-body">
                         <div class="row">
@@ -110,7 +110,7 @@
                 </div>
             </c:when>
             <c:when test="${archivable.class.simpleName == 'Review'}">
-                <!-- Is a Lesson object -->
+                <!-- Is a Review object -->
                 <i class="fa fa-star bg-blue"></i>
                 <div class="timeline-item">
                     <span class="time">
@@ -118,13 +118,39 @@
                         <fmt:formatDate pattern="hh:mm"
                                         value="${archivable.getArchiveDate()}"/>
                     </span>
-                    <h3 class="timeline-header">Gave a review to <c:out
-                            value="${archivable.lesson.tutor.student.name}"/></h3>
+                    <h3 class="timeline-header">
+                        <c:choose>
+                            <c:when test="${archivable.lesson.tutor.student == student}">
+                                <div class="label label-success">Received review for</div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="label label-primary">Gave review for</div>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:out value="${archivable.lesson.name}"/>
+                    </h3>
                     <div class="timeline-body">
                         <div class="row">
                             <!-- description -->
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <p><c:out value="${archivable.text}"/></p>
+                            <div class="col-md-12">
+                                <blockquote>
+                                    <p><c:out value="${archivable.text}"/></p>
+                                    <small>${archivable.anonymous ? 'anonymous' : archivable.student.name} </small>
+                                </blockquote>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span>Tutor: </span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span>Engagement: </span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span>Atmosphere: </span>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
