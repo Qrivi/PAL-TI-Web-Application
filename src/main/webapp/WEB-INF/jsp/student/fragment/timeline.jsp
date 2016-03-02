@@ -15,13 +15,17 @@
     </li>
 </c:if>
 
-<c:forEach var="archivable" items="${timeline.archivables}">
-    <li class="time-label">
-        <span class="bg-red">
-            <fmt:formatDate pattern="dd MMM. YYYY"
-                            value="${archivable.getArchiveDate()}"/>
-        </span>
-    </li>
+<c:forEach var="archivable" items="${timeline.archivables}" varStatus="status">
+    <c:if test="${not empty previous || status.index == 0}">
+        <fmt:formatDate var="current" pattern="dd MMM. YYYY"
+                        value="${archivable.getArchiveDate()}"/>
+        <c:if test="${!previous.equals(current)}">
+            <li class="time-label">
+                <span class="bg-red">${current}</span>
+            </li>
+        </c:if>
+        <c:set var="previous" value="${current}"/>
+    </c:if>
     <li>
         <c:choose>
             <c:when test="${archivable.class.simpleName == 'Lesson'}">
