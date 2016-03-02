@@ -5,7 +5,11 @@ import be.peerassistedlearningti.model.Lesson;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.ProfileForm;
-import be.peerassistedlearningti.web.model.util.*;
+import be.peerassistedlearningti.web.model.util.LessonReviewWrapper;
+import be.peerassistedlearningti.web.model.util.SessionAuth;
+import be.peerassistedlearningti.web.model.util.StudentUtils;
+import be.peerassistedlearningti.web.model.util.Timeline;
+import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -110,14 +114,14 @@ public class ProfileController extends StudentController
             {
                 MultipartFile avatar = form.getAvatar();
 
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
                 ByteArrayInputStream bis = new ByteArrayInputStream( avatar.getBytes() );
                 BufferedImage bufferedImage = ImageIO.read( bis );
 
-                BufferedImage scaled = ImageUtils.getScaledInstance( bufferedImage, 512, 512, true );
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                BufferedImage scaled = Thumbnails.of( bufferedImage ).forceSize( 180, 180 ).outputFormat( "png" ).outputQuality( 1 ).asBufferedImage();
 
-                ImageIO.write( scaled, "png", os );
-                byte[] imageBytes = os.toByteArray();
+                ImageIO.write( scaled, "png", bos );
+                byte[] imageBytes = bos.toByteArray();
 
                 student.setAvatar( new Image( imageBytes, new Date() ) );
             } catch ( Exception e )

@@ -10,6 +10,7 @@ $( document ).ready( function () {
         eventLimit  : true ,
         events      : "/booking/events" ,
         eventRender : function ( event , element ) {
+            $( "#results" ).text( parseInt( $( "#results" ).text() ) + 1 );
             element.find( '.fc-title' ).append( "<br/>" + event.description );
         }
     } );
@@ -20,4 +21,24 @@ $( document ).ready( function () {
     } );
 
     setInterval( function () { $( '#calendar' ).fullCalendar( 'refresh' ); } , 60000 );
+
+    $( "#course" ).select2();
+
+    $( "#filter" ).click( function () {
+        var courses = $( "#course" ).val();
+        console.log( courses.join() );
+        $.ajax( {
+            url     : "/booking/events" ,
+            type    : "get" ,
+            data    : {
+                courses : courses.join()
+            } ,
+            success : function ( events ) {
+                $( "#results" ).text( "0" );
+                $( '#calendar' ).fullCalendar( 'removeEvents' );
+                $( '#calendar' ).fullCalendar( 'addEventSource' , events );
+                $( '#calendar' ).fullCalendar( 'rerenderEvents' );
+            }
+        } );
+    } );
 } );

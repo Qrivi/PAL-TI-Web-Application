@@ -1,6 +1,8 @@
 package be.peerassistedlearningti.web.controller.student;
 
+import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.dto.CalendarDTO;
@@ -8,10 +10,7 @@ import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
@@ -46,6 +45,8 @@ public class BookingController extends StudentController
         {
             map.addAttribute( "lessons", service.getUpcomingLessons() );
         }
+
+        map.addAttribute( "courses", service.getAllCoursesByStudent( SessionAuth.getStudent() ) );
 
         map.addAttribute( "myOpenBookings", service.getUpcomingBookings( SessionAuth.getStudent() ) );
         return new ModelAndView( "student/booking", map );
@@ -90,10 +91,20 @@ public class BookingController extends StudentController
 
     @ResponseBody
     @RequestMapping( value = "/events", method = RequestMethod.GET )
-    public List<CalendarDTO> getBookings()
+    public List<CalendarDTO> getBookings( @RequestParam( value = "courses", required = false ) Course[] courses )
     {
         List<CalendarDTO> events = new ArrayList<>();
-        events.addAll( service.getUpcomingLessons().stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
+        Student current = SessionAuth.getStudent();
+
+        if ( courses != null )
+        {
+            for ( Course course : courses )
+                events.addAll( service.getUpcomingLessons( course ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
+        } else
+        {
+            events.addAll( service.getUpcomingLessons( current ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
+        }
+
         return events;
     }
 
@@ -101,12 +112,14 @@ public class BookingController extends StudentController
     {
         DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
+
         event.setId( lesson.getId() );
         event.setTitle( lesson.getName() );
         event.setDescription( lesson.getDescription() );
         event.setStart( dateFormat.format( lesson.getDate() ) );
         event.setEnd( dateFormat.format( new Date( lesson.getDate().getTime() + lesson.getDuration() * 60 * 1000 ) ) );
         event.setColor( color );
+
         return event;
     }
 

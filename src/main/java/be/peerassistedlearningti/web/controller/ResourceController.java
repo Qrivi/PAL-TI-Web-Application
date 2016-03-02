@@ -44,9 +44,9 @@ public class ResourceController
     {
         Student student = service.getStudentById( id );
         Image image = service.getAvatarByStudent( student );
-        byte[] bytes = image.getBytes();
+        byte[] bytes;
 
-        if ( bytes == null )
+        if ( image == null )
         {
             try
             {
@@ -57,12 +57,15 @@ public class ResourceController
             {
                 bytes = new byte[ 0 ];
             }
+        } else
+        {
+            bytes = image.getBytes();
         }
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
         headers.setContentLength( bytes.length );
-        headers.setLastModified( image.getLastModified().getTime() );
+        headers.setLastModified( ( image == null ) ? new Date( 0 ).getTime() : image.getLastModified().getTime() );
         return new HttpEntity<>( bytes, headers );
     }
 

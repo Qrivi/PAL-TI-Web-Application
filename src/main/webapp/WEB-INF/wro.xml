@@ -6,7 +6,6 @@
     </group>
     <!-- Libraries -->
     <group name="libraries">
-
         <!-- bootstrap-css -->
         <css>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</css>
         <!-- font-awesome -->
