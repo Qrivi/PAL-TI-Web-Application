@@ -3,6 +3,7 @@ package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Request;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.RequestForm;
 import be.peerassistedlearningti.web.model.util.RequestSimilarityWrapper;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,8 +54,35 @@ public class RequestController extends StudentController {
         }
         Request request = new Request(form.getTitle(),form.getDescription(),form.getCourse(), SessionAuth.getStudent());
         service.addRequest(request);
+        //TODO:: print success message
+        return new ModelAndView("redirect:/request",fillModel(model) );
+    }
 
-        return new ModelAndView("/request",fillModel(model) );
+    @RequestMapping(value="/upvote/{id}", method = RequestMethod.GET)
+    public void upvote(@PathVariable(value = "id")int id)
+    {
+        Request request = service.getRequestById(id);
+
+        if(request == null)
+            return;
+        Student current = SessionAuth.getStudent();
+
+        current.upvote(request);
+        service.updateStudent(current);
+
+    }
+
+    @RequestMapping(value="/undovote/{id}", method = RequestMethod.GET)
+    public void undoVote(@PathVariable(value = "id")int id)
+    {
+        Request request = service.getRequestById(id);
+
+        if(request == null)
+            return;
+        Student current = SessionAuth.getStudent();
+
+        current.removeUpvote(request);
+        service.updateStudent(current);
     }
 
 
