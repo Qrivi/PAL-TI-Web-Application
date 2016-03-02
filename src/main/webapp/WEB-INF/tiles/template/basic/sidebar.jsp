@@ -1,6 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <sec:authentication var="auth" property="principal"/>
 <tiles:importAttribute name="nav_item"/>
 <div class="sidebar">
@@ -53,8 +54,18 @@
             <li class="${nav_item == "calendar" ? "active" : "" }"><a
                     href="<c:url value="/calendar"/>"><i class="fa fa-calendar"></i><span>Calendar</span></a>
             </li>
-            <li class="${nav_item == "booking" ? "active" : "" }"><a
-                    href="<c:url value="/booking"/>"><i class="fa fa-pencil-square-o"></i><span>Book a lesson</span></a>
+
+            <li class="treeview ${fn:substring(nav_item, 0, 7) == "booking" ? "active" : "" }">
+                <a href="#">
+                    <i class="fa fa fa-pencil-square-o"></i> <span>Book a lesson</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="${nav_item == "bookingCalendar" ? "active" : "" }"><a href="<c:url value="/booking"/>"><i
+                            class="fa fa-th-list"></i> By table</a></li>
+                    <li class="${nav_item == "bookingTable" ? "active" : "" }"><a href="<c:url value="/booking"/>"><i
+                            class="fa fa-calendar"></i> By calendar</a></li>
+                </ul>
             </li>
             <li class="${nav_item == "request" ? "active" : "" }"><a
                     href="<c:url value="/request"/>"><i class="fa fa-plus-square-o"></i><span>Request a lesson</span></a>
