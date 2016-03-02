@@ -29,8 +29,10 @@ $( document ).ready( function () {
         } ,
         removeFilter  : function ( tutor ) {
             var i = calendar.filters.indexOf( tutor );
-            if ( i > 0 )
-                calendar.filters.splice( i , 1 );
+            if ( i =>
+            0
+            )
+            calendar.filters.splice( i , 1 );
             calendar.refresh();
         } ,
         refresh       : function () {
