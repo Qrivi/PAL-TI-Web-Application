@@ -45,9 +45,7 @@ public class ReviewController extends StudentController
             model.addAttribute( "review", form );
         }
         if ( model.get( "lesson" ) == null )
-        {
             model.addAttribute( "lesson", lesson );
-        }
         return model;
     }
 
