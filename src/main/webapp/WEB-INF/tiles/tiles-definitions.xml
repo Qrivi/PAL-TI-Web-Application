@@ -201,12 +201,22 @@
     </definition>
 
     <definition name="admin/tutors" extends="basic">
-        <put-attribute name="page_title" value="Tutors"/>
+    <put-attribute name="page_title" value="Tutors"/>
+    <put-attribute name="page_description" value=""/>
+    <put-attribute name="nav_item" value="tutors" cascade="true"/>
+    <put-attribute name="content" value="/WEB-INF/jsp/admin/tutors.jsp"/>
+    <put-list-attribute name="javascripts" inherit="true">
+        <add-attribute value="/resources/js/tutors.js"/>
+    </put-list-attribute>
+    </definition>
+
+    <definition name="admin/requests" extends="basic">
+        <put-attribute name="page_title" value="Requests"/>
         <put-attribute name="page_description" value=""/>
-        <put-attribute name="nav_item" value="tutors" cascade="true"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/admin/tutors.jsp"/>
+        <put-attribute name="nav_item" value="requests" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/requests.jsp"/>
         <put-list-attribute name="javascripts" inherit="true">
-            <add-attribute value="/resources/js/tutors.js"/>
+            <add-attribute value="/resources/js/requests.js"/>
         </put-list-attribute>
     </definition>
 
