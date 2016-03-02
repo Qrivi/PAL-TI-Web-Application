@@ -138,10 +138,16 @@
                                                 <td>${lesson.room.name}</td>
                                                 <td>${lesson.backupRoom.name}</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-primary"
+                                                    <a class="btn btn-sm btn-default"
                                                        href="<c:url value="/tutor/lessons/info/${lesson.id}"/>" alt="Info for lesson ${lesson.name}">
                                                         <i class="fa fa-info"></i>
                                                     </a>
+                                                    <c:if test="${lesson.bookings.size() < 1}">
+                                                        <a class="btn btn-sm btn-default"
+                                                           href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>" alt="Edit lesson ${lesson.name}">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </a>
+                                                    </c:if>
                                                 </td>
                                             </tr>
                                         </c:forEach>

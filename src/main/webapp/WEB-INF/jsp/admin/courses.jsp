@@ -109,8 +109,9 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
-                                    <form:select path="curriculum" class="form-control">
-                                        <form:option value="None" label="Curriculum"/>
+                                    <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="Curriculum" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>
@@ -161,8 +162,9 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
-                                    <form:select path="curriculum" class="form-control">
-                                        <form:option value="None" label="Curriculum"/>
+                                    <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="Curriculum" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>

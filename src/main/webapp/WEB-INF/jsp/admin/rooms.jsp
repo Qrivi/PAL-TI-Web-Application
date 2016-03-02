@@ -91,15 +91,17 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
                                     <form:errors path="campus" element="label"/>
-                                    <form:select path="campus" class="form-control">
-                                        <form:option value="None" label="--- Campus ---"/>
+                                    <form:select path="campus" class="campus form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="Campuses" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${campuses}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
-                                    <form:select path="type" class="form-control">
-                                        <form:option value="None" label="--- Room Type ---"/>
+                                    <form:select path="type" class="type form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="Room Types" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${roomTypes}"/>
                                     </form:select>
                                 </div>
@@ -135,15 +137,17 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
                                     <form:errors path="campus" element="label"/>
-                                    <form:select path="campus" class="form-control">
-                                        <form:option value="None" label="--- Campus ---"/>
+                                    <form:select path="campus" class="campus form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${campuses}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
-                                    <form:select path="type" class="form-control">
-                                        <form:option value="None" label="--- Room Type ---"/>
+                                    <form:select path="type" class="type form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <option></option>
                                         <form:options items="${roomTypes}"/>
                                     </form:select>
                                 </div>

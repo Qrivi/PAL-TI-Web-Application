@@ -1,5 +1,7 @@
 $( document ).ready( function () {
     $( "#room-overview" ).DataTable();
+    $( ".campus" ).select2();
+    $( ".type" ).select2();
     $( "#room-overview .update" ).click( function () {
         var props = $( this ).parent().parent().find( "td" );
         $( "#updateRoom #id" ).val( $( this ).attr( "data-id" ) );

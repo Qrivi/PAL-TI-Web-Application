@@ -101,7 +101,7 @@ public class ResourceController
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", service.getPastBookings( s ) );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", service.getUpcomingBookings( s ) );
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
             outputter.output( calendar, response.getOutputStream() );
@@ -127,7 +127,7 @@ public class ResourceController
 
         try
         {
-            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getLessons( tutor ) );
+            net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getUpcomingLessons( tutor ) );
 
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
@@ -192,6 +192,14 @@ public class ResourceController
             organizer.getParameters().add( Role.REQ_PARTICIPANT );
             organizer.getParameters().add( new Cn( tutor.getName() ) );
             event.getProperties().add( organizer );
+
+            // Add the description
+            Description description = new Description( lesson.getDescription() );
+            event.getProperties().add( description );
+
+            // Add the rooms as locations
+            Location loc = new Location( lesson.getRoom().getCampus() + ", " + lesson.getRoom().getName() + " - " + lesson.getBackupRoom().getCampus() + ", " + lesson.getBackupRoom().getName() );
+            event.getProperties().add( loc );
 
             // Iterate over the bookings
             for ( Student s : lesson.getBookings() )

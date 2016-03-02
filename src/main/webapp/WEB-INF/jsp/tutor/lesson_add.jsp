@@ -49,7 +49,7 @@
                                             <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
                                             <form:select path="course" class="form-control select2 select2-hidden-accessible"
                                                          data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                <form:option value="" label="--- Course ---"/>
+                                                <option></option>
                                                 <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                             </form:select>
                                         </div>
@@ -73,8 +73,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
                                             <form:label path="room">Room : <c:if test="${not empty roomError}"><span class="text-danger">${roomError}</span></c:if></form:label>
-                                            <form:select path="room" class="form-control" placeholder="Room">
-                                                <form:option value="" label="--- Room ---"/>
+                                            <form:select path="room" class="form-control select2 select2-hidden-accessible"
+                                                         data-placeholder="Room" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                <option></option>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
                                         </div>
@@ -82,8 +83,9 @@
                                     <div class="form-group has-feedback">
                                         <div class="col-md-6">
                                             <form:label path="backupRoom">Backup room : <c:if test="${not empty backupRoomError}"><span class="text-danger">${backupRoomError}</span></c:if></form:label>
-                                            <form:select path="backupRoom" class="form-control">
-                                                <form:option value="" label="--- Backup Room ---"/>
+                                            <form:select path="backupRoom" class="form-control select2 select2-hidden-accessible"
+                                                         data-placeholder="Backup Room" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                <option></option>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
                                         </div>
