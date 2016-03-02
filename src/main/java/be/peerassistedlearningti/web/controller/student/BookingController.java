@@ -29,8 +29,8 @@ public class BookingController extends StudentController
     @Autowired
     private PALService service;
 
-    @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getBookingPage()
+    @RequestMapping( value = "/table", method = RequestMethod.GET )
+    public ModelAndView getTableBookingPage( ModelMap model )
     {
         ModelMap map = new ModelMap();
 
@@ -40,16 +40,20 @@ public class BookingController extends StudentController
         {
             Collection<Lesson> lessons = service.getUpcomingLessons();
             lessons.removeAll( service.getLessons( tutor ) );
-            map.addAttribute( "lessons", lessons );
+            model.addAttribute( "lessons", lessons );
         } else
         {
-            map.addAttribute( "lessons", service.getUpcomingLessons() );
+            model.addAttribute( "lessons", service.getUpcomingLessons() );
         }
 
-        map.addAttribute( "courses", service.getAllCoursesByStudent( SessionAuth.getStudent() ) );
+        model.addAttribute( "myOpenBookings", service.getUpcomingBookings( SessionAuth.getStudent() ) );
+        return new ModelAndView( "student/booking/table", map );
+    }
 
-        map.addAttribute( "myOpenBookings", service.getUpcomingBookings( SessionAuth.getStudent() ) );
-        return new ModelAndView( "student/booking", map );
+    @RequestMapping( value = "/calendar", method = RequestMethod.GET )
+    public ModelAndView getCalendarBookingPage( ModelMap model )
+    {
+        return new ModelAndView( "student/booking/calendar", "courses", service.getAllCoursesByStudent( SessionAuth.getStudent() ) );
     }
 
     @RequestMapping( value = "/register/{lessonId}", method = RequestMethod.POST )
@@ -61,14 +65,14 @@ public class BookingController extends StudentController
                 lesson.getBookings().size() == lesson.getMaxParticipants() ||
                 lesson.getTutor().getStudent().equals( SessionAuth.getStudent() ) )
         {
-            return new ModelAndView( "redirect:/booking" );
+            return new ModelAndView( "redirect:/booking/table" );
         } else
         {
             lesson.addBooking( SessionAuth.getStudent() );
             service.updateLesson( lesson );
             SessionAuth.setStudent( service.getStudentById( SessionAuth.getStudent().getId() ) );
             //TODO:: add success message
-            return new ModelAndView( "redirect:/booking" );
+            return new ModelAndView( "redirect:/booking/table" );
         }
     }
 
@@ -78,19 +82,19 @@ public class BookingController extends StudentController
         Lesson lesson = service.getLessonById( lessonId );
         if ( lesson == null || !service.hasBooking( SessionAuth.getStudent(), lesson ) )
         {
-            return new ModelAndView( "redirect:/booking" );
+            return new ModelAndView( "redirect:/booking/table" );
         } else
         {
             lesson.removeBooking( SessionAuth.getStudent() );
             service.updateLesson( lesson );
             SessionAuth.setStudent( service.getStudentById( SessionAuth.getStudent().getId() ) );
             //TODO:: add success message
-            return new ModelAndView( "redirect:/booking" );
+            return new ModelAndView( "redirect:/booking/table" );
         }
     }
 
     @ResponseBody
-    @RequestMapping( value = "/events", method = RequestMethod.GET )
+    @RequestMapping( value = "/calendar/events", method = RequestMethod.GET )
     public List<CalendarDTO> getBookings( @RequestParam( value = "courses", required = false ) Course[] courses )
     {
         List<CalendarDTO> events = new ArrayList<>();

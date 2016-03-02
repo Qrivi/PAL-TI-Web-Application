@@ -22,12 +22,15 @@ $( document ).ready( function () {
             return filtered;
         } ,
         addFilter     : function ( tutor ) {
-            calendar.filters.push( tutor );
+            var i = calendar.filters.indexOf( tutor );
+            if ( i == -1 )
+                calendar.filters.push( tutor );
             calendar.refresh();
         } ,
         removeFilter  : function ( tutor ) {
             var i = calendar.filters.indexOf( tutor );
-            calendar.filters.splice( i , 1 );
+            if ( i > 0 )
+                calendar.filters.splice( i , 1 );
             calendar.refresh();
         } ,
         refresh       : function () {
@@ -69,7 +72,7 @@ $( document ).ready( function () {
         editable    : false ,
         eventLimit  : false ,
         eventRender : function ( event , element ) {
-            $( '#results' ).text( calendar.fEvents.length );
+            $( '#results' ).text( calendar.fEvents().length );
             element.find( '.fc-title' ).append( '<br/>' + event.description + '<br />' + event.tutor_name );
             element.click( function () {
                 calendar.selectedEvent = event;
@@ -149,7 +152,7 @@ $( document ).ready( function () {
     function lookup () {
         var courses = $( "#course" ).val();
         $.ajax( {
-            url     : "/booking/events" ,
+            url     : "/booking/calendar/events" ,
             type    : "get" ,
             data    : {
                 courses : courses.join()
@@ -163,10 +166,9 @@ $( document ).ready( function () {
                     tutors.push( event.tutor_name );
                 }
                 calendar.tutors.forEach( function ( tutor ) {
-                    console.log( tutor );
                     var index = tutors.indexOf( tutor );
-                    console.log( index );
                     if ( index == -1 ) {
+                        calendar.removeFilter( tutor );
                         var id = tutor.replace( /\s/g , "-" ).toLowerCase();
                         $( "#" + id ).parent().parent().parent().remove();
                     }
