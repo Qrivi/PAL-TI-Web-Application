@@ -141,6 +141,7 @@ public class ExternalProfileController extends StudentController
         timeline.addAll( service.getReviewsByStudent( current ) );
         if (current.getTutor() != null) {
             timeline.addAll(service.getPastLessons(current.getTutor()));
+            timeline.addAll(service.getReviews(current.getTutor()));
         }
         model.addAttribute( "timeline", timeline );
         model.addAttribute("student", current);
