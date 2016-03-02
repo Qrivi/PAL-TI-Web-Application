@@ -79,6 +79,13 @@
         </put-list-attribute>
     </definition>
 
+    <definition name="student/request_info" extends="basic">
+        <put-attribute name="page_title" value="Request Info"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="request" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/student/request_info.jsp"/>
+    </definition>
+
     <!-- BASIC - TUTOR -->
 
     <definition name="tutor/lesson_add" extends="basic">

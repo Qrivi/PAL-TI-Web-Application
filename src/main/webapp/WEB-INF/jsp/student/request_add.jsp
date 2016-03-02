@@ -16,21 +16,20 @@
     <div class="row">
         <div class="col-md-12">
             <!-- New request form -->
-            <div class="box">
+            <div class="box box-primary collapsed-box">
                 <div class="box-header with-border">
                     <div class="row">
                         <div class="col-md-1">
-                            <h3 class="box-title">Request</h3>
+                            <h3 class="box-title">New request</h3>
                         </div>
                         <div id="loading_similar" class="col-md-10"></div>
                         <div class="col-md-1">
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fa fa-minus"></i></button>
+                                    <i class="fa fa-plus"></i></button>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <form:form action="/request/add" method="POST" commandName="request">
                 <c:set var="courseError"><form:errors path="course"/></c:set>
@@ -77,6 +76,26 @@
 
             <!- Current requests -->
             <!-- todo add current requests -->
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">My requests & up-votes</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        <!--TODO:: finish displaying current users requests/upvotes -->
+                        <div class="alert alert-info col-sm-4 col-sm-offset-4">
+                            <h4><i class="icon fa fa-frown-o"></i>No requests or up-votes</h4>
+                            <p>You haven't made any requests, nor have you up-voted any.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

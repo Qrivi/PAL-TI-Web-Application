@@ -17,6 +17,9 @@
                                 class="fa fa-thumbs-up"></i> ${other.request.upvotes.size()}</span></td>
                         <!-- title -->
                         <td>${other.request.title}</td>
+                        <td>
+                            <a href="/request/${other.request.id}" class="btn btn-info"><i class="fa fa-info"></i></a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
