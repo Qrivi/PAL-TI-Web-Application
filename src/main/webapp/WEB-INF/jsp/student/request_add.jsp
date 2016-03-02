@@ -19,11 +19,11 @@
             <div class="box box-primary collapsed-box">
                 <div class="box-header with-border">
                     <div class="row">
-                        <div class="col-md-1">
+                        <div class="col-md-2">
                             <h3 class="box-title">New request</h3>
                         </div>
-                        <div id="loading_similar" class="col-md-10"></div>
-                        <div class="col-md-1">
+                        <div id="loading_similar" class="col-md-1"></div>
+                        <div class="col-md-1 col-md-offset-8 col-sm-offset-6">
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                                     <i class="fa fa-plus"></i></button>
@@ -46,12 +46,12 @@
                             </div>
                             <div id="similar_requests" class="col-md-offset-2 col-md-8 col-sm-12">
                             </div>
-                            <div class="col-md-12 form-group">
+                            <div class="col-md-9 col-sm-12 col-xs-12 form-group">
                                 <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
                                 <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
                                 <div id="request_title_feedback" class="label label-default"></div>
                             </div>
-                            <div class="col-md-3 col-sm-3 col-xs-12 form-group">
+                            <div class="col-md-3 col-sm-12 col-xs-12 form-group">
                                 <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
                                 <form:select id="request_course" path="course" class="form-control"
                                              placeholder="Course">
@@ -59,7 +59,7 @@
                                     <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                             </div>
-                            <div class="col-md-9 col-sm-9 col-xs-12 form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                                 <form:label path="description">Description : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
                                 <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="description"/>
                                 <div id="request_text_feedback" class="label label-default"></div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class="box-footer">
                         <div class="pull-right">
-                            <form:button class="btn btn-default" type="submit">Add</form:button>
+                            <form:button class="btn btn-default" type="submit">Add Request</form:button>
                         </div>
                     </div>
                 </form:form>
