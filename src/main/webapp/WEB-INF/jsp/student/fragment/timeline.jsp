@@ -21,7 +21,7 @@
                         value="${archivable.getArchiveDate()}"/>
         <c:if test="${!previous.equals(current)}">
             <li class="time-label">
-                <span class="bg-red">${current}</span>
+                <span class="bg-red"><c:out value="${current}"/></span>
             </li>
         </c:if>
         <c:set var="previous" value="${current}"/>
@@ -113,7 +113,7 @@
                     </div>
                 </div>
             </c:when>
-            <c:when test="${archivable.class.simpleName == 'Review'}">
+            <c:when test="${archivable.class.simpleName == 'Review' && (!archivable.anonymous || !archivable.student.equals(student))}">
                 <!-- Is a Review object -->
                 <i class="fa fa-star bg-blue"></i>
                 <div class="timeline-item">
