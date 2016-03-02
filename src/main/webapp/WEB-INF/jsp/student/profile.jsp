@@ -47,9 +47,9 @@
             <div id="tabs" class="nav-tabs-custom">
                 <!-- tab buttons -->
                 <ul class="nav nav-tabs">
-                    <!-- activity tab button-->
+                    <!-- reviews tab button-->
                     <c:if test="${user == auth}">
-                        <li class="active"><a href="#activity" data-toggle="tab" aria-expanded="true">Activity</a>
+                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">Reviews</a>
                         </li>
                     </c:if>
                     <!-- timeline tab button-->
@@ -61,9 +61,9 @@
                 </ul>
                 <!-- tab contents -->
                 <section class="tab-content">
-                    <!-- activity tab content-->
+                    <!-- reviews tab content-->
                     <c:if test="${user == auth}">
-                        <div class="tab-pane" id="activity">
+                        <div class="tab-pane" id="reviews">
                             <div class="loading">
                                 <i class="fa fa-refresh fa-spin"></i>
                             </div>
