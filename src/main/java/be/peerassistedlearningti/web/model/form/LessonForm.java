@@ -54,6 +54,7 @@ public class LessonForm
         maxParticipants = lesson.getMaxParticipants();
         room = lesson.getRoom();
         backupRoom = lesson.getBackupRoom();
+        request = lesson.getRequest();
     }
 
     public String getName()

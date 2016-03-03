@@ -50,10 +50,8 @@
                                                          data-placeholder="Request (optional)" style="width: 100%;"
                                                          tabindex="-1" aria-hidden="true">
                                                 <option></option>
-                                                <c:forEach items="${requests}" var="currRequest">
-                                                    <option value="${currRequest.id}">${currRequest.course.shortName}
-                                                        - ${currRequest.title}</option>
-                                                </c:forEach>
+                                                <form:option value="null" label="None"/>
+                                                <form:options items="${requests}" itemValue="id" itemLabel="title"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -78,7 +76,7 @@
                                                     class="text-danger">${courseError}</span></c:if></form:label>
                                             <form:select path="course" class="form-control"
                                                          placeholder="Course" disabled="${!editable}">
-                                                <form:option value="" label="--- Course ---"/>
+                                                <option></option>
                                                 <form:options items="${courses}" itemValue="id"
                                                               itemLabel="name"/>
                                             </form:select>
