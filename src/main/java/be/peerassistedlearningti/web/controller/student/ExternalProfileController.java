@@ -127,7 +127,6 @@ public class ExternalProfileController extends StudentController
         return new ModelAndView( "redirect:/profile/" + student.getProfileIdentifier() );
     }
 
-
     @RequestMapping( value = "/timeline", method = RequestMethod.GET )
     public ModelAndView getTimeline( @PathVariable( "identifier" ) String id, @RequestParam( value = "offset", required = true ) int offset, @RequestParam( value = "limit", required = true ) int limit, ModelMap model )
     {
@@ -136,7 +135,7 @@ public class ExternalProfileController extends StudentController
         Timeline timeline = new Timeline();
 
         timeline.addAll( service.getPastBookings( current, offset, limit ) );
-        timeline.addAll( service.getReviewsByStudent( current, offset, limit ) );
+        timeline.addAll( service.getReviews( current, offset, limit ) );
 
         if ( current.getTutor() != null )
         {

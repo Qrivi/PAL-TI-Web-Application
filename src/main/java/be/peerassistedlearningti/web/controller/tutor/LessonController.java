@@ -37,9 +37,9 @@ public class LessonController extends TutorController
         if (model.get("courses") == null)
             model.addAttribute("courses", tutor.getCourses());
         if (model.get("rooms") == null)
-            model.addAttribute("rooms", service.getRoomsFromCampus(Campus.PROXIMUS));
+            model.addAttribute("rooms", service.getRooms(Campus.PROXIMUS));
         if (model.get("requests") == null)
-            model.addAttribute("requests", service.getAllRequests(tutor.getCourses()));
+            model.addAttribute("requests", service.getRequests(tutor.getCourses()));
         return model;
     }
 

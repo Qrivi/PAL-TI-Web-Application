@@ -58,7 +58,7 @@ public class ReviewController extends StudentController
         if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
             return new ModelAndView( "redirect:/profile" );
 
-        Review review = service.getReviewsByStudentAndLesson( current, lesson );
+        Review review = service.getReviews( current, lesson );
         return new ModelAndView( "student/review_add", fillModel( model, review, lesson ) );
     }
 
@@ -74,7 +74,7 @@ public class ReviewController extends StudentController
         if ( result.hasErrors() )
             return new ModelAndView( "student/review_add", fillModel( model, null, lesson ) );
 
-        Review review = service.getReviewsByStudentAndLesson( current, lesson );
+        Review review = service.getReviews( current, lesson );
         if ( review == null )
         {
             review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm

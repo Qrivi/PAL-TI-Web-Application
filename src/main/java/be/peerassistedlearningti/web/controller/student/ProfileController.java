@@ -32,7 +32,7 @@ public class ProfileController extends StudentController
         List<LessonReviewWrapper> list = new ArrayList<>();
 
         for ( Lesson lesson : service.getPastBookings( current, offset, limit ) )
-            list.add( new LessonReviewWrapper( lesson, service.getReviewsByStudentAndLesson( current, lesson ) ) );
+            list.add( new LessonReviewWrapper( lesson, service.getReviews( current, lesson ) ) );
 
         Collections.sort( list, ( o1, o2 ) -> o1.getLesson().getDate().compareTo( o2.getLesson().getDate() ) );
 
