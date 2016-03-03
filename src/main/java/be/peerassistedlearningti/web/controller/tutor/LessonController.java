@@ -1,6 +1,9 @@
 package be.peerassistedlearningti.web.controller.tutor;
 
-import be.peerassistedlearningti.model.*;
+import be.peerassistedlearningti.model.Campus;
+import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearningti.model.Tutor;
 import be.peerassistedlearningti.service.PALService;
 import be.peerassistedlearningti.web.model.form.LessonForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
@@ -95,6 +98,7 @@ public class LessonController extends TutorController
     {
         Lesson myLesson = service.getLessonById( id );
         model.addAttribute( "lesson", new LessonForm( myLesson ) );
+        model.addAttribute("bookings", myLesson.getBookings());
         model.addAttribute( "editable", false );
         return new ModelAndView( "tutor/lesson_edit", model );
     }
