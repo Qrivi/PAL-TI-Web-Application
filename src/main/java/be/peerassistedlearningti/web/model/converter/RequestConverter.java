@@ -5,6 +5,9 @@ import be.peerassistedlearningti.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 
+/**
+ * Converts a String into the matching Request
+ */
 public class RequestConverter implements Converter<String, Request> {
     @Autowired
     private PALService service;

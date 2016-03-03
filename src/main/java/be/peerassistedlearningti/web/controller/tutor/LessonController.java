@@ -102,7 +102,6 @@ public class LessonController extends TutorController
 
         if (form.getRequest() != null) {
             lesson.setRequest(form.getRequest());
-            //todo send notifaction mail to upvoters
         }
 
         service.updateLesson( lesson );
@@ -158,7 +157,6 @@ public class LessonController extends TutorController
                 .getRoom(), form.getBackupRoom() );
         if (form.getRequest() != null) {
             lesson.setRequest(form.getRequest());
-            //todo send notifaction mail to upvoters
         }
 
         service.addLesson( lesson );
