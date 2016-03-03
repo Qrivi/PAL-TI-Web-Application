@@ -61,8 +61,23 @@
                             <div class="img-push row">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <!--todo add scores -->
-                                        <c:out value="${review.text}"/>
+                                        <span class="lead"><c:out value="${review.text}"/></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>Tutor: </span>
+                                        <div class="rating" data-rating="${review.engagementScore}"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>Engagement: </span>
+                                        <div class="rating" data-rating="${review.engagementScore}"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>Atmosphere: </span>
+                                        <div class="rating" data-rating="${review.atmosphereScore}"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>Content: </span>
+                                        <div class="rating" data-rating="${review.contentScore}"></div>
                                     </div>
                                 </div>
                             </div>
