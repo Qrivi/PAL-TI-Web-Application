@@ -2,7 +2,7 @@
     <!-- App -->
     <group name="app">
         <css>/WEB-INF/resources/app/css/app.css</css>
-        <js>/WEB-INF/resources/app/css/app.js</js>
+        <js>/WEB-INF/resources/app/js/app.js</js>
     </group>
     <!-- Libraries -->
     <group name="libraries">

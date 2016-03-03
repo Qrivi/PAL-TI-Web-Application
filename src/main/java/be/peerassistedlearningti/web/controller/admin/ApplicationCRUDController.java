@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -67,5 +68,12 @@ public class ApplicationCRUDController extends AdminController
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Rejected", new Object[]{ application.getId() } ) );
 
         return new ModelAndView( "redirect:/admin/applications" );
+    }
+
+    @ResponseBody
+    @RequestMapping( value = "/applications/count", method = RequestMethod.GET )
+    public Integer pendingApplicationCount()
+    {
+        return service.getAllPendingApplications().size();
     }
 }

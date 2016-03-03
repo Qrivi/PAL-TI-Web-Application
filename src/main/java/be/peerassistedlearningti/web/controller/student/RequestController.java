@@ -74,7 +74,7 @@ public class RequestController extends StudentController
     }
 
     @RequestMapping( value = "/upvote/{id}", method = RequestMethod.POST )
-    public ModelAndView upvote( @PathVariable( value = "id" ) int id, ModelMap model )
+    public ModelAndView upvote( @PathVariable( value = "id" ) int id, ModelMap model, RedirectAttributes redirectAttributes )
     {
         Request request = service.getRequestById( id );
 
@@ -84,12 +84,13 @@ public class RequestController extends StudentController
         request.upvote( SessionAuth.getStudent() );
         service.updateRequest( request );
 
-        return new ModelAndView( "redirect:/request", fillModel( model ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Upvote", new Object[]{ request.getTitle() } ) );
+        return new ModelAndView( "redirect:/request" );
 
     }
 
     @RequestMapping( value = "/undovote/{id}", method = RequestMethod.POST )
-    public ModelAndView undoVote( @PathVariable( value = "id" ) int id, ModelMap model )
+    public ModelAndView undoVote( @PathVariable( value = "id" ) int id, ModelMap model, RedirectAttributes redirectAttributes )
     {
         Request request = service.getRequestById( id );
 
@@ -99,7 +100,8 @@ public class RequestController extends StudentController
         request.removeUpvote( SessionAuth.getStudent() );
         service.updateRequest( request );
 
-        return new ModelAndView( "redirect:/request", fillModel( model ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Undoupvote", new Object[]{ request.getTitle() } ) );
+        return new ModelAndView( "redirect:/request" );
     }
 
     @RequestMapping( value = "/similar", method = RequestMethod.POST )

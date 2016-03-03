@@ -37,6 +37,7 @@ $( document ).ready( function () {
             calendar.container.fullCalendar( 'removeEvents' );
             calendar.container.fullCalendar( 'addEventSource' , calendar.fEvents() );
             calendar.container.fullCalendar( 'rerenderEvents' );
+            $( '#results' ).text( calendar.fEvents().length );
         } ,
         register      : function () {
             if ( calendar.selectedEvent == undefined ) return;
@@ -72,7 +73,6 @@ $( document ).ready( function () {
         editable    : false ,
         eventLimit  : false ,
         eventRender : function ( event , element ) {
-            $( '#results' ).text( calendar.fEvents().length );
             var title = $( "<span class='title'>" + event.course_name + " - " + element.find( '.fc-title' ).text() + "</span>" );
             element.find( '.fc-title' ).html( title );
             element.find( '.fc-title' ).append( '<br/><br/>' + event.description + '<br/><br/>' + event.tutor_name );

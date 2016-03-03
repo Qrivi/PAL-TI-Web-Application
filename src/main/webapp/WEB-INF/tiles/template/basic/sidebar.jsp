@@ -25,7 +25,9 @@
             <li class="${nav_item == "rooms" ? "active" : "" }"><a
                     href="<c:url value="/admin/rooms"/>"><i class="fa fa-building"></i><span>Rooms</span></a></li>
             <li class="${nav_item == "applications" ? "active" : "" }"><a
-                    href="<c:url value="/admin/applications"/>"><i class="fa fa-file-text"></i><span>Applications</span></a></li>
+                    href="<c:url value="/admin/applications"/>"><i class="fa fa-file-text"></i><span>Applications</span>
+                <small id="application-count" class="label pull-right bg-red"></small>
+            </a></li>
             <li class="${nav_item == "tutors" ? "active" : "" }"><a
                     href="<c:url value="/admin/tutors"/>"><i class="fa fa-briefcase"></i><span>Tutors</span></a>
             </li>
