@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearning.model.Course;
 import be.peerassistedlearningti.web.model.validation.NotEmptyMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.validation;
 
-import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearning.model.Student;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.security.core.context.SecurityContextHolder;
 

@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.util;
 
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.UserType;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.model.UserType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

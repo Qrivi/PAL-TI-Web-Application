@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.converter;
 
-import be.peerassistedlearningti.model.Curriculum;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Curriculum;
+import be.peerassistedlearning.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 

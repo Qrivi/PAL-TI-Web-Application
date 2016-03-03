@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.model.Curriculum;
+import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearningti.web.model.validation.CheckCodeIsUnique;
 import org.hibernate.validator.constraints.NotEmpty;
 

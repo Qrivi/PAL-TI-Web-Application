@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.model.Campus;
-import be.peerassistedlearningti.model.RoomType;
+import be.peerassistedlearning.model.Campus;
+import be.peerassistedlearning.model.RoomType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;

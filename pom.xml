@@ -17,7 +17,7 @@
         <spring.version>4.1.6.RELEASE</spring.version>
         <spring-data.version>1.9.2.RELEASE</spring-data.version>
         <spring-security.version>4.0.0.RELEASE</spring-security.version>
-        <pal-ti-integration.version>2.0</pal-ti-integration.version>
+        <pal-integration.version>2.0</pal-integration.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
         <urlrewrite.version>4.0.4</urlrewrite.version>
         <commons-io.version>2.4</commons-io.version>
@@ -84,9 +84,9 @@
         </dependency>
         <!-- PAL TI Integeration-->
         <dependency>
-            <groupId>be.pal-ti</groupId>
+            <groupId>be.peerassistedlearning</groupId>
             <artifactId>integration</artifactId>
-            <version>${pal-ti-integration.version}</version>
+            <version>${pal-integration.version}</version>
         </dependency>
         <!-- Spring -->
         <dependency>

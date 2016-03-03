@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.util;
 
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Review;
+import be.peerassistedlearning.model.Lesson;
+import be.peerassistedlearning.model.Review;
 
 public class LessonReviewWrapper implements Comparable<LessonReviewWrapper> {
 

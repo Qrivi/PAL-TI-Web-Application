@@ -1,9 +1,9 @@
 package be.peerassistedlearningti.web.controller.student;
 
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Review;
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Lesson;
+import be.peerassistedlearning.model.Review;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.form.ReviewForm;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import be.peerassistedlearningti.web.model.util.message.MessageFactory;

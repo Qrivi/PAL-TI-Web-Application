@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.util;
 
-import be.peerassistedlearningti.common.model.archivable.Archivable;
+import be.peerassistedlearning.common.model.archivable.Archivable;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -37,7 +37,7 @@ public class Timeline
     /**
      * Limits the list of archivables
      *
-     * @param limit
+     * @param limit The new max size of the set
      */
     public void limit( int limit )
     {

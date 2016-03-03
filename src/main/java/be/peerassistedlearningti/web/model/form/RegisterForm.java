@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.common.model.validation.FieldMatch;
-import be.peerassistedlearningti.model.Curriculum;
+import be.peerassistedlearning.common.model.validation.FieldMatch;
+import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;

@@ -1,8 +1,8 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.common.model.validation.FieldMatch;
-import be.peerassistedlearningti.model.Curriculum;
-import be.peerassistedlearningti.model.UserType;
+import be.peerassistedlearning.common.model.validation.FieldMatch;
+import be.peerassistedlearning.model.Curriculum;
+import be.peerassistedlearning.model.UserType;
 
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentUpdateForm.password.repeatPassword}" )
 public class StudentUpdateForm
