@@ -18,7 +18,7 @@ public class RoomTypeConverter implements Converter<String, RoomType>
     {
         try
         {
-            return service.getRoomTypeByType( s );
+            return service.getRoomTypeByString( s );
         } catch ( Exception e )
         {
             return null;

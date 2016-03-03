@@ -17,7 +17,7 @@ public class UserTypeConverter implements Converter<String, UserType>
     {
         try
         {
-            return service.getStudentTypeByType( s );
+            return service.getStudentTypeByString( s );
         } catch ( Exception e )
         {
             return null;

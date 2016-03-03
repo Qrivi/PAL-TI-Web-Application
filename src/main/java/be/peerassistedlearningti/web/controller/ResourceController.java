@@ -43,7 +43,7 @@ public class ResourceController
     public HttpEntity<byte[]> getAvatar( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
     {
         Student student = service.getStudentById( id );
-        Image image = service.getAvatarByStudent( student );
+        Image image = service.getAvatar( student );
         byte[] bytes;
 
         if ( image == null )
@@ -74,7 +74,7 @@ public class ResourceController
     public HttpEntity<byte[]> getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
     {
         Application app = service.getApplicationById( id );
-        Image image = service.getScreenshotByApplication( app );
+        Image image = service.getScreenshot( app );
         byte[] bytes = image.getBytes();
 
         if ( bytes == null )

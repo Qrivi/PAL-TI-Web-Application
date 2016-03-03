@@ -53,7 +53,7 @@ public class BookingController extends StudentController
     @RequestMapping( value = "/calendar", method = RequestMethod.GET )
     public ModelAndView getCalendarBookingPage( ModelMap model )
     {
-        return new ModelAndView( "student/booking/calendar", "courses", service.getAllCoursesByStudent( SessionAuth.getStudent() ) );
+        return new ModelAndView( "student/booking/calendar", "courses", service.getCourses( SessionAuth.getStudent() ) );
     }
 
     @RequestMapping( value = "/register/{lessonId}", method = RequestMethod.POST )

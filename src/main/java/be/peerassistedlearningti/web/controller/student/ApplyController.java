@@ -42,8 +42,8 @@ public class ApplyController extends StudentController
             Collection<Course> courses = service.getAllCourses();
             Collection<Application> applications = new LinkedList<>();
 
-            applications.addAll( service.getAllPendingApplications( current ) );
-            applications.addAll( service.getAllApprovedApplications( current ) );
+            applications.addAll( service.getPendingApplications( current ) );
+            applications.addAll( service.getApprovedApplications( current ) );
 
             courses.removeAll( applications.stream().map( Application::getCourse ).collect( Collectors.toList() ) );
 
