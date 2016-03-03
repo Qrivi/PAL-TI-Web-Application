@@ -34,19 +34,29 @@
                                 <c:set var="durationError"><form:errors path="duration"/></c:set>
                                 <c:set var="roomError"><form:errors path="room"/></c:set>
                                 <c:set var="backupRoomError"><form:errors path="backupRoom"/></c:set>
-                                <div class="form-group has-feedback">
-                                    <form:label path="name">Name : <c:if test="${not empty nameError}"><span
-                                            class="text-danger">${nameError}</span></c:if></form:label>
-                                    <form:input path="name" class="form-control" placeholder="Name" disabled="${!editable}"/>
-                                </div>
-                                <div class="form-group has-feedback">
-                                    <form:label path="description">Description : <c:if
-                                            test="${not empty descriptionError}"><span
-                                            class="text-danger">${descriptionError}</span></c:if></form:label>
-                                    <form:textarea path="description" class="form-control"
-                                                   placeholder="Description" rows="5" disabled="${!editable}"/>
-                                </div>
                                 <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group has-feedback">
+                                            <form:label path="name">Name : <c:if test="${not empty nameError}"><span
+                                                    class="text-danger">${nameError}</span></c:if></form:label>
+                                            <form:input path="name" class="form-control" placeholder="Name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group has-feedback">
+                                            <form:label path="request">Request : </form:label>
+                                            <form:select path="request"
+                                                         class="form-control select2 select2-hidden-accessible"
+                                                         data-placeholder="Request (optional)" style="width: 100%;"
+                                                         tabindex="-1" aria-hidden="true">
+                                                <option></option>
+                                                <c:forEach items="${requests}" var="currRequest">
+                                                    <option value="${currRequest.id}">${currRequest.course.shortName}
+                                                        - ${currRequest.title}</option>
+                                                </c:forEach>
+                                            </form:select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <form:label path="date">Date & Time : <c:if
                                                 test="${not empty dateError}"><span

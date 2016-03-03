@@ -30,6 +30,19 @@ public class LessonController extends TutorController
     @Autowired
     private PALService service;
 
+    private ModelMap fillModel(ModelMap model) {
+        Tutor tutor = service.getTutorByStudent(SessionAuth.getStudent());
+        if (model.get("lesson") == null)
+            model.addAttribute("lesson", new LessonForm());
+        if (model.get("courses") == null)
+            model.addAttribute("courses", tutor.getCourses());
+        if (model.get("rooms") == null)
+            model.addAttribute("rooms", service.getRoomsFromCampus(Campus.PROXIMUS));
+        if (model.get("requests") == null)
+            model.addAttribute("requests", service.getAllRequests(tutor.getCourses()));
+        return model;
+    }
+
     @RequestMapping( value = "/lessons", method = RequestMethod.GET )
     public ModelAndView getLessonOverviewPage( ModelMap model )
     {
@@ -75,7 +88,7 @@ public class LessonController extends TutorController
 
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
 
-        if ( !tutor.equals( lesson.getTutor() ) )
+        if (!tutor.equals(lesson.getTutor()) || !tutor.getCourses().contains(form.getCourse()))
             return new ModelAndView( "redirect:/tutor/lessons" );
 
         lesson.setName( form.getName() );
@@ -86,6 +99,11 @@ public class LessonController extends TutorController
         lesson.setMaxParticipants( form.getMaxParticipants() );
         lesson.setRoom( form.getRoom() );
         lesson.setBackupRoom( form.getBackupRoom() );
+
+        if (form.getRequest() != null) {
+            lesson.setRequest(form.getRequest());
+            //todo send notifaction mail to upvoters
+        }
 
         service.updateLesson( lesson );
 
@@ -116,18 +134,6 @@ public class LessonController extends TutorController
         return new ModelAndView( "redirect:/tutor/lessons" );
     }
 
-    private ModelMap fillModel( ModelMap model )
-    {
-        Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
-        if ( model.get( "lesson" ) == null )
-            model.addAttribute( "lesson", new LessonForm() );
-        if ( model.get( "courses" ) == null )
-            model.addAttribute( "courses", tutor.getCourses() );
-        if ( model.get( "rooms" ) == null )
-            model.addAttribute( "rooms", service.getRoomsFromCampus( Campus.PROXIMUS ) );
-        return model;
-    }
-
     @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
     public ModelAndView getLessonAddPage( ModelMap model )
     {
@@ -150,6 +156,10 @@ public class LessonController extends TutorController
 
         Lesson lesson = new Lesson( form.getDate(), form.getName(), form.getDescription(), localTimeToMinutes( form.getDuration() ), form.getCourse(), form.getMaxParticipants(), tutor, form
                 .getRoom(), form.getBackupRoom() );
+        if (form.getRequest() != null) {
+            lesson.setRequest(form.getRequest());
+            //todo send notifaction mail to upvoters
+        }
 
         service.addLesson( lesson );
         notifySubscribers( lesson );

@@ -2,6 +2,7 @@ package be.peerassistedlearningti.web.model.form;
 
 import be.peerassistedlearningti.model.Course;
 import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Request;
 import be.peerassistedlearningti.model.Room;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -36,6 +37,8 @@ public class LessonForm
 
     @NotNull( message = "{NotNull.LessonForm.backupRoom}" )
     private Room backupRoom;
+
+    private Request request;
 
     public LessonForm() {}
 
@@ -133,4 +136,11 @@ public class LessonForm
         this.backupRoom = backupRoom;
     }
 
+    public Request getRequest() {
+        return request;
+    }
+
+    public void setRequest(Request request) {
+        this.request = request;
+    }
 }
