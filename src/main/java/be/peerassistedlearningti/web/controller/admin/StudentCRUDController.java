@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.controller.admin;
 
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.form.StudentForm;
 import be.peerassistedlearningti.web.model.form.StudentUpdateForm;
 import be.peerassistedlearningti.web.model.util.StudentUtils;

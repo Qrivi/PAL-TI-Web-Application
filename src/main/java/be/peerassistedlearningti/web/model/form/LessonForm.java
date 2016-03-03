@@ -1,9 +1,9 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Request;
-import be.peerassistedlearningti.model.Room;
+import be.peerassistedlearning.model.Course;
+import be.peerassistedlearning.model.Lesson;
+import be.peerassistedlearning.model.Request;
+import be.peerassistedlearning.model.Room;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Min;

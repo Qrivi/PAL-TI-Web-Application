@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Student;
+import be.peerassistedlearning.model.Lesson;
+import be.peerassistedlearning.model.Student;
 
 import javax.validation.constraints.NotNull;
 

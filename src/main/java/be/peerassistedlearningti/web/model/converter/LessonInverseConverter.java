@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.converter;
 
-import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearning.model.Lesson;
 import org.springframework.core.convert.converter.Converter;
 
 /**

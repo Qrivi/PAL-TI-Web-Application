@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.util;
 
-import be.peerassistedlearningti.model.Request;
+import be.peerassistedlearning.model.Request;
 
 
 public class RequestSimilarityWrapper implements Comparable<RequestSimilarityWrapper> {

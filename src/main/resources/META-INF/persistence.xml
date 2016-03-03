@@ -5,17 +5,17 @@
     <persistence-unit name="PAL" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>jdbc/PAL</jta-data-source>
-        <class>be.peerassistedlearningti.model.Student</class>
-        <class>be.peerassistedlearningti.model.Course</class>
-        <class>be.peerassistedlearningti.model.Tutor</class>
-        <class>be.peerassistedlearningti.model.Lesson</class>
-        <class>be.peerassistedlearningti.model.Room</class>
-        <class>be.peerassistedlearningti.model.RoomType</class>
-        <class>be.peerassistedlearningti.model.Campus</class>
-        <class>be.peerassistedlearningti.model.Application</class>
-        <class>be.peerassistedlearningti.model.Review</class>
-        <class>be.peerassistedlearningti.model.Request</class>
-        <class>be.peerassistedlearningti.model.Image</class>
+        <class>be.peerassistedlearning.model.Student</class>
+        <class>be.peerassistedlearning.model.Course</class>
+        <class>be.peerassistedlearning.model.Tutor</class>
+        <class>be.peerassistedlearning.model.Lesson</class>
+        <class>be.peerassistedlearning.model.Room</class>
+        <class>be.peerassistedlearning.model.RoomType</class>
+        <class>be.peerassistedlearning.model.Campus</class>
+        <class>be.peerassistedlearning.model.Application</class>
+        <class>be.peerassistedlearning.model.Review</class>
+        <class>be.peerassistedlearning.model.Request</class>
+        <class>be.peerassistedlearning.model.Image</class>
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.transaction.jta.platform" value="org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform"/>

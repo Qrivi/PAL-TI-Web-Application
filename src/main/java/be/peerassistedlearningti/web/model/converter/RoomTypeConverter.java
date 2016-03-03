@@ -1,8 +1,8 @@
 package be.peerassistedlearningti.web.model.converter;
 
 
-import be.peerassistedlearningti.model.RoomType;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.RoomType;
+import be.peerassistedlearning.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 

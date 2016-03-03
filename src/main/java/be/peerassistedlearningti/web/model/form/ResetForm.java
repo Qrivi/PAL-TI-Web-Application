@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.common.model.validation.FieldMatch;
+import be.peerassistedlearning.common.model.validation.FieldMatch;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @FieldMatch(first = "password", second = "repeatPassword", message = "{FieldMatch.ResetForm.password.repeatPassword}")

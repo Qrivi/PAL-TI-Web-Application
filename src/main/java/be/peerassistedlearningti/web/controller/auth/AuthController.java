@@ -1,8 +1,8 @@
 package be.peerassistedlearningti.web.controller.auth;
 
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.UserType;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.model.UserType;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.form.RegisterForm;
 import be.peerassistedlearningti.web.model.form.ResetForm;
 import be.peerassistedlearningti.web.model.form.ResetRequestForm;

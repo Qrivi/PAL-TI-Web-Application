@@ -1,8 +1,8 @@
 package be.peerassistedlearningti.web.controller.student;
 
-import be.peerassistedlearningti.model.Course;
-import be.peerassistedlearningti.model.Request;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Course;
+import be.peerassistedlearning.model.Request;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.form.RequestForm;
 import be.peerassistedlearningti.web.model.util.RequestSimilarityWrapper;
 import be.peerassistedlearningti.web.model.util.SessionAuth;

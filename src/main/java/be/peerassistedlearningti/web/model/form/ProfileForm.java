@@ -1,14 +1,13 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.common.model.validation.FieldMatch;
-import be.peerassistedlearningti.model.Course;
+import be.peerassistedlearning.common.model.validation.FieldMatch;
+import be.peerassistedlearning.model.Course;
 import be.peerassistedlearningti.web.model.validation.CheckEmailIsUnique;
 import be.peerassistedlearningti.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collection;
 import java.util.Set;
 
 @FieldMatch( first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ProfileForm.newPassword.newRepeatPassword}" )

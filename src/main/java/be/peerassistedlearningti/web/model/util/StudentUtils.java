@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.model.util;
 
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

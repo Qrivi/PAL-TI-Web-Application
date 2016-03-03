@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.form;
 
-import be.peerassistedlearningti.model.Curriculum;
+import be.peerassistedlearning.model.Curriculum;
 
 public class CourseUpdateForm
 {

@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.controller.admin;
 
-import be.peerassistedlearningti.model.Tutor;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Tutor;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

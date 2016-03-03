@@ -1,9 +1,9 @@
 package be.peerassistedlearningti.web.provider;
 
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.Tutor;
-import be.peerassistedlearningti.model.UserType;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.model.Tutor;
+import be.peerassistedlearning.model.UserType;
+import be.peerassistedlearning.service.PALService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,7 +28,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
      *
      * @param auth Authentication object to validate
      * @return A valid UsernamePasswordAuthenticationToken if the authentication is valid, otherwise null is returned
-     * @throws AuthenticationException
+     * @throws AuthenticationException This exception is never thrown
      */
     public Authentication authenticate( Authentication auth ) throws AuthenticationException
     {

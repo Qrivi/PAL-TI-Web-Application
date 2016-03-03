@@ -1,6 +1,6 @@
 package be.peerassistedlearningti.web.model.validation;
 
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 

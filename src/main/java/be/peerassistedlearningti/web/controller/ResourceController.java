@@ -1,7 +1,7 @@
 package be.peerassistedlearningti.web.controller;
 
-import be.peerassistedlearningti.model.*;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.*;
+import be.peerassistedlearning.service.PALService;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.*;
 import net.fortuna.ical4j.model.component.VEvent;

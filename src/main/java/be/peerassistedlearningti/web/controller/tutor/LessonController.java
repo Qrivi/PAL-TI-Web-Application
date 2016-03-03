@@ -1,10 +1,10 @@
 package be.peerassistedlearningti.web.controller.tutor;
 
-import be.peerassistedlearningti.model.Campus;
-import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Student;
-import be.peerassistedlearningti.model.Tutor;
-import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearning.model.Campus;
+import be.peerassistedlearning.model.Lesson;
+import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.model.Tutor;
+import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearningti.web.model.form.LessonForm;
 import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
