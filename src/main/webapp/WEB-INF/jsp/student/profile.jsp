@@ -72,7 +72,7 @@
                         <div class="loading">
                             <i class="fa fa-refresh fa-spin"></i>
                         </div>
-                        <ul class="timeline timeline-inverse">
+                        <ul class="timeline timeline-inverse" style="display: none">
                             <!-- End timeline items -->
                             <li><i class="timeline-end fa fa-clock-o bg-gray"></i></li>
                         </ul>

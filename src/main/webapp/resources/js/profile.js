@@ -15,9 +15,10 @@ $( document ).ready( function () {
         }
     } );
 
+    var timelineTotal = 4;
+    var timelineLimit = 3;
+    var timelineElement;
 
-    var totalTimeline = 1;
-    var timeline;
     loadTimeline();
 
     $( "#timeline" ).on( "click" , ".load-more button" , function () {
@@ -25,26 +26,30 @@ $( document ).ready( function () {
     } );
 
     function loadTimeline () {
+        $( "#timeline" ).find( ".loading" ).show();
+        $( "#timeline" ).find( ".timeline" ).hide();
         $.ajax( {
             url     : window.location.href + "/timeline" ,
             type    : "get" ,
             data    : {
                 "offset" : 0 ,
-                "limit"  : totalTimeline + 1
+                "limit"  : timelineTotal + timelineLimit
             } ,
             success : function ( html ) {
+                var items = $( html ).find( ".timeline-item" ).length;
+
                 $( "#timeline" ).find( ".loading" ).fadeOut( 1000 );
-                var count = $( $.parseHTML( html ) ).find( ".timeline-item" ).length;
-                console.log( count + " " + totalTimeline );
-                $( timeline ).remove();
-                timeline = $( html );
-                $( timeline ).hide().prependTo( ".timeline" ).fadeIn( 1000 );
-                if ( count == totalTimeline ) {
-                    console.log( $( "#timeline" ).find( ".load-more" ) );
+                $( "#timeline" ).find( ".timeline" ).delay( 1000 ).fadeIn( 1000 );
+
+                $( timelineElement ).remove();
+                timelineElement = $( html );
+                $( timelineElement ).hide().prependTo( ".timeline" ).delay( 1000 ).fadeIn( 1000 );
+
+                if ( items <= timelineTotal ) {
                     $( "#timeline" ).find( ".load-more" ).remove();
                 }
                 else {
-                    totalTimeline = count;
+                    timelineTotal = items;
                 }
                 $( ".rating" ).each( function () {
                     $( this ).rateYo( {
@@ -59,7 +64,9 @@ $( document ).ready( function () {
     }
 
 
-    var totalReviews = 0;
+    var reviewsTotal = 0;
+    var reviewsLimit = 4;
+
     loadReviews();
 
     $( "#reviews" ).on( "click" , ".load-more button" , function () {
@@ -71,22 +78,25 @@ $( document ).ready( function () {
             url     : "/profile/reviews" ,
             type    : "get" ,
             data    : {
-                "offset" : totalReviews ,
-                "limit"  : 4
+                "offset" : reviewsTotal ,
+                "limit"  : reviewsLimit
             } ,
             success : function ( html ) {
-                var reviews = $( $.parseHTML( html ) ).find( ".review" ).length;
+                var reviews = $( html ).find( ".review" ).length;
                 if ( reviews > 0 ) {
-                    totalReviews += reviews;
+                    reviewsTotal += reviews;
                     $( "#reviews" ).find( ".loading" ).fadeOut( 1000 );
                     $( "#reviews" ).find( ".load-more" ).remove();
-                    $( html ).hide().appendTo( "#reviews" ).fadeIn( 1000 );
+                    $( html ).hide().appendTo( "#reviews" ).delay( 1000 ).fadeIn( 1000 );
                 }
-                else if ( totalReviews == 0 ) {
+                else if ( reviewsTotal == 0 ) {
                     $( "#reviews" ).find( ".loading" ).fadeOut( 1000 );
-                    $( html ).hide().appendTo( "#reviews" ).fadeIn( 1000 );
+                    $( html ).hide().appendTo( "#reviews" ).delay( 1000 ).fadeIn( 1000 );
                 }
                 else {
+                    $( "#reviews" ).find( ".load-more" ).remove();
+                }
+                if ( reviews < reviewsLimit ) {
                     $( "#reviews" ).find( ".load-more" ).remove();
                 }
             }
