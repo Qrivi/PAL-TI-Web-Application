@@ -99,6 +99,14 @@ $( document ).ready( function () {
                 if ( reviews < reviewsLimit ) {
                     $( "#reviews" ).find( ".load-more" ).remove();
                 }
+                $(".rating").each(function () {
+                    $(this).rateYo({
+                        rating: $(this).data("rating"),
+                        maxValue: 10,
+                        halfStar: true,
+                        readOnly: true
+                    });
+                });
             }
         } );
     }
