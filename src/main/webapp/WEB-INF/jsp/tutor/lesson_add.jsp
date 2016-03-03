@@ -14,7 +14,7 @@
             <div class="box">
                 <div class="box-body">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-md-12">
                             <form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="descriptionError"><form:errors path="description"/></c:set>

@@ -16,69 +16,9 @@
     <div class="row">
         <div class="col-md-12">
             <!-- New request form -->
-            <div class="box box-primary collapsed-box">
+            <div class="box box-primary">
                 <div class="box-header with-border">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <h3 class="box-title">New request</h3>
-                        </div>
-                        <div id="loading_similar" class="col-md-1"></div>
-                        <div class="col-md-1 col-md-offset-8 col-sm-offset-6">
-                            <div class="box-tools pull-right">
-                                <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                    <i class="fa fa-plus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <form:form action="/request/add" method="POST" commandName="request">
-                <c:set var="courseError"><form:errors path="course"/></c:set>
-                    <c:set var="titleError"><form:errors path="title"/></c:set>
-                <c:set var="descriptionError"><form:errors path="description"/></c:set>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-md-offset-4 col-md-4">
-                                <div class="alert alert-info alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                    <h4><i class="icon fa fa-info"></i> Info</h4>
-                                    Please check if your request doesn't already exist.
-                                </div>
-                            </div>
-                            <div id="similar_requests" class="col-md-offset-2 col-md-8 col-sm-12">
-                            </div>
-                            <div class="col-md-9 col-sm-12 col-xs-12 form-group">
-                                <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
-                                <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
-                                <div id="request_title_feedback" class="label label-default"></div>
-                            </div>
-                            <div class="col-md-3 col-sm-12 col-xs-12 form-group">
-                                <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
-                                <form:select id="request_course" path="course" class="form-control"
-                                             placeholder="Course">
-                                    <form:option value="" label="--- Course ---"/>
-                                    <form:options items="${courses}" itemValue="id" itemLabel="name"/>
-                                </form:select>
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                                <form:label path="description">Description : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
-                                <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="description"/>
-                                <div id="request_text_feedback" class="label label-default"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-footer">
-                        <div class="pull-right">
-                            <form:button class="btn btn-default" type="submit">Add Request</form:button>
-                        </div>
-                    </div>
-                </form:form>
-            </div>
-
-            <!- Current requests -->
-            <!-- todo add current requests -->
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">My requests & up-votes</h3>
+                    <h3 class="box-title">New request</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
                                 title="Collapse">
@@ -87,36 +27,77 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <div class="row">
-                        <!--TODO:: finish displaying current users requests/upvotes -->
-                        <c:if test="${empty myRequests}">
-                            <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                                <h4><i class="icon fa fa-frown-o"></i>No requests or up-votes</h4>
-                                <p>You haven't made any requests, nor have you up-voted any.</p>
+                    <form:form action="/request/add" method="POST" commandName="request">
+                        <c:set var="courseError"><form:errors path="course"/></c:set>
+                        <c:set var="titleError"><form:errors path="title"/></c:set>
+                        <c:set var="descriptionError"><form:errors path="description"/></c:set>
+                        <div class="row">
+                            <div class="col-md-9 form-group has-feedback">
+                                <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
+                                <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
+                                <div id="request_title_feedback" class="label label-default"></div>
                             </div>
-                        </c:if>
-                        <c:if test="${not empty myRequests}">
-                            <div class="panel-body table-responsive no-padding">
-                                <table class="table table-hover">
-                                    <tbody>
-                                        <c:forEach var="request" items="${myRequests}">
-                                            <tr data-toggle="tooltip" title="${request.description}">
-                                                <td class="col-md-1 col-sm-1"><span class="label label-default"><i
-                                                        class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
-                                                <td class="col-md-4 col-sm-4">${request.course.name}</td>
-                                                <td class="col-md-6 col-sm-6">${request.title}</td>
-                                                <td class="col-md-1 col-sm-1">
-                                                    <a href="/request/${request.id}" class="btn btn-info pull-right"><i class="fa fa-info"></i></a>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
+                            <div class="col-md-3 form-group has-feedback">
+                                <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                <form:select id="request_course" path="course" class="form-control select2 select2-hidden-accessible"
+                                             data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <option></option>
+                                    <form:options items="${courses}" itemValue="id" itemLabel="name"/>
+                                </form:select>
                             </div>
-                        </c:if>
+                        </div>
+                        <div class="form-group">
+                            <form:label path="description">Description : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
+                            <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="description"/>
+                            <div id="request_text_feedback" class="label label-default"></div>
+                        </div>
+                        <div class="form-group">
+                            <form:button class="btn btn-default pull-right" type="submit">Add Request</form:button>
+                        </div>
+                    </form:form>
+                </div>
+                <div id="similar_requests"></div>
+            </div>
+        </div>
+        <c:if test="${not empty requests}">
+            <div class="col-md-12">
+                <!-- todo add current requests -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">All requests</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="Collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="request-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Upvotes</th>
+                                    <th>Title</th>
+                                    <th>Course</th>
+                                    <th data-orderable="false">Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="request" items="${requests}">
+                                    <tr>
+                                        <td><span class="label label-default"><i class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
+                                        <td>${request.title}</td>
+                                        <td>${request.course.name}</td>
+                                        <td>
+                                            <a href="/request/${request.id}" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        </div>
+        </c:if>
     </div>
 </section>
