@@ -1,10 +1,29 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Course.course" var="mCourse"/>
+<spring:message code="Course.courses" var="mCourses"/>
+<spring:message code="Course.code" var="mCode"/>
+<spring:message code="Course.name" var="mName"/>
+<spring:message code="Course.shortName" var="mShortName"/>
+<spring:message code="Course.curriculum" var="mCurriculum"/>
+<spring:message code="Course.year" var="mYear"/>
+<spring:message code="Course.subscribers" var="mSubscribers"/>
+<spring:message code="Course.overview" var="mOverview"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.add" var="mAdd"/>
+<spring:message code="Actions.edit" var="mEdit"/>
+<spring:message code="Actions.update" var="mUpdate"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.create" var="mCreate"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
 
 <section class="content-header">
     <h1>
-        Courses
+        ${mCourses}
     </h1>
 </section>
 <section class="content">
@@ -12,9 +31,9 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Course overview</h3>
+                    <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -24,24 +43,24 @@
                             <table id="course-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Short name</th>
-                                        <th>Curriculum</th>
-                                        <th>Year</th>
-                                        <th>Subscribers</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mCode}</th>
+                                        <th>${mName}</th>
+                                        <th>${mShortName}</th>
+                                        <th>${mCurriculum}</th>
+                                        <th>${mYear}</th>
+                                        <th>${mSubscribers}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Short name</th>
-                                        <th>Curriculum</th>
-                                        <th>Year</th>
-                                        <th>Subscribers</th>
-                                        <th>Actions</th>
+                                        <th>${mCode}</th>
+                                        <th>${mName}</th>
+                                        <th>${mShortName}</th>
+                                        <th>${mCurriculum}</th>
+                                        <th>${mYear}</th>
+                                        <th>${mSubscribers}</th>
+                                        <th>${mActions}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -57,11 +76,11 @@
                                                 <form class="small" action="<c:url value="/admin/courses" />" method="POST">
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${course.id}"/>
-                                                    <button class="btn btn-sm" data-toggle="tooltip" title="Delete">
+                                                    <button class="btn btn-sm" data-toggle="tooltip" title="${mDelete}">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
-                                                <button class="btn btn-sm update" data-id="${course.id}" data-toggle="tooltip" title="Edit">
+                                                <button class="btn btn-sm update" data-id="${course.id}" data-toggle="tooltip" title="${mEdit}">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
                                             </td>
@@ -79,9 +98,9 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create a Course</h3>
+                    <h3 class="box-title">${mCreateCourse}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -97,30 +116,30 @@
                                 <c:set var="yearError"><form:errors path="year"/></c:set>
                                 <div class="form-group has-feedback ${ not empty codeError ? 'has-error' : ''}">
                                     <form:errors path="code" element="label"/>
-                                    <form:input path="code" class="form-control" placeholder="Course code"/>
+                                    <form:input path="code" class="form-control" placeholder="${mCode}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                     <form:errors path="name" element="label"/>
-                                    <form:input path="name" class="form-control" placeholder="Course name"/>
+                                    <form:input path="name" class="form-control" placeholder="${mName}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty shortNameError ? 'has-error' : ''}">
                                     <form:errors path="shortName" element="label"/>
-                                    <form:input path="shortName" class="form-control" placeholder="Course short name"/>
+                                    <form:input path="shortName" class="form-control" placeholder="${mShortName}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
                                     <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Curriculum" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mCurriculum}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty yearError ? 'has-error' : ''}">
                                     <form:errors path="year" element="label"/>
-                                    <form:input path="year" type="number" min="1" class="form-control" value="null" placeholder="Course year"/>
+                                    <form:input path="year" type="number" min="1" class="form-control" value="null" placeholder="${mYear}"/>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <button type="submit" class="btn btn-default pull-right">Add</button>
+                                    <button type="submit" class="btn btn-default pull-right">${mAdd}</button>
                                 </div>
                             </form:form>
                         </div>
@@ -131,9 +150,9 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Update a Course</h3>
+                    <h3 class="box-title">${mUpdateCourse}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -150,30 +169,30 @@
                                 <form:hidden path="id" class="form-control"/>
                                 <div class="form-group has-feedback ${ not empty codeError ? 'has-error' : ''}">
                                     <form:errors path="code" element="label"/>
-                                    <form:input path="code" class="form-control" placeholder="Course code"/>
+                                    <form:input path="code" class="form-control" placeholder="${mCode}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                     <form:errors path="name" element="label"/>
-                                    <form:input path="name" class="form-control" placeholder="Course name"/>
+                                    <form:input path="name" class="form-control" placeholder="${mName}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty shortNameError ? 'has-error' : ''}">
                                     <form:errors path="shortName" element="label"/>
-                                    <form:input path="shortName" class="form-control" placeholder="Course short name"/>
+                                    <form:input path="shortName" class="form-control" placeholder="${mShortName}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
                                     <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Curriculum" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mCurriculum}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty yearError ? 'has-error' : ''}">
                                     <form:errors path="year" element="label"/>
-                                    <form:input path="year" type="number" min="1" class="form-control" value="null" placeholder="Course year"/>
+                                    <form:input path="year" type="number" min="1" class="form-control" value="null" placeholder="${mYear}"/>
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <button type="submit" class="btn btn-default pull-right">Update</button>
+                                    <button type="submit" class="btn btn-default pull-right">${mUpdate}</button>
                                 </div>
                             </form:form>
                         </div>
