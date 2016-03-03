@@ -134,6 +134,7 @@ public class ExternalProfileController extends StudentController
         Student current = service.getStudentByProfileIdentifier( id );
 
         Timeline timeline = new Timeline();
+
         timeline.addAll( service.getPastBookings( current, offset, limit ) );
         timeline.addAll( service.getReviewsByStudent( current, offset, limit ) );
 
@@ -142,6 +143,8 @@ public class ExternalProfileController extends StudentController
             timeline.addAll( service.getPastLessons( current.getTutor(), offset, limit ) );
             timeline.addAll( service.getReviews( current.getTutor(), offset, limit ) );
         }
+
+        timeline.limit( limit );
 
         model.addAttribute( "timeline", timeline );
         model.addAttribute( "student", current );

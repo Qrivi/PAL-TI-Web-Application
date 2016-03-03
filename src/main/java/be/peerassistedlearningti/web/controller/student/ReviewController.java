@@ -87,6 +87,7 @@ public class ReviewController extends StudentController
             review.setEngagementScore( reviewForm.getEngagementScore() );
             review.setAtmosphereScore( reviewForm.getAtmosphereScore() );
             review.setTutorScore( reviewForm.getTutorScore() );
+            review.setDate( new Date() );
         }
 
         service.addReview( review );

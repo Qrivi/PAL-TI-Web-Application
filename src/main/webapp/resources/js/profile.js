@@ -14,40 +14,81 @@ $( document ).ready( function () {
             $( lastTab ).addClass( 'active' );
         }
     } );
-    $.ajax( {
-        url     : window.location.href + "/timeline" ,
-        type    : "get" ,
-        data    : {
-            "offset" : 0 ,
-            "limit"  : 2
-        } ,
-        success : function ( html ) {
-            $( "#timeline" ).find( ".loading" ).fadeOut( 1000 );
-            $( html ).hide().appendTo( ".timeline" ).fadeIn( 1000 );
-        }
+
+
+    var totalTimeline = 1;
+    var timeline;
+    loadTimeline();
+
+    $( "#timeline" ).on( "click" , ".load-more button" , function () {
+        loadTimeline();
     } );
 
-    var reviewOffset = 0;
-    loadReviews( reviewOffset );
+    function loadTimeline () {
+        $.ajax( {
+            url     : window.location.href + "/timeline" ,
+            type    : "get" ,
+            data    : {
+                "offset" : 0 ,
+                "limit"  : totalTimeline + 1
+            } ,
+            success : function ( html ) {
+                $( "#timeline" ).find( ".loading" ).fadeOut( 1000 );
+                var count = $( $.parseHTML( html ) ).find( ".timeline-item" ).length;
+                console.log( count + " " + totalTimeline );
+                $( timeline ).remove();
+                timeline = $( html );
+                $( timeline ).hide().prependTo( ".timeline" ).fadeIn( 1000 );
+                if ( count == totalTimeline ) {
+                    console.log( $( "#timeline" ).find( ".load-more" ) );
+                    $( "#timeline" ).find( ".load-more" ).remove();
+                }
+                else {
+                    totalTimeline = count;
+                }
+                $( ".rating" ).each( function () {
+                    $( this ).rateYo( {
+                        rating   : $( this ).data( "rating" ) ,
+                        maxValue : 10 ,
+                        halfStar : true ,
+                        readOnly : true
+                    } );
+                } );
+            }
+        } );
+    }
+
+
+    var totalReviews = 0;
+    loadReviews();
 
     $( "#reviews" ).on( "click" , ".load-more button" , function () {
-        console.log( "zezeze" );
-        loadReviews( reviewOffset );
-        reviewOffset += 1;
+        loadReviews();
     } );
 
-    function loadReviews ( offset ) {
+    function loadReviews () {
         $.ajax( {
             url     : "/profile/reviews" ,
             type    : "get" ,
             data    : {
-                "offset" : offset ,
-                "limit"  : 1
+                "offset" : totalReviews ,
+                "limit"  : 4
             } ,
             success : function ( html ) {
-                $( "#reviews" ).find( ".loading" ).fadeOut( 1000 );
-                $( "#reviews" ).find( ".load-more" ).remove();
-                $( html ).hide().appendTo( "#reviews" ).fadeIn( 1000 );
+                var reviews = $( $.parseHTML( html ) ).find( ".review" ).length;
+                if ( reviews > 0 ) {
+                    totalReviews += reviews;
+                    $( "#reviews" ).find( ".loading" ).fadeOut( 1000 );
+                    $( "#reviews" ).find( ".load-more" ).remove();
+                    $( html ).hide().appendTo( "#reviews" ).fadeIn( 1000 );
+                }
+                else if ( totalReviews == 0 ) {
+                    $( "#reviews" ).find( ".loading" ).fadeOut( 1000 );
+                    $( html ).hide().appendTo( "#reviews" ).fadeIn( 1000 );
+                }
+                else {
+                    $( "#reviews" ).find( ".load-more" ).remove();
+                }
             }
         } );
     }

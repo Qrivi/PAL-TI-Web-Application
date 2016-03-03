@@ -7,7 +7,6 @@
 <sec:authentication var="auth" property="principal"/>
 <c:set var="req" value="${pageContext.request}"/>
 <c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
-<c:set var="disabled" value="${editable ? '' : 'disabled'}"/>
 <section class="content-header">
     <h1>
         Profile
@@ -49,8 +48,7 @@
                 <ul class="nav nav-tabs">
                     <!-- reviews tab button-->
                     <c:if test="${user == auth}">
-                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">Reviews</a>
-                        </li>
+                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">Reviews</a></li>
                     </c:if>
                     <!-- timeline tab button-->
                     <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
@@ -61,8 +59,8 @@
                 </ul>
                 <!-- tab contents -->
                 <section class="tab-content">
-                    <!-- reviews tab content-->
                     <c:if test="${user == auth}">
+                        <!-- reviews tab content-->
                         <div class="tab-pane" id="reviews">
                             <div class="loading">
                                 <i class="fa fa-refresh fa-spin"></i>
@@ -74,7 +72,10 @@
                         <div class="loading">
                             <i class="fa fa-refresh fa-spin"></i>
                         </div>
-                        <ul class="timeline timeline-inverse"></ul>
+                        <ul class="timeline timeline-inverse">
+                            <!-- End timeline items -->
+                            <li><i class="timeline-end fa fa-clock-o bg-gray"></i></li>
+                        </ul>
                     </div>
                     <!-- settings tab content-->
                     <c:if test="${user == auth}">

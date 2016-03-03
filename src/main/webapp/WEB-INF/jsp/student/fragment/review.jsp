@@ -4,16 +4,17 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <sec:authentication var="auth" property="principal"/>
 <div class="row">
-    <c:if test="${empty reviews}">
+    <c:if test="${empty lessonReviews}">
         <div class="alert alert-info col-sm-4 col-sm-offset-4">
             <h4><i class="icon fa fa-info-circle"></i>No closed bookings</h4>
             Once you've finished a lesson, you will be able to post a review
             here.
         </div>
     </c:if>
-    <c:forEach var="review" items="${reviews}">
-        <c:set var="lesson" value="${review.lesson}"/>
-        <div class="col-md-12">
+    <c:forEach var="lessonReview" items="${lessonReviews}">
+        <c:set var="review" value="${lessonReview.review}"/>
+        <c:set var="lesson" value="${lessonReview.lesson}"/>
+        <div class="review col-md-12">
             <div class="box box-default">
                 <div class="box-header with-border">
                     <div class="user-block">
@@ -71,7 +72,7 @@
             </div>
         </div>
     </c:forEach>
-    <c:if test="${not empty reviews}">
+    <c:if test="${not empty lessonReviews}">
         <div class="load-more col-md-12">
             <div class="text-center">
                 <button type="button" class="btn btn-default">Load More</button>

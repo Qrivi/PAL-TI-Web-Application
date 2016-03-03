@@ -1,9 +1,9 @@
 package be.peerassistedlearningti.web.controller.student;
 
 import be.peerassistedlearningti.model.Lesson;
-import be.peerassistedlearningti.model.Review;
 import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.util.LessonReviewWrapper;
 import be.peerassistedlearningti.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,14 +29,16 @@ public class ProfileController extends StudentController
     {
         Student current = SessionAuth.getStudent();
 
-        List<Review> list = new ArrayList<>();
+        List<LessonReviewWrapper> list = new ArrayList<>();
 
         for ( Lesson lesson : service.getPastBookings( current, offset, limit ) )
-            list.add( service.getReviewsByStudentAndLesson( current, lesson ) );
+            list.add( new LessonReviewWrapper( lesson, service.getReviewsByStudentAndLesson( current, lesson ) ) );
 
         Collections.sort( list, ( o1, o2 ) -> o1.getLesson().getDate().compareTo( o2.getLesson().getDate() ) );
 
-        return new ModelAndView( "student/fragment/review", "reviews", list );
+        model.addAttribute( "lessonReviews", list );
+
+        return new ModelAndView( "student/fragment/review" );
     }
 
     @RequestMapping( method = RequestMethod.GET )

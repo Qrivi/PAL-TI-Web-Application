@@ -1,8 +1,9 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!-- Empty Timeline -->
+<c:set var="previous" value=""/>
 <c:if test="${empty timeline.archivables}">
+    <!-- Empty Timeline -->
     <li>
         <i class="fa fa-info bg-gray"></i>
         <div class="timeline-item">
@@ -11,24 +12,20 @@
                 This doesn't only contains all the lessons you went to but also
                 contains all the reviews you've posted.</p></div>
         </div>
-        </i>
     </li>
 </c:if>
-
 <c:forEach var="archivable" items="${timeline.archivables}" varStatus="status">
-    <c:if test="${not empty previous || status.index == 0}">
-        <fmt:formatDate var="current" pattern="dd MMM. YYYY"
-                        value="${archivable.getArchiveDate()}"/>
-        <c:if test="${!previous.equals(current)}">
-            <li class="time-label">
-                <span class="bg-red"><c:out value="${current}"/></span>
-            </li>
-        </c:if>
-        <c:set var="previous" value="${current}"/>
-    </c:if>
-    <li>
-        <c:choose>
-            <c:when test="${archivable.class.simpleName == 'Lesson'}">
+    <c:choose>
+        <c:when test="${archivable.class.simpleName == 'Lesson'}">
+            <fmt:formatDate var="current" pattern="dd MMM. YYYY"
+                            value="${archivable.getArchiveDate()}"/>
+            <c:if test="${!previous.equals(current)}">
+                <li class="time-label">
+                    <span class="bg-red"><c:out value="${current}"/></span>
+                </li>
+            </c:if>
+            <c:set var="previous" value="${current}"/>
+            <li>
                 <!-- Is a Lesson object -->
                 <i class="fa fa-calendar-check-o bg-blue"></i>
                 <div class="timeline-item">
@@ -112,8 +109,18 @@
                         </div>
                     </div>
                 </div>
-            </c:when>
-            <c:when test="${archivable.class.simpleName == 'Review' && (!archivable.anonymous || !archivable.student.equals(student))}">
+            </li>
+        </c:when>
+        <c:when test="${archivable.class.simpleName == 'Review'}">
+            <fmt:formatDate var="current" pattern="dd MMM. YYYY"
+                            value="${archivable.getArchiveDate()}"/>
+            <c:if test="${!previous.equals(current)}">
+                <li class="time-label">
+                    <span class="bg-red"><c:out value="${current}"/></span>
+                </li>
+            </c:if>
+            <c:set var="previous" value="${current}"/>
+            <li>
                 <!-- Is a Review object -->
                 <i class="fa fa-star bg-blue"></i>
                 <div class="timeline-item">
@@ -144,24 +151,35 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <span>Tutor: </span>
+                                        <div class="rating" data-rating="${archivable.engagementScore}"></div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <span>Engagement: </span>
+                                        <div class="rating" data-rating="${archivable.engagementScore}"></div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <span>Atmosphere: </span>
+                                        <div class="rating" data-rating="${archivable.atmosphereScore}"></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <span>Content: </span>
+                                        <div class="rating" data-rating="${archivable.contentScore}"></div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-            </c:when>
-        </c:choose>
-    </li>
+            </li>
+        </c:when>
+    </c:choose>
 </c:forEach>
-<!-- End timeline items -->
-<li><i class="fa fa-clock-o bg-gray"></i></li>
+<c:if test="${not empty timeline.archivables}">
+    <li class="load-more">
+        <div class="text-center">
+            <button type="button" class="btn btn-default">Load More</button>
+        </div>
+    </li>
+</c:if>
