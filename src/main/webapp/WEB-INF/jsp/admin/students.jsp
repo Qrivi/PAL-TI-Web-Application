@@ -2,10 +2,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<spring:message code="Student.students" var="mStudents"/>
 <section class="content-header">
     <h1>
-        Students
+        ${mStudents}
     </h1>
 </section>
 <section class="content">

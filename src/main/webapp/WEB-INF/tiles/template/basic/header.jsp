@@ -15,6 +15,8 @@
         </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li><a href="?lang=en_US">en</a></li>
+                <li><a href="?lang=nl">nl</a></li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<c:url value="/resources/students/${auth.id}/avatar.png"/>" class="user-image" alt="User Image">
