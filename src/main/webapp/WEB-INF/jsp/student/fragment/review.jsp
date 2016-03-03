@@ -45,7 +45,8 @@
                     <strong><c:out value="${lesson.name}"/></strong>
                     <p><c:out value="${lesson.description}"/></p>
                 </div>
-                <div class="box-footer">
+                <c:if test="${review != null}">
+                    <div class="box-footer">
                     <div class="row">
                         <div class="col-md-1">
                             <div class="row">
@@ -84,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+                </c:if>
             </div>
         </div>
     </c:forEach>
