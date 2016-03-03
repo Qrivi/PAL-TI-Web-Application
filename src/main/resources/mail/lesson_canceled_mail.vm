@@ -117,24 +117,13 @@
                                             <td class="content-block"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                                 valign="top">
-                                                This mail was sent to you to inform you that there is a new lesson available for
-                                                <strong>${lesson.course.name}</strong>.
+                                                This mail was sent to you to inform you that a lesson you booked was canceled.
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <b>${lesson.name}</b>
                                                 <p>${lesson.description}</p>
-                                            </td>
-                                        </tr>
-                                        <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                            <td class="content-block"
-                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
-                                                valign="top">
-                                                If you would like to stop receiving mail notifications for
-												${lesson.course.name}, kindly unsubscribe for this course.
-                                                <br/>
-                                                This can be done on: profile -> settings -> subscriptions
                                             </td>
                                         </tr>
                                         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

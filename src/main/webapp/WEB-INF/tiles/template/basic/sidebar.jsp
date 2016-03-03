@@ -28,6 +28,9 @@
                     href="<c:url value="/admin/applications"/>"><i class="fa fa-file-text"></i><span>Applications</span>
                 <small id="application-count" class="label pull-right bg-red"></small>
             </a></li>
+            <li class="${nav_item == "lessons" ? "active" : "" }"><a
+                    href="<c:url value="/admin/lessons"/>"><i class="fa fa-book"></i><span>Lessons</span></a>
+            </li>
             <li class="${nav_item == "tutors" ? "active" : "" }"><a
                     href="<c:url value="/admin/tutors"/>"><i class="fa fa-briefcase"></i><span>Tutors</span></a>
             </li>

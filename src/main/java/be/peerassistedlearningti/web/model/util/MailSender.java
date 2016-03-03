@@ -70,4 +70,26 @@ public class MailSender
         };
         mailSender.send( preparator );
     }
+
+    /**
+     * Sends a lesson canceled mail to the specified student
+     *
+     * @param student The student to send the mail to
+     * @param lesson  The lesson that is removed
+     */
+    @Async
+    public void sendLessonCanceledMail( final Student student, final Lesson lesson )
+    {
+        MimeMessagePreparator preparator = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper( mimeMessage );
+            messageHelper.setTo( student.getEmail() );
+            messageHelper.setSubject( "PAL-TI lesson was canceled" );
+            Map<String, Object> model = new HashMap<String, Object>();
+            model.put( "student", student );
+            model.put( "lesson", lesson );
+            String text = VelocityEngineUtils.mergeTemplateIntoString( velocityEngine, "mail/lesson_canceled_mail.vm", "UTF-8", model );
+            messageHelper.setText( text, true );
+        };
+        mailSender.send( preparator );
+    }
 }

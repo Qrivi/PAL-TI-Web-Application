@@ -1,7 +1,9 @@
 package be.peerassistedlearningti.web.controller.admin;
 
 import be.peerassistedlearningti.model.Lesson;
+import be.peerassistedlearningti.model.Student;
 import be.peerassistedlearningti.service.PALService;
+import be.peerassistedlearningti.web.model.util.MailSender;
 import be.peerassistedlearningti.web.model.util.message.MessageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,20 +17,30 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LessonCRUDController extends AdminController
 {
     @Autowired
-    private PALService service;
+    MailSender mailSender;
 
-    @RequestMapping( value = "lessons", method = RequestMethod.GET )
-    public ModelAndView getLessonOverviewPage()
-    {
-        return new ModelAndView( "admin/lessons", "lessons", service.getAllLessons() );
-    }
+    @Autowired
+    private PALService service;
 
     @RequestMapping( value = "/lessons", method = RequestMethod.DELETE )
     public String removeLesson( @RequestParam( value = "id" ) int id, RedirectAttributes redirectAttributes )
     {
         Lesson l = service.getLessonById( id );
         service.removeLesson( l );
+        notifyBookings( l );
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.LessonCRUDController.Remove", new Object[]{ l.getName() } ) );
         return "redirect:/admin/lessons";
+    }
+
+    private void notifyBookings( Lesson lesson )
+    {
+        for ( Student booking : lesson.getBookings() )
+            mailSender.sendLessonCanceledMail( booking, lesson );
+    }
+
+    @RequestMapping( value = "lessons", method = RequestMethod.GET )
+    public ModelAndView getLessonOverviewPage()
+    {
+        return new ModelAndView( "admin/lessons", "lessons", service.getAllLessons() );
     }
 }
