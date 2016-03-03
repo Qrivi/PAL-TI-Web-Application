@@ -63,7 +63,7 @@ public class RequestController extends StudentController
     public ModelAndView addRequest( @Valid @ModelAttribute( value = "request" ) RequestForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
     {
         if ( result.hasErrors() )
-            return new ModelAndView( "/request", fillModel( model ) );
+            return new ModelAndView( "student/request_add", fillModel( model ) );
 
         Request request = new Request( form.getTitle(), form.getDescription(), form.getCourse(), SessionAuth.getStudent() );
         request.upvote( SessionAuth.getStudent() );

@@ -30,7 +30,7 @@
         <tiles.version>3.0.1</tiles.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
         <hibernate-entitymanager.version>4.3.1.Final</hibernate-entitymanager.version>
-        <jackson-annotations.version>2.7.2</jackson-annotations.version>
+        <jackson.version>2.7.2</jackson.version>
         <guava.version>r05</guava.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
     </properties>
@@ -46,7 +46,17 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson-annotations.version}</version>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
         </dependency>
         <!-- velocity -->
         <dependency>
