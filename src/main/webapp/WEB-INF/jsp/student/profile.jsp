@@ -4,12 +4,38 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <sec:authentication var="auth" property="principal"/>
 <c:set var="req" value="${pageContext.request}"/>
 <c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
+
+<spring:message code="Profile.profile" var="mProfile"/>
+<spring:message code="Profile.upcomingBookings" var="mUpcomingBookings"/>
+<spring:message code="Profile.pastBookings" var="mPastBookings"/>
+<spring:message code="Profile.subscriptions" var="mSubscriptions"/>
+<spring:message code="Profile.saveChanges" var="mSaveChanges"/>
+<spring:message code="Profile.timeline" var="mTimeline"/>
+<spring:message code="Profile.settings" var="mSettins"/>
+<spring:message code="Profile.copy" var="mCopy"/>
+<spring:message code="Review.reviews" var="mReviews"/>
+<spring:message code="Calendar.calendar" var="mCalendar"/>
+<spring:message code="Calendar.bookingCalendar" var="mBookingCalendar"/>
+<spring:message code="Calendar.lessonCalendar" var="mLessonCalendar"/>
+
+<spring:message code="Student.name" var="mName"/>
+<spring:message code="Student.password" var="mPassword"/>
+<spring:message code="Student.avatar" var="mAvatar"/>
+<spring:message code="Student.email" var="mEmail"/>
+<spring:message code="Student.curriculum" var="mCurriculum"/>
+<spring:message code="Student.type" var="mType"/>
+<spring:message code="Student.userType" var="mUserType"/>
+<spring:message code="Student.repeatPassword" var="mRepeatPassword"/>
+<spring:message code="Student.newPassword" var="mNewPassword"/>
+<spring:message code="Student.currentPassword" var="mCurrentPassword"/>
+
 <section class="content-header">
     <h1>
-        Profile
+        ${mProfile}
     </h1>
 </section>
 <!-- main content -->
@@ -25,19 +51,19 @@
                     <p class="text-muted text-center"><c:out value="${user.email}"/></p>
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Past bookings</b> <a class="pull-right"><c:out
+                            <b>${mPastBookings}</b> <a class="pull-right"><c:out
                                 value="${pastBookings}"/></a>
                         </li>
                         <li class="list-group-item">
-                            <b>Upcoming bookings</b> <a class="pull-right"><c:out
+                            <b>${mUpcomingBookings}</b> <a class="pull-right"><c:out
                                 value="${upcomingBookings}"/></a>
                         </li>
                         <li class="list-group-item">
-                            <b>Subscriptions</b> <a class="pull-right"><c:out
+                            <b>${mSubscriptions}</b> <a class="pull-right"><c:out
                                 value="${user.subscriptions == null ? 0 : user.subscriptions.size()}"/></a>
                         </li>
                     </ul>
-                    <a href="<c:url value="/calendar"/>" class="btn btn-primary btn-block"><b>Calendar</b></a>
+                    <a href="<c:url value="/calendar"/>" class="btn btn-primary btn-block"><b>${mCalendar}</b></a>
                 </div>
             </div>
         </div>
@@ -48,13 +74,13 @@
                 <ul class="nav nav-tabs">
                     <!-- reviews tab button-->
                     <c:if test="${user == auth}">
-                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">Reviews</a></li>
+                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">${mReviews}</a></li>
                     </c:if>
                     <!-- timeline tab button-->
-                    <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
+                    <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">${mTimeline}</a></li>
                     <!-- settings tab button-->
                     <c:if test="${user == auth}">
-                        <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                        <li><a href="#settings" data-toggle="tab">${mSettings}</a></li>
                     </c:if>
                 </ul>
                 <!-- tab contents -->
@@ -95,34 +121,34 @@
                                         <!-- name field-->
                                         <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                             <form:label path="avatar"
-                                                        class="col-sm-2 control-label">Avatar</form:label>
+                                                        class="col-sm-2 control-label">${mAvatar}</form:label>
                                             <div class="col-sm-10">
-                                                <form:input path="avatar" type="file" placeholder="Avatar"/>
+                                                <form:input path="avatar" type="file" placeholder="${mAvatar}"/>
                                             </div>
                                         </div>
                                         <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
-                                            <form:label path="name" class="col-sm-2 control-label">Name</form:label>
+                                            <form:label path="name" class="col-sm-2 control-label">${mName}</form:label>
                                             <div class="col-sm-10">
-                                                <form:input path="name" class="form-control" placeholder="Name"/>
+                                                <form:input path="name" class="form-control" placeholder="${mName}"/>
                                             </div>
                                         </div>
                                         <!-- email field-->
                                         <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
                                             <form:label path="email"
-                                                        class="col-sm-2 control-label">Email</form:label>
+                                                        class="col-sm-2 control-label">${mEmail}</form:label>
                                             <div class="col-sm-10">
-                                                <form:input path="email" class="form-control" placeholder="Email"/>
+                                                <form:input path="email" class="form-control" placeholder="${mEmail}"/>
                                             </div>
                                         </div>
                                         <hr class="separator"/>
                                         <!-- subscriptions field -->
                                         <div class="form-group has-feedback ${ not empty subscriptionsError ? 'has-error' : ''}">
                                             <form:label path="subscriptions"
-                                                        class="col-sm-2 control-label">Subscriptions</form:label>
+                                                        class="col-sm-2 control-label">${mSubscriptions}</form:label>
                                             <div class="col-sm-10">
                                                 <form:select id="subscriptions" path="subscriptions"
                                                              class="form-control select2 select2-hidden-accessible"
-                                                             multiple="multiple" data-placeholder="Subscriptions"
+                                                             multiple="multiple" data-placeholder="${mSubscriptions}"
                                                              style="width: 100%;" tabindex="-1" aria-hidden="true">
                                                     <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                                 </form:select>
@@ -132,12 +158,12 @@
                                         <sec:authorize access="hasRole('ROLE_TUTOR')">
                                             <!-- lesson calendar field -->
                                             <div class="form-group has-feedback">
-                                                <label for="lesson-calendar" class="col-sm-2 control-label">Lesson Calendar</label>
+                                                <label for="lesson-calendar" class="col-sm-2 control-label">${mLessonCalendar}</label>
                                                 <div class="col-sm-10">
                                                     <div class="input-group">
                                                         <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">Copy</button>
+                                                            <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">${mCopy}</button>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -145,7 +171,7 @@
                                         </sec:authorize>
                                         <!-- booking calendar field -->
                                         <div class="form-group has-feedback">
-                                            <label for="booking-calendar" class="col-sm-2 control-label">Booking Calendar</label>
+                                            <label for="booking-calendar" class="col-sm-2 control-label">${mBookingCalendar}</label>
                                             <div class="col-sm-10">
                                                 <div class="input-group">
                                                     <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
@@ -159,34 +185,34 @@
                                         <!-- new password field -->
                                         <div class="form-group has-feedback ${ not empty newPasswordError ? 'has-error' : ''}">
                                             <form:label path="newPassword"
-                                                        class="col-sm-2 control-label">New password</form:label>
+                                                        class="col-sm-2 control-label">${mNewPassword}</form:label>
                                             <div class="col-sm-10">
                                                 <form:password path="newPassword" class="form-control"
-                                                               placeholder="New password"/>
+                                                               placeholder="${mNewPassword}"/>
                                             </div>
                                         </div>
                                         <!-- new password repeat field -->
                                         <div class="form-group has-feedback ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
                                             <form:label path="newRepeatPassword"
-                                                        class="col-sm-2 control-label">Repeat Password</form:label>
+                                                        class="col-sm-2 control-label">${mRepeatPassword}</form:label>
                                             <div class="col-sm-10">
                                                 <form:password path="newRepeatPassword" class="form-control"
-                                                               placeholder="Repeat Password"/>
+                                                               placeholder="${mRepeatPassword}"/>
                                             </div>
                                         </div>
                                         <hr class="separator"/>
                                         <!-- password field -->
                                         <div class="form-group has-feedback ${ not empty passwordError ? 'has-error' : ''}">
                                             <form:label path="password"
-                                                        class="col-sm-2 control-label">Current Password</form:label>
+                                                        class="col-sm-2 control-label">${mCurrentPassword}</form:label>
                                             <div class="col-sm-10">
                                                 <form:password path="password" class="form-control"
-                                                               placeholder="Current Password"/>
+                                                               placeholder="${mCurrentPassword}"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-offset-10 col-sm-2">
-                                                <button type="submit" class="btn btn-default pull-right">Save changes</button>
+                                                <button type="submit" class="btn btn-default pull-right">${mSaveChanges}</button>
                                             </div>
                                         </div>
                                     </form:form>
