@@ -5,15 +5,20 @@ $( document ).ready( function () {
             $.cookie( 'last_tab' , $( e.target ).attr( 'href' ) );
         } );
         var lastTab = $.cookie( 'last_tab' );
-        if ( lastTab ) {
-            $( 'ul.nav-tabs' ).children().removeClass( 'active' );
-            if ( $( 'a[href="' + lastTab + '"]' ).length == 0 )
-                lastTab = "#timeline";
-            $( 'a[href="' + lastTab + '"]' ).parents( 'li:first' ).addClass( 'active' );
-            $( 'div.tab-content' ).children().removeClass( 'active' );
-            $( lastTab ).addClass( 'active' );
+
+        if (lastTab && $('a[href="' + lastTab + '"]').length > 0)
+            setActiveTab(lastTab);
+        else {
+            setActiveTab("#timeline");
         }
     } );
+
+    function setActiveTab(tab) {
+        $('ul.nav-tabs').children().removeClass('active');
+        $('a[href="' + tab + '"]').parents('li:first').addClass('active');
+        $('div.tab-content').children().removeClass('active');
+        $(tab).addClass('active');
+    }
 
     var timelineTotal = 4;
     var timelineLimit = 3;
