@@ -15,7 +15,7 @@
 <spring:message code="Profile.subscriptions" var="mSubscriptions"/>
 <spring:message code="Profile.saveChanges" var="mSaveChanges"/>
 <spring:message code="Profile.timeline" var="mTimeline"/>
-<spring:message code="Profile.settings" var="mSettins"/>
+<spring:message code="Profile.settings" var="mSettings"/>
 <spring:message code="Profile.copy" var="mCopy"/>
 <spring:message code="Review.reviews" var="mReviews"/>
 <spring:message code="Calendar.calendar" var="mCalendar"/>
