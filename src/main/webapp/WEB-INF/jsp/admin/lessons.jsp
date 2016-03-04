@@ -2,10 +2,29 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Lesson.lesson" var="mLesson"/>
+<spring:message code="Lesson.lessons" var="mLessons"/>
+<spring:message code="Lesson.name" var="mName"/>
+<spring:message code="Lesson.course" var="mCourse"/>
+<spring:message code="Lesson.description" var="mDescription"/>
+<spring:message code="Lesson.date" var="mDate"/>
+<spring:message code="Lesson.duration" var="mDuration"/>
+<spring:message code="Lesson.maxParticipants" var="mMaxParticipants"/>
+<spring:message code="Lesson.tutor" var="mTutor"/>
+<spring:message code="Lesson.room" var="mRoom"/>
+<spring:message code="Lesson.backupRoom" var="mBackupRoom"/>
+<spring:message code="Lesson.registeredStudents" var="mRegisteredStudents"/>
+<spring:message code="Lesson.overview" var="mOverview"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
 
 <section class="content-header">
     <h1>
-        Lessons
+        ${mLessons}
     </h1>
 </section>
 <section class="content">
@@ -13,10 +32,10 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Lesson overview</h3>
+                    <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"
-                                data-toggle="tooltip" title="Collapse">
+                                data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -27,32 +46,32 @@
                                    cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Course</th>
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Duration</th>
-                                        <th>Maximum Participants</th>
-                                        <th>Tutor</th>
-                                        <th>Room</th>
-                                        <th>Backup room</th>
-                                        <th>Registered students</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mName}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mDescription}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mDuration}</th>
+                                        <th>${mMaxParticipants}</th>
+                                        <th>${mTutor}</th>
+                                        <th>${mRoom}</th>
+                                        <th>${mBackupRoom}</th>
+                                        <th>${mRegisteredStudents}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Course</th>
-                                        <th>Description</th>
-                                        <th>Date</th>
-                                        <th>Duration</th>
-                                        <th>Maximum Participants</th>
-                                        <th>Tutor</th>
-                                        <th>Room</th>
-                                        <th>Backup room</th>
-                                        <th>Registered students</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mName}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mDescription}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mDuration}</th>
+                                        <th>${mMaxParticipants}</th>
+                                        <th>${mTutor}</th>
+                                        <th>${mRoom}</th>
+                                        <th>${mBackupRoom}</th>
+                                        <th>${mRegisteredStudents}</th>
+                                        <th>${mActions}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -73,7 +92,7 @@
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${lesson.id}"/>
                                                     <button class="btn btn-sm" data-toggle="tooltip"
-                                                            title="Delete" data-toggle="tooltip" title="Delete">
+                                                            title="${mDelete}" data-toggle="tooltip">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>

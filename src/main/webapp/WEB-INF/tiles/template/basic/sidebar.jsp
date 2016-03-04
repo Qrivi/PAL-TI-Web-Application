@@ -5,6 +5,10 @@
 <sec:authentication var="auth" property="principal"/>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
+<spring:message code="Navigation.admin" var="mNavAdmin"/>
+<spring:message code="Navigation.tutor" var="mNavTutor"/>
+<spring:message code="Navigation.main" var="mNavMain"/>
+
 <spring:message code="Student.students" var="mStudents"/>
 <spring:message code="Course.courses" var="mCourses"/>
 <spring:message code="Room.rooms" var="mRooms"/>
@@ -36,7 +40,7 @@
     </div>
     <ul class="sidebar-menu">
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <li class="header">ADMIN NAVIGATION</li>
+            <li class="header">${mNavAdmin}</li>
             <li class="${nav_item == "students" ? "active" : "" }"><a
                     href="<c:url value="/admin/students"/>"><i class="fa fa-users"></i><span>${mStudents}</span></a>
             </li>
@@ -62,7 +66,7 @@
             </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_TUTOR')">
-            <li class="header">TUTOR NAVIGATION</li>
+            <li class="header">${mNavTutor}</li>
             <li class="${nav_item == "tutor_lesson_add" ? "active" : ""}"><a
                     href="<c:url value="/tutor/lessons/add"/>"><i class="fa fa-calendar-plus-o"></i><span>${mMakeLesson}</span></a>
             </li>
@@ -72,7 +76,7 @@
             </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_USER')">
-            <li class="header">MAIN NAVIGATION</li>
+            <li class="header">${mNavMain}</li>
             <li class="${nav_item == "profile" ? "active" : "" }"><a
                     href="<c:url value="/profile/${auth.profileIdentifier}"/>"><i class="fa fa-user"></i><span>${mProfile}</span></a>
             </li>

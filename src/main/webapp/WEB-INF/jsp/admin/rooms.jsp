@@ -1,10 +1,28 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Room.room" var="mRoom"/>
+<spring:message code="Room.rooms" var="mRooms"/>
+<spring:message code="Room.name" var="mName"/>
+<spring:message code="Room.campus" var="mCampus"/>
+<spring:message code="Room.campuses" var="mCampuses"/>
+<spring:message code="Room.type" var="mType"/>
+<spring:message code="Room.roomTypes" var="mRoomTypes"/>
+<spring:message code="Room.overview" var="mOverview"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.add" var="mAdd"/>
+<spring:message code="Actions.edit" var="mEdit"/>
+<spring:message code="Actions.update" var="mUpdate"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.create" var="mCreate"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
 
 <section class="content-header">
     <h1>
-        Rooms
+        ${mRooms}
     </h1>
 </section>
 <section class="content">
@@ -12,7 +30,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Room overview</h3>
+                    <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
                             <i class="fa fa-minus"></i></button>
@@ -24,18 +42,18 @@
                             <table id="room-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Campus</th>
-                                        <th>Type</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mName}</th>
+                                        <th>${mCampus}</th>
+                                        <th>${mType}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Campus</th>
-                                        <th>Type</th>
-                                        <th>Actions</th>
+                                        <th>${mName}</th>
+                                        <th>${mCampus}</th>
+                                        <th>${mType}</th>
+                                        <th>${mActions}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -54,7 +72,7 @@
                                                     </button>
                                                 </form>
                                                 <button class="btn btn-sm update" data-id="${room.id}"
-                                                        data-toggle="tooltip" title="Edit">
+                                                        data-toggle="tooltip" title="${mEdit}">
                                                     <i class="fa fa-pencil"></i>
                                                 </button>
                                             </td>
@@ -72,9 +90,9 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Create a Room</h3>
+                    <h3 class="box-title">${mCreate}${' '}${mRoom}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -87,12 +105,12 @@
                                 <c:set var="typeError"><form:errors path="type"/></c:set>
                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                     <form:errors path="name" element="label"/>
-                                    <form:input path="name" class="form-control" placeholder="Name"/>
+                                    <form:input path="name" class="form-control" placeholder="${mName}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
                                     <form:errors path="campus" element="label"/>
                                     <form:select path="campus" class="campus form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Campuses" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mCampuses}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${campuses}"/>
                                     </form:select>
@@ -100,13 +118,13 @@
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
                                     <form:select path="type" class="type form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Room Types" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mRoomTypes}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${roomTypes}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default pull-right">Add</button>
+                                    <button type="submit" class="btn btn-default pull-right">${mAdd}</button>
                                 </div>
                             </form:form>
                         </div>
@@ -117,9 +135,9 @@
         <div class="col-md-6">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Update a Room</h3>
+                    <h3 class="box-title">${mUpdate}${' '}${mRoom}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -133,12 +151,12 @@
                                 <form:hidden path="id" class="form-control"/>
                                 <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
                                     <form:errors path="name" element="label"/>
-                                    <form:input path="name" class="form-control" placeholder="Name"/>
+                                    <form:input path="name" class="form-control" placeholder="${mName}"/>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
                                     <form:errors path="campus" element="label"/>
                                     <form:select path="campus" class="campus form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mCampuses}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${campuses}"/>
                                     </form:select>
@@ -146,13 +164,13 @@
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
                                     <form:select path="type" class="type form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mRoomTypes}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <option></option>
                                         <form:options items="${roomTypes}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default pull-right">Update</button>
+                                    <button type="submit" class="btn btn-default pull-right">${mUpdate}</button>
                                 </div>
                             </form:form>
                         </div>

@@ -2,10 +2,20 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Tutor.tutor" var="mTutor"/>
+<spring:message code="Tutor.tutors" var="mTutors"/>
+<spring:message code="Tutor.course" var="mCourse"/>
+<spring:message code="Tutor.overview" var="mOverview"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
 
 <section class="content-header">
     <h1>
-        Tutors
+        ${mTutors}
     </h1>
 </section>
 <section class="content">
@@ -13,10 +23,10 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Tutor overview</h3>
+                    <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"
-                                data-toggle="tooltip" title="Collapse">
+                                data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -27,16 +37,16 @@
                                    cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Tutor</th>
-                                        <th>Course</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mTutor}</th>
+                                        <th>${mCourse}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Tutor</th>
-                                        <th>Course</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mTutor}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mActions}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -55,7 +65,7 @@
                                                       method="POST">
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${tutor.id}"/>
-                                                    <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i>
+                                                    <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip" title="${mDelete}"></i>
                                                     </button>
                                                 </form>
                                             </td>

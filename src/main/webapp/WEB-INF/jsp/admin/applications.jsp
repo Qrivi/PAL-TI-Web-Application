@@ -3,9 +3,37 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
+<spring:message code="Application.application" var="mApplication"/>
+<spring:message code="Application.applications" var="mApplications"/>
+<spring:message code="Application.student" var="mStudent"/>
+<spring:message code="Application.course" var="mCourse"/>
+<spring:message code="Application.date" var="mDate"/>
+<spring:message code="Application.startDate" var="mStartDate"/>
+<spring:message code="Application.endDate" var="mEndDate"/>
+<spring:message code="Application.status" var="mStatus"/>
+<spring:message code="Application.apply" var="mApply"/>
+<spring:message code="Application.approve" var="mApprove"/>
+<spring:message code="Application.approved" var="mApproved"/>
+<spring:message code="Application.reject" var="mReject"/>
+<spring:message code="Application.rejected" var="mRejected"/>
+<spring:message code="Application.screenshot" var="mScreenshot"/>
+<spring:message code="Application.pendingApplications" var="mPendingApplications"/>
+<spring:message code="Application.doneApplications" var="mDoneApplications"/>
+<spring:message code="Application.zoom" var="mZoom"/>
+<spring:message code="Application.close" var="mClose"/>
+<spring:message code="Student.overview" var="mOverview"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.add" var="mAdd"/>
+<spring:message code="Actions.edit" var="mEdit"/>
+<spring:message code="Actions.update" var="mUpdate"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.create" var="mCreate"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
+
 <section class="content-header">
     <h1>
-        Applications
+        ${mApplications}
     </h1>
 </section>
 <section class="content">
@@ -13,9 +41,9 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Pending Applications</h3>
+                    <h3 class="box-title">${mPendingApplications}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -25,18 +53,18 @@
                             <table id="pending-application-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Student</th>
-                                        <th>Course</th>
-                                        <th>Date</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mStudent}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mDate}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Student</th>
-                                        <th>Course</th>
-                                        <th>Date</th>
-                                        <th>Actions</th>
+                                        <th>${mStudent}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mActions}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -48,18 +76,18 @@
                                             <td>
                                                 <form class="small" action="<c:url value="/admin/applications/approve/${application.id}" />" method="POST">
                                                     <button class="btn btn-sm btn-success"
-                                                            data-toggle="tooltip" title="Approve">
+                                                            data-toggle="tooltip" title="${mApprove}">
                                                         <i class="fa fa-thumbs-up"></i>
                                                     </button>
                                                 </form>
                                                 <form class="small" action="<c:url value="/admin/applications/reject/${application.id}" />" method="POST">
                                                     <button class="btn btn-sm btn-danger"
-                                                            data-toggle="tooltip" title="Reject">
+                                                            data-toggle="tooltip" title="${mReject}">
                                                         <i class="fa fa-thumbs-down"></i>
                                                     </button>
                                                 </form>
                                                 <button class="btn btn-sm btn-primary screenshot"
-                                                        data-toggle="tooltip" title="Screenshot"
+                                                        data-toggle="tooltip" title="${mScreenshot}"
                                                         data-url="<c:url value="/resources/applications/${application.id}/screenshot.png"/>">
                                                     <i class="fa fa-picture-o"></i>
                                                 </button>
@@ -78,9 +106,9 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Done Applications</h3>
+                    <h3 class="box-title">${mDoneApplications}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -90,20 +118,20 @@
                             <table id="done-application-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Student</th>
-                                        <th>Course</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Status</th>
+                                        <th>${mStudent}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mStartDate}</th>
+                                        <th>${mEndDate}</th>
+                                        <th>${mStatus}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Student</th>
-                                        <th>Course</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Status</th>
+                                        <th>${mStudent}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mStartDate}</th>
+                                        <th>${mEndDate}</th>
+                                        <th>${mStatus}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -131,16 +159,16 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Screenshot</h4>
+                <h4 class="modal-title">${mScreenshot}</h4>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info">You can click on the screenshot to zoom in.</div>
+                <div class="alert alert-info">${mZoom}</div>
                 <a id="screenshot-url">
                     <img id="screenshot" width="100%" height="100%" alt="screenshot"/>
                 </a>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">${mClose}</button>
             </div>
         </div>
     </div>

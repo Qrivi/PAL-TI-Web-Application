@@ -1,7 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <spring:message code="Student.student" var="mStudent"/>
@@ -14,7 +13,7 @@
 <spring:message code="Student.type" var="mType"/>
 <spring:message code="Student.userType" var="mUserType"/>
 <spring:message code="Student.repeatPassword" var="mRepeatPassword"/>
-<spring:message code="Student.overview" var="mOveview"/>
+<spring:message code="Student.overview" var="mOverview"/>
 
 <spring:message code="Actions.actions" var="mActions"/>
 <spring:message code="Actions.add" var="mAdd"/>
@@ -34,7 +33,7 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">${mOveview}</h3>
+                    <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>

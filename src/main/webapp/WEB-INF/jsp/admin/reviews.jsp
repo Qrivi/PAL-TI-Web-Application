@@ -2,10 +2,27 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Review.review" var="mRewiew"/>
+<spring:message code="Review.reviews" var="mReviews"/>
+<spring:message code="Review.lesson" var="mLesson"/>
+<spring:message code="Review.date" var="mDate"/>
+<spring:message code="Review.student" var="mStudent"/>
+<spring:message code="Review.contentScore" var="mContentScore"/>
+<spring:message code="Review.tutorScore" var="mTutorScore"/>
+<spring:message code="Review.engagementScore" var="mEngagementScore"/>
+<spring:message code="Review.ambianceScore" var="mAmbianceScore"/>
+<spring:message code="Review.comment" var="mComment"/>
+<spring:message code="Review.overview" var="mOverview"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
 
 <section class="content-header">
     <h1>
-        Reviews
+        ${mReviews}
     </h1>
 </section>
 <section class="content">
@@ -13,9 +30,9 @@
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Review overview</h3>
+                    <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -25,28 +42,28 @@
                             <table id="review-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Lesson</th>
-                                        <th>Date</th>
-                                        <th>Student</th>
-                                        <th>Content Score</th>
-                                        <th>Tutor Score</th>
-                                        <th>Engagement Score</th>
-                                        <th>Atmosphere Score</th>
-                                        <th>Comment</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mLesson}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mStudent}</th>
+                                        <th>${mContentScore}</th>
+                                        <th>${mTutorScore}</th>
+                                        <th>${mEngagementScore}</th>
+                                        <th>${mAmbianceScore}</th>
+                                        <th>${mComment}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Lesson</th>
-                                        <th>Date</th>
-                                        <th>Student</th>
-                                        <th>Content Score</th>
-                                        <th>Tutor Score</th>
-                                        <th>Engagement Score</th>
-                                        <th>Atmosphere Score</th>
-                                        <th>Comment</th>
-                                        <th data-orderable="false">Actions</th>
+                                        <th>${mLesson}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mStudent}</th>
+                                        <th>${mContentScore}</th>
+                                        <th>${mTutorScore}</th>
+                                        <th>${mEngagementScore}</th>
+                                        <th>${mAmbianceScore}</th>
+                                        <th>${mComment}</th>
+                                        <th data-orderable="false">${mActions}</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -65,7 +82,7 @@
                                                       method="POST">
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${review.id}"/>
-                                                    <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip" title="Delete"></i>
+                                                    <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip" title="${mDelete}"></i>
                                                     </button>
                                                 </form>
                                             </td>
