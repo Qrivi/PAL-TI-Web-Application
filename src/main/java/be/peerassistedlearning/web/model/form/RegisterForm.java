@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.RegisterForm.password.repeatPassword}" )
 public class RegisterForm
@@ -21,6 +22,7 @@ public class RegisterForm
     private String email;
 
     @NotEmpty( message = "{NotEmpty.RegisterForm.password}" )
+    @Size( min = 5, message = "{Size.RegisterForm.newPassword}")
     private String password;
 
     @NotEmpty( message = "{NotEmpty.RegisterForm.repeatPassword}" )
