@@ -21,6 +21,6 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
         <security:authentication-provider ref="authProvider"/>
     </security:authentication-manager>
 
-    <bean id="authProvider" class="be.peerassistedlearningti.web.provider.AuthenticationProviderImpl"/>
+    <bean id="authProvider" class="be.peerassistedlearning.web.provider.AuthenticationProviderImpl"/>
 
 </beans>

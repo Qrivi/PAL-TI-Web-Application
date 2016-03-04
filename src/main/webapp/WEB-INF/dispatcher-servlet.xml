@@ -16,7 +16,7 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="be.peerassistedlearningti.web" use-default-filters="false">
+    <context:component-scan base-package="be.peerassistedlearning.web" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 

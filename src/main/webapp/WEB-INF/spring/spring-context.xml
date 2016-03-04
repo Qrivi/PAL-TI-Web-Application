@@ -20,7 +20,7 @@
     http://www.springframework.org/schema/task/spring-task.xsd">
 
     <context:annotation-config/>
-    <context:component-scan base-package="be.peerassistedlearningti, be.peerassistedlearning">
+    <context:component-scan base-package="be.peerassistedlearning">
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
 
@@ -71,15 +71,15 @@
 
     <!-- Student utils -->
 
-    <bean class="be.peerassistedlearningti.web.model.util.StudentUtils"/>
+    <bean class="be.peerassistedlearning.web.model.util.StudentUtils"/>
 
     <!-- Message factory -->
 
-    <bean class="be.peerassistedlearningti.web.model.util.message.MessageFactory"/>
+    <bean class="be.peerassistedlearning.web.model.util.message.MessageFactory"/>
 
     <!-- Reset mail -->
 
-    <bean id="resetMail" class="be.peerassistedlearningti.web.model.util.MailSender"/>
+    <bean id="resetMail" class="be.peerassistedlearning.web.model.util.MailSender"/>
 
     <!-- Java Mail -->
 
@@ -113,27 +113,27 @@
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="be.peerassistedlearningti.web.model.converter.RoomTypeConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.CampusConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.LessonConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.LessonInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.StudentConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.StudentInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.CourseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.CourseInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.RoomConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.RoomInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.DateConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.DateInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.TimeConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.TimeInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.UserTypeConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.IntegerConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.IntegerInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.CurriculumConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.CurriculumInverseConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.RequestConverter"/>
-                <bean class="be.peerassistedlearningti.web.model.converter.RequestInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.RoomTypeConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.CampusConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.LessonConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.LessonInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.StudentConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.StudentInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.CourseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.CourseInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.RoomConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.RoomInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.DateConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.DateInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.TimeConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.TimeInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.UserTypeConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.IntegerConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.IntegerInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.CurriculumConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.CurriculumInverseConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.RequestConverter"/>
+                <bean class="be.peerassistedlearning.web.model.converter.RequestInverseConverter"/>
             </set>
         </property>
     </bean>
