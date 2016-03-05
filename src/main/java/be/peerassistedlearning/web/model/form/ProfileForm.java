@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @FieldMatch( first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ProfileForm.newPassword.newRepeatPassword}" )
@@ -26,6 +27,7 @@ public class ProfileForm
     @CheckWithSessionPassword( message = "{CheckWithSessionPassword.ProfileForm.password}" )
     private String password;
 
+    @Size( min = 5, message = "{Size.ProfileForm.newPassword}")
     private String newPassword;
     private String newRepeatPassword;
     private Set<Course> subscriptions;
