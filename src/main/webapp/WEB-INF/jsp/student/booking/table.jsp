@@ -2,10 +2,39 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Course.courses" var="mCourses"/>
+<spring:message code="Lesson.lesson" var="mLesson"/>
+<spring:message code="Lesson.lessons" var="mLessons"/>
+<spring:message code="Lesson.noLessons" var="mNoLessons"/>
+<spring:message code="Lesson.name" var="mName"/>
+<spring:message code="Lesson.course" var="mCourse"/>
+<spring:message code="Lesson.description" var="mDescription"/>
+<spring:message code="Lesson.date" var="mDate"/>
+<spring:message code="Lesson.duration" var="mDuration"/>
+<spring:message code="Lesson.participants" var="mParticipants"/>
+<spring:message code="Lesson.tutor" var="mTutor"/>
+<spring:message code="Tutor.tutors" var="mTutors"/>
+<spring:message code="Lesson.room" var="mRoom"/>
+<spring:message code="Lesson.backupRoom" var="mBackupRoom"/>
+<spring:message code="Lesson.booking" var="mBooking"/>
+<spring:message code="Lesson.myBookings" var="mMyBookings"/>
+<spring:message code="Lesson.noBookings" var="mNoBookings"/>
+<spring:message code="Lesson.noRegister" var="mNoRegister"/>
+<spring:message code="Lesson.register" var="mRegister"/>
+<spring:message code="Lesson.registered" var="mRegistered"/>
+<spring:message code="Lesson.unregister" var="mUnregister"/>
+<spring:message code="Lesson.unregistered" var="mUnregistered"/>
+<spring:message code="Lesson.noLessonsAvailable" var="mNoLessonsAvailable"/>
+<spring:message code="Lesson.notification" var="mNotification"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
 
 <section class="content-header">
     <h1>
-        Bookings
+        ${mBookings}
     </h1>
 </section>
 <!-- main content -->
@@ -15,9 +44,9 @@
             <!-- My current bookings -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">My Bookings</h3>
+                    <h3 class="box-title">${mMyBookings}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="${mCollapse}"><i
                                 class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -25,8 +54,8 @@
                     <div class="row">
                         <c:if test="${empty myOpenBookings}">
                             <div class="alert alert-warning col-sm-4 col-sm-offset-4">
-                                <h4><i class="icon fa fa-frown-o"></i>No bookings</h4>
-                                You haven't registered for a lesson yet.
+                                <h4><i class="icon fa fa-frown-o"></i>${mNoBookings}</h4>
+                                    ${mNoRegister}
                             </div>
                         </c:if>
                         <c:if test="${not empty myOpenBookings}">
@@ -37,7 +66,7 @@
                                             <form action="<c:url value="/booking/unregister/${booking.id}" />"
                                                   method="POST">
                                                 <button class="btn btn-flat btn-danger"><i
-                                                        class="fa fa-trash"></i></button>
+                                                        class="fa fa-trash"></i>
                                                 </button>
                                             </form>
                                         </div>
@@ -74,9 +103,9 @@
             <!-- Open lessons table -->
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Lessons</h3>
+                    <h3 class="box-title">${mLessons}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="${mCollapse}"><i
                                 class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -84,11 +113,9 @@
                     <div class="row">
                         <c:if test="${empty lessons}">
                             <div class="alert alert-warning col-sm-4 col-sm-offset-4">
-                                <h4><i class="icon fa fa-frown-o"></i>No lessons</h4>
-                                <p>There aren't any lessons available, perhaps you should subscribe for a course.
-                                    This way we know which courses need some attention.</p>
-                                <p>Once we've found a suitable tutor for this course you'll receive an email
-                                    notification.</p>
+                                <h4><i class="icon fa fa-frown-o"></i>${mNoLessons}</h4>
+                                <p>${mNoLessonsAvailable}</p>
+                                <p>${mNotification}</p>
                             </div>
                         </c:if>
                         <c:if test="${not empty lessons}">
@@ -98,24 +125,24 @@
                                        width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Date</th>
-                                            <th>Duration</th>
-                                            <th>Participants</th>
-                                            <th>Tutor</th>
-                                            <th data-orderable="false">Actions</th>
+                                            <th>${mName}</th>
+                                            <th>${mCourse}</th>
+                                            <th>${mDate}</th>
+                                            <th>${mDuration}</th>
+                                            <th>${mParticipants}</th>
+                                            <th>${mTutor}</th>
+                                            <th data-orderable="false">${mActions}</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Course</th>
-                                            <th>Date</th>
-                                            <th>Duration</th>
-                                            <th>Participants</th>
-                                            <th>Tutor</th>
-                                            <th>Actions</th>
+                                            <th>${mName}</th>
+                                            <th>${mCourse}</th>
+                                            <th>${mDate}</th>
+                                            <th>${mDuration}</th>
+                                            <th>${mParticipants}</th>
+                                            <th>${mTutor}</th>
+                                            <th>${mActions}</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -144,7 +171,7 @@
                                                         <form action="<c:url value="/booking/register/${lesson.id}" />"
                                                               method="POST">
                                                             <button type="submit"
-                                                                    class="btn btn-success btn-sm" data-toggle="tooltip" title="Register">
+                                                                    class="btn btn-success btn-sm" data-toggle="tooltip" title="${mRegister}">
                                                                 <i class="fa fa-plus"></i>
                                                             </button>
                                                         </form>
@@ -152,7 +179,7 @@
                                                     <c:if test="${myOpenBookings.contains(lesson)}">
                                                         <form action="<c:url value="/booking/unregister/${lesson.id}" />"
                                                               method="POST">
-                                                            <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Unregister">
+                                                            <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="${mUnregister}">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>
                                                         </form>

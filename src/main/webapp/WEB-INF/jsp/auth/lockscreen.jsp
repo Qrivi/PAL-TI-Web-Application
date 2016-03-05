@@ -1,9 +1,15 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Login.PasswordIncorrect" var="mIncorrect"/>
+<spring:message code="Login.retrieveSession" var="mRetrieveSession"/>
+<spring:message code="Login.diffUser" var="mDiffUser"/>
+
 <c:if test="${not empty error}">
     <div class="callout callout-danger lead">
         <p>
-            Password is incorrect!
+            ${mIncorrect}
         </p>
     </div>
 </c:if>
@@ -23,8 +29,8 @@
     </form>
 </div>
 <div class="help-block text-center">
-    Enter your password to retrieve your session
+    ${mRetrieveSession}
 </div>
 <div class="text-center">
-    <a href="<c:url value="/auth/login"/>?different_user=true">Or sign in as a different user</a>
+    <a href="<c:url value="/auth/login"/>?different_user=true">${mDiffUser}</a>
 </div>

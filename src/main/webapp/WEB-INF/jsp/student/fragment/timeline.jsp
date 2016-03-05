@@ -1,16 +1,37 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="previous" value=""/>
+
+<spring:message code="Timeline.info" var="mTimelineInfo"/>
+<spring:message code="Timeline.show" var="mShow"/>
+<spring:message code="Timeline.gaveLesson" var="mGaveLesson"/>
+<spring:message code="Timeline.wentToLesson" var="mWentToLesson"/>
+<spring:message code="Timeline.receivedReviewFor" var="mReceivedReviewFor"/>
+<spring:message code="Timeline.gaveReviewFor" var="mGaveReviewFor"/>
+
+<spring:message code="Review.content" var="mContent"/>
+<spring:message code="Review.tutor" var="mTutor"/>
+<spring:message code="Review.engagement" var="mEngagement"/>
+<spring:message code="Review.ambiance" var="mAmbiance"/>
+
+<spring:message code="Course.course" var="mCourse"/>
+<spring:message code="Course.courses" var="mCourses"/>
+<spring:message code="Lesson.lesson" var="mLesson"/>
+<spring:message code="Lesson.participants" var="mParticipants"/>
+<spring:message code="Lesson.minutes" var="mMinutes"/>
+<spring:message code="Tutor.tutor" var="mTutor"/>
+
+<spring:message code="Actions.loadMore" var="mLoadMore"/>
+
 <c:if test="${empty timeline.archivables}">
     <!-- Empty Timeline -->
     <li>
         <i class="fa fa-info bg-gray"></i>
         <div class="timeline-item">
-            <h3 class="timeline-header">Timeline info</h3>
-            <div class="timeline-body"><p>This page will show you your history,
-                This doesn't only contains all the lessons you went to but also
-                contains all the reviews you've posted.</p></div>
+            <h3 class="timeline-header">${mTimelineInfo}</h3>
+            <div class="timeline-body"><p>${mShow}</p></div>
         </div>
     </li>
 </c:if>
@@ -37,10 +58,10 @@
                     <h3 class="timeline-header">
                         <c:choose>
                             <c:when test="${archivable.tutor.student == student}">
-                                <div class="label label-success">Gave lesson</div>
+                                <div class="label label-success">${mGaveLesson}</div>
                             </c:when>
                             <c:otherwise>
-                                <div class="label label-primary">Went to lesson</div>
+                                <div class="label label-primary">${mWentToLesson}</div>
                             </c:otherwise>
                         </c:choose>
                         <c:out value=" ${archivable.name}"/>
@@ -51,7 +72,7 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="panel panel-default bg-purple-gradient">
                                     <div class="panel-body">
-                                        <strong>Course</strong>
+                                        <strong>${mCourse}</strong>
                                         <ul class="list-unstyled">
                                             <li>${archivable.course.code}/${archivable.course.name}</li>
                                             <li>${archivable.course.curriculum} - ${archivable.course.year}e</li>
@@ -63,13 +84,12 @@
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="panel panel-default bg-purple-gradient">
                                     <div class="panel-body">
-                                        <strong>Lesson</strong>
+                                        <strong>${mLesson}</strong>
                                         <ul class="list-unstyled">
                                             <li>${archivable.room.campus}
                                                 - ${archivable.room.name}, ${archivable.backupRoom.campus}
                                                 - ${archivable.backupRoom.name}</li>
-                                            <li>${archivable.duration} minutes - ${archivable.bookings.size()}
-                                                participants
+                                            <li>${archivable.duration}${' '}${mMinutes} - ${archivable.bookings.size()}${' '}${mParticipants}
                                             </li>
                                         </ul>
                                     </div>
@@ -80,10 +100,10 @@
                                 <div class="panel panel-default bg-purple-gradient">
                                     <div class="panel-body row">
                                         <div class="col-md-8">
-                                            <strong>Tutor</strong>
+                                            <strong>${mTutor}</strong>
                                             <ul class="list-unstyled">
                                                 <li>${archivable.tutor.student.name}</li>
-                                                <li>${archivable.tutor.courses.size()} courses</li>
+                                                <li>${archivable.tutor.courses.size()}${mCourses}</li>
                                             </ul>
                                         </div>
                                         <div class="col-md-4">
@@ -132,10 +152,10 @@
                     <h3 class="timeline-header">
                         <c:choose>
                             <c:when test="${archivable.lesson.tutor.student == student}">
-                                <div class="label label-success">Received review for</div>
+                                <div class="label label-success">${mReceivedReviewFor}</div>
                             </c:when>
                             <c:otherwise>
-                                <div class="label label-primary">Gave review for</div>
+                                <div class="label label-primary">${mGaveReviewFor}</div>
                             </c:otherwise>
                         </c:choose>
                         <c:out value="${archivable.lesson.name}"/>
@@ -152,19 +172,19 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <span>Tutor: </span>
+                                        <span>${mTutor}: </span>
                                         <div class="rating" data-rating="${archivable.engagementScore}"></div>
                                     </div>
                                     <div class="col-md-3">
-                                        <span>Engagement: </span>
+                                        <span>${mEngagement}: </span>
                                         <div class="rating" data-rating="${archivable.engagementScore}"></div>
                                     </div>
                                     <div class="col-md-3">
-                                        <span>Atmosphere: </span>
+                                        <span>${mAmbiance}: </span>
                                         <div class="rating" data-rating="${archivable.atmosphereScore}"></div>
                                     </div>
                                     <div class="col-md-3">
-                                        <span>Content: </span>
+                                        <span>${mContent}: </span>
                                         <div class="rating" data-rating="${archivable.contentScore}"></div>
                                     </div>
                                 </div>
@@ -179,7 +199,7 @@
 <c:if test="${not empty timeline.archivables}">
     <li class="load-more">
         <div class="text-center">
-            <button type="button" class="btn btn-default">Load More</button>
+            <button type="button" class="btn btn-default">${mLoadMore}</button>
         </div>
     </li>
 </c:if>

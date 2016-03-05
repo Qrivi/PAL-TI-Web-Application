@@ -4,14 +4,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <sec:authentication var="auth" property="principal"/>
 <c:set var="req" value="${pageContext.request}"/>
 <c:set var="baseURL"
        value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
+<spring:message code="Request.request" var="mRequest"/>
+<spring:message code="Request.allRequests" var="mAllRequests"/>
+<spring:message code="Request.newRequest" var="mNewRequest"/>
+<spring:message code="Request.lessonRequest" var="mLessonRequest"/>
+<spring:message code="Request.title" var="mTitle"/>
+<spring:message code="Request.course" var="mCourse"/>
+<spring:message code="Request.description" var="mDescription"/>
+<spring:message code="Request.upvote" var="mUpvote"/>
+<spring:message code="Request.upvotes" var="mUpvotes"/>
+<spring:message code="Request.undoUpvote" var="mUndoUpvote"/>
+<spring:message code="Request.noUpvotes" var="mNoUpvotes"/>
+<spring:message code="Request.noUpvotesYet" var="mNoUpvotesYet"/>
+
+<spring:message code="Actions.info" var="mInfo"/>
+
 <section class="content-header">
     <h1>
-        Request Info
+        ${mRequest}${' '}${mInfo}
     </h1>
 </section>
 <!-- main content -->
@@ -20,14 +36,14 @@
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Request</h3>
+                    <h3 class="box-title">${mRequest}</h3>
                     <div class="pull-right">
                         <c:choose>
                             <c:when test="${requested.upvotes.contains(auth)}">
                                 <form action="<c:url value="/request/undovote/${requested.id}" />"
                                       method="POST">
                                     <button type="submit"
-                                            class="btn btn-danger btn-sm" data-toggle="tooltip" title="Undo upvote">
+                                            class="btn btn-danger btn-sm" data-toggle="tooltip" title="${mUndoUpvote}">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </form>
@@ -36,7 +52,7 @@
                                 <form action="<c:url value="/request/upvote/${requested.id}" />"
                                       method="POST">
                                     <button type="submit"
-                                            class="btn btn-success btn-sm" data-toggle="tooltip" title="Upvote">
+                                            class="btn btn-success btn-sm" data-toggle="tooltip" title="${mUpvote}">
                                         <i class="fa fa-thumbs-up"></i>
                                     </button>
                                 </form>
@@ -48,9 +64,9 @@
                     <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Course</th>
-                                <th>Description</th>
+                                <th>${mTitle}</th>
+                                <th>${mCourse}</th>
+                                <th>${mDescription}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -63,15 +79,15 @@
                     </table>
                     <div class="panel no-margin">
                         <div class="panel-heading">
-                            <h4 class="box-title">Up-votes</h4>
+                            <h4 class="box-title">${mUpvotes}</h4>
                             <span class="label label-default"><i
                                     class="fa fa-thumbs-up"></i> ${requested.upvotes.size()}</span>
                         </div>
                         <div class="panel-body">
                             <c:if test="${empty requested.upvotes}">
                                 <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                                    <h4><i class="icon fa fa-frown-o"></i>No upvotes</h4>
-                                    This request doesn't have any up-votes yet.
+                                    <h4><i class="icon fa fa-frown-o"></i>${mNoUpvotes}</h4>
+                                    ${mNoUpvotesYet}
                                 </div>
                             </c:if>
                             <c:if test="${not empty requested.upvotes}">

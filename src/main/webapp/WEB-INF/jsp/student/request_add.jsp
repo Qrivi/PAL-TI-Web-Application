@@ -3,12 +3,25 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="req" value="${pageContext.request}"/>
 <c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
+<spring:message code="Request.allRequests" var="mAllRequests"/>
+<spring:message code="Request.newRequest" var="mNewRequest"/>
+<spring:message code="Request.lessonRequest" var="mLessonRequest"/>
+<spring:message code="Request.title" var="mTitle"/>
+<spring:message code="Request.upvotes" var="mUpvotes"/>
+<spring:message code="Request.course" var="mCourse"/>
+<spring:message code="Request.description" var="mDescription"/>
+
+<spring:message code="Actions.info" var="mInfo"/>
+<spring:message code="Actions.add" var="mAdd"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
+
 <section class="content-header">
     <h1>
-        Lesson Request
+        ${mLessonRequest}
     </h1>
 </section>
 <!-- main content -->
@@ -18,10 +31,10 @@
             <!-- New request form -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">New request</h3>
+                    <h3 class="box-title">${mNewRequest}</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                title="Collapse">
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i>
                         </button>
                     </div>
@@ -33,26 +46,26 @@
                         <c:set var="descriptionError"><form:errors path="description"/></c:set>
                         <div class="row">
                             <div class="col-md-9 form-group has-feedback">
-                                <form:label path="title">Title : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
-                                <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="title"/>
+                                <form:label path="title">${mTitle} : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
+                                <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="${mTitle}"/>
                                 <div id="request_title_feedback" class="label label-default"></div>
                             </div>
                             <div class="col-md-3 form-group has-feedback">
-                                <form:label path="course">Course : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
                                 <form:select id="request_course" path="course" class="form-control select2 select2-hidden-accessible"
-                                             data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                             data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                     <option></option>
                                     <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <form:label path="description">Description : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
-                            <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="description"/>
+                            <form:label path="description">${mDescription} : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
+                            <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="${mDescription}"/>
                             <div id="request_text_feedback" class="label label-default"></div>
                         </div>
                         <div class="form-group">
-                            <form:button class="btn btn-default pull-right" type="submit">Add Request</form:button>
+                            <form:button class="btn btn-default pull-right" type="submit">${mAdd}</form:button>
                         </div>
                     </form:form>
                 </div>
@@ -64,10 +77,10 @@
                 <!-- todo add current requests -->
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">All requests</h3>
+                        <h3 class="box-title">${mAllRequests}</h3>
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                                    title="Collapse">
+                                    title="${mCollapse}">
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
@@ -76,10 +89,10 @@
                         <table id="request-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Upvotes</th>
-                                    <th>Title</th>
-                                    <th>Course</th>
-                                    <th data-orderable="false">Info</th>
+                                    <th>${mUpvotes}</th>
+                                    <th>${mTitle}</th>
+                                    <th>${mCourse}</th>
+                                    <th data-orderable="false">${mInfo}</th>
                                 </tr>
                             </thead>
                             <tbody>
