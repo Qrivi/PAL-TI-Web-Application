@@ -32,7 +32,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                                                     <input type="hidden" name="_method" value="delete"/>
                                                     <input type="hidden" name="id" value="${room.id}"/>
                                                     <button class="btn btn-sm" data-toggle="tooltip"
-                                                            title="Delete">
+                                                            title="${mDelete}">
                                                         <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
