@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class RequestController extends StudentController
         if ( model.get( "courses" ) == null )
             model.addAttribute( "courses", service.getCourses( SessionAuth.getStudent() ) );
         if ( model.get( "requests" ) == null )
-            model.addAttribute("requests", service.getAllRequestsWithoutLesson());
+            model.addAttribute("requests", service.getAllRequests());
         return model;
     }
 
@@ -55,6 +56,11 @@ public class RequestController extends StudentController
         if ( request == null )
             return new ModelAndView( "redirect:/request", fillModel( model ) );
         model.addAttribute( "requested", request );
+        if (request.getLesson() != null) {
+            model.addAttribute("lessonIsUpcomming", request.getLesson().getDate().after(new Date()));
+            model.addAttribute("isBooked", service.getLessonByIdForStudent(request.getLesson().getId(), SessionAuth.getStudent()) != null);
+        }
+
         return new ModelAndView( "student/request_info", fillModel( model ) );
     }
 
@@ -85,7 +91,7 @@ public class RequestController extends StudentController
         service.updateRequest( request );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Upvote", new Object[]{ request.getTitle() } ) );
-        return new ModelAndView( "redirect:/request" );
+        return new ModelAndView("redirect:/request/" + id);
 
     }
 
@@ -101,7 +107,7 @@ public class RequestController extends StudentController
         service.updateRequest( request );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Undoupvote", new Object[]{ request.getTitle() } ) );
-        return new ModelAndView( "redirect:/request" );
+        return new ModelAndView("redirect:/request/" + id);
     }
 
     @RequestMapping( value = "/similar", method = RequestMethod.POST )
