@@ -8,6 +8,7 @@
 <c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
 <spring:message code="Request.allRequests" var="mAllRequests"/>
+<spring:message code="Request.allMyRequests" var="mMyRequests"/>
 <spring:message code="Request.newRequest" var="mNewRequest"/>
 <spring:message code="Request.lessonRequest" var="mLessonRequest"/>
 <spring:message code="Request.title" var="mTitle"/>
@@ -78,6 +79,46 @@
                 <div id="similar_requests"></div>
             </div>
         </div>
+        <c:if test="${not empty myRequests}">
+            <div class="col-md-12">
+                <!-- todo add current requests -->
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">${mMyRequests}</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                    title="${mCollapse}">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <table id="request-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>${mUpvotes}</th>
+                                <th>${mTitle}</th>
+                                <th>${mCourse}</th>
+                                <th data-orderable="false">${mInfo}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="request" items="${myRequests}">
+                                <tr>
+                                    <td><span class="label label-default"><i class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
+                                    <td>${request.title}</td>
+                                    <td>${request.course.name}</td>
+                                    <td>
+                                        <a href="/request/${request.id}" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </c:if>
         <c:if test="${not empty requests}">
             <div class="col-md-12">
                 <!-- todo add current requests -->
