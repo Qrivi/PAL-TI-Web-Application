@@ -39,7 +39,7 @@ public class RequestController extends StudentController
         if ( model.get( "courses" ) == null )
             model.addAttribute( "courses", service.getCourses( SessionAuth.getStudent() ) );
         if ( model.get( "requests" ) == null )
-            model.addAttribute("requests", service.getAllRequests());
+            model.addAttribute("requests", service.getAllRequestsWithoutLesson());
         return model;
     }
 
