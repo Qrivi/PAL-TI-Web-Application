@@ -2,10 +2,34 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Lesson.lesson" var="mLesson"/>
+<spring:message code="Lesson.name" var="mName"/>
+<spring:message code="Lesson.course" var="mCourse"/>
+<spring:message code="Lesson.description" var="mDescription"/>
+<spring:message code="Lesson.date" var="mDate"/>
+<spring:message code="Lesson.duration" var="mDuration"/>
+<spring:message code="Lesson.participants" var="mParticipants"/>
+<spring:message code="Lesson.tutor" var="mTutor"/>
+<spring:message code="Lesson.room" var="mRoom"/>
+<spring:message code="Lesson.backupRoom" var="mBackupRoom"/>
+<spring:message code="Lesson.registeredStudents" var="mRegisteredStudents"/>
+<spring:message code="Lesson.myLessons" var="mMyLessons"/>
+<spring:message code="Lesson.myUpcomingLessons" var="mMyUpcomingLessons"/>
+<spring:message code="Lesson.noLessons" var="mNoLessons"/>
+<spring:message code="Lesson.noLessonsToGive" var="mNoLessonsToGive"/>
+<spring:message code="Lesson.history" var="mHistory"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
+<spring:message code="Actions.edit" var="mEdit"/>
+<spring:message code="Actions.infoFor" var="mInfoFor"/>
 
 <section class="content-header">
     <h1>
-        My lessons
+        ${mMyLessons}
     </h1>
 </section>
 <!-- main content -->
@@ -15,9 +39,9 @@
         <div class="col-md-12 col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">My upcoming lessons</h3>
+                    <h3 class="box-title">${mMyUpcomingLessons}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="${mCollapse}"><i
                                 class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -25,8 +49,8 @@
                     <div class="row">
                         <c:if test="${empty myUpcomingLessons}">
                             <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                                <h4><i class="icon fa fa-info"></i>No lessons</h4>
-                                You have no lessons to give.
+                                <h4><i class="icon fa fa-info"></i>${mNoLessons}</h4>
+                                    ${mNoLessonsToGive}
                             </div>
                         </c:if>
                         <c:if test="${not empty myUpcomingLessons}">
@@ -35,15 +59,14 @@
                                     <div class="info-box bg-blue-gradient">
                                         <div class="pull-right">
                                             <form action="<c:url value="/tutor/lessons/remove" />" method="POST">
-                                                <input type="hidden" name="_method" value="delete"/>
+                                                <input type="hidden" name="_method" value="${mDelete}"/>
                                                 <input type="hidden" name="id" value="${lesson.id}"/>
                                                 <button class="btn btn-flat btn-danger"><i
                                                         class="fa fa-trash"></i></button>
-                                                </button>
                                             </form>
                                         </div>
                                         <a href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>"
-                                           style="cursor:pointer;" alt="Edit lesson ${lesson.name}">
+                                           style="cursor:pointer;" alt="${mEdit}${' '}${lesson.name}">
                                             <i class="info-box-icon fa fa-edit"></i>
                                         </a>
                                         <div class="info-box-content">
@@ -72,9 +95,9 @@
         <div class="col-md-12 col-sm-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Lesson history</h3>
+                    <h3 class="box-title">${mHistory}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" title="${mCollapse}"><i
                                 class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -82,8 +105,8 @@
                     <div class="row">
                         <c:if test="${empty myPastLessons}">
                             <div class="alert alert-info col-sm-4 col-sm-offset-4">
-                                <h4><i class="icon fa fa-info"></i>No lessons</h4>
-                                You have no lessons to give.
+                                <h4><i class="icon fa fa-info"></i>${mNoLessons}</h4>
+                                ${mNoLessonsToGive}
                             </div>
                         </c:if>
                         <c:if test="${not empty myPastLessons}">
@@ -92,26 +115,26 @@
                                        cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Duration</th>
-                                            <th>Course</th>
-                                            <th>Participants</th>
-                                            <th>Room</th>
-                                            <th>Backup room</th>
-                                            <th>Actions</th>
+                                            <th>${mName}</th>
+                                            <th>${mDate}</th>
+                                            <th>${mDuration}</th>
+                                            <th>${mCourse}</th>
+                                            <th>${mParticipants}</th>
+                                            <th>${mRoom}</th>
+                                            <th>${mBackupRoom}</th>
+                                            <th>${mActions}</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Date</th>
-                                            <th>Duration</th>
-                                            <th>Course</th>
-                                            <th>Participants</th>
-                                            <th>Room</th>
-                                            <th>Backup room</th>
-                                            <th>Actions</th>
+                                            <th>${mName}</th>
+                                            <th>${mDate}</th>
+                                            <th>${mDuration}</th>
+                                            <th>${mCourse}</th>
+                                            <th>${mParticipants}</th>
+                                            <th>${mRoom}</th>
+                                            <th>${mBackupRoom}</th>
+                                            <th>${mActions}</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -139,12 +162,12 @@
                                                 <td>${lesson.backupRoom.name}</td>
                                                 <td>
                                                     <a class="btn btn-sm btn-default"
-                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>" alt="Info for lesson ${lesson.name}">
+                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>" alt="${mInfoFor}${' '}${lesson.name}">
                                                         <i class="fa fa-info"></i>
                                                     </a>
                                                     <c:if test="${lesson.bookings.size() < 1}">
                                                         <a class="btn btn-sm btn-default"
-                                                           href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>" alt="Edit lesson ${lesson.name}">
+                                                           href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>" alt="${mEdit}${' '}${lesson.name}">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                     </c:if>

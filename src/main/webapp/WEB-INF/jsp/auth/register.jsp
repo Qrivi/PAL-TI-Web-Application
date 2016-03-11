@@ -1,9 +1,14 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+<spring:message code="Login.registerMembership" var="mRegisterMembership"/>
+<spring:message code="Login.register" var="mRegister"/>
+<spring:message code="Login.alreadyMembership" var="mAlreadyMembership"/>
 
 <div class="login-box-body">
-    <p class="login-box-msg">Register a new membership</p>
+    <p class="login-box-msg">${mRegisterMembership}</p>
     <form:form method="post" commandName="register" enctype="application/x-www-form-urlencoded">
         <c:set var="nameError"><form:errors path="name"/></c:set>
         <c:set var="emailError"><form:errors path="email"/></c:set>
@@ -39,9 +44,9 @@
         </div>
         <div class="row">
             <div class="col-xs-4 col-xs-offset-8">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">${mRegister}</button>
             </div>
         </div>
     </form:form>
-    <a href="<c:url value="/auth/login"/>" class="text-center">I already have a membership</a>
+    <a href="<c:url value="/auth/login"/>" class="text-center">${mAlreadyMembership}</a>
 </div>

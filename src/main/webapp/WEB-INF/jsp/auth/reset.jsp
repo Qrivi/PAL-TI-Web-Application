@@ -3,8 +3,13 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
+<spring:message code="Login.emailInstructions" var="mEmailInstructions"/>
+<spring:message code="Login.goBackLogin" var="mGoBackLogin"/>
+
+<spring:message code="Actions.send" var="mSend"/>
+
 <div class="login-box-body">
-    <p class="login-box-msg">Enter your registered email address and we will send instructions to help you.</p>
+    <p class="login-box-msg">${mEmailInstructions}</p>
     <form:form method="post" commandName="resetRequest" enctype="application/x-www-form-urlencoded">
         <c:set var="emailError"><form:errors path="email"/></c:set>
         <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
@@ -14,9 +19,9 @@
         </div>
         <div class="row">
             <div class="col-xs-4 col-xs-offset-8">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">Send</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat">${mSend}</button>
             </div>
         </div>
     </form:form>
-    <a href="<c:url value="/auth/login"/>" class="text-center">Go back to the login page</a>
+    <a href="<c:url value="/auth/login"/>" class="text-center">${mGoBackLogin}</a>
 </div>

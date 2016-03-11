@@ -3,12 +3,37 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="req" value="${pageContext.request}"/>
 <c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
+<spring:message code="Review.review" var="mReview"/>
+<spring:message code="Review.courseS" var="mCourseS"/>
+<spring:message code="Review.content" var="mContent"/>
+<spring:message code="Review.contentScore" var="mContentScore"/>
+<spring:message code="Review.tutor" var="mTutor"/>
+<spring:message code="Review.tutorScore" var="mTutorScore"/>
+<spring:message code="Review.engagement" var="mEngagement"/>
+<spring:message code="Review.engagementScore" var="mEngagementScore"/>
+<spring:message code="Review.ambiance" var="mAmbiance"/>
+<spring:message code="Review.ambianceScore" var="mAmbienceScore"/>
+<spring:message code="Review.comment" var="mComment"/>
+<spring:message code="Review.anonymous" var="mAnonymous"/>
+<spring:message code="Review.postAnonymous" var="mPostAnonymous"/>
+<spring:message code="Review.post" var="mPost"/>
+
+<spring:message code="Lesson.description" var="mDescription"/>
+<spring:message code="Lesson.lesson" var="mLesson"/>
+
+<spring:message code="Course.course" var="mCourse"/>
+
+<spring:message code="Actions.actions" var="mActions"/>
+<spring:message code="Actions.delete" var="mDelete"/>
+<spring:message code="Actions.collapse" var="mCollapse"/>
+
 <section class="content-header">
     <h1>
-        Review
+        ${mReview}
     </h1>
 </section>
 <!-- main content -->
@@ -20,7 +45,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${lesson.name}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -32,10 +57,10 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-8 col-xs-8">
-                                            <h4>Tutor</h4>
+                                            <h4>${mTutor}</h4>
                                             <ul>
                                                 <li>${lesson.tutor.student.name}</li>
-                                                <li>${lesson.tutor.courses.size()} course(s)</li>
+                                                <li>${lesson.tutor.courses.size()}${' '}${mCourseS}</li>
                                             </ul>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 pull-right">
@@ -51,7 +76,7 @@
                         <div class="col-md-3 col-sm-6 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Course</h4>
+                                    <h4>${mCourse}</h4>
                                     <ul>
                                         <li>${lesson.course.code} - ${lesson.course.name}</li>
                                         <li>${lesson.course.curriculum} - ${lesson.course.year}e</li>
@@ -66,7 +91,7 @@
                                     <div class="pull-right">
                                         <span class="label label-primary"><fmt:formatDate value="${lesson.date}" pattern="hh:mm dd MMMMMMMMM YYYY"/> - ${lesson.duration}min.</span>
                                     </div>
-                                    <h4>Lesson</h4>
+                                    <h4>${mLesson}</h4>
                                     <ul>
                                         <li>${lesson.name}</li>
                                         <li>${lesson.room.name}, ${lesson.room.campus} or ${lesson.backupRoom.name}, ${lesson.backupRoom.campus}</li>
@@ -78,7 +103,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Description</h4>
+                                    <h4>${mDescription}</h4>
                                     <p><c:out value="${lesson.description}"/></p>
                                 </div>
                             </div>
@@ -101,44 +126,44 @@
                         <div class="row">
                             <!-- contentScore field -->
                             <div class="col-md-3 col-sm-6">
-                                <span class="control-label">Content</span>
+                                <span class="control-label">${mContent}</span>
                                 <div class="form-group ${ not empty contentScoreError ? 'has-error' : ''}">
                                     <form:errors path="contentScore" element="label"/>
                                     <div id="contentScore"></div>
-                                    <form:input id="contentScoreInput" type="hidden" min="1" max="10" path="contentScore" class="form-control" placeholder="Content score"/>
+                                    <form:input id="contentScoreInput" type="hidden" min="1" max="10" path="contentScore" class="form-control" placeholder="${mContentScore}"/>
                                 </div>
                             </div>
                             <!-- engagementScore field -->
                             <div class="col-md-3 col-sm-6">
-                                <span class="control-label">Engagement</span>
+                                <span class="control-label">${mEngagement}</span>
                                 <div class="form-group ${ not empty engagementScoreError ? 'has-error' : ''}">
                                     <form:errors path="engagementScore" element="label"/>
                                     <div id="engagementScore"></div>
-                                    <form:input id="engagementScoreInput" type="hidden" min="1" max="10" path="engagementScore" class="form-control rateYo" placeholder="Engagement score"/>
+                                    <form:input id="engagementScoreInput" type="hidden" min="1" max="10" path="engagementScore" class="form-control rateYo" placeholder="${mEngagementScore}"/>
                                 </div>
                             </div>
                             <!-- AtmosphereScore field -->
                             <div class="col-md-3 col-sm-6">
-                                <span class="control-label">Atmosphere</span>
+                                <span class="control-label">${mAmbiance}</span>
                                 <div class="form-group ${ not empty atmosphereScoreError ? 'has-error' : ''}">
                                     <form:errors path="atmosphereScore" element="label"/>
                                     <div id="atmosphereScore"></div>
-                                    <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10" path="atmosphereScore" class="form-control rateYo" placeholder="Atmosphere score"/>
+                                    <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10" path="atmosphereScore" class="form-control rateYo" placeholder="${mAmbienceScore}"/>
                                 </div>
                             </div>
                             <!-- tutorScore field -->
                             <div class="col-md-3 col-sm-6">
-                                <span class="control-label">Tutor</span>
+                                <span class="control-label">${mTutor}</span>
                                 <div class="form-group ${ not empty tutorScoreError ? 'has-error' : ''}">
                                     <form:errors path="tutorScore" element="label"/>
                                     <div id="tutorScore"></div>
-                                    <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore" class="form-control rateYo" placeholder="Tutor score"/>
+                                    <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore" class="form-control rateYo" placeholder="${mTutorScore}"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group ${ not empty textError ? 'has-error' : ''}">
                                     <form:errors path="text" element="label"/>
-                                    <form:textarea id="review_text" path="text" maxlength="140" minlength="10" class="form-control" placeholder="Comment"/>
+                                    <form:textarea id="review_text" path="text" maxlength="140" minlength="10" class="form-control" placeholder="${mComment}"/>
                                     <div id="review_text_feedback" class="label label-default"></div>
                                 </div>
                             </div>
@@ -151,14 +176,14 @@
                                 <div class="form-group no-margin">
                                     <div class="checkbox icheck">
                                         <label>
-                                            <form:checkbox path="Anonymous" class="form-control " placeholder="Anonymous"/> <span>Post anonymous</span>
+                                            <form:checkbox path="${mAnonymous}" class="form-control " placeholder="${mAnonymous}"/> <span>${mPostAnonymous}</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-offset-8 col-md-1">
                                 <div class="form-group pull-right no-margin">
-                                    <button id="submitReview" type="submit" class="btn btn-default pull-right">Post review</button>
+                                    <button id="submitReview" type="submit" class="btn btn-default pull-right">${mPost}</button>
                                 </div>
                             </div>
                         </div>

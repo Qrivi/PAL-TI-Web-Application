@@ -6,7 +6,7 @@
 <spring:message code="Login.signIn" var="mSignIn"/>
 <spring:message code="Login.rememberMe" var="mRememberMe"/>
 <spring:message code="Login.forgotPassword" var="mForgotPassword"/>
-<spring:message code="Login.register" var="mRegister"/>
+<spring:message code="Login.registerMembership" var="mRegister"/>
 
 <spring:message code="Student.email" var="mEmail"/>
 <spring:message code="Student.password" var="mPassword"/>
