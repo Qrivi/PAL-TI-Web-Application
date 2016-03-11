@@ -22,7 +22,7 @@ public class RegisterForm
     private String email;
 
     @NotEmpty( message = "{NotEmpty.RegisterForm.password}" )
-    @Size( min = 5, message = "{Size.RegisterForm.newPassword}")
+    @Size(min = 5, message = "{Size.RegisterForm.newPassword}")
     private String password;
 
     @NotEmpty( message = "{NotEmpty.RegisterForm.repeatPassword}" )
@@ -33,34 +33,13 @@ public class RegisterForm
 
     public RegisterForm() {}
 
+    public String getName() {
+        return name;
+    }
+
     public void setName( String name )
     {
         this.name = name;
-    }
-
-    public void setCurriculum( Curriculum curriculum )
-    {
-        this.curriculum = curriculum;
-    }
-
-    public void setEmail( String email )
-    {
-        this.email = email;
-    }
-
-    public void setPassword( String password )
-    {
-        this.password = password;
-    }
-
-    public void setRepeatPassword( String repeatPassword )
-    {
-        this.repeatPassword = repeatPassword;
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     public String getEmail()
@@ -68,9 +47,19 @@ public class RegisterForm
         return email;
     }
 
+    public void setEmail( String email )
+    {
+        this.email = email;
+    }
+
     public Curriculum getCurriculum()
     {
         return curriculum;
+    }
+
+    public void setCurriculum(Curriculum curriculum)
+    {
+        this.curriculum = curriculum;
     }
 
     public String getPassword()
@@ -78,9 +67,19 @@ public class RegisterForm
         return password;
     }
 
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
     public String getRepeatPassword()
     {
         return repeatPassword;
+    }
+
+    public void setRepeatPassword(String repeatPassword)
+    {
+        this.repeatPassword = repeatPassword;
     }
 
 }

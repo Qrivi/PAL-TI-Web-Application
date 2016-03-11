@@ -132,7 +132,8 @@
                                             <form:label path="room">${mRoom} : <c:if
                                                     test="${not empty roomError}"><span
                                                     class="text-danger">${roomError}</span></c:if></form:label>
-                                            <form:select path="room" class="form-control" placeholder="${mRoom}" disabled="${!editable}">
+                                            <form:select path="room" class="form-control" placeholder="${mRoom}"
+                                                         disabled="${!editable}">
                                                 <form:option value="" label="--- ${Room} ---"/>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
@@ -156,9 +157,11 @@
                                 </div>
                                 <div class="form-group">
                                     <c:if test="${editable}">
-                                        <button type="submit" class="btn btn-prima}ry pull-right">${mSaveChanges}</button>
+                                        <button type="submit"
+                                                class="btn btn-prima}ry pull-right">${mSaveChanges}</button>
                                     </c:if>
-                                    <a href="<c:url value="/tutor/lessons"/>" class="btn btn-default pull-right">${mGoBack}</a>
+                                    <a href="<c:url value="/tutor/lessons"/>"
+                                       class="btn btn-default pull-right">${mGoBack}</a>
                                 </div>
                             </form:form>
                         </div>
@@ -176,8 +179,8 @@
                     <c:if test="${empty bookings}">
                         <div class="alert alert-warning col-sm-4 col-sm-offset-4">
                             <h4><i class="icon fa fa-frown-o"></i>${mNoBookings}</h4>
-                            ${mPatient}
-                </div>
+                                ${mPatient}
+                        </div>
                     </c:if>
                     <c:if test="${not empty bookings}">
                         <ul class="row users-list">

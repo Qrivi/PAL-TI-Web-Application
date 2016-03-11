@@ -39,7 +39,8 @@
                         <div class="col-md-12 form-group">
                             <label for="course">${mCourses} :</label>
                             <select id="course" class="form-control select2 select2-hidden-accessible" multiple="multiple"
-                                    data-placeholder="${mCourses}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    data-placeholder="${mCourses}" style="width: 100%;" tabindex="-1"
+                                    aria-hidden="true">
                                 <option value="">--- ${mCourse} ---</option>
                                 <c:forEach var="course" items="${courses}">
                                     <option value="${course.id}">${course.shortName}</option>
@@ -90,8 +91,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">${mClose}</button>
-                <button id="booking-unregister" type="button" class="btn btn-primary" data-dismiss="modal">${mUnregister}</button>
-                <button id="booking-register" type="button" class="btn btn-primary" data-dismiss="modal">${mRegister}</button>
+                <button id="booking-unregister" type="button" class="btn btn-primary"
+                        data-dismiss="modal">${mUnregister}</button>
+                <button id="booking-register" type="button" class="btn btn-primary"
+                        data-dismiss="modal">${mRegister}</button>
             </div>
         </div>
     </div>

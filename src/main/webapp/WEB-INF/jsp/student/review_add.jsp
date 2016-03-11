@@ -45,7 +45,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${lesson.name}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -130,7 +131,9 @@
                                 <div class="form-group ${ not empty contentScoreError ? 'has-error' : ''}">
                                     <form:errors path="contentScore" element="label"/>
                                     <div id="contentScore"></div>
-                                    <form:input id="contentScoreInput" type="hidden" min="1" max="10" path="contentScore" class="form-control" placeholder="${mContentScore}"/>
+                                    <form:input id="contentScoreInput" type="hidden" min="1" max="10"
+                                                path="contentScore" class="form-control"
+                                                placeholder="${mContentScore}"/>
                                 </div>
                             </div>
                             <!-- engagementScore field -->
@@ -139,7 +142,9 @@
                                 <div class="form-group ${ not empty engagementScoreError ? 'has-error' : ''}">
                                     <form:errors path="engagementScore" element="label"/>
                                     <div id="engagementScore"></div>
-                                    <form:input id="engagementScoreInput" type="hidden" min="1" max="10" path="engagementScore" class="form-control rateYo" placeholder="${mEngagementScore}"/>
+                                    <form:input id="engagementScoreInput" type="hidden" min="1" max="10"
+                                                path="engagementScore" class="form-control rateYo"
+                                                placeholder="${mEngagementScore}"/>
                                 </div>
                             </div>
                             <!-- AtmosphereScore field -->
@@ -148,7 +153,9 @@
                                 <div class="form-group ${ not empty atmosphereScoreError ? 'has-error' : ''}">
                                     <form:errors path="atmosphereScore" element="label"/>
                                     <div id="atmosphereScore"></div>
-                                    <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10" path="atmosphereScore" class="form-control rateYo" placeholder="${mAmbienceScore}"/>
+                                    <form:input id="atmosphereScoreInput" type="hidden" min="1" max="10"
+                                                path="atmosphereScore" class="form-control rateYo"
+                                                placeholder="${mAmbienceScore}"/>
                                 </div>
                             </div>
                             <!-- tutorScore field -->
@@ -157,13 +164,15 @@
                                 <div class="form-group ${ not empty tutorScoreError ? 'has-error' : ''}">
                                     <form:errors path="tutorScore" element="label"/>
                                     <div id="tutorScore"></div>
-                                    <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore" class="form-control rateYo" placeholder="${mTutorScore}"/>
+                                    <form:input id="tutorScoreInput" type="hidden" min="1" max="10" path="tutorScore"
+                                                class="form-control rateYo" placeholder="${mTutorScore}"/>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group ${ not empty textError ? 'has-error' : ''}">
                                     <form:errors path="text" element="label"/>
-                                    <form:textarea id="review_text" path="text" maxlength="140" minlength="10" class="form-control" placeholder="${mComment}"/>
+                                    <form:textarea id="review_text" path="text" maxlength="140" minlength="10"
+                                                   class="form-control" placeholder="${mComment}"/>
                                     <div id="review_text_feedback" class="label label-default"></div>
                                 </div>
                             </div>
@@ -176,14 +185,16 @@
                                 <div class="form-group no-margin">
                                     <div class="checkbox icheck">
                                         <label>
-                                            <form:checkbox path="${mAnonymous}" class="form-control " placeholder="${mAnonymous}"/> <span>${mPostAnonymous}</span>
+                                            <form:checkbox path="${mAnonymous}" class="form-control "
+                                                           placeholder="${mAnonymous}"/> <span>${mPostAnonymous}</span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-offset-8 col-md-1">
                                 <div class="form-group pull-right no-margin">
-                                    <button id="submitReview" type="submit" class="btn btn-default pull-right">${mPost}</button>
+                                    <button id="submitReview" type="submit"
+                                            class="btn btn-default pull-right">${mPost}</button>
                                 </div>
                             </div>
                         </div>

@@ -46,22 +46,28 @@
                         <c:set var="descriptionError"><form:errors path="description"/></c:set>
                         <div class="row">
                             <div class="col-md-9 form-group has-feedback">
-                                <form:label path="title">${mTitle} : <c:if test="${not empty titleError}"><span class="text-danger">${titleError}</span></c:if></form:label>
-                                <form:input id="request_title" path="title" maxlength="50" minlength="3" class="form-control" placeholder="${mTitle}"/>
+                                <form:label path="title">${mTitle} : <c:if test="${not empty titleError}"><span
+                                        class="text-danger">${titleError}</span></c:if></form:label>
+                                <form:input id="request_title" path="title" maxlength="50" minlength="3"
+                                            class="form-control" placeholder="${mTitle}"/>
                                 <div id="request_title_feedback" class="label label-default"></div>
                             </div>
                             <div class="col-md-3 form-group has-feedback">
-                                <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span
+                                        class="text-danger">${courseError}</span></c:if></form:label>
                                 <form:select id="request_course" path="course" class="form-control select2 select2-hidden-accessible"
-                                             data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                             data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1"
+                                             aria-hidden="true">
                                     <option></option>
                                     <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                 </form:select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <form:label path="description">${mDescription} : <c:if test="${not empty descriptionError}"><span class="text-danger">${descriptionError}</span></c:if></form:label>
-                            <form:textarea id="request_text" path="description" maxlength="300" minlength="10" class="form-control" placeholder="${mDescription}"/>
+                            <form:label path="description">${mDescription} : <c:if test="${not empty descriptionError}"><span
+                                    class="text-danger">${descriptionError}</span></c:if></form:label>
+                            <form:textarea id="request_text" path="description" maxlength="300" minlength="10"
+                                           class="form-control" placeholder="${mDescription}"/>
                             <div id="request_text_feedback" class="label label-default"></div>
                         </div>
                         <div class="form-group">

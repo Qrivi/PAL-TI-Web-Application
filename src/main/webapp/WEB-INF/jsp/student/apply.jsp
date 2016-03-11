@@ -33,7 +33,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mSubmitYourApplication}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -44,7 +45,8 @@
                                 <c:set var="courseError"><form:errors path="course"/></c:set>
                                 <c:set var="screenshotError"><form:errors path="screenshot"/></c:set>
                                 <div class="form-group has-feedback ${ not empty courseError ? 'has-error' : ''}">
-                                    <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                    <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span
+                                            class="text-danger">${courseError}</span></c:if></form:label>
                                     <form:select path="course" class="form-control select2 select2-hidden-accessible"
                                                  data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
                                         <form:option value="" label="--- Course ---"/>
@@ -52,7 +54,9 @@
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty screenshotError ? 'has-error' : ''}">
-                                    <form:label path="screenshot">${mScreenshot} : <c:if test="${not empty screenshotError}"><span class="text-danger">${screenshotError}</span></c:if></form:label>
+                                    <form:label path="screenshot">${mScreenshot} : <c:if
+                                            test="${not empty screenshotError}"><span
+                                            class="text-danger">${screenshotError}</span></c:if></form:label>
                                     <form:input path="screenshot" type="file" placeholder="Screenshot"/>
                                     <p class="help-block">${mOnlyApply}</p>
                                 </div>
@@ -70,7 +74,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mMostSubscribedCourses}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -101,7 +106,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mYourApplications}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>

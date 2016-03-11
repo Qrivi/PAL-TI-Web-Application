@@ -106,7 +106,7 @@
                         <c:if test="${empty myPastLessons}">
                             <div class="alert alert-info col-sm-4 col-sm-offset-4">
                                 <h4><i class="icon fa fa-info"></i>${mNoLessons}</h4>
-                                ${mNoLessonsToGive}
+                                    ${mNoLessonsToGive}
                             </div>
                         </c:if>
                         <c:if test="${not empty myPastLessons}">
@@ -162,12 +162,14 @@
                                                 <td>${lesson.backupRoom.name}</td>
                                                 <td>
                                                     <a class="btn btn-sm btn-default"
-                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>" alt="${mInfoFor}${' '}${lesson.name}">
+                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>"
+                                                       alt="${mInfoFor}${' '}${lesson.name}">
                                                         <i class="fa fa-info"></i>
                                                     </a>
                                                     <c:if test="${lesson.bookings.size() < 1}">
                                                         <a class="btn btn-sm btn-default"
-                                                           href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>" alt="${mEdit}${' '}${lesson.name}">
+                                                           href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>"
+                                                           alt="${mEdit}${' '}${lesson.name}">
                                                             <i class="fa fa-pencil"></i>
                                                         </a>
                                                     </c:if>

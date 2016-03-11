@@ -76,10 +76,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <form:label path="date">${mDateTime} : <c:if test="${not empty dateError}"><span class="text-danger">${dateError}</span></c:if></form:label>
+                                        <form:label path="date">${mDateTime} : <c:if test="${not empty dateError}"><span
+                                                class="text-danger">${dateError}</span></c:if></form:label>
                                         <div class="form-group has-feedback">
                                             <div class="input-group date" id="datetimepicker">
-                                                <form:input path="date" type="text" class="form-control" placeholder="${mDateTime}"/>
+                                                <form:input path="date" type="text" class="form-control"
+                                                            placeholder="${mDateTime}"/>
                                                                 <span class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                                 </span>
@@ -88,9 +90,12 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                            <form:label path="course">${mCourse} : <c:if
+                                                    test="${not empty courseError}"><span
+                                                    class="text-danger">${courseError}</span></c:if></form:label>
                                             <form:select path="course" class="form-control select2 select2-hidden-accessible"
-                                                         data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                         data-placeholder="${mCourse}" style="width: 100%;"
+                                                         tabindex="-1" aria-hidden="true">
                                                 <option></option>
                                                 <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                             </form:select>
@@ -100,23 +105,31 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <form:label path="maxParticipants">${mMaxParticipants} <c:if test="${not empty maxParticipantsError}"><span class="text-danger">${maxParticipantsError}</span></c:if></form:label>
-                                            <form:input path="maxParticipants" type="number" min="1" class="form-control" placeholder="${mMaxParticipants}"/>
+                                            <form:label path="maxParticipants">${mMaxParticipants} <c:if
+                                                    test="${not empty maxParticipantsError}"><span
+                                                    class="text-danger">${maxParticipantsError}</span></c:if></form:label>
+                                            <form:input path="maxParticipants" type="number" min="1"
+                                                        class="form-control" placeholder="${mMaxParticipants}"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <form:label path="duration">${mDuration} : <c:if test="${not empty durationError}"><span class="text-danger">${durationError}</span></c:if></form:label>
-                                            <form:input path="duration" type="time" class="form-control" placeholder="${mDuration}"/>
+                                            <form:label path="duration">${mDuration} : <c:if
+                                                    test="${not empty durationError}"><span
+                                                    class="text-danger">${durationError}</span></c:if></form:label>
+                                            <form:input path="duration" type="time" class="form-control"
+                                                        placeholder="${mDuration}"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group has-feedback">
-                                            <form:label path="room">${mRoom} : <c:if test="${not empty roomError}"><span class="text-danger">${roomError}</span></c:if></form:label>
+                                            <form:label path="room">${mRoom} : <c:if test="${not empty roomError}"><span
+                                                    class="text-danger">${roomError}</span></c:if></form:label>
                                             <form:select path="room" class="form-control select2 select2-hidden-accessible"
-                                                         data-placeholder="${mRoom}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                         data-placeholder="${mRoom}" style="width: 100%;" tabindex="-1"
+                                                         aria-hidden="true">
                                                 <option></option>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
@@ -124,9 +137,12 @@
                                     </div>
                                     <div class="form-group has-feedback">
                                         <div class="col-md-6">
-                                            <form:label path="backupRoom">${mBackupRoom} : <c:if test="${not empty backupRoomError}"><span class="text-danger">${backupRoomError}</span></c:if></form:label>
+                                            <form:label path="backupRoom">${mBackupRoom} : <c:if
+                                                    test="${not empty backupRoomError}"><span
+                                                    class="text-danger">${backupRoomError}</span></c:if></form:label>
                                             <form:select path="backupRoom" class="form-control select2 select2-hidden-accessible"
-                                                         data-placeholder="${mBackupRoom}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                         data-placeholder="${mBackupRoom}" style="width: 100%;"
+                                                         tabindex="-1" aria-hidden="true">
                                                 <option></option>
                                                 <form:options items="${rooms}" itemValue="id" itemLabel="name"/>
                                             </form:select>
