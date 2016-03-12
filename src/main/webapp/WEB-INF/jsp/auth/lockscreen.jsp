@@ -5,6 +5,7 @@
 <spring:message code="Login.PasswordIncorrect" var="mIncorrect"/>
 <spring:message code="Login.retrieveSession" var="mRetrieveSession"/>
 <spring:message code="Login.diffUser" var="mDiffUser"/>
+<spring:message code="Student.password" var="mPassword"/>
 
 <c:if test="${not empty error}">
     <div class="callout callout-danger lead">
@@ -21,7 +22,7 @@
     <form class="lockscreen-credentials" method="post" action="<c:url value="/auth/checklogin"/>">
         <input type="hidden" name="email" value="${user.email}">
         <div class="input-group">
-            <input type="password" name="password" class="form-control" placeholder="password">
+            <input type="password" name="password" class="form-control" placeholder="${mPassword}">
             <div class="input-group-btn">
                 <button type="submit" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
             </div>

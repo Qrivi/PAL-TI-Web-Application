@@ -176,7 +176,7 @@
                                                 <div class="input-group">
                                                     <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">Copy</button>
+                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">${mCopy}</button>
                                                     </span>
                                                 </div>
                                             </div>

@@ -46,14 +46,14 @@
                                 <div class="form-group has-feedback ${ not empty courseError ? 'has-error' : ''}">
                                     <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
                                     <form:select path="course" class="form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="Course" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                        <form:option value="" label="--- Course ---"/>
+                                                 data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                        <form:option value="" label="--- ${mCourse} ---"/>
                                         <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty screenshotError ? 'has-error' : ''}">
                                     <form:label path="screenshot">${mScreenshot} : <c:if test="${not empty screenshotError}"><span class="text-danger">${screenshotError}</span></c:if></form:label>
-                                    <form:input path="screenshot" type="file" placeholder="Screenshot"/>
+                                    <form:input path="screenshot" type="file" placeholder="${mScreenshot}"/>
                                     <p class="help-block">${mOnlyApply}</p>
                                 </div>
                                 <div class="form-group">

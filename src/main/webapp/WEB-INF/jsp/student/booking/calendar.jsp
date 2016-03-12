@@ -23,7 +23,7 @@
 <spring:message code="Lesson.unregister" var="mUnregister"/>
 <spring:message code="Lesson.unregistered" var="mUnregistered"/>
 <spring:message code="Lesson.legend" var="mLegend"/>
-<spring:message code="Lesson.result" var="mResult"/>
+<spring:message code="Lesson.results" var="mResults"/>
 
 <spring:message code="Actions.close" var="mClose"/>
 
@@ -51,7 +51,7 @@
                             <div id="tutors"></div>
                         </div>
                         <div class="col-md-12">
-                            <span id="results">0</span> ${mResult}
+                            ${mResults}: <span id="results">0</span>
                         </div>
                     </div>
                 </div>
