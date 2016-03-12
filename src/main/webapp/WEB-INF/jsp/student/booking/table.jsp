@@ -171,7 +171,8 @@
                                                         <form action="<c:url value="/booking/register/${lesson.id}" />"
                                                               method="POST">
                                                             <button type="submit"
-                                                                    class="btn btn-success btn-sm" data-toggle="tooltip" title="${mRegister}">
+                                                                    class="btn btn-success btn-sm" data-toggle="tooltip"
+                                                                    title="${mRegister}">
                                                                 <i class="fa fa-plus"></i>
                                                             </button>
                                                         </form>
@@ -179,7 +180,8 @@
                                                     <c:if test="${myOpenBookings.contains(lesson)}">
                                                         <form action="<c:url value="/booking/unregister/${lesson.id}" />"
                                                               method="POST">
-                                                            <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="${mUnregister}">
+                                                            <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                    title="${mUnregister}">
                                                                 <i class="fa fa-trash"></i>
                                                             </button>
                                                         </form>

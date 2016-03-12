@@ -89,7 +89,8 @@
                                             <li>${archivable.room.campus}
                                                 - ${archivable.room.name}, ${archivable.backupRoom.campus}
                                                 - ${archivable.backupRoom.name}</li>
-                                            <li>${archivable.duration}${' '}${mMinutes} - ${archivable.bookings.size()}${' '}${mParticipants}
+                                            <li>${archivable.duration}${' '}${mMinutes}
+                                                - ${archivable.bookings.size()}${' '}${mParticipants}
                                             </li>
                                         </ul>
                                     </div>

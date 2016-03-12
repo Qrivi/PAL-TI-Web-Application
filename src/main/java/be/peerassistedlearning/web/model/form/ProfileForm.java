@@ -2,8 +2,8 @@ package be.peerassistedlearning.web.model.form;
 
 import be.peerassistedlearning.common.model.validation.FieldMatch;
 import be.peerassistedlearning.model.Course;
-import be.peerassistedlearning.web.model.validation.CheckWithSessionPassword;
 import be.peerassistedlearning.web.model.validation.CheckEmailIsUnique;
+import be.peerassistedlearning.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +27,7 @@ public class ProfileForm
     @CheckWithSessionPassword( message = "{CheckWithSessionPassword.ProfileForm.password}" )
     private String password;
 
-    @Size( min = 5, message = "{Size.ProfileForm.newPassword}")
+    @Size(min = 5, message = "{Size.ProfileForm.newPassword}")
     private String newPassword;
     private String newRepeatPassword;
     private Set<Course> subscriptions;
