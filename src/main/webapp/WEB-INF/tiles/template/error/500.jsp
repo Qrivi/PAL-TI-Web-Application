@@ -12,7 +12,7 @@
 <div class="error-content">
     <h3><i class="fa fa-warning text-red"></i> ${m1}</h3>
     <p>
-        ${m2}
-        ${m3}<a href="<c:url value="/profile"/>">${m4}</a> ${m5} <a href="<c:url value="/auth/login"/>">${m6}</a>.
+        ${m2}${' '}
+        ${m3}<a href="<c:url value="/profile"/>"> ${m4}</a> ${m5} <a href="<c:url value="/auth/login"/>"> ${m6}</a>.
     </p>
 </div>

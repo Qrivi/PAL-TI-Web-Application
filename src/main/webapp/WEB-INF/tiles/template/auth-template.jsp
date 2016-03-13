@@ -7,9 +7,14 @@
 <tiles:importAttribute name="javascripts"/>
 <tiles:importAttribute name="stylesheets"/>
 
+<c:set var="page_title">
+    <tiles:insertAttribute name="page_title" ignore="true"/>
+</c:set>
+<spring:message code="${page_title}" var="mTitle"/>
+
 <html>
     <head>
-        <title><tiles:insertAttribute name="page_title" ignore="true"/> - PAL</title>
+        <title>${mTitle} - PAL</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

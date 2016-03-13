@@ -59,7 +59,7 @@
                                     <div class="info-box bg-blue-gradient">
                                         <div class="pull-right">
                                             <form action="<c:url value="/tutor/lessons/remove" />" method="POST">
-                                                <input type="hidden" name="_method" value="${mDelete}"/>
+                                                <input type="hidden" name="_method" value="delete"/>
                                                 <input type="hidden" name="id" value="${lesson.id}"/>
                                                 <button class="btn btn-flat btn-danger"><i
                                                         class="fa fa-trash"></i></button>
@@ -71,7 +71,7 @@
                                         </a>
                                         <div class="info-box-content">
                                             <span class="info-box-text">${lesson.course.shortName}</span>
-                                            <span class="info-box-text">${lesson.name}</span>
+                                            <span class="info-box-text"><c:out value="${lesson.name}"/></span>
                                                             <span class="info-box-text">
                                                                 <fmt:formatDate pattern="EEE. dd/MM hh:mm"
                                                                                 value="${lesson.date}"/> - ${lesson.room.name}

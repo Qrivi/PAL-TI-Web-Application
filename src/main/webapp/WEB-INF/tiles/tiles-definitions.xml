@@ -20,7 +20,7 @@
     <!-- BASIC - STUDENT -->
 
     <definition name="student/profile" extends="basic">
-        <put-attribute name="page_title" value="Profile"/>
+        <put-attribute name="page_title" value="Title.profile"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="profile" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/profile.jsp"/>
@@ -30,7 +30,7 @@
     </definition>
 
     <definition name="student/review_add" extends="basic">
-        <put-attribute name="page_title" value="Review"/>
+        <put-attribute name="page_title" value="Title.review"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="profile" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/review_add.jsp"/>
@@ -40,7 +40,7 @@
     </definition>
 
     <definition name="student/calendar" extends="basic">
-        <put-attribute name="page_title" value="Calendar"/>
+        <put-attribute name="page_title" value="Title.calendar"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="calendar" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/calendar.jsp"/>
@@ -50,7 +50,7 @@
     </definition>
 
     <definition name="student/booking/calendar" extends="basic">
-        <put-attribute name="page_title" value="Booking"/>
+        <put-attribute name="page_title" value="Title.booking"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="booking_calendar" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/booking/calendar.jsp"/>
@@ -60,7 +60,7 @@
     </definition>
 
     <definition name="student/booking/table" extends="basic">
-        <put-attribute name="page_title" value="Booking"/>
+        <put-attribute name="page_title" value="Title.booking"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="booking_table" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/booking/table.jsp"/>
@@ -70,7 +70,7 @@
     </definition>
 
     <definition name="student/apply" extends="basic">
-        <put-attribute name="page_title" value="Apply"/>
+        <put-attribute name="page_title" value="Title.apply"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="apply" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/apply.jsp"/>
@@ -80,7 +80,7 @@
     </definition>
 
     <definition name="student/request_add" extends="basic">
-        <put-attribute name="page_title" value="Request"/>
+        <put-attribute name="page_title" value="Title.request"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="request" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/request_add.jsp"/>
@@ -90,7 +90,7 @@
     </definition>
 
     <definition name="student/request_info" extends="basic">
-        <put-attribute name="page_title" value="Request Info"/>
+        <put-attribute name="page_title" value="Title.requestInfo"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="request" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/student/request_info.jsp"/>
@@ -99,7 +99,7 @@
     <!-- BASIC - TUTOR -->
 
     <definition name="tutor/lesson_add" extends="basic">
-        <put-attribute name="page_title" value="Add a Lesson"/>
+        <put-attribute name="page_title" value="Title.addALesson"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="tutor_lesson_add" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/tutor/lesson_add.jsp"/>
@@ -109,7 +109,7 @@
     </definition>
 
     <definition name="tutor/lesson_edit" extends="basic">
-        <put-attribute name="page_title" value="Edit a Lesson"/>
+        <put-attribute name="page_title" value="Title.editALesson"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="tutor_lesson_add" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/tutor/lesson_edit.jsp"/>
@@ -119,7 +119,7 @@
     </definition>
 
     <definition name="tutor/lesson_info" extends="basic">
-        <put-attribute name="page_title" value="Info for a Lesson"/>
+        <put-attribute name="page_title" value="Title.infoForALesson"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="tutor_lesson_add" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/tutor/lesson_edit.jsp"/>
@@ -129,7 +129,7 @@
     </definition>
 
     <definition name="tutor/lessons" extends="basic">
-        <put-attribute name="page_title" value="Lessons"/>
+        <put-attribute name="page_title" value="Title.lessons"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="tutor_lessons" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/tutor/lessons.jsp"/>
@@ -141,7 +141,7 @@
     <!-- BASIC - ADMIN -->
 
     <definition name="admin/students" extends="basic">
-        <put-attribute name="page_title" value="Students"/>
+        <put-attribute name="page_title" value="Title.students"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="students" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/students.jsp"/>
@@ -151,7 +151,7 @@
     </definition>
 
     <definition name="admin/applications" extends="basic">
-        <put-attribute name="page_title" value="Applications"/>
+        <put-attribute name="page_title" value="Title.applications"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="applications" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/applications.jsp"/>
@@ -161,7 +161,7 @@
     </definition>
 
     <definition name="admin/courses" extends="basic">
-        <put-attribute name="page_title" value="Courses"/>
+        <put-attribute name="page_title" value="Title.courses"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="courses" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/courses.jsp"/>
@@ -171,7 +171,7 @@
     </definition>
 
     <definition name="admin/lessons" extends="basic">
-        <put-attribute name="page_title" value="Lessons"/>
+        <put-attribute name="page_title" value="Title.lessons"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="lessons" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/lessons.jsp"/>
@@ -181,7 +181,7 @@
     </definition>
 
     <definition name="admin/reviews" extends="basic">
-        <put-attribute name="page_title" value="Reviews"/>
+        <put-attribute name="page_title" value="Title.reviews"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="reviews" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/reviews.jsp"/>
@@ -191,7 +191,7 @@
     </definition>
 
     <definition name="admin/rooms" extends="basic">
-        <put-attribute name="page_title" value="Rooms"/>
+        <put-attribute name="page_title" value="Title.rooms"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="rooms" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/rooms.jsp"/>
@@ -201,17 +201,17 @@
     </definition>
 
     <definition name="admin/tutors" extends="basic">
-    <put-attribute name="page_title" value="Tutors"/>
-    <put-attribute name="page_description" value=""/>
-    <put-attribute name="nav_item" value="tutors" cascade="true"/>
-    <put-attribute name="content" value="/WEB-INF/jsp/admin/tutors.jsp"/>
-    <put-list-attribute name="javascripts" inherit="true">
-        <add-attribute value="/resources/js/tutors.js"/>
-    </put-list-attribute>
+        <put-attribute name="page_title" value="Title.tutors"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="nav_item" value="tutors" cascade="true"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/tutors.jsp"/>
+        <put-list-attribute name="javascripts" inherit="true">
+            <add-attribute value="/resources/js/tutors.js"/>
+        </put-list-attribute>
     </definition>
 
     <definition name="admin/requests" extends="basic">
-        <put-attribute name="page_title" value="Requests"/>
+        <put-attribute name="page_title" value="Title.requests"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="nav_item" value="requests" cascade="true"/>
         <put-attribute name="content" value="/WEB-INF/jsp/admin/requests.jsp"/>
@@ -229,12 +229,12 @@
     </definition>
 
     <definition name="500" extends="error-page">
-        <put-attribute name="page_title" value="An Error Occurred"/>
+        <put-attribute name="page_title" value="Title.anErrorOccurred"/>
         <put-attribute name="content" value="/WEB-INF/tiles/template/error/500.jsp"/>
     </definition>
 
     <definition name="404" extends="error-page">
-        <put-attribute name="page_title" value="Not Found"/>
+        <put-attribute name="page_title" value="Title.notFound"/>
         <put-attribute name="content" value="/WEB-INF/tiles/template/error/404.jsp"/>
     </definition>
 
@@ -251,7 +251,7 @@
     </definition>
 
     <definition name="auth/login" extends="auth">
-        <put-attribute name="page_title" value="Login"/>
+        <put-attribute name="page_title" value="Title.login"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="content" value="/WEB-INF/jsp/auth/login.jsp"/>
         <put-list-attribute name="javascripts" inherit="true">
@@ -260,25 +260,26 @@
     </definition>
 
     <definition name="auth/register" extends="auth">
-        <put-attribute name="page_title" value="Register"/>
+        <put-attribute name="page_title" value="Title.register"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="content" value="/WEB-INF/jsp/auth/register.jsp"/>
     </definition>
 
     <definition name="auth/reset" extends="auth">
-        <put-attribute name="page_title" value="Password Reset"/>
+        <put-attribute name="page_title" value="Title.passwordReset"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="content" value="/WEB-INF/jsp/auth/reset.jsp"/>
     </definition>
 
     <definition name="auth/reset_validation" extends="auth">
-        <put-attribute name="page_title" value="Password Reset"/>
+        <put-attribute name="page_title" value="Title.passwordReset"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="content" value="/WEB-INF/jsp/auth/reset_validation.jsp"/>
     </definition>
 
     <definition name="auth/lockscreen" extends="auth">
-        <put-attribute name="page_title" value="Login"/>
+        <put-attribute name="page_title" value="Title.login"/>
+        <put-attribute name="page_title" value="Title.login"/>
         <put-attribute name="page_description" value=""/>
         <put-attribute name="content" value="/WEB-INF/jsp/auth/lockscreen.jsp"/>
     </definition>

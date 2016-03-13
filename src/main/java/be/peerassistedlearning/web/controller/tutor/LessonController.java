@@ -30,16 +30,17 @@ public class LessonController extends TutorController
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel(ModelMap model) {
-        Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent());
-        if (model.get("lesson") == null)
-            model.addAttribute("lesson", new LessonForm());
-        if (model.get("courses") == null)
-            model.addAttribute("courses", tutor.getCourses());
-        if (model.get("rooms") == null)
-            model.addAttribute("rooms", service.getRooms(Campus.PROXIMUS));
-        if (model.get("requests") == null)
-            model.addAttribute("requests", service.getRequests(tutor.getCourses()));
+    private ModelMap fillModel( ModelMap model )
+    {
+        Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
+        if ( model.get( "lesson" ) == null )
+            model.addAttribute( "lesson", new LessonForm() );
+        if ( model.get( "courses" ) == null )
+            model.addAttribute( "courses", tutor.getCourses() );
+        if ( model.get( "rooms" ) == null )
+            model.addAttribute( "rooms", service.getRooms( Campus.PROXIMUS ) );
+        if ( model.get( "requests" ) == null )
+            model.addAttribute( "requests", service.getRequests( tutor.getCourses() ) );
         return model;
     }
 
@@ -88,7 +89,7 @@ public class LessonController extends TutorController
 
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
 
-        if (!tutor.equals(lesson.getTutor()) || !tutor.getCourses().contains(form.getCourse()))
+        if ( !tutor.equals( lesson.getTutor() ) || !tutor.getCourses().contains( form.getCourse() ) )
             return new ModelAndView( "redirect:/tutor/lessons" );
 
         lesson.setName( form.getName() );
@@ -100,8 +101,9 @@ public class LessonController extends TutorController
         lesson.setRoom( form.getRoom() );
         lesson.setBackupRoom( form.getBackupRoom() );
 
-        if (form.getRequest() != null) {
-            lesson.setRequest(form.getRequest());
+        if ( form.getRequest() != null )
+        {
+            lesson.setRequest( form.getRequest() );
         }
 
         service.updateLesson( lesson );
@@ -115,7 +117,7 @@ public class LessonController extends TutorController
     {
         Lesson myLesson = service.getLessonById( id );
         model.addAttribute( "lesson", new LessonForm( myLesson ) );
-        model.addAttribute("bookings", myLesson.getBookings());
+        model.addAttribute( "bookings", myLesson.getBookings() );
         model.addAttribute( "editable", false );
         return new ModelAndView( "tutor/lesson_edit", model );
     }
@@ -155,8 +157,9 @@ public class LessonController extends TutorController
 
         Lesson lesson = new Lesson( form.getDate(), form.getName(), form.getDescription(), localTimeToMinutes( form.getDuration() ), form.getCourse(), form.getMaxParticipants(), tutor, form
                 .getRoom(), form.getBackupRoom() );
-        if (form.getRequest() != null) {
-            lesson.setRequest(form.getRequest());
+        if ( form.getRequest() != null )
+        {
+            lesson.setRequest( form.getRequest() );
         }
 
         service.addLesson( lesson );
