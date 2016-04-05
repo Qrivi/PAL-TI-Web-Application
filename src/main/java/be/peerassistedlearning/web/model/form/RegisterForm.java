@@ -7,12 +7,14 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.RegisterForm.password.repeatPassword}" )
 public class RegisterForm
 {
 
+    @Pattern( regexp = "^[a-zA-Z0-9_ ]*$", message = "{Pattern.RegisterForm.name}" )
     @NotEmpty( message = "{NotEmpty.RegisterForm.name}" )
     private String name;
 
@@ -22,7 +24,7 @@ public class RegisterForm
     private String email;
 
     @NotEmpty( message = "{NotEmpty.RegisterForm.password}" )
-    @Size(min = 5, message = "{Size.RegisterForm.newPassword}")
+    @Size( min = 5, message = "{Size.RegisterForm.newPassword}" )
     private String password;
 
     @NotEmpty( message = "{NotEmpty.RegisterForm.repeatPassword}" )
@@ -33,7 +35,8 @@ public class RegisterForm
 
     public RegisterForm() {}
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -57,7 +60,7 @@ public class RegisterForm
         return curriculum;
     }
 
-    public void setCurriculum(Curriculum curriculum)
+    public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
     }
@@ -67,7 +70,7 @@ public class RegisterForm
         return password;
     }
 
-    public void setPassword(String password)
+    public void setPassword( String password )
     {
         this.password = password;
     }
@@ -77,7 +80,7 @@ public class RegisterForm
         return repeatPassword;
     }
 
-    public void setRepeatPassword(String repeatPassword)
+    public void setRepeatPassword( String repeatPassword )
     {
         this.repeatPassword = repeatPassword;
     }

@@ -112,14 +112,10 @@
                                                enctype="multipart/form-data">
                                         <c:set var="nameError"><form:errors path="name"/></c:set>
                                         <c:set var="emailError"><form:errors path="email"/></c:set>
-                                        <c:set var="subscriptionsError"><form:errors path="subscriptions"/></c:set>
-                                        <c:set var="nameError"><form:errors path="name"/></c:set>
                                         <c:set var="passwordError"><form:errors path="password"/></c:set>
-                                        <c:set var="newPasswordError"><form:errors path="newPassword"/><form:errors/></c:set>
-                                        <c:set var="newRepeatPasswordError"><form:errors path="newRepeatPassword"/><form:errors/></c:set>
-                                        <form:errors element="div" cssClass="alert alert-danger"/>
+                                        <form:errors element="div" cssClass="alert alert-danger" path="*"/>
                                         <!-- name field-->
-                                        <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
+                                        <div class="form-group has-feedback">
                                             <form:label path="avatar"
                                                         class="col-sm-2 control-label">${mAvatar}</form:label>
                                             <div class="col-sm-10">
@@ -142,7 +138,7 @@
                                         </div>
                                         <hr class="separator"/>
                                         <!-- subscriptions field -->
-                                        <div class="form-group has-feedback ${ not empty subscriptionsError ? 'has-error' : ''}">
+                                        <div class="form-group has-feedback">
                                             <form:label path="subscriptions"
                                                         class="col-sm-2 control-label">${mSubscriptions}</form:label>
                                             <div class="col-sm-10">
@@ -183,7 +179,7 @@
                                         </div>
                                         <hr class="separator"/>
                                         <!-- new password field -->
-                                        <div class="form-group has-feedback ${ not empty newPasswordError ? 'has-error' : ''}">
+                                        <div class="form-group has-feedback">
                                             <form:label path="newPassword"
                                                         class="col-sm-2 control-label">${mNewPassword}</form:label>
                                             <div class="col-sm-10">
@@ -192,7 +188,7 @@
                                             </div>
                                         </div>
                                         <!-- new password repeat field -->
-                                        <div class="form-group has-feedback ${ not empty newRepeatPasswordError ? 'has-error' : ''}">
+                                        <div class="form-group has-feedback">
                                             <form:label path="newRepeatPassword"
                                                         class="col-sm-2 control-label">${mRepeatPassword}</form:label>
                                             <div class="col-sm-10">
