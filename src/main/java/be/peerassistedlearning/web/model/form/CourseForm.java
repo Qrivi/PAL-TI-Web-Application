@@ -3,6 +3,7 @@ package be.peerassistedlearning.web.model.form;
 import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearning.web.model.validation.CheckCodeIsUnique;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -10,13 +11,16 @@ import javax.validation.constraints.NotNull;
 public class CourseForm
 {
 
+    @SafeHtml
     @CheckCodeIsUnique( message = "{CheckCodeIsUnique.CourseForm.code}" )
     @NotEmpty( message = "{NotEmpty.CourseForm.code}" )
     private String code;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.CourseForm.name}" )
     private String name;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.CourseForm.shortName}" )
     private String shortName;
 

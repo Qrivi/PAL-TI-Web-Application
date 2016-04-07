@@ -1,6 +1,7 @@
 package be.peerassistedlearning.web.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * Represents a calendar event
@@ -88,34 +89,34 @@ public class CalendarDTO
 
     public String getTitle()
     {
-        return title;
+        return HtmlUtils.htmlEscape( title );
     }
 
     public String getDescription()
     {
-        return description;
+        return HtmlUtils.htmlEscape( description );
     }
 
     public String getColor()
     {
-        return color;
+        return HtmlUtils.htmlEscape( color );
     }
 
-    public String getStart() { return start; }
+    public String getStart() { return HtmlUtils.htmlEscape( start ); }
 
     public String getEnd()
     {
-        return end;
+        return HtmlUtils.htmlEscape( end );
     }
 
     public String getTutorName()
     {
-        return tutorName;
+        return HtmlUtils.htmlEscape( tutorName );
     }
 
     public String getCourseName()
     {
-        return courseName;
+        return HtmlUtils.htmlEscape( courseName );
     }
 
     public boolean isRegistered()

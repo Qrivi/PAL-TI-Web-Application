@@ -5,6 +5,7 @@ import be.peerassistedlearning.model.Lesson;
 import be.peerassistedlearning.model.Request;
 import be.peerassistedlearning.model.Room;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -13,9 +14,11 @@ import java.util.Date;
 
 public class LessonForm
 {
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.LessonForm.name}" )
     private String name;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.LessonForm.description}" )
     private String description;
 

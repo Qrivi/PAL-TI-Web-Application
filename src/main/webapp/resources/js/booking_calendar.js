@@ -94,8 +94,8 @@ $( document ).ready( function () {
 
     function showModal ( event ) {
         $( '#booking-modal' ).modal( 'show' );
-        $( '#booking-title' ).text( event.title );
-        $( '#booking-description' ).text( event.description );
+        $( '#booking-title' ).html( event.title );
+        $( '#booking-description' ).html( event.description );
         if ( event.registered ) {
             $( '#booking-unregister' ).show();
             $( '#booking-register' ).hide();

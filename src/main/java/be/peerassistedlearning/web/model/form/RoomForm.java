@@ -3,10 +3,13 @@ package be.peerassistedlearning.web.model.form;
 import be.peerassistedlearning.model.Campus;
 import be.peerassistedlearning.model.RoomType;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.NotNull;
 
-public class RoomForm {
+public class RoomForm
+{
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.RoomForm.name}" )
     private String name;
 
@@ -16,29 +19,35 @@ public class RoomForm {
     @NotNull( message = "{NotNull.RoomForm.type}" )
     private RoomType type;
 
-    public RoomForm(){}
+    public RoomForm() {}
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public Campus getCampus() {
+    public Campus getCampus()
+    {
         return campus;
     }
 
-    public RoomType getType() {
+    public RoomType getType()
+    {
         return type;
     }
 
-    public void setName(String name) {
+    public void setName( String name )
+    {
         this.name = name;
     }
 
-    public void setCampus(Campus campus) {
+    public void setCampus( Campus campus )
+    {
         this.campus = campus;
     }
 
-    public void setType(RoomType type) {
+    public void setType( RoomType type )
+    {
         this.type = type;
     }
 }

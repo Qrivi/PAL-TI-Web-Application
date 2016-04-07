@@ -6,9 +6,9 @@ import be.peerassistedlearning.web.model.validation.CheckEmailIsUnique;
 import be.peerassistedlearning.web.model.validation.CheckWithSessionPassword;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.Pattern;
 import java.util.Set;
 
 @FieldMatch( first = "newPassword", second = "newRepeatPassword", message = "{FieldMatch.ProfileForm.newPassword.newRepeatPassword}" )
@@ -16,10 +16,11 @@ public class ProfileForm
 {
     private MultipartFile avatar;
 
-    @Pattern( regexp = "^[a-zA-Z0-9_ ]*$", message = "{Pattern.ProfileForm.name}" )
+    @SafeHtml( message = "{Pattern.ProfileForm.name}" )
     @NotEmpty( message = "{NotEmpty.ProfileForm.name}" )
     private String name;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.ProfileForm.email}" )
     @CheckEmailIsUnique( allowSessionEmail = true, message = "{CheckEmailIsUnique.ProfileForm.email}" )
     @Email( message = "{Email.ProfileForm.email}" )

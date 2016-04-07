@@ -5,28 +5,31 @@ import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearning.web.model.validation.CheckEmailIsUnique;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.RegisterForm.password.repeatPassword}" )
 public class RegisterForm
 {
 
-    @Pattern( regexp = "^[a-zA-Z0-9_ ]*$", message = "{Pattern.RegisterForm.name}" )
+    @SafeHtml( message = "{Pattern.RegisterForm.name}" )
     @NotEmpty( message = "{NotEmpty.RegisterForm.name}" )
     private String name;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.RegisterForm.email}" )
     @Email( message = "{Email.RegisterForm.email}" )
     @CheckEmailIsUnique( message = "{CheckEmailIsUnique.RegisterForm.email}" )
     private String email;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.RegisterForm.password}" )
     @Size( min = 5, message = "{Size.RegisterForm.newPassword}" )
     private String password;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.RegisterForm.repeatPassword}" )
     private String repeatPassword;
 

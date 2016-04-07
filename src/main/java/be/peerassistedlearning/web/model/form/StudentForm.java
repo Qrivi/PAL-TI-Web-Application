@@ -6,6 +6,7 @@ import be.peerassistedlearning.model.UserType;
 import be.peerassistedlearning.web.model.validation.CheckEmailIsUnique;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.validation.constraints.NotNull;
 
@@ -13,17 +14,21 @@ import javax.validation.constraints.NotNull;
 public class StudentForm
 {
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.StudentForm.name}" )
     private String name;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.StudentForm.email}" )
     @Email( message = "{Email.StudentForm.email}" )
     @CheckEmailIsUnique( message = "{CheckEmailIsUnique.StudentForm.email}" )
     private String email;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.StudentForm.password}" )
     private String password;
 
+    @SafeHtml
     @NotEmpty( message = "{NotEmpty.StudentForm.repeatPassword}" )
     private String repeatPassword;
 

@@ -1,5 +1,7 @@
 package be.peerassistedlearning.web.model.form;
 
+import org.hibernate.validator.constraints.SafeHtml;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -7,6 +9,7 @@ import javax.validation.constraints.Size;
 
 public class ReviewForm
 {
+    @SafeHtml
     @Size( min = 10, max = 140, message = "{Size.ReviewForm.text}" )
     private String text;
 
