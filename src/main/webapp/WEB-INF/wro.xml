@@ -1,11 +1,5 @@
 <groups xmlns="http://www.isdc.ro/wro">
-    <!-- App -->
-    <group name="app">
-        <css>/resources/app/css/app.css</css>
-        <js>/resources/app/js/app.js</js>
-    </group>
-    <!-- Libraries -->
-    <group name="libraries">
+    <group name="global">
         <!-- bootstrap-css -->
         <css>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css</css>
         <!-- font-awesome -->
@@ -50,10 +44,5 @@
         <js>https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.6.1/fullcalendar.js</js>
         <!--RateYo star rating -->
         <js>https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.js</js>
-    </group>
-    <!-- Global -->
-    <group name="global">
-        <group-ref>libraries</group-ref>
-        <group-ref>app</group-ref>
     </group>
 </groups>

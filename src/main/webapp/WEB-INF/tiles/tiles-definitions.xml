@@ -11,9 +11,11 @@
         <put-attribute name="sidebar" value="/WEB-INF/tiles/template/basic/sidebar.jsp"/>
         <put-list-attribute name="stylesheets">
             <add-attribute value="/resources/global.css"/>
+            <add-attribute value="/resources/css/app.css"/>
         </put-list-attribute>
         <put-list-attribute name="javascripts">
             <add-attribute value="/resources/global.js"/>
+            <add-attribute value="/resources/js/app.js"/>
         </put-list-attribute>
     </definition>
 
@@ -225,6 +227,7 @@
     <definition name="error-page" template="/WEB-INF/tiles/template/error-template.jsp">
         <put-list-attribute name="stylesheets">
             <add-attribute value="/resources/global.css"/>
+            <add-attribute value="/resources/css/app.css"/>
         </put-list-attribute>
     </definition>
 
@@ -244,6 +247,7 @@
         <put-attribute name="header" value="/WEB-INF/tiles/template/auth/header.jsp"/>
         <put-list-attribute name="stylesheets">
             <add-attribute value="/resources/global.css"/>
+            <add-attribute value="/resources/css/app.css"/>
         </put-list-attribute>
         <put-list-attribute name="javascripts">
             <add-attribute value="/resources/global.js"/>
