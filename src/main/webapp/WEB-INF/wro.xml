@@ -1,8 +1,8 @@
 <groups xmlns="http://www.isdc.ro/wro">
     <!-- App -->
     <group name="app">
-        <css>/WEB-INF/resources/app/css/app.css</css>
-        <js>/WEB-INF/resources/app/js/app.js</js>
+        <css>/resources/app/css/app.css</css>
+        <js>/resources/app/js/app.js</js>
     </group>
     <!-- Libraries -->
     <group name="libraries">
@@ -23,8 +23,8 @@
         <!--RateYo star rating -->
         <css>https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.0.1/jquery.rateyo.min.css</css>
         <!-- admin-lte-css -->
-        <css>/WEB-INF/resources/dist/css/AdminLTE.css</css>
-        <css>/WEB-INF/resources/dist/css/skins/skin-blue.min.css</css>
+        <css>https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/AdminLTE.min.css</css>
+        <css>https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/css/skins/skin-blue.min.css</css>
         <css>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/blue.css</css>
         <!-- jquery -->
         <js>https://code.jquery.com/jquery-2.2.0.min.js</js>
@@ -32,7 +32,7 @@
         <!-- bootstrap-js -->
         <js>https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js</js>
         <!-- admin-lte-js -->
-        <js>/WEB-INF/resources/dist/js/app.js</js>
+        <js>https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.3/js/app.min.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js</js>
         <!-- Select2 -->
         <js>https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js</js>
