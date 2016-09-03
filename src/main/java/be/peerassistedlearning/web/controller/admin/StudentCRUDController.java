@@ -55,7 +55,7 @@ public class StudentCRUDController extends AdminController
         if ( result.hasErrors() )
             return new ModelAndView( "admin/students", fillModel( model ) );
 
-        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
+        service.addStudent( new Student( form.getStudentId(), form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.StudentCRUDController.Add", new Object[]{ form.getName() } ) );
 

@@ -13,6 +13,9 @@ import javax.validation.constraints.NotNull;
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentForm.password.repeatPassword}" )
 public class StudentForm
 {
+    @SafeHtml
+    @NotEmpty( message = "{NotEmpty.StudentForm.studentId}" )
+    private String studentId;
 
     @SafeHtml
     @NotEmpty( message = "{NotEmpty.StudentForm.name}" )
@@ -39,6 +42,10 @@ public class StudentForm
     private Curriculum curriculum;
 
     public StudentForm() {}
+
+    public void setStudentId( String studentId ){
+        this.studentId = studentId;
+    }
 
     public void setName( String name )
     {
@@ -68,6 +75,10 @@ public class StudentForm
     public void setCurriculum( Curriculum curriculum )
     {
         this.curriculum = curriculum;
+    }
+
+    public String getStudentId(){
+        return studentId;
     }
 
     public String getName()
