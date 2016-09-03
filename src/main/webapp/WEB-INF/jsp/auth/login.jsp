@@ -1,14 +1,12 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <spring:message code="Login.incorrect" var="mIncorrect"/>
 <spring:message code="Login.sign" var="mSign"/>
 <spring:message code="Login.signIn" var="mSignIn"/>
 <spring:message code="Login.rememberMe" var="mRememberMe"/>
-<spring:message code="Login.forgotPassword" var="mForgotPassword"/>
-<spring:message code="Login.registerMembership" var="mRegister"/>
 
-<spring:message code="Student.email" var="mEmail"/>
+<spring:message code="Student.studentId" var="mStudentId"/>
 <spring:message code="Student.password" var="mPassword"/>
 
 <c:if test="${not empty error}">
@@ -18,10 +16,10 @@
 </c:if>
 <div class="login-box-body">
     <p class="login-box-msg">${mSign}</p>
-    <form method="post" action="<c:url value="/auth/checklogin"/>">
+    <form method="post">
         <div class="form-group has-feedback">
-            <input id="email" type="email" name="email" class="form-control" placeholder="${mEmail}" required>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <input id="studentId" type="text" name="studentId" class="form-control" placeholder="${mStudentId}" required>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             <input type="password" name="password" class="form-control" placeholder="${mPassword}" required>
@@ -40,6 +38,4 @@
             </div>
         </div>
     </form>
-    <a href="<c:url value="/auth/reset"/>">${mForgotPassword}</a><br>
-    <a href="<c:url value="/auth/register"/>" class="text-center">${mRegister}</a>
 </div>
