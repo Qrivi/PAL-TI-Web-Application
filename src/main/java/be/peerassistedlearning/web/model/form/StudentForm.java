@@ -11,12 +11,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.validation.constraints.NotNull;
 
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentForm.password.repeatPassword}" )
-public class StudentForm
-{
-    @SafeHtml
-    @NotEmpty( message = "{NotEmpty.StudentForm.studentId}" )
-    private String studentId;
-
+public class StudentForm{
     @SafeHtml
     @NotEmpty( message = "{NotEmpty.StudentForm.name}" )
     private String name;
@@ -41,73 +36,54 @@ public class StudentForm
     @NotNull( message = "{NotNull.StudentForm.curriculum}" )
     private Curriculum curriculum;
 
-    public StudentForm() {}
-
-    public void setStudentId( String studentId ){
-        this.studentId = studentId;
+    public StudentForm(){
     }
 
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
     }
 
-    public void setEmail( String email )
-    {
+    public void setEmail( String email ){
         this.email = email;
     }
 
-    public void setPassword( String password )
-    {
+    public void setPassword( String password ){
         this.password = password;
     }
 
-    public void setRepeatPassword( String repeatPassword )
-    {
+    public void setRepeatPassword( String repeatPassword ){
         this.repeatPassword = repeatPassword;
     }
 
-    public void setType( UserType type )
-    {
+    public void setType( UserType type ){
         this.type = type;
     }
 
-    public void setCurriculum( Curriculum curriculum )
-    {
+    public void setCurriculum( Curriculum curriculum ){
         this.curriculum = curriculum;
     }
 
-    public String getStudentId(){
-        return studentId;
-    }
-
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
-    public String getEmail()
-    {
+    public String getEmail(){
         return email;
     }
 
-    public String getPassword()
-    {
+    public String getPassword(){
         return password;
     }
 
-    public String getRepeatPassword()
-    {
+    public String getRepeatPassword(){
         return repeatPassword;
     }
 
-    public UserType getType()
-    {
+    public UserType getType(){
         return type;
     }
 
-    public Curriculum getCurriculum()
-    {
+    public Curriculum getCurriculum(){
         return curriculum;
     }
 }
