@@ -1,6 +1,7 @@
 package be.peerassistedlearning.web.controller.auth;
 
 import be.krivi.detour.core.KUAccount;
+import be.krivi.detour.core.KUSubscription;
 import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearning.model.Student;
 import be.peerassistedlearning.model.UserType;
@@ -56,12 +57,20 @@ public class AuthController{
             return new ModelAndView( "redirect:/auth/login?error=invalid&id=" + studentId );
 
         if( service.getStudentByEmail( a.getEmail() ) == null ){
-
             Curriculum curriculum;
-            String p = a.getSubscriptions().get( 0 ).getProgramme();
-            if( p.toLowerCase().contains( "informatica" ) )
+            String programme = "None";
+
+            for( KUSubscription sub : a.getSubscriptions() ){
+                if( "Valid".equals( sub.getStatus() ) ){
+                    programme = sub.getProgramme();
+                    break;
+                }
+            }
+
+
+            if( programme.toLowerCase().contains( "informatica" ) )
                 curriculum = Curriculum.TI;
-            else if( p.toLowerCase().contains( "management" ) )
+            else if( programme.toLowerCase().contains( "management" ) )
                 curriculum = Curriculum.MANAGEMENT;
             else
                 return new ModelAndView( "redirect:/auth/login?error=unsupported&id=" + studentId );
