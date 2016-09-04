@@ -8,7 +8,7 @@
 <spring:message code="Login.signIn" var="mSignIn"/>
 <spring:message code="Login.rememberMe" var="mRememberMe"/>
 
-<spring:message code="Student.studentId" var="mStudentId"/>
+<spring:message code="Student.profileIdentifier" var="mProfileIdentifier"/>
 <spring:message code="Student.password" var="mPassword"/>
 
 <c:if test="${not empty error}">
@@ -30,7 +30,7 @@
     <p class="login-box-msg">${mSign}</p>
     <form method="post">
         <div class="form-group has-feedback">
-            <input id="studentId" type="text" name="studentId" class="form-control" placeholder="${mStudentId}"
+            <input id="studentId" type="text" name="studentId" class="form-control" placeholder="${mProfileIdentifier}"
                    value="${studentId}" required>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
