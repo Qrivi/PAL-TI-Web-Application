@@ -3,6 +3,7 @@
 
 <spring:message code="Login.invalid" var="mInvalid"/>
 <spring:message code="Login.unsupported" var="mUnsupported"/>
+<spring:message code="Login.failure" var="mFailure"/>
 <spring:message code="Login.sign" var="mSign"/>
 <spring:message code="Login.signIn" var="mSignIn"/>
 <spring:message code="Login.rememberMe" var="mRememberMe"/>
@@ -18,6 +19,9 @@
             </c:when>
             <c:when test="${error == 'unsupported'}">
                 <p>${mUnsupported}</p>
+            </c:when>
+            <c:when test="${error == 'failure'}">
+                <p>${mFailure}</p>
             </c:when>
         </c:choose>
     </div>

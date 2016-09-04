@@ -2,17 +2,16 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <spring:message code="Login.sign" var="mSign"/>
-<spring:message code="Login.signIn" var="mSignIn"/>
-<spring:message code="Error.no-js" var="mNoJS"/>
+<spring:message code="Login.continue" var="mContinue"/>
+<spring:message code="Login.successful" var="mSuccessful"/>
 
-<!--noscript-->
     <div class="login-box-body">
         <p class="login-box-msg">${mSign}</p>
         <form method="post" action="<c:url value="/auth/checklogin"/>">
             <div class="form-group has-feedback">
                 <input type="hidden" name="email" value="${email}">
                 <input type="hidden" name="password" value="${password}">
-                ${mNoJS}
+                ${mSuccessful}
             </div>
             <div class="row">
                 <div class="col-xs-8">
@@ -21,12 +20,11 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <button type="submit" id="signinbtn" class="btn btn-primary btn-block btn-flat">${mSignIn}</button>
+                    <button type="submit" id="signinbtn" class="btn btn-primary btn-block btn-flat">${mContinue}</button>
                 </div>
             </div>
         </form>
     </div>
-<!--/noscript-->
 <script>
     document.getElementById('signinbtn').click();
 </script>

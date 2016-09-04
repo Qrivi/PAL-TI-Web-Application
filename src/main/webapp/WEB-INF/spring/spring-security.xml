@@ -12,7 +12,7 @@ http://www.springframework.org/schema/security/spring-security-4.0.xsd">
     <security:http auto-config="true" use-expressions="true">
         <security:form-login username-parameter="email" password-parameter="password" login-page="/auth/login"
                              default-target-url="/profile" login-processing-url="/auth/checklogin"
-                             authentication-failure-url="/auth/login?error=true"/>
+                             authentication-failure-url="/auth/login?error=failure"/>
         <security:logout invalidate-session="true" logout-success-url="/auth/login" logout-url="/auth/logout" delete-cookies="JSESSIONID"/>
         <security:csrf disabled="true"/>
     </security:http>
