@@ -1,9 +1,12 @@
 package be.peerassistedlearning.web.controller.auth;
 
 import be.krivi.detour.core.KUAccount;
+import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearning.model.Student;
+import be.peerassistedlearning.model.UserType;
 import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearning.web.model.util.MailSender;
+import be.peerassistedlearning.web.model.util.StudentUtils;
 import be.peerassistedlearning.web.model.util.detour.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +32,10 @@ public class AuthController{
     //================================================================================
 
     @RequestMapping( value = "/login", method = RequestMethod.GET )
-    public ModelAndView loginStudent( @RequestParam( value = "error", required = false ) boolean error, @RequestParam( value = "different_user", required = false ) boolean differentUser, @CookieValue( value = "remember", required = false ) String remember, @CookieValue( value = "email", required = false ) String email, ModelMap model ){
-        if( error )
-            model.addAttribute( "error", true );
+    public ModelAndView loginStudent( @RequestParam( value = "error", required = false ) String error, @RequestParam( value = "id", required = false ) String studentId, @RequestParam( value = "different_user", required = false ) boolean differentUser, @CookieValue( value = "remember", required = false ) String remember, @CookieValue( value = "email", required = false ) String email, ModelMap model ){
+        if( !"".equals( error ) )
+            model.addAttribute( "error", error );
+        model.addAttribute( "studentId", studentId );
         if( !differentUser && remember != null && Boolean.valueOf( remember ) ){
             if( email != null ){
                 Student current = service.getStudentByEmail( email );
@@ -45,17 +49,37 @@ public class AuthController{
     }
 
     @RequestMapping( value = "/login", method = RequestMethod.POST )
-    public ModelAndView registerStudent( @RequestParam( "studentId" ) String studentId, @RequestParam( "password" ) String password ){
+    public ModelAndView registerStudent( @RequestParam( "studentId" ) String studentId, @RequestParam( "password" ) String password, ModelMap model ){
         KUAccount a = Authenticator.auth( studentId, password );
 
-
-        //TODO implement!
-        // code beneath was to check if Detour is working, and it does after downgrading JSoup endorsement in GlassFish
         if( a == null )
-            return new ModelAndView( "redirect:/auth/login?error=true&cool=mislukt" );
-        return new ModelAndView( "redirect:/auth/login?error=true&cool=" + a.getFirstName() );
-    }
+            return new ModelAndView( "redirect:/auth/login?error=invalid&id=" + studentId );
 
+        if( service.getStudentByEmail( a.getEmail() ) == null ){
+
+            Curriculum curriculum;
+            String p = a.getSubscriptions().get( 0 ).getProgramme();
+            if( p.toLowerCase().contains( "informatica" ) )
+                curriculum = Curriculum.TI;
+            else if( p.toLowerCase().contains( "management" ) )
+                curriculum = Curriculum.MANAGEMENT;
+            else
+                return new ModelAndView( "redirect:/auth/login?error=unsupported&id=" + studentId );
+
+            Student s = new Student(
+                    a.getFirstName() + " " + a.getLastName(),
+                    password,
+                    a.getEmail(),
+                    curriculum,
+                    StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.NORMAL );
+            service.addStudent( s );
+        }
+
+        model.addAttribute( "email", a.getEmail() );
+        model.addAttribute( "password", password );
+
+        return new ModelAndView( "auth/logincheck", model );
+    }
 
     //================================================================================
     // endregion

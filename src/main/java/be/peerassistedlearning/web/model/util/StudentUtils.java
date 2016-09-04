@@ -31,9 +31,6 @@ public class StudentUtils
      */
     public static String createProfileIdentifier( String identifier )
     {
-        // Trim and lowercase the identifier and replace all spaces with dots
-        identifier = identifier.trim().toLowerCase().replaceAll( " ", "." );
-
         // Check if a student exists with the identifier
         Student student = service.getStudentByProfileIdentifier( identifier );
 

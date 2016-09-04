@@ -2,9 +2,9 @@ package be.peerassistedlearning.web.controller.admin;
 
 import be.peerassistedlearning.model.Student;
 import be.peerassistedlearning.service.PALService;
+import be.peerassistedlearning.web.model.form.StudentForm;
 import be.peerassistedlearning.web.model.form.StudentUpdateForm;
 import be.peerassistedlearning.web.model.util.StudentUtils;
-import be.peerassistedlearning.web.model.form.StudentForm;
 import be.peerassistedlearning.web.model.util.message.MessageFactory;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -55,7 +55,7 @@ public class StudentCRUDController extends AdminController
         if ( result.hasErrors() )
             return new ModelAndView( "admin/students", fillModel( model ) );
 
-        service.addStudent( new Student( form.getStudentId(), form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
+        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
 
         redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.StudentCRUDController.Add", new Object[]{ form.getName() } ) );
 

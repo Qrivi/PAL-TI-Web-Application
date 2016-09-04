@@ -263,6 +263,12 @@
         </put-list-attribute>
     </definition>
 
+    <definition name="auth/logincheck" extends="auth">
+        <put-attribute name="page_title" value="Title.login"/>
+        <put-attribute name="page_description" value=""/>
+        <put-attribute name="content" value="/WEB-INF/jsp/auth/logincheck.jsp"/>
+    </definition>
+
     <definition name="auth/register" extends="auth">
         <put-attribute name="page_title" value="Title.register"/>
         <put-attribute name="page_description" value=""/>
