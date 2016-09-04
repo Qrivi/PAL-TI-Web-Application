@@ -1,18 +1,14 @@
 package be.peerassistedlearning.web.model.form;
 
-import be.peerassistedlearning.common.model.validation.FieldMatch;
 import be.peerassistedlearning.model.Curriculum;
 import be.peerassistedlearning.model.UserType;
 
-@FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.StudentUpdateForm.password.repeatPassword}" )
 public class StudentUpdateForm
 {
 
     private Integer id = -1;
     private String name;
     private String email;
-    private String password;
-    private String repeatPassword;
     private UserType type;
     private Curriculum curriculum;
 
@@ -28,16 +24,6 @@ public class StudentUpdateForm
     public void setEmail( String email )
     {
         this.email = email;
-    }
-
-    public void setPassword( String password )
-    {
-        this.password = password;
-    }
-
-    public void setRepeatPassword( String repeatPassword )
-    {
-        this.repeatPassword = repeatPassword;
     }
 
     public void setType( UserType type )
@@ -60,16 +46,6 @@ public class StudentUpdateForm
     public String getEmail()
     {
         return email;
-    }
-
-    public String getPassword()
-    {
-        return password;
-    }
-
-    public String getRepeatPassword()
-    {
-        return repeatPassword;
     }
 
     public UserType getType()

@@ -110,47 +110,8 @@
                                 <div class="col-sm-12">
                                     <form:form class="form-horizontal" method="put" commandName="profile"
                                                enctype="multipart/form-data">
-                                        <c:set var="nameError"><form:errors path="name"/></c:set>
-                                        <c:set var="emailError"><form:errors path="email"/></c:set>
-                                        <c:set var="passwordError"><form:errors path="password"/></c:set>
                                         <form:errors element="div" cssClass="alert alert-danger" path="*"/>
-                                        <!-- name field-->
-                                        <div class="form-group has-feedback">
-                                            <form:label path="avatar"
-                                                        class="col-sm-2 control-label">${mAvatar}</form:label>
-                                            <div class="col-sm-10">
-                                                <form:input path="avatar" type="file" placeholder="${mAvatar}"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group has-feedback ${ not empty nameError ? 'has-error' : ''}">
-                                            <form:label path="name" class="col-sm-2 control-label">${mName}</form:label>
-                                            <div class="col-sm-10">
-                                                <form:input path="name" class="form-control" placeholder="${mName}"/>
-                                            </div>
-                                        </div>
-                                        <!-- email field-->
-                                        <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
-                                            <form:label path="email"
-                                                        class="col-sm-2 control-label">${mEmail}</form:label>
-                                            <div class="col-sm-10">
-                                                <form:input path="email" class="form-control" placeholder="${mEmail}"/>
-                                            </div>
-                                        </div>
-                                        <hr class="separator"/>
-                                        <!-- subscriptions field -->
-                                        <div class="form-group has-feedback">
-                                            <form:label path="subscriptions"
-                                                        class="col-sm-2 control-label">${mSubscriptions}</form:label>
-                                            <div class="col-sm-10">
-                                                <form:select id="subscriptions" path="subscriptions"
-                                                             class="form-control select2 select2-hidden-accessible"
-                                                             multiple="multiple" data-placeholder="${mSubscriptions}"
-                                                             style="width: 100%;" tabindex="-1" aria-hidden="true">
-                                                    <form:options items="${courses}" itemValue="id" itemLabel="name"/>
-                                                </form:select>
-                                            </div>
-                                        </div>
-                                        <hr class="separator"/>
+
                                         <sec:authorize access="hasRole('ROLE_TUTOR')">
                                             <!-- lesson calendar field -->
                                             <div class="form-group has-feedback">
@@ -178,32 +139,25 @@
                                             </div>
                                         </div>
                                         <hr class="separator"/>
-                                        <!-- new password field -->
+                                        <!-- name field-->
                                         <div class="form-group has-feedback">
-                                            <form:label path="newPassword"
-                                                        class="col-sm-2 control-label">${mNewPassword}</form:label>
+                                            <form:label path="avatar"
+                                                        class="col-sm-2 control-label">${mAvatar}</form:label>
                                             <div class="col-sm-10">
-                                                <form:password path="newPassword" class="form-control"
-                                                               placeholder="${mNewPassword}"/>
+                                                <form:input path="avatar" type="file" placeholder="${mAvatar}"/>
                                             </div>
                                         </div>
-                                        <!-- new password repeat field -->
+                                        <!-- subscriptions field -->
                                         <div class="form-group has-feedback">
-                                            <form:label path="newRepeatPassword"
-                                                        class="col-sm-2 control-label">${mRepeatPassword}</form:label>
+                                            <form:label path="subscriptions"
+                                                        class="col-sm-2 control-label">${mSubscriptions}</form:label>
                                             <div class="col-sm-10">
-                                                <form:password path="newRepeatPassword" class="form-control"
-                                                               placeholder="${mRepeatPassword}"/>
-                                            </div>
-                                        </div>
-                                        <hr class="separator"/>
-                                        <!-- password field -->
-                                        <div class="form-group has-feedback ${ not empty passwordError ? 'has-error' : ''}">
-                                            <form:label path="password"
-                                                        class="col-sm-2 control-label">${mCurrentPassword}</form:label>
-                                            <div class="col-sm-10">
-                                                <form:password path="password" class="form-control"
-                                                               placeholder="${mCurrentPassword}"/>
+                                                <form:select id="subscriptions" path="subscriptions"
+                                                             class="form-control select2 select2-hidden-accessible"
+                                                             multiple="multiple" data-placeholder="${mSubscriptions}"
+                                                             style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                    <form:options items="${courses}" itemValue="id" itemLabel="name"/>
+                                                </form:select>
                                             </div>
                                         </div>
                                         <div class="form-group">

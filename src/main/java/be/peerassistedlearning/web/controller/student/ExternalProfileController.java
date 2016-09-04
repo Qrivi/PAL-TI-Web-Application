@@ -3,13 +3,11 @@ package be.peerassistedlearning.web.controller.student;
 import be.peerassistedlearning.model.Image;
 import be.peerassistedlearning.model.Student;
 import be.peerassistedlearning.service.PALService;
-import be.peerassistedlearning.web.model.util.SessionAuth;
-import be.peerassistedlearning.web.model.util.StudentUtils;
 import be.peerassistedlearning.web.model.form.ProfileForm;
+import be.peerassistedlearning.web.model.util.SessionAuth;
 import be.peerassistedlearning.web.model.util.Timeline;
 import be.peerassistedlearning.web.model.util.message.MessageFactory;
 import net.coobird.thumbnailator.Thumbnails;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -51,8 +49,6 @@ public class ExternalProfileController extends StudentController
         if ( model.get( "profile" ) == null )
         {
             ProfileForm profile = new ProfileForm();
-            profile.setName( student.getName() );
-            profile.setEmail( student.getEmail() );
             profile.setSubscriptions( student.getSubscriptions() );
             model.addAttribute( "profile", profile );
         }
@@ -83,15 +79,6 @@ public class ExternalProfileController extends StudentController
 
         if ( !s.equals( student ) )
             return new ModelAndView( "redirect:/profile" );
-
-        if ( !form.getName().equals( student.getName() ) )
-            student.setProfileIdentifier( StudentUtils.createProfileIdentifier( form.getName() ) );
-
-        student.setName( StringUtils.defaultIfEmpty( form.getName(), student.getName() ) );
-        student.setEmail( StringUtils.defaultIfEmpty( form.getEmail().toLowerCase(), student.getEmail() ) );
-
-        if ( !form.getNewPassword().isEmpty() )
-            student.setPassword( form.getNewPassword() );
 
         if ( !form.getAvatar().isEmpty() )
         {

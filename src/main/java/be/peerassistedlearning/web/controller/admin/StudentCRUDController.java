@@ -4,10 +4,8 @@ import be.peerassistedlearning.model.Student;
 import be.peerassistedlearning.service.PALService;
 import be.peerassistedlearning.web.model.form.StudentForm;
 import be.peerassistedlearning.web.model.form.StudentUpdateForm;
-import be.peerassistedlearning.web.model.util.StudentUtils;
 import be.peerassistedlearning.web.model.util.message.MessageFactory;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,18 +47,18 @@ public class StudentCRUDController extends AdminController
         return new ModelAndView( "admin/students", fillModel( model ) );
     }
 
-    @RequestMapping( value = "/students", method = RequestMethod.POST )
-    public ModelAndView addStudent( @Valid @ModelAttribute( "student" ) StudentForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
-            return new ModelAndView( "admin/students", fillModel( model ) );
-
-        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
-
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.StudentCRUDController.Add", new Object[]{ form.getName() } ) );
-
-        return new ModelAndView( "redirect:/admin/students" );
-    }
+//    @RequestMapping( value = "/students", method = RequestMethod.POST )
+//    public ModelAndView addStudent( @Valid @ModelAttribute( "student" ) StudentForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
+//    {
+//        if ( result.hasErrors() )
+//            return new ModelAndView( "admin/students", fillModel( model ) );
+//
+//        service.addStudent( new Student( form.getName(), form.getPassword(), form.getEmail(), form.getCurriculum(), StudentUtils.createProfileIdentifier( form.getName() ), form.getType() ) );
+//
+//        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.StudentCRUDController.Add", new Object[]{ form.getName() } ) );
+//
+//        return new ModelAndView( "redirect:/admin/students" );
+//    }
 
     @RequestMapping( value = "/students", method = RequestMethod.PUT )
     public ModelAndView updateStudent( @Valid @ModelAttribute( "updateStudent" ) StudentUpdateForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
@@ -78,27 +76,8 @@ public class StudentCRUDController extends AdminController
         if ( s == null )
             return new ModelAndView( "admin/students", fillModel( model ) );
 
-        String email = form.getEmail();
-
-        if ( !StringUtils.isEmpty( email ) )
-        {
-            Student s2 = service.getStudentByEmail( email );
-            if ( s2 != null && !s.equals( s2 ) )
-            {
-                result.reject( "CheckEmailIsUnique.StudentUpdateForm.email" );
-                return new ModelAndView( "admin/students", fillModel( model ) );
-            }
-        }
-
-        String password = form.getPassword();
-
-        s.setName( StringUtils.defaultIfEmpty( form.getName(), s.getName() ) );
-        s.setEmail( StringUtils.defaultIfEmpty( email, s.getEmail() ) );
         s.setType( ObjectUtils.defaultIfNull( form.getType(), s.getType() ) );
         s.setCurriculum( ObjectUtils.defaultIfNull( form.getCurriculum(), s.getCurriculum() ) );
-
-        if ( !StringUtils.isEmpty( password ) )
-            s.setPassword( password );
 
         s.setLastUpdated( new Date() );
         service.updateStudent( s );
