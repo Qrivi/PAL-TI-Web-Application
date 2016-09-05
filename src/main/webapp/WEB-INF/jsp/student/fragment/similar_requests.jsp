@@ -13,7 +13,7 @@
                     <td class="col-md-4 col-sm-3 text-left">${other.request.title}</td>
                     <td class="col-md-6 col-sm-5 text-left">${other.request.description}</td>
                     <td class="col-md-1 col-sm-2 text-right">
-                        <a href="/request/${other.request.id}" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                        <a href="<c:url value="/request/${other.request.id}"/>" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
                     </td>
                 </tr>
             </c:forEach>

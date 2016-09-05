@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form:form action="/request/add" method="POST" commandName="request">
+                    <form:form action="${pageContext.request.contextPath}/request/add" method="POST" commandName="request">
                         <c:set var="courseError"><form:errors path="course"/></c:set>
                         <c:set var="titleError"><form:errors path="title"/></c:set>
                         <c:set var="descriptionError"><form:errors path="description"/></c:set>
@@ -109,7 +109,7 @@
                                     <td>${request.title}</td>
                                     <td>${request.course.name}</td>
                                     <td>
-                                        <a href="/request/${request.id}" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                                        <a href="<c:url value="/request/${request.id}"/>" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -149,7 +149,7 @@
                                         <td>${request.title}</td>
                                         <td>${request.course.name}</td>
                                         <td>
-                                            <a href="/request/${request.id}" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                                            <a href="<c:url value="/request/${request.id}"/>" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>
