@@ -33,7 +33,14 @@ public class AuthController{
     //================================================================================
 
     @RequestMapping( value = "/login", method = RequestMethod.GET )
-    public ModelAndView loginStudent( @RequestParam( value = "error", required = false ) String error, @RequestParam( value = "id", required = false ) String studentId, @RequestParam( value = "different_user", required = false ) boolean differentUser, @CookieValue( value = "remember", required = false ) String remember, @CookieValue( value = "email", required = false ) String email, ModelMap model ){
+    public ModelAndView loginStudent(
+            @RequestParam( value = "error", required = false ) String error,
+            @RequestParam( value = "id", required = false ) String studentId,
+            @RequestParam( value = "different_user", required = false ) boolean differentUser,
+            @CookieValue( value = "remember", required = false ) String remember,
+            @CookieValue( value = "email", required = false ) String email,
+            ModelMap model )
+    {
         if( !"".equals( error ) )
             model.addAttribute( "error", error );
 
@@ -63,7 +70,6 @@ public class AuthController{
         Student s = service.getStudentByEmail( a.getEmail() );
 
         if( s == null ){
-            Curriculum curriculum;
             String programme = "None";
 
             for( KUSubscription sub : a.getSubscriptions() ){
@@ -73,19 +79,16 @@ public class AuthController{
                 }
             }
 
+            Curriculum c = service.getCurriculumFromProgramme( programme );
 
-            if( programme.toLowerCase().contains( "informatica" ) )
-                curriculum = Curriculum.TI;
-            else if( programme.toLowerCase().contains( "management" ) )
-                curriculum = Curriculum.MANAGEMENT;
-            else
+            if(c == null)
                 return new ModelAndView( "redirect:/auth/login?error=unsupported&id=" + studentId );
 
             s = new Student(
                     a.getFirstName() + " " + a.getLastName(),
                     password,
                     a.getEmail(),
-                    curriculum,
+                    c,
                     StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.ADMIN ); //TODO UserType.Normal
             service.addStudent( s );
         }else{
