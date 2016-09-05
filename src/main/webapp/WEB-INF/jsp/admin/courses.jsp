@@ -33,59 +33,62 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="course-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="course-overview" class="table table-striped table-bordered" cellspacing="0"
+                                   width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>${mCode}</th>
-                                        <th>${mName}</th>
-                                        <th>${mShortName}</th>
-                                        <th>${mCurriculum}</th>
-                                        <th>${mYear}</th>
-                                        <th>${mSubscribers}</th>
-                                        <th data-orderable="false">${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mCode}</th>
+                                    <th>${mName}</th>
+                                    <th>${mShortName}</th>
+                                    <th>${mCurriculum}</th>
+                                    <th>${mYear}</th>
+                                    <th>${mSubscribers}</th>
+                                    <th data-orderable="false">${mActions}</th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th>${mCode}</th>
-                                        <th>${mName}</th>
-                                        <th>${mShortName}</th>
-                                        <th>${mCurriculum}</th>
-                                        <th>${mYear}</th>
-                                        <th>${mSubscribers}</th>
-                                        <th>${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mCode}</th>
+                                    <th>${mName}</th>
+                                    <th>${mShortName}</th>
+                                    <th>${mCurriculum}</th>
+                                    <th>${mYear}</th>
+                                    <th>${mSubscribers}</th>
+                                    <th>${mActions}</th>
+                                </tr>
                                 </tfoot>
                                 <tbody>
-                                    <c:forEach var="course" items="${courses}">
-                                        <tr>
-                                            <td>${course.code}</td>
-                                            <td>${course.name}</td>
-                                            <td>${course.shortName}</td>
-                                            <td>${course.curriculum}</td>
-                                            <td>${course.year}</td>
-                                            <td>${course.subscribers.size()}</td>
-                                            <td>
-                                                <form class="small" action="<c:url value="/admin/courses" />" method="POST">
-                                                    <input type="hidden" name="_method" value="delete"/>
-                                                    <input type="hidden" name="id" value="${course.id}"/>
-                                                    <button class="btn btn-sm" data-toggle="tooltip" title="${mDelete}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                <button class="btn btn-sm update" data-id="${course.id}" data-toggle="tooltip" title="${mEdit}">
-                                                    <i class="fa fa-pencil"></i>
+                                <c:forEach var="course" items="${courses}">
+                                    <tr>
+                                        <td>${course.code}</td>
+                                        <td>${course.name}</td>
+                                        <td>${course.shortName}</td>
+                                        <td>${course.curriculum}</td>
+                                        <td>${course.year}</td>
+                                        <td>${course.subscribers.size()}</td>
+                                        <td>
+                                            <form class="small" action="<c:url value="/admin/courses" />" method="POST">
+                                                <input type="hidden" name="_method" value="delete"/>
+                                                <input type="hidden" name="id" value="${course.id}"/>
+                                                <button class="btn btn-sm" data-toggle="tooltip" title="${mDelete}">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                            </form>
+                                            <button class="btn btn-sm update" data-id="${course.id}"
+                                                    data-toggle="tooltip" title="${mEdit}">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -100,7 +103,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mCreate}${' '}${mCourse}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -128,15 +132,18 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
-                                    <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mCurriculum}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <form:select path="curriculum"
+                                                 class="curriculum form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="${mCurriculum}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty yearError ? 'has-error' : ''}">
                                     <form:errors path="year" element="label"/>
-                                    <form:input path="year" type="number" min="1" class="form-control" value="null" placeholder="${mYear}"/>
+                                    <form:input path="year" type="number" min="1" class="form-control" value="null"
+                                                placeholder="${mYear}"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <button type="submit" class="btn btn-default pull-right">${mAdd}</button>
@@ -152,14 +159,16 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mUpdate}${' '}${mCourse}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form:form method="put" commandName="updateCourse" enctype="application/x-www-form-urlencoded">
+                            <form:form method="put" commandName="updateCourse"
+                                       enctype="application/x-www-form-urlencoded">
                                 <c:set var="codeError"><form:errors path="code"/></c:set>
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="shortNameError"><form:errors path="shortName"/></c:set>
@@ -181,15 +190,18 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty curriculumError ? 'has-error' : ''}">
                                     <form:errors path="curriculum" element="label"/>
-                                    <form:select path="curriculum" class="curriculum form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mCurriculum}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <form:select path="curriculum"
+                                                 class="curriculum form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="${mCurriculum}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <option></option>
                                         <form:options items="${curriculums}"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty yearError ? 'has-error' : ''}">
                                     <form:errors path="year" element="label"/>
-                                    <form:input path="year" type="number" min="1" class="form-control" value="null" placeholder="${mYear}"/>
+                                    <form:input path="year" type="number" min="1" class="form-control" value="null"
+                                                placeholder="${mYear}"/>
                                 </div>
                                 <div class="form-group has-feedback">
                                     <button type="submit" class="btn btn-default pull-right">${mUpdate}</button>

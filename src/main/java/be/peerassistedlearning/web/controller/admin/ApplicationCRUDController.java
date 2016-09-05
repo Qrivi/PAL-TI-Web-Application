@@ -19,22 +19,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
-public class ApplicationCRUDController extends AdminController
-{
+public class ApplicationCRUDController extends AdminController{
     @Autowired
     private PALService service;
 
     @RequestMapping( value = "/applications", method = RequestMethod.GET )
-    public ModelAndView getApplicationOverviewPage( ModelMap model )
-    {
+    public ModelAndView getApplicationOverviewPage( ModelMap model ){
         model.addAttribute( "pendingApplications", service.getAllPendingApplications() );
         model.addAttribute( "doneApplications", service.getAllDoneApplications() );
         return new ModelAndView( "admin/applications", model );
     }
 
     @RequestMapping( value = "/applications/approve/{id}", method = RequestMethod.POST )
-    public ModelAndView approveApplication( @PathVariable( value = "id" ) int id, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView approveApplication( @PathVariable( value = "id" ) int id, RedirectAttributes redirectAttributes ){
         Application application = service.getApplicationById( id );
 
         application.approve();
@@ -42,38 +39,34 @@ public class ApplicationCRUDController extends AdminController
 
         Tutor tutor = service.getTutorByStudent( application.getStudent() );
 
-        if ( tutor == null )
-        {
+        if( tutor == null ){
             Set<Course> courses = new HashSet<Course>();
             courses.add( application.getCourse() );
             service.addTutor( new Tutor( application.getStudent(), courses ) );
-        } else
-        {
+        }else{
             tutor.addCourse( application.getCourse() );
             service.updateTutor( tutor );
         }
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Approved", new Object[]{ application.getId() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Approved", new Object[]{application.getId()} ) );
 
         return new ModelAndView( "redirect:/admin/applications" );
     }
 
     @RequestMapping( value = "/applications/reject/{id}", method = RequestMethod.POST )
-    public ModelAndView rejectApplication( @PathVariable( value = "id" ) int id, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView rejectApplication( @PathVariable( value = "id" ) int id, RedirectAttributes redirectAttributes ){
         Application application = service.getApplicationById( id );
 
         application.reject();
         service.updateApplication( application );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Rejected", new Object[]{ application.getId() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ApplicationCRUDController.Rejected", new Object[]{application.getId()} ) );
 
         return new ModelAndView( "redirect:/admin/applications" );
     }
 
     @ResponseBody
     @RequestMapping( value = "/applications/count", method = RequestMethod.GET )
-    public Integer pendingApplicationCount()
-    {
+    public Integer pendingApplicationCount(){
         return service.getAllPendingApplications().size();
     }
 }

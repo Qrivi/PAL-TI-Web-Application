@@ -8,8 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class RequestForm
-{
+public class RequestForm{
 
     @SafeHtml
     @NotNull( message = "{NotNull.RequestForm.title}" )
@@ -25,36 +24,31 @@ public class RequestForm
     @NotNull( message = "{NotNull.RequestForm.course}" )
     private Course course;
 
-    public RequestForm() {}
-
-    public void setTitle( String title )
-    {
-        this.title = title;
+    public RequestForm(){
     }
 
-    public void setDescription( String description )
-    {
-        this.description = description;
-    }
-
-    public void setCourse( Course course )
-    {
-        this.course = course;
-    }
-
-    public String getTitle()
-    {
+    public String getTitle(){
         return title;
     }
 
-    public String getDescription()
-    {
+    public void setTitle( String title ){
+        this.title = title;
+    }
+
+    public String getDescription(){
         return description;
     }
 
-    public Course getCourse()
-    {
+    public void setDescription( String description ){
+        this.description = description;
+    }
+
+    public Course getCourse(){
         return course;
+    }
+
+    public void setCourse( Course course ){
+        this.course = course;
     }
 
 }

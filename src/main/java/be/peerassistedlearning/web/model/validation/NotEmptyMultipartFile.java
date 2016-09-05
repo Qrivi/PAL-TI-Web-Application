@@ -13,13 +13,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Checks if the given MultiPart file is not empty
  */
-@Target( { METHOD , FIELD , ANNOTATION_TYPE } )
+@Target( {METHOD, FIELD, ANNOTATION_TYPE} )
 @Retention( RUNTIME )
 @Constraint( validatedBy = NotEmptyMultipartFileValidator.class )
 @Documented
-public @interface NotEmptyMultipartFile
-{
+public @interface NotEmptyMultipartFile{
     String message() default "{constraints.notemptymultipartfile.message}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

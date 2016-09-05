@@ -43,57 +43,63 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mPendingApplications}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="pending-application-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="pending-application-overview" class="table table-striped table-bordered"
+                                   cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>${mStudent}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mDate}</th>
-                                        <th data-orderable="false">${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mStudent}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mDate}</th>
+                                    <th data-orderable="false">${mActions}</th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th>${mStudent}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mDate}</th>
-                                        <th>${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mStudent}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mDate}</th>
+                                    <th>${mActions}</th>
+                                </tr>
                                 </tfoot>
                                 <tbody>
-                                    <c:forEach var="application" items="${pendingApplications}">
-                                        <tr>
-                                            <td>${application.student.name}</td>
-                                            <td>${application.course.name}</td>
-                                            <td>${application.beginDate}</td>
-                                            <td>
-                                                <form class="small" action="<c:url value="/admin/applications/approve/${application.id}" />" method="POST">
-                                                    <button class="btn btn-sm btn-success"
-                                                            data-toggle="tooltip" title="${mApprove}">
-                                                        <i class="fa fa-thumbs-up"></i>
-                                                    </button>
-                                                </form>
-                                                <form class="small" action="<c:url value="/admin/applications/reject/${application.id}" />" method="POST">
-                                                    <button class="btn btn-sm btn-danger"
-                                                            data-toggle="tooltip" title="${mReject}">
-                                                        <i class="fa fa-thumbs-down"></i>
-                                                    </button>
-                                                </form>
-                                                <button class="btn btn-sm btn-primary screenshot"
-                                                        data-toggle="tooltip" title="${mScreenshot}"
-                                                        data-url="<c:url value="/resources/applications/${application.id}/screenshot.png"/>">
-                                                    <i class="fa fa-picture-o"></i>
+                                <c:forEach var="application" items="${pendingApplications}">
+                                    <tr>
+                                        <td>${application.student.name}</td>
+                                        <td>${application.course.name}</td>
+                                        <td>${application.beginDate}</td>
+                                        <td>
+                                            <form class="small"
+                                                  action="<c:url value="/admin/applications/approve/${application.id}" />"
+                                                  method="POST">
+                                                <button class="btn btn-sm btn-success"
+                                                        data-toggle="tooltip" title="${mApprove}">
+                                                    <i class="fa fa-thumbs-up"></i>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                            </form>
+                                            <form class="small"
+                                                  action="<c:url value="/admin/applications/reject/${application.id}" />"
+                                                  method="POST">
+                                                <button class="btn btn-sm btn-danger"
+                                                        data-toggle="tooltip" title="${mReject}">
+                                                    <i class="fa fa-thumbs-down"></i>
+                                                </button>
+                                            </form>
+                                            <button class="btn btn-sm btn-primary screenshot"
+                                                    data-toggle="tooltip" title="${mScreenshot}"
+                                                    data-url="<c:url value="/resources/applications/${application.id}/screenshot.png"/>">
+                                                <i class="fa fa-picture-o"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -108,42 +114,44 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mDoneApplications}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="done-application-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="done-application-overview" class="table table-striped table-bordered"
+                                   cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>${mStudent}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mStartDate}</th>
-                                        <th>${mEndDate}</th>
-                                        <th>${mStatus}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mStudent}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mStartDate}</th>
+                                    <th>${mEndDate}</th>
+                                    <th>${mStatus}</th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th>${mStudent}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mStartDate}</th>
-                                        <th>${mEndDate}</th>
-                                        <th>${mStatus}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mStudent}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mStartDate}</th>
+                                    <th>${mEndDate}</th>
+                                    <th>${mStatus}</th>
+                                </tr>
                                 </tfoot>
                                 <tbody>
-                                    <c:forEach var="application" items="${doneApplications}">
-                                        <tr>
-                                            <td>${application.student.name}</td>
-                                            <td>${application.course.name}</td>
-                                            <td>${application.beginDate}</td>
-                                            <td>${application.endDate}</td>
-                                            <td>${application.state}</td>
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach var="application" items="${doneApplications}">
+                                    <tr>
+                                        <td>${application.student.name}</td>
+                                        <td>${application.course.name}</td>
+                                        <td>${application.beginDate}</td>
+                                        <td>${application.endDate}</td>
+                                        <td>${application.state}</td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

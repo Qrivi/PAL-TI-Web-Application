@@ -6,16 +6,12 @@ import org.springframework.core.convert.converter.Converter;
 /**
  * Converts a Student into the matching String
  */
-public class StudentInverseConverter implements Converter<Student, String>
-{
-    public String convert( Student student )
-    {
-        try
-        {
+public class StudentInverseConverter implements Converter<Student, String>{
+    public String convert( Student student ){
+        try{
             return student.getId()
                     .toString();
-        } catch ( Exception e )
-        {
+        }catch( Exception e ){
             return null;
         }
     }

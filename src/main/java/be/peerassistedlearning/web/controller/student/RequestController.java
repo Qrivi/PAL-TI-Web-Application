@@ -27,40 +27,36 @@ import java.util.List;
 
 @Controller
 @RequestMapping( value = "/request" )
-public class RequestController extends StudentController
-{
+public class RequestController extends StudentController{
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model )
-    {
-        if ( model.get( "request" ) == null )
+    private ModelMap fillModel( ModelMap model ){
+        if( model.get( "request" ) == null )
             model.addAttribute( "request", new RequestForm() );
-        if ( model.get( "courses" ) == null )
+        if( model.get( "courses" ) == null )
             model.addAttribute( "courses", service.getCourses( SessionAuth.getStudent() ) );
-        if ( model.get( "requests" ) == null )
-            model.addAttribute("requests", service.getAllRequestsWithoutLesson());
-        if ( model.get( "myRequests" ) == null )
-            model.addAttribute("myRequests", service.getRequests(SessionAuth.getStudent()));
+        if( model.get( "requests" ) == null )
+            model.addAttribute( "requests", service.getAllRequestsWithoutLesson() );
+        if( model.get( "myRequests" ) == null )
+            model.addAttribute( "myRequests", service.getRequests( SessionAuth.getStudent() ) );
         return model;
     }
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getRequestPage( ModelMap model )
-    {
+    public ModelAndView getRequestPage( ModelMap model ){
         return new ModelAndView( "student/request_add", fillModel( model ) );
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public ModelAndView getRequestInfo( @PathVariable( value = "id" ) int id, ModelMap model )
-    {
+    public ModelAndView getRequestInfo( @PathVariable( value = "id" ) int id, ModelMap model ){
         Request request = service.getRequestById( id );
-        if ( request == null )
+        if( request == null )
             return new ModelAndView( "redirect:/request", fillModel( model ) );
         model.addAttribute( "requested", request );
-        if (request.getLesson() != null) {
-            model.addAttribute("lessonIsUpcomming", request.getLesson().getDate().after(new Date()));
-            model.addAttribute("isBooked", service.getLessonByIdForStudent(request.getLesson().getId(), SessionAuth.getStudent()) != null);
+        if( request.getLesson() != null ){
+            model.addAttribute( "lessonIsUpcomming", request.getLesson().getDate().after( new Date() ) );
+            model.addAttribute( "isBooked", service.getLessonByIdForStudent( request.getLesson().getId(), SessionAuth.getStudent() ) != null );
         }
 
         return new ModelAndView( "student/request_info", fillModel( model ) );
@@ -68,59 +64,54 @@ public class RequestController extends StudentController
 
 
     @RequestMapping( value = "/add", method = RequestMethod.POST )
-    public ModelAndView addRequest( @Valid @ModelAttribute( value = "request" ) RequestForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView addRequest( @Valid @ModelAttribute( value = "request" ) RequestForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
+        if( result.hasErrors() )
             return new ModelAndView( "student/request_add", fillModel( model ) );
 
         Request request = new Request( form.getTitle(), form.getDescription(), form.getCourse(), SessionAuth.getStudent() );
         request.upvote( SessionAuth.getStudent() );
         service.addRequest( request );
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Add", new Object[]{ form.getTitle() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Add", new Object[]{form.getTitle()} ) );
         return new ModelAndView( "redirect:/request" );
     }
 
     @RequestMapping( value = "/upvote/{id}", method = RequestMethod.POST )
-    public ModelAndView upvote( @PathVariable( value = "id" ) int id, ModelMap model, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView upvote( @PathVariable( value = "id" ) int id, ModelMap model, RedirectAttributes redirectAttributes ){
         Request request = service.getRequestById( id );
 
-        if ( request == null )
+        if( request == null )
             return new ModelAndView( "redirect:/request", fillModel( model ) );
 
         request.upvote( SessionAuth.getStudent() );
         service.updateRequest( request );
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Upvote", new Object[]{ request.getTitle() } ) );
-        return new ModelAndView("redirect:/request/" + id);
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Upvote", new Object[]{request.getTitle()} ) );
+        return new ModelAndView( "redirect:/request/" + id );
 
     }
 
     @RequestMapping( value = "/undovote/{id}", method = RequestMethod.POST )
-    public ModelAndView undoVote( @PathVariable( value = "id" ) int id, ModelMap model, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView undoVote( @PathVariable( value = "id" ) int id, ModelMap model, RedirectAttributes redirectAttributes ){
         Request request = service.getRequestById( id );
 
-        if ( request == null )
+        if( request == null )
             return new ModelAndView( "redirect:/request", fillModel( model ) );
 
         request.removeUpvote( SessionAuth.getStudent() );
         service.updateRequest( request );
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Undoupvote", new Object[]{ request.getTitle() } ) );
-        return new ModelAndView("redirect:/request/" + id);
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestController.Undoupvote", new Object[]{request.getTitle()} ) );
+        return new ModelAndView( "redirect:/request/" + id );
     }
 
     @RequestMapping( value = "/similar", method = RequestMethod.POST )
-    public ModelAndView getSimilar( HttpServletRequest req )
-    {
+    public ModelAndView getSimilar( HttpServletRequest req ){
         String title = req.getParameter( "title" );
         String courseId = req.getParameter( "course" );
         Course course = service.getCourseById( Integer.parseInt( courseId ) );
 
-        if ( title == null || course == null )
-        {
+        if( title == null || course == null ){
             return new ModelAndView( "student/fragment/similar_requests" );
         }
 
@@ -129,11 +120,10 @@ public class RequestController extends StudentController
         newRequest.setTitle( title );
 
         List<RequestSimilarityWrapper> similar = new LinkedList<>();
-        for ( Request request : service.getRequests( newRequest.getCourse() ) )
-        {
+        for( Request request : service.getRequests( newRequest.getCourse() ) ){
             double similarity = request.getSimilarity( newRequest );
             System.out.println( "similarity=" + similarity );
-            if ( similarity >= 0.6 )
+            if( similarity >= 0.6 )
                 similar.add( new RequestSimilarityWrapper( similarity, request ) );
         }
         Collections.sort( similar );

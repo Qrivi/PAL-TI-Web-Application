@@ -23,26 +23,22 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( value = "/booking" )
-public class BookingController extends StudentController
-{
+public class BookingController extends StudentController{
 
     @Autowired
     private PALService service;
 
     @RequestMapping( value = "/table", method = RequestMethod.GET )
-    public ModelAndView getTableBookingPage( ModelMap model )
-    {
+    public ModelAndView getTableBookingPage( ModelMap model ){
         ModelMap map = new ModelMap();
 
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
 
-        if ( tutor != null )
-        {
+        if( tutor != null ){
             Collection<Lesson> lessons = service.getUpcomingLessons();
             lessons.removeAll( service.getLessons( tutor ) );
             model.addAttribute( "lessons", lessons );
-        } else
-        {
+        }else{
             model.addAttribute( "lessons", service.getUpcomingLessons() );
         }
 
@@ -51,23 +47,19 @@ public class BookingController extends StudentController
     }
 
     @RequestMapping( value = "/calendar", method = RequestMethod.GET )
-    public ModelAndView getCalendarBookingPage( ModelMap model )
-    {
+    public ModelAndView getCalendarBookingPage( ModelMap model ){
         return new ModelAndView( "student/booking/calendar", "courses", service.getCourses( SessionAuth.getStudent() ) );
     }
 
     @RequestMapping( value = "/register/{lessonId}", method = RequestMethod.POST )
-    public ModelAndView addBooking( @PathVariable( value = "lessonId" ) int lessonId )
-    {
+    public ModelAndView addBooking( @PathVariable( value = "lessonId" ) int lessonId ){
         Lesson lesson = service.getLessonById( lessonId );
-        if ( lesson == null ||
+        if( lesson == null ||
                 service.hasBooking( SessionAuth.getStudent(), lesson ) ||
                 lesson.getBookings().size() == lesson.getMaxParticipants() ||
-                lesson.getTutor().getStudent().equals( SessionAuth.getStudent() ) )
-        {
+                lesson.getTutor().getStudent().equals( SessionAuth.getStudent() ) ){
             return new ModelAndView( "redirect:/booking/table" );
-        } else
-        {
+        }else{
             lesson.addBooking( SessionAuth.getStudent() );
             service.updateLesson( lesson );
             SessionAuth.setStudent( service.getStudentById( SessionAuth.getStudent().getId() ) );
@@ -77,14 +69,11 @@ public class BookingController extends StudentController
     }
 
     @RequestMapping( value = "/unregister/{lessonId}", method = RequestMethod.POST )
-    public ModelAndView removeBooking( @PathVariable( value = "lessonId" ) int lessonId )
-    {
+    public ModelAndView removeBooking( @PathVariable( value = "lessonId" ) int lessonId ){
         Lesson lesson = service.getLessonById( lessonId );
-        if ( lesson == null || !service.hasBooking( SessionAuth.getStudent(), lesson ) )
-        {
+        if( lesson == null || !service.hasBooking( SessionAuth.getStudent(), lesson ) ){
             return new ModelAndView( "redirect:/booking/table" );
-        } else
-        {
+        }else{
             lesson.removeBooking( SessionAuth.getStudent() );
             service.updateLesson( lesson );
             SessionAuth.setStudent( service.getStudentById( SessionAuth.getStudent().getId() ) );
@@ -95,25 +84,21 @@ public class BookingController extends StudentController
 
     @ResponseBody
     @RequestMapping( value = "/calendar/events", method = RequestMethod.GET )
-    public List<CalendarDTO> getBookings( @RequestParam( value = "courses", required = false ) Course[] courses )
-    {
+    public List<CalendarDTO> getBookings( @RequestParam( value = "courses", required = false ) Course[] courses ){
         List<CalendarDTO> events = new ArrayList<>();
         Student current = SessionAuth.getStudent();
 
-        if ( courses != null )
-        {
-            for ( Course course : courses )
+        if( courses != null ){
+            for( Course course : courses )
                 events.addAll( service.getUpcomingLessons( course ).stream().map( lesson -> convert( lesson ) ).collect( Collectors.toList() ) );
-        } else
-        {
+        }else{
             events.addAll( service.getUpcomingLessons( current ).stream().map( lesson -> convert( lesson ) ).collect( Collectors.toList() ) );
         }
 
         return events;
     }
 
-    private CalendarDTO convert( Lesson lesson )
-    {
+    private CalendarDTO convert( Lesson lesson ){
         DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
 

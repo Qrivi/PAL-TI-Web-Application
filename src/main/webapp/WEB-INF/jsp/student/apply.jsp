@@ -33,7 +33,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mSubmitYourApplication}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -44,15 +45,19 @@
                                 <c:set var="courseError"><form:errors path="course"/></c:set>
                                 <c:set var="screenshotError"><form:errors path="screenshot"/></c:set>
                                 <div class="form-group has-feedback ${ not empty courseError ? 'has-error' : ''}">
-                                    <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span class="text-danger">${courseError}</span></c:if></form:label>
+                                    <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span
+                                            class="text-danger">${courseError}</span></c:if></form:label>
                                     <form:select path="course" class="form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <form:option value="" label="--- ${mCourse} ---"/>
                                         <form:options items="${courses}" itemValue="id" itemLabel="name"/>
                                     </form:select>
                                 </div>
                                 <div class="form-group has-feedback ${ not empty screenshotError ? 'has-error' : ''}">
-                                    <form:label path="screenshot">${mScreenshot} : <c:if test="${not empty screenshotError}"><span class="text-danger">${screenshotError}</span></c:if></form:label>
+                                    <form:label path="screenshot">${mScreenshot} : <c:if
+                                            test="${not empty screenshotError}"><span
+                                            class="text-danger">${screenshotError}</span></c:if></form:label>
                                     <form:input path="screenshot" type="file" placeholder="${mScreenshot}"/>
                                     <p class="help-block">${mOnlyApply}</p>
                                 </div>
@@ -70,27 +75,28 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mMostSubscribedCourses}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body no-padding">
                     <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>${mCode}</th>
-                                <th>${mName}</th>
-                                <th>${mSubscribers}</th>
-                            </tr>
+                        <tr>
+                            <th>${mCode}</th>
+                            <th>${mName}</th>
+                            <th>${mSubscribers}</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="course" items="${topSubscribedCourses}">
-                                <tr>
-                                    <td>${course.code}</td>
-                                    <td>${course.name}</td>
-                                    <td>${course.subscribers.size()}</td>
-                                </tr>
-                            </c:forEach>
+                        <c:forEach var="course" items="${topSubscribedCourses}">
+                            <tr>
+                                <td>${course.code}</td>
+                                <td>${course.name}</td>
+                                <td>${course.subscribers.size()}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -101,29 +107,30 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mYourApplications}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body no-padding">
                     <table class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
-                            <tr>
-                                <th>${mCourse}</th>
-                                <th>${mStartDate}</th>
-                                <th>${mEndDate}</th>
-                                <th>${mStatus}</th>
-                            </tr>
+                        <tr>
+                            <th>${mCourse}</th>
+                            <th>${mStartDate}</th>
+                            <th>${mEndDate}</th>
+                            <th>${mStatus}</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="application" items="${lastApplications}">
-                                <tr>
-                                    <td>${application.course.name}</td>
-                                    <td>${application.beginDate}</td>
-                                    <td>${application.endDate}</td>
-                                    <td>${application.state}</td>
-                                </tr>
-                            </c:forEach>
+                        <c:forEach var="application" items="${lastApplications}">
+                            <tr>
+                                <td>${application.course.name}</td>
+                                <td>${application.beginDate}</td>
+                                <td>${application.endDate}</td>
+                                <td>${application.state}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

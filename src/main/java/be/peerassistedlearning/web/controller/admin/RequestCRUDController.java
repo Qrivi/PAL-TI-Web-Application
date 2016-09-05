@@ -13,23 +13,20 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class RequestCRUDController extends AdminController
-{
+public class RequestCRUDController extends AdminController{
     @Autowired
     private PALService service;
 
     @RequestMapping( value = "/requests", method = RequestMethod.GET )
-    public ModelAndView getRequestOverviewPage( ModelMap model )
-    {
+    public ModelAndView getRequestOverviewPage( ModelMap model ){
         return new ModelAndView( "admin/requests", "requests", service.getAllRequests() );
     }
 
     @RequestMapping( value = "/requests", method = RequestMethod.DELETE )
-    public String removeRequest( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes )
-    {
+    public String removeRequest( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes ){
         Request r = service.getRequestById( id );
         service.removeRequest( r );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestCRUDController.Remove", new Object[]{ r.getId() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RequestCRUDController.Remove", new Object[]{r.getId()} ) );
         return "redirect:/admin/requests";
     }
 }

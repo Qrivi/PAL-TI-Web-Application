@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping( "/tutor" )
 @PreAuthorize( "hasRole('ROLE_TUTOR')" )
-public class TutorController
-{}
+public class TutorController{
+}

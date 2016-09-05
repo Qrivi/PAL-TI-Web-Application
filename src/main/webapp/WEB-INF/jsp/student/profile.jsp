@@ -7,7 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <sec:authentication var="auth" property="principal"/>
 <c:set var="req" value="${pageContext.request}"/>
-<c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
+<c:set var="baseURL"
+       value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
 <spring:message code="Profile.profile" var="mProfile"/>
 <spring:message code="Profile.upcomingBookings" var="mUpcomingBookings"/>
@@ -74,7 +75,8 @@
                 <ul class="nav nav-tabs">
                     <!-- reviews tab button-->
                     <c:if test="${user == auth}">
-                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">${mReviews}</a></li>
+                        <li class="active"><a href="#reviews" data-toggle="tab" aria-expanded="true">${mReviews}</a>
+                        </li>
                     </c:if>
                     <!-- timeline tab button-->
                     <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="false">${mTimeline}</a></li>
@@ -115,12 +117,16 @@
                                         <sec:authorize access="hasRole('ROLE_TUTOR')">
                                             <!-- lesson calendar field -->
                                             <div class="form-group has-feedback">
-                                                <label for="lesson-calendar" class="col-sm-2 control-label">${mLessonCalendar}</label>
+                                                <label for="lesson-calendar"
+                                                       class="col-sm-2 control-label">${mLessonCalendar}</label>
                                                 <div class="col-sm-10">
                                                     <div class="input-group">
-                                                        <input id="lesson-calendar" type="text" value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}" class="form-control"/>
+                                                        <input id="lesson-calendar" type="text"
+                                                               value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}"
+                                                               class="form-control"/>
                                                         <span class="input-group-btn">
-                                                            <button class="btn btn-default" type="button" onclick="copyToClipboard('lesson-calendar')">${mCopy}</button>
+                                                            <button class="btn btn-default" type="button"
+                                                                    onclick="copyToClipboard('lesson-calendar')">${mCopy}</button>
                                                         </span>
                                                     </div>
                                                 </div>
@@ -128,12 +134,16 @@
                                         </sec:authorize>
                                         <!-- booking calendar field -->
                                         <div class="form-group has-feedback">
-                                            <label for="booking-calendar" class="col-sm-2 control-label">${mBookingCalendar}</label>
+                                            <label for="booking-calendar"
+                                                   class="col-sm-2 control-label">${mBookingCalendar}</label>
                                             <div class="col-sm-10">
                                                 <div class="input-group">
-                                                    <input id="booking-calendar" type="text" value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}" class="form-control"/>
+                                                    <input id="booking-calendar" type="text"
+                                                           value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}"
+                                                           class="form-control"/>
                                                     <span class="input-group-btn">
-                                                        <button class="btn btn-default" type="button" onclick="copyToClipboard('booking-calendar')">${mCopy}</button>
+                                                        <button class="btn btn-default" type="button"
+                                                                onclick="copyToClipboard('booking-calendar')">${mCopy}</button>
                                                     </span>
                                                 </div>
                                             </div>
@@ -162,7 +172,8 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-offset-10 col-sm-2">
-                                                <button type="submit" class="btn btn-default pull-right">${mSaveChanges}</button>
+                                                <button type="submit"
+                                                        class="btn btn-default pull-right">${mSaveChanges}</button>
                                             </div>
                                         </div>
                                     </form:form>

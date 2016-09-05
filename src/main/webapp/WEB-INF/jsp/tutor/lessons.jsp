@@ -73,7 +73,7 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text">${lesson.course.shortName}</span>
                                             <span class="info-box-text"><c:out value="${lesson.name}"/></span>
-                                                            <span class="info-box-text">
+                                            <span class="info-box-text">
                                                                 <fmt:formatDate pattern="EEE. dd/MM hh:mm"
                                                                                 value="${lesson.date}"/> - ${lesson.room.name}
                                                             </span>
@@ -115,68 +115,71 @@
                                 <table id="lesson-history-overview" class="table table-striped table-bordered"
                                        cellspacing="0" width="100%">
                                     <thead>
-                                        <tr>
-                                            <th>${mName}</th>
-                                            <th>${mDate}</th>
-                                            <th>${mDuration}</th>
-                                            <th>${mCourse}</th>
-                                            <th>${mParticipants}</th>
-                                            <th>${mRoom}</th>
-                                            <th>${mBackupRoom}</th>
-                                            <th>${mActions}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>${mName}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mDuration}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mParticipants}</th>
+                                        <th>${mRoom}</th>
+                                        <th>${mBackupRoom}</th>
+                                        <th>${mActions}</th>
+                                    </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>${mName}</th>
-                                            <th>${mDate}</th>
-                                            <th>${mDuration}</th>
-                                            <th>${mCourse}</th>
-                                            <th>${mParticipants}</th>
-                                            <th>${mRoom}</th>
-                                            <th>${mBackupRoom}</th>
-                                            <th>${mActions}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>${mName}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mDuration}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mParticipants}</th>
+                                        <th>${mRoom}</th>
+                                        <th>${mBackupRoom}</th>
+                                        <th>${mActions}</th>
+                                    </tr>
                                     </tfoot>
                                     <tbody>
-                                        <c:forEach var="lesson" items="${myPastLessons}">
-                                            <tr>
-                                                <td>${lesson.name}</td>
-                                                <td><fmt:formatDate pattern="EEE. dd/MM/YYYY hh:mm"
-                                                                    value="${lesson.date}"/></td>
-                                                <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
-                                                <td>${lesson.course.name}</td>
-                                                <td>
-                                                    <div class="progress progress-xs">
-                                                        <div class="progress-bar
+                                    <c:forEach var="lesson" items="${myPastLessons}">
+                                        <tr>
+                                            <td>${lesson.name}</td>
+                                            <td><fmt:formatDate pattern="EEE. dd/MM/YYYY hh:mm"
+                                                                value="${lesson.date}"/></td>
+                                            <td><fmt:formatNumber maxFractionDigits="0"
+                                                                  value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber
+                                                    value="${lesson.duration%60}" type="number"
+                                                    minIntegerDigits="2"/></td>
+                                            <td>${lesson.course.name}</td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar
                                                                         <c:set var="percentage" value="${lesson.bookings.size()/lesson.maxParticipants*100}"/>
                                                                             <c:choose>
                                                                                 <c:when test="${percentage < 60}">progress-bar-success</c:when>
                                                                                 <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
                                                                                 <c:when test="${percentage == 100}">progress-bar-danger</c:when>
                                                                             </c:choose>"
-                                                             style="width: ${lesson.bookings.size()/lesson.maxParticipants*100}%">
-                                                        </div>
+                                                         style="width: ${lesson.bookings.size()/lesson.maxParticipants*100}%">
                                                     </div>
-                                                        ${lesson.bookings.size()}/${lesson.maxParticipants}</td>
-                                                <td>${lesson.room.name}</td>
-                                                <td>${lesson.backupRoom.name}</td>
-                                                <td>
+                                                </div>
+                                                    ${lesson.bookings.size()}/${lesson.maxParticipants}</td>
+                                            <td>${lesson.room.name}</td>
+                                            <td>${lesson.backupRoom.name}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-default"
+                                                   href="<c:url value="/tutor/lessons/info/${lesson.id}"/>"
+                                                   alt="${mInfoFor}${' '}${lesson.name}">
+                                                    <i class="fa fa-info"></i>
+                                                </a>
+                                                <c:if test="${lesson.bookings.size() < 1}">
                                                     <a class="btn btn-sm btn-default"
-                                                       href="<c:url value="/tutor/lessons/info/${lesson.id}"/>"
-                                                       alt="${mInfoFor}${' '}${lesson.name}">
-                                                        <i class="fa fa-info"></i>
+                                                       href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>"
+                                                       alt="${mEdit}${' '}${lesson.name}">
+                                                        <i class="fa fa-pencil"></i>
                                                     </a>
-                                                    <c:if test="${lesson.bookings.size() < 1}">
-                                                        <a class="btn btn-sm btn-default"
-                                                           href="<c:url value="/tutor/lessons/edit/${lesson.id}"/>"
-                                                           alt="${mEdit}${' '}${lesson.name}">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                                                </c:if>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

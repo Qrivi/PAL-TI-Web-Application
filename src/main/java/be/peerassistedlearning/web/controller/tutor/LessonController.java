@@ -21,8 +21,7 @@ import javax.validation.Valid;
 import java.time.LocalTime;
 
 @Controller
-public class LessonController extends TutorController
-{
+public class LessonController extends TutorController{
 
     @Autowired
     MailSender mailSender;
@@ -30,23 +29,21 @@ public class LessonController extends TutorController
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model )
-    {
+    private ModelMap fillModel( ModelMap model ){
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
-        if ( model.get( "lesson" ) == null )
+        if( model.get( "lesson" ) == null )
             model.addAttribute( "lesson", new LessonForm() );
-        if ( model.get( "courses" ) == null )
+        if( model.get( "courses" ) == null )
             model.addAttribute( "courses", tutor.getCourses() );
-        if ( model.get( "rooms" ) == null )
+        if( model.get( "rooms" ) == null )
             model.addAttribute( "rooms", service.getRooms( Campus.PROXIMUS ) );
-        if ( model.get( "requests" ) == null )
+        if( model.get( "requests" ) == null )
             model.addAttribute( "requests", service.getRequests( tutor.getCourses() ) );
         return model;
     }
 
     @RequestMapping( value = "/lessons", method = RequestMethod.GET )
-    public ModelAndView getLessonOverviewPage( ModelMap model )
-    {
+    public ModelAndView getLessonOverviewPage( ModelMap model ){
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
         model.addAttribute( "myPastLessons", service.getPastLessons( tutor ) );
         model.addAttribute( "myUpcomingLessons", service.getUpcomingLessons( tutor ) );
@@ -54,16 +51,15 @@ public class LessonController extends TutorController
     }
 
     @RequestMapping( value = "/lessons/edit/{id}", method = RequestMethod.GET )
-    public ModelAndView showEditPage( @PathVariable( value = "id" ) int id, ModelMap model )
-    {
+    public ModelAndView showEditPage( @PathVariable( value = "id" ) int id, ModelMap model ){
         Lesson lesson = service.getLessonById( id );
 
-        if ( lesson == null )
+        if( lesson == null )
             return new ModelAndView( "redirect:/tutor/lessons" );
 
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
 
-        if ( !tutor.equals( lesson.getTutor() ) )
+        if( !tutor.equals( lesson.getTutor() ) )
             return new ModelAndView( "redirect:/tutor/lessons" );
 
         model.addAttribute( "lesson", new LessonForm( lesson ) );
@@ -73,15 +69,13 @@ public class LessonController extends TutorController
     }
 
     @RequestMapping( value = "/lessons/edit/{id}", method = RequestMethod.PUT )
-    public ModelAndView editLesson( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "lesson" ) LessonForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView editLesson( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "lesson" ) LessonForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
         Lesson lesson = service.getLessonById( id );
 
-        if ( lesson == null )
+        if( lesson == null )
             return new ModelAndView( "redirect:/tutor/lessons" );
 
-        if ( result.hasErrors() )
-        {
+        if( result.hasErrors() ){
             model.addAttribute( "bookings", lesson.getBookings() );
             model.addAttribute( "editable", true );
             return new ModelAndView( "tutor/lesson_edit", fillModel( model ) );
@@ -89,7 +83,7 @@ public class LessonController extends TutorController
 
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
 
-        if ( !tutor.equals( lesson.getTutor() ) || !tutor.getCourses().contains( form.getCourse() ) )
+        if( !tutor.equals( lesson.getTutor() ) || !tutor.getCourses().contains( form.getCourse() ) )
             return new ModelAndView( "redirect:/tutor/lessons" );
 
         lesson.setName( form.getName() );
@@ -101,20 +95,18 @@ public class LessonController extends TutorController
         lesson.setRoom( form.getRoom() );
         lesson.setBackupRoom( form.getBackupRoom() );
 
-        if ( form.getRequest() != null )
-        {
+        if( form.getRequest() != null ){
             lesson.setRequest( form.getRequest() );
         }
 
         service.updateLesson( lesson );
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.LessonController.Save", new Object[]{ form.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.LessonController.Save", new Object[]{form.getName()} ) );
         return new ModelAndView( "redirect:/tutor/lessons" );
     }
 
     @RequestMapping( value = "/lessons/info/{id}", method = RequestMethod.GET )
-    public ModelAndView showInfoPage( @PathVariable( value = "id" ) int id, ModelMap model )
-    {
+    public ModelAndView showInfoPage( @PathVariable( value = "id" ) int id, ModelMap model ){
         Lesson myLesson = service.getLessonById( id );
         model.addAttribute( "lesson", new LessonForm( myLesson ) );
         model.addAttribute( "bookings", myLesson.getBookings() );
@@ -123,42 +115,37 @@ public class LessonController extends TutorController
     }
 
     @RequestMapping( value = "/lessons/remove", method = RequestMethod.DELETE )
-    public ModelAndView removeLesson( @RequestParam( value = "id" ) int id, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView removeLesson( @RequestParam( value = "id" ) int id, RedirectAttributes redirectAttributes ){
         Lesson lesson = service.getLessonById( id );
-        if ( lesson == null || !lesson.getTutor().getStudent().equals( SessionAuth.getStudent() ) )
+        if( lesson == null || !lesson.getTutor().getStudent().equals( SessionAuth.getStudent() ) )
             return new ModelAndView( "redirect:/tutor/lessons" );
 
         service.removeLesson( lesson );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.LessonController.Remove", new Object[]{ lesson.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.LessonController.Remove", new Object[]{lesson.getName()} ) );
 
         return new ModelAndView( "redirect:/tutor/lessons" );
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.GET )
-    public ModelAndView getLessonAddPage( ModelMap model )
-    {
+    public ModelAndView getLessonAddPage( ModelMap model ){
         return new ModelAndView( "tutor/lesson_add", fillModel( model ) );
     }
 
     @RequestMapping( value = "/lessons/add", method = RequestMethod.POST )
-    public ModelAndView addLesson( @Valid @ModelAttribute( "lesson" ) LessonForm form, BindingResult result, ModelMap model )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView addLesson( @Valid @ModelAttribute( "lesson" ) LessonForm form, BindingResult result, ModelMap model ){
+        if( result.hasErrors() )
             return new ModelAndView( "tutor/lesson_add", fillModel( model ) );
 
         Tutor tutor = service.getTutorByStudent( SessionAuth.getStudent() );
 
-        if ( tutor == null || !tutor.getCourses().contains( form.getCourse() ) )
-        {
+        if( tutor == null || !tutor.getCourses().contains( form.getCourse() ) ){
             result.reject( "NoTutor.LessonForm.course" );
             return new ModelAndView( "tutor/lesson_add", fillModel( model ) );
         }
 
         Lesson lesson = new Lesson( form.getDate(), form.getName(), form.getDescription(), localTimeToMinutes( form.getDuration() ), form.getCourse(), form.getMaxParticipants(), tutor, form
                 .getRoom(), form.getBackupRoom() );
-        if ( form.getRequest() != null )
-        {
+        if( form.getRequest() != null ){
             lesson.setRequest( form.getRequest() );
         }
 
@@ -168,14 +155,12 @@ public class LessonController extends TutorController
         return new ModelAndView( "redirect:/tutor/lessons" );
     }
 
-    private void notifySubscribers( Lesson lesson )
-    {
-        for ( Student subscriber : lesson.getCourse().getSubscribers() )
+    private void notifySubscribers( Lesson lesson ){
+        for( Student subscriber : lesson.getCourse().getSubscribers() )
             mailSender.sendNotificationMail( subscriber, lesson );
     }
 
-    private long localTimeToMinutes( LocalTime time )
-    {
+    private long localTimeToMinutes( LocalTime time ){
         return time.getHour() * 60 + time.getMinute();
     }
 }

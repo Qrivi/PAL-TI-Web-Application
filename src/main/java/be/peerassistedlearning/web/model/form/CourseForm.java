@@ -8,8 +8,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class CourseForm
-{
+public class CourseForm{
 
     @SafeHtml
     @CheckCodeIsUnique( message = "{CheckCodeIsUnique.CourseForm.code}" )
@@ -31,55 +30,46 @@ public class CourseForm
     @Min( value = 1, message = "{Min.CourseForm.year}" )
     private Integer year;
 
-    public CourseForm() {}
-
-    public void setCode( String code )
-    {
-        this.code = code;
+    public CourseForm(){
     }
 
-    public void setName( String name )
-    {
-        this.name = name;
-    }
-
-    public void setShortName( String shortName )
-    {
-        this.shortName = shortName;
-    }
-
-    public void setCurriculum( Curriculum curriculum )
-    {
-        this.curriculum = curriculum;
-    }
-
-    public void setYear( Integer year )
-    {
-        this.year = year;
-    }
-
-    public String getCode()
-    {
+    public String getCode(){
         return code;
     }
 
-    public String getName()
-    {
+    public void setCode( String code ){
+        this.code = code;
+    }
+
+    public String getName(){
         return name;
     }
 
-    public String getShortName()
-    {
+    public void setName( String name ){
+        this.name = name;
+    }
+
+    public String getShortName(){
         return shortName;
     }
 
-    public Curriculum getCurriculum()
-    {
+    public void setShortName( String shortName ){
+        this.shortName = shortName;
+    }
+
+    public Curriculum getCurriculum(){
         return curriculum;
     }
 
-    public Integer getYear()
-    {
+    public void setCurriculum( Curriculum curriculum ){
+        this.curriculum = curriculum;
+    }
+
+    public Integer getYear(){
         return year;
+    }
+
+    public void setYear( Integer year ){
+        this.year = year;
     }
 }

@@ -17,15 +17,15 @@ import java.util.Map;
 /**
  * Class used to send a mail to a given student.
  */
-public class MailSender
-{
+public class MailSender{
     @Autowired
     private JavaMailSender mailSender;
 
     @Autowired
     private VelocityEngine velocityEngine;
 
-    public MailSender() {}
+    public MailSender(){
+    }
 
     /**
      * Sends a reset password mail to the specified student
@@ -34,10 +34,8 @@ public class MailSender
      * @param token   The reset password token
      */
     @Async
-    public void sendResetMail( final Student student, final String token )
-    {
-        try
-        {
+    public void sendResetMail( final Student student, final String token ){
+        try{
             MimeMessagePreparator preparator = mimeMessage -> {
                 MimeMessageHelper messageHelper = new MimeMessageHelper( mimeMessage );
                 messageHelper.setTo( student.getEmail() );
@@ -49,7 +47,8 @@ public class MailSender
                 messageHelper.setText( text, true );
             };
             mailSender.send( preparator );
-        } catch ( Exception e ) {}
+        }catch( Exception e ){
+        }
     }
 
     /**
@@ -59,10 +58,8 @@ public class MailSender
      * @param lesson  The lesson of the notification
      */
     @Async
-    public void sendNotificationMail( final Student student, final Lesson lesson )
-    {
-        try
-        {
+    public void sendNotificationMail( final Student student, final Lesson lesson ){
+        try{
             MimeMessagePreparator preparator = mimeMessage -> {
                 MimeMessageHelper messageHelper = new MimeMessageHelper( mimeMessage );
                 messageHelper.setTo( student.getEmail() );
@@ -74,7 +71,8 @@ public class MailSender
                 messageHelper.setText( text, true );
             };
             mailSender.send( preparator );
-        } catch ( Exception e ) {}
+        }catch( Exception e ){
+        }
     }
 
     /**
@@ -84,10 +82,8 @@ public class MailSender
      * @param lesson  The lesson that is removed
      */
     @Async
-    public void sendLessonCanceledMail( final Student student, final Lesson lesson )
-    {
-        try
-        {
+    public void sendLessonCanceledMail( final Student student, final Lesson lesson ){
+        try{
             MimeMessagePreparator preparator = mimeMessage -> {
                 MimeMessageHelper messageHelper = new MimeMessageHelper( mimeMessage );
                 messageHelper.setTo( student.getEmail() );
@@ -99,6 +95,7 @@ public class MailSender
                 messageHelper.setText( text, true );
             };
             mailSender.send( preparator );
-        } catch ( Exception e ) {}
+        }catch( Exception e ){
+        }
     }
 }

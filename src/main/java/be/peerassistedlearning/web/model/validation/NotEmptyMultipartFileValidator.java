@@ -7,16 +7,15 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class NotEmptyMultipartFileValidator implements ConstraintValidator<NotEmptyMultipartFile, MultipartFile>
-{
+public class NotEmptyMultipartFileValidator implements ConstraintValidator<NotEmptyMultipartFile, MultipartFile>{
 
     @Autowired
     private PALService service;
 
-    public void initialize( NotEmptyMultipartFile notEmptyMultipartFile ) {}
+    public void initialize( NotEmptyMultipartFile notEmptyMultipartFile ){
+    }
 
-    public boolean isValid( MultipartFile multipartFile, ConstraintValidatorContext constraintValidatorContext )
-    {
+    public boolean isValid( MultipartFile multipartFile, ConstraintValidatorContext constraintValidatorContext ){
         return !multipartFile.isEmpty();
     }
 }

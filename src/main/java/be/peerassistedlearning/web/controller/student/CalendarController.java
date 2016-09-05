@@ -4,8 +4,8 @@ import be.peerassistedlearning.model.Lesson;
 import be.peerassistedlearning.model.Student;
 import be.peerassistedlearning.model.Tutor;
 import be.peerassistedlearning.service.PALService;
-import be.peerassistedlearning.web.model.util.SessionAuth;
 import be.peerassistedlearning.web.model.dto.CalendarDTO;
+import be.peerassistedlearning.web.model.util.SessionAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,34 +23,30 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping( value = "/calendar" )
-public class CalendarController extends StudentController
-{
+public class CalendarController extends StudentController{
     @Autowired
     PALService service;
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getCalendar( ModelMap model )
-    {
+    public ModelAndView getCalendar( ModelMap model ){
         return new ModelAndView( "student/calendar", model );
     }
 
     @ResponseBody
     @RequestMapping( value = "/events", method = RequestMethod.GET )
-    public List<CalendarDTO> getCalendarEvents()
-    {
+    public List<CalendarDTO> getCalendarEvents(){
         Student current = SessionAuth.getStudent();
         Tutor tutor = service.getTutorByStudent( current );
         List<CalendarDTO> events = new ArrayList<>();
 
         events.addAll( service.getUpcomingBookings( current ).stream().map( lesson -> convert( lesson, "#428bca" ) ).collect( Collectors.toList() ) );
-        if ( tutor != null )
+        if( tutor != null )
             events.addAll( service.getLessons( tutor ).stream().map( lesson -> convert( lesson, "#5cb85c" ) ).collect( Collectors.toList() ) );
 
         return events;
     }
 
-    private CalendarDTO convert( Lesson lesson, String color )
-    {
+    private CalendarDTO convert( Lesson lesson, String color ){
         DateFormat dateFormat = new SimpleDateFormat( "YYYY-MM-dd hh:mm:SS" );
         CalendarDTO event = new CalendarDTO();
 

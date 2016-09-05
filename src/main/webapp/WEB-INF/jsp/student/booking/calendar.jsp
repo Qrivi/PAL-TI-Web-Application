@@ -38,7 +38,8 @@
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="course">${mCourses} :</label>
-                            <select id="course" class="form-control select2 select2-hidden-accessible" multiple="multiple"
+                            <select id="course" class="form-control select2 select2-hidden-accessible"
+                                    multiple="multiple"
                                     data-placeholder="${mCourses}" style="width: 100%;" tabindex="-1"
                                     aria-hidden="true">
                                 <option value="">--- ${mCourse} ---</option>

@@ -21,58 +21,53 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-public class RoomCRUDController extends AdminController
-{
+public class RoomCRUDController extends AdminController{
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model )
-    {
-        if ( model.get( "room" ) == null )
+    private ModelMap fillModel( ModelMap model ){
+        if( model.get( "room" ) == null )
             model.addAttribute( "room", new RoomForm() );
-        if ( model.get( "updateRoom" ) == null )
+        if( model.get( "updateRoom" ) == null )
             model.addAttribute( "updateRoom", new RoomUpdateForm() );
-        if ( model.get( "roomTypes" ) == null )
+        if( model.get( "roomTypes" ) == null )
             model.addAttribute( "roomTypes", service.getRoomTypes() );
-        if ( model.get( "campuses" ) == null )
+        if( model.get( "campuses" ) == null )
             model.addAttribute( "campuses", service.getCampuses() );
-        if ( model.get( "rooms" ) == null )
+        if( model.get( "rooms" ) == null )
             model.addAttribute( "rooms", service.getAllRooms() );
         return model;
     }
 
     @RequestMapping( value = "/rooms", method = RequestMethod.GET )
-    public ModelAndView getRoomOverviewPage( ModelMap model )
-    {
+    public ModelAndView getRoomOverviewPage( ModelMap model ){
         return new ModelAndView( "admin/rooms", fillModel( model ) );
     }
 
     @RequestMapping( value = "/rooms", method = RequestMethod.POST )
-    public ModelAndView addRoom( @Valid @ModelAttribute( "room" ) RoomForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView addRoom( @Valid @ModelAttribute( "room" ) RoomForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
+        if( result.hasErrors() )
             return new ModelAndView( "admin/rooms", fillModel( model ) );
 
         service.addRoom( new Room( form.getName(), form.getCampus(), form.getType() ) );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RoomCRUDController.Add", new Object[]{ form.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RoomCRUDController.Add", new Object[]{form.getName()} ) );
 
         return new ModelAndView( "redirect:/admin/rooms" );
     }
 
     @RequestMapping( value = "/rooms", method = RequestMethod.PUT )
-    public ModelAndView updateRoom( @Valid @ModelAttribute( "updateStudent" ) RoomUpdateForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView updateRoom( @Valid @ModelAttribute( "updateStudent" ) RoomUpdateForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
+        if( result.hasErrors() )
             return new ModelAndView( "admin/rooms", fillModel( model ) );
 
         Integer id = form.getId();
 
-        if ( id == null )
+        if( id == null )
             return new ModelAndView( "admin/rooms", fillModel( model ) );
 
         Room r = service.getRoomById( id );
 
-        if ( r == null )
+        if( r == null )
             return new ModelAndView( "admin/rooms", fillModel( model ) );
 
         r.setName( StringUtils.defaultIfEmpty( form.getName(), r.getName() ) );
@@ -80,16 +75,15 @@ public class RoomCRUDController extends AdminController
         r.setType( ObjectUtils.defaultIfNull( form.getType(), r.getType() ) );
 
         service.updateRoom( r );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RoomCRUDController.Update", new Object[]{ form.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RoomCRUDController.Update", new Object[]{form.getName()} ) );
         return new ModelAndView( "redirect:/admin/rooms" );
     }
 
     @RequestMapping( value = "/rooms", method = RequestMethod.DELETE )
-    public String removeRoom( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes )
-    {
+    public String removeRoom( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes ){
         Room r = service.getRoomById( id );
         service.removeRoom( r );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RoomCRUDController.Remove", new Object[]{ r.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.RoomCRUDController.Remove", new Object[]{r.getName()} ) );
         return "redirect:/admin/rooms";
     }
 

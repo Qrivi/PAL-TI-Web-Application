@@ -11,8 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @FieldMatch( first = "password", second = "repeatPassword", message = "{FieldMatch.RegisterForm.password.repeatPassword}" )
-public class RegisterForm
-{
+public class RegisterForm{
 
     @SafeHtml( message = "{Pattern.RegisterForm.name}" )
     @NotEmpty( message = "{NotEmpty.RegisterForm.name}" )
@@ -36,55 +35,46 @@ public class RegisterForm
     @NotNull( message = "{NotNull.RegisterForm.curriculum}" )
     private Curriculum curriculum;
 
-    public RegisterForm() {}
+    public RegisterForm(){
+    }
 
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
     }
 
-    public String getEmail()
-    {
+    public String getEmail(){
         return email;
     }
 
-    public void setEmail( String email )
-    {
+    public void setEmail( String email ){
         this.email = email;
     }
 
-    public Curriculum getCurriculum()
-    {
+    public Curriculum getCurriculum(){
         return curriculum;
     }
 
-    public void setCurriculum( Curriculum curriculum )
-    {
+    public void setCurriculum( Curriculum curriculum ){
         this.curriculum = curriculum;
     }
 
-    public String getPassword()
-    {
+    public String getPassword(){
         return password;
     }
 
-    public void setPassword( String password )
-    {
+    public void setPassword( String password ){
         this.password = password;
     }
 
-    public String getRepeatPassword()
-    {
+    public String getRepeatPassword(){
         return repeatPassword;
     }
 
-    public void setRepeatPassword( String repeatPassword )
-    {
+    public void setRepeatPassword( String repeatPassword ){
         this.repeatPassword = repeatPassword;
     }
 

@@ -12,8 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.Date;
 
-public class LessonForm
-{
+public class LessonForm{
     @SafeHtml
     @NotEmpty( message = "{NotEmpty.LessonForm.name}" )
     private String name;
@@ -43,15 +42,15 @@ public class LessonForm
 
     private Request request;
 
-    public LessonForm() {}
+    public LessonForm(){
+    }
 
-    public LessonForm( Lesson lesson )
-    {
+    public LessonForm( Lesson lesson ){
         name = lesson.getName();
         description = lesson.getDescription();
         date = lesson.getDate();
-        int hours = (int) lesson.getDuration() / 60;
-        int minutes = (int) lesson.getDuration() % 60;
+        int hours = (int)lesson.getDuration() / 60;
+        int minutes = (int)lesson.getDuration() % 60;
         duration = LocalTime.of( hours, minutes );
         course = lesson.getCourse();
         maxParticipants = lesson.getMaxParticipants();
@@ -60,91 +59,75 @@ public class LessonForm
         request = lesson.getRequest();
     }
 
-    public String getName()
-    {
+    public String getName(){
         return name;
     }
 
-    public void setName( String name )
-    {
+    public void setName( String name ){
         this.name = name;
     }
 
-    public String getDescription()
-    {
+    public String getDescription(){
         return description;
     }
 
-    public void setDescription( String description )
-    {
+    public void setDescription( String description ){
         this.description = description;
     }
 
-    public Date getDate()
-    {
+    public Date getDate(){
         return date;
     }
 
-    public void setDate( Date date )
-    {
+    public void setDate( Date date ){
         this.date = date;
     }
 
-    public LocalTime getDuration()
-    {
+    public LocalTime getDuration(){
         return duration;
     }
 
-    public void setDuration( LocalTime duration )
-    {
+    public void setDuration( LocalTime duration ){
         this.duration = duration;
     }
 
-    public Course getCourse()
-    {
+    public Course getCourse(){
         return course;
     }
 
-    public void setCourse( Course course )
-    {
+    public void setCourse( Course course ){
         this.course = course;
     }
 
-    public Integer getMaxParticipants()
-    {
+    public Integer getMaxParticipants(){
         return maxParticipants;
     }
 
-    public void setMaxParticipants( Integer maxParticipants )
-    {
+    public void setMaxParticipants( Integer maxParticipants ){
         this.maxParticipants = maxParticipants;
     }
 
-    public Room getRoom()
-    {
+    public Room getRoom(){
         return room;
     }
 
-    public void setRoom( Room room )
-    {
+    public void setRoom( Room room ){
         this.room = room;
     }
 
-    public Room getBackupRoom()
-    {
+    public Room getBackupRoom(){
         return backupRoom;
     }
 
-    public void setBackupRoom( Room backupRoom )
-    {
+    public void setBackupRoom( Room backupRoom ){
         this.backupRoom = backupRoom;
     }
 
-    public Request getRequest() {
+    public Request getRequest(){
         return request;
     }
 
-    public void setRequest(Request request) {
+    public void setRequest( Request request ){
         this.request = request;
     }
 }

@@ -12,13 +12,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Checks if the given password matched the current session student's password
  */
-@Target( { METHOD , FIELD , ANNOTATION_TYPE } )
+@Target( {METHOD, FIELD, ANNOTATION_TYPE} )
 @Retention( RUNTIME )
 @Constraint( validatedBy = CheckWithSessionPasswordValidator.class )
 @Documented
-public @interface CheckWithSessionPassword
-{
+public @interface CheckWithSessionPassword{
     String message() default "{constraints.checkwithsessionpassword.message}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

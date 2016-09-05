@@ -40,45 +40,46 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="room-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="room-overview" class="table table-striped table-bordered" cellspacing="0"
+                                   width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>${mName}</th>
-                                        <th>${mCampus}</th>
-                                        <th>${mType}</th>
-                                        <th data-orderable="false">${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mName}</th>
+                                    <th>${mCampus}</th>
+                                    <th>${mType}</th>
+                                    <th data-orderable="false">${mActions}</th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th>${mName}</th>
-                                        <th>${mCampus}</th>
-                                        <th>${mType}</th>
-                                        <th>${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mName}</th>
+                                    <th>${mCampus}</th>
+                                    <th>${mType}</th>
+                                    <th>${mActions}</th>
+                                </tr>
                                 </tfoot>
                                 <tbody>
-                                    <c:forEach var="room" items="${rooms}">
-                                        <tr>
-                                            <td>${room.name}</td>
-                                            <td>${room.campus}</td>
-                                            <td>${room.type}</td>
-                                            <td>
-                                                <form class="small" action="<c:url value="/admin/rooms" />" method="POST">
-                                                    <input type="hidden" name="_method" value="delete"/>
-                                                    <input type="hidden" name="id" value="${room.id}"/>
-                                                    <button class="btn btn-sm" data-toggle="tooltip"
-                                                            title="${mDelete}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                                <button class="btn btn-sm update" data-id="${room.id}"
-                                                        data-toggle="tooltip" title="${mEdit}">
-                                                    <i class="fa fa-pencil"></i>
+                                <c:forEach var="room" items="${rooms}">
+                                    <tr>
+                                        <td>${room.name}</td>
+                                        <td>${room.campus}</td>
+                                        <td>${room.type}</td>
+                                        <td>
+                                            <form class="small" action="<c:url value="/admin/rooms" />" method="POST">
+                                                <input type="hidden" name="_method" value="delete"/>
+                                                <input type="hidden" name="id" value="${room.id}"/>
+                                                <button class="btn btn-sm" data-toggle="tooltip"
+                                                        title="${mDelete}">
+                                                    <i class="fa fa-trash"></i>
                                                 </button>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                            </form>
+                                            <button class="btn btn-sm update" data-id="${room.id}"
+                                                    data-toggle="tooltip" title="${mEdit}">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -93,7 +94,8 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mCreate}${' '}${mRoom}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
@@ -110,8 +112,10 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
                                     <form:errors path="campus" element="label"/>
-                                    <form:select path="campus" class="campus form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mCampuses}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <form:select path="campus"
+                                                 class="campus form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="${mCampuses}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <option></option>
                                         <form:options items="${campuses}"/>
                                     </form:select>
@@ -119,7 +123,8 @@
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
                                     <form:select path="type" class="type form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mRoomTypes}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mRoomTypes}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <option></option>
                                         <form:options items="${roomTypes}"/>
                                     </form:select>
@@ -138,14 +143,16 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mUpdate}${' '}${mRoom}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form:form method="put" commandName="updateRoom" enctype="application/x-www-form-urlencoded">
+                            <form:form method="put" commandName="updateRoom"
+                                       enctype="application/x-www-form-urlencoded">
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="campusError"><form:errors path="campus"/></c:set>
                                 <c:set var="typeError"><form:errors path="type"/></c:set>
@@ -156,8 +163,10 @@
                                 </div>
                                 <div class="form-group has-feedback ${ not empty campusError ? 'has-error' : ''}">
                                     <form:errors path="campus" element="label"/>
-                                    <form:select path="campus" class="campus form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mCampuses}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                    <form:select path="campus"
+                                                 class="campus form-control select2 select2-hidden-accessible"
+                                                 data-placeholder="${mCampuses}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <option></option>
                                         <form:options items="${campuses}"/>
                                     </form:select>
@@ -165,7 +174,8 @@
                                 <div class="form-group has-feedback ${ not empty typeError ? 'has-error' : ''}">
                                     <form:errors path="type" element="label"/>
                                     <form:select path="type" class="type form-control select2 select2-hidden-accessible"
-                                                 data-placeholder="${mRoomTypes}" style="width: 100%;" tabindex="-1" aria-hidden="true">
+                                                 data-placeholder="${mRoomTypes}" style="width: 100%;" tabindex="-1"
+                                                 aria-hidden="true">
                                         <option></option>
                                         <form:options items="${roomTypes}"/>
                                     </form:select>

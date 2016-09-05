@@ -7,8 +7,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class ReviewForm
-{
+public class ReviewForm{
     @SafeHtml
     @Size( min = 10, max = 140, message = "{Size.ReviewForm.text}" )
     private String text;
@@ -35,65 +34,54 @@ public class ReviewForm
 
     private boolean anonymous;
 
-    public ReviewForm() {}
-
-    public void setText( String text )
-    {
-        this.text = text;
+    public ReviewForm(){
     }
 
-    public void setContentScore( Integer contentScore )
-    {
-        this.contentScore = contentScore;
-    }
-
-    public void setTutorScore( Integer tutorScore )
-    {
-        this.tutorScore = tutorScore;
-    }
-
-    public void setEngagementScore( Integer engagementScore )
-    {
-        this.engagementScore = engagementScore;
-    }
-
-    public void setAtmosphereScore( Integer atmosphereScore )
-    {
-        this.atmosphereScore = atmosphereScore;
-    }
-
-    public void setAnonymous( boolean anonymous )
-    {
-        this.anonymous = anonymous;
-    }
-
-    public String getText()
-    {
+    public String getText(){
         return text;
     }
 
-    public Integer getContentScore()
-    {
+    public void setText( String text ){
+        this.text = text;
+    }
+
+    public Integer getContentScore(){
         return contentScore;
     }
 
-    public Integer getTutorScore()
-    {
+    public void setContentScore( Integer contentScore ){
+        this.contentScore = contentScore;
+    }
+
+    public Integer getTutorScore(){
         return tutorScore;
     }
 
-    public Integer getEngagementScore()
-    {
+    public void setTutorScore( Integer tutorScore ){
+        this.tutorScore = tutorScore;
+    }
+
+    public Integer getEngagementScore(){
         return engagementScore;
     }
 
-    public Integer getAtmosphereScore()
-    {
+    public void setEngagementScore( Integer engagementScore ){
+        this.engagementScore = engagementScore;
+    }
+
+    public Integer getAtmosphereScore(){
         return atmosphereScore;
     }
 
-    public boolean isAnonymous()
-    {
+    public void setAtmosphereScore( Integer atmosphereScore ){
+        this.atmosphereScore = atmosphereScore;
+    }
+
+    public boolean isAnonymous(){
         return anonymous;
+    }
+
+    public void setAnonymous( boolean anonymous ){
+        this.anonymous = anonymous;
     }
 }

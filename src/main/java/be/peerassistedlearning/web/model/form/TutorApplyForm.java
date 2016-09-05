@@ -6,8 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 
-public class TutorApplyForm
-{
+public class TutorApplyForm{
 
     @NotNull( message = "{NotNull.TutorApplyForm.course}" )
     private Course course;
@@ -16,26 +15,23 @@ public class TutorApplyForm
     @NotNull( message = "{NotNull.TutorApplyForm.screenshot}" )
     private MultipartFile screenshot;
 
-    public TutorApplyForm() {}
-
-    public void setCourse( Course course )
-    {
-        this.course = course;
+    public TutorApplyForm(){
     }
 
-    public void setScreenshot( MultipartFile screenshot )
-    {
-        this.screenshot = screenshot;
-    }
-
-    public Course getCourse()
-    {
+    public Course getCourse(){
         return course;
     }
 
-    public MultipartFile getScreenshot()
-    {
+    public void setCourse( Course course ){
+        this.course = course;
+    }
+
+    public MultipartFile getScreenshot(){
         return screenshot;
+    }
+
+    public void setScreenshot( MultipartFile screenshot ){
+        this.screenshot = screenshot;
     }
 
 }

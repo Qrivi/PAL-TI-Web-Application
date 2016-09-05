@@ -28,14 +28,16 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">${mOverview}</h3>
                     <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="${mCollapse}">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+                                title="${mCollapse}">
                             <i class="fa fa-minus"></i></button>
                     </div>
                 </div>
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="request-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="request-overview" class="table table-striped table-bordered" cellspacing="0"
+                                   width="100%">
                                 <thead>
                                 <tr>
                                     <th>${mTitle}</th>
@@ -68,7 +70,8 @@
                                         <td>${request.creationDate}</td>
                                         <td>${request.upvotes.size()}</td>
                                         <td>
-                                            <form class="small" action="<c:url value="/admin/requests" />" method="POST">
+                                            <form class="small" action="<c:url value="/admin/requests" />"
+                                                  method="POST">
                                                 <input type="hidden" name="_method" value="delete"/>
                                                 <input type="hidden" name="id" value="${request.id}"/>
                                                 <button class="btn btn-sm" data-toggle="tooltip" title="${mDelete}">

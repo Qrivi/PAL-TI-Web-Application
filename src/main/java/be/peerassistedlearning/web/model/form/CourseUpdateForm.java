@@ -2,8 +2,7 @@ package be.peerassistedlearning.web.model.form;
 
 import be.peerassistedlearning.model.Curriculum;
 
-public class CourseUpdateForm
-{
+public class CourseUpdateForm{
 
     private Integer id;
     private String code;
@@ -12,65 +11,54 @@ public class CourseUpdateForm
     private Curriculum curriculum;
     private Integer year;
 
-    public CourseUpdateForm() {}
-
-    public void setId( Integer id )
-    {
-        this.id = id;
+    public CourseUpdateForm(){
     }
 
-    public void setCode( String code )
-    {
-        this.code = code;
-    }
-
-    public void setName( String name )
-    {
-        this.name = name;
-    }
-
-    public void setShortName( String shortName )
-    {
-        this.shortName = shortName;
-    }
-
-    public void setCurriculum( Curriculum curriculum )
-    {
-        this.curriculum = curriculum;
-    }
-
-    public void setYear( Integer year )
-    {
-        this.year = year;
-    }
-
-    public Integer getId()
-    {
+    public Integer getId(){
         return id;
     }
 
-    public String getCode()
-    {
+    public void setId( Integer id ){
+        this.id = id;
+    }
+
+    public String getCode(){
         return code;
     }
 
-    public String getName()
-    {
+    public void setCode( String code ){
+        this.code = code;
+    }
+
+    public String getName(){
         return name;
     }
 
-    public String getShortName()
-    {
+    public void setName( String name ){
+        this.name = name;
+    }
+
+    public String getShortName(){
         return shortName;
     }
 
-    public Curriculum getCurriculum()
-    {
+    public void setShortName( String shortName ){
+        this.shortName = shortName;
+    }
+
+    public Curriculum getCurriculum(){
         return curriculum;
     }
 
-    public Integer getYear()
-    {
+    public void setCurriculum( Curriculum curriculum ){
+        this.curriculum = curriculum;
+    }
+
+    public Integer getYear(){
         return year;
+    }
+
+    public void setYear( Integer year ){
+        this.year = year;
     }
 }

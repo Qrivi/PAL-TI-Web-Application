@@ -1,3 +1,3 @@
-$( document ).ready( function () {
-    $( "#lesson-history-overview" ).DataTable();
-} );
+$(document).ready(function () {
+    $("#lesson-history-overview").DataTable();
+});

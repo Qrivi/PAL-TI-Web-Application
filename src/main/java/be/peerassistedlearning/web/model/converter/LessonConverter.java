@@ -8,18 +8,14 @@ import org.springframework.core.convert.converter.Converter;
 /**
  * Converts a String into the matching Lesson
  */
-public class LessonConverter implements Converter<String, Lesson>
-{
+public class LessonConverter implements Converter<String, Lesson>{
     @Autowired
     private PALService service;
 
-    public Lesson convert( String s )
-    {
-        try
-        {
+    public Lesson convert( String s ){
+        try{
             return service.getLessonById( Integer.parseInt( s ) );
-        } catch ( Exception e )
-        {
+        }catch( Exception e ){
             return null;
         }
     }

@@ -10,16 +10,14 @@ import java.util.TreeSet;
 /**
  * Class used to create a timeline of different events
  */
-public class Timeline
-{
+public class Timeline{
 
     private Set<Archivable> archivables;
 
     /**
      * Default constructor
      */
-    public Timeline()
-    {
+    public Timeline(){
         archivables = new TreeSet<>( new ArchiveCmp() );
     }
 
@@ -29,8 +27,7 @@ public class Timeline
      * @param archivables The collection to add to the timeline
      * @return If the collection is changed as a result of the call
      */
-    public boolean addAll( Collection<? extends Archivable> archivables )
-    {
+    public boolean addAll( Collection<? extends Archivable> archivables ){
         return this.archivables.addAll( archivables );
     }
 
@@ -39,32 +36,28 @@ public class Timeline
      *
      * @param limit The new max size of the set
      */
-    public void limit( int limit )
-    {
-        if ( archivables.size() < limit )
+    public void limit( int limit ){
+        if( archivables.size() < limit )
             return;
         Set<Archivable> limited = new TreeSet<>( new ArchiveCmp() );
-        for ( Archivable a : archivables )
+        for( Archivable a : archivables )
             limited.add( a );
         archivables = limited;
     }
 
     /**
-     * Compares two Archivable object using the getArchiveDate method
+     * @return The archivable list of the timeline
      */
-    private class ArchiveCmp implements Comparator<Archivable>
-    {
-        public int compare( Archivable o1, Archivable o2 )
-        {
-            return o2.getArchiveDate().compareTo( o1.getArchiveDate() );
-        }
+    public Set<Archivable> getArchivables(){
+        return archivables;
     }
 
     /**
-     * @return The archivable list of the timeline
+     * Compares two Archivable object using the getArchiveDate method
      */
-    public Set<Archivable> getArchivables()
-    {
-        return archivables;
+    private class ArchiveCmp implements Comparator<Archivable>{
+        public int compare( Archivable o1, Archivable o2 ){
+            return o2.getArchiveDate().compareTo( o1.getArchiveDate() );
+        }
     }
 }

@@ -58,44 +58,44 @@
                 </div>
                 <c:if test="${review != null}">
                     <div class="box-footer">
-                    <div class="row">
-                        <div class="col-md-1">
-                            <div class="row">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <img class="img-responsive img-circle img-sm"
-                                         src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
-                                         alt="Avatar">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="row">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <img class="img-responsive img-circle img-sm"
+                                             src="<c:url value="/resources/students/${auth.id}/avatar.png"/>"
+                                             alt="Avatar">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-11">
-                            <!-- .img-push is used to add margin to elements next to floating images -->
-                            <div class="img-push row">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <span class="lead"><c:out value="${review.text}"/></span>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>${mTutor}: </span>
-                                        <div class="rating" data-rating="${review.engagementScore}"></div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>${mEngagement}: </span>
-                                        <div class="rating" data-rating="${review.engagementScore}"></div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>${mAmbiance}: </span>
-                                        <div class="rating" data-rating="${review.atmosphereScore}"></div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <span>${mContent}: </span>
-                                        <div class="rating" data-rating="${review.contentScore}"></div>
+                            <div class="col-md-11">
+                                <!-- .img-push is used to add margin to elements next to floating images -->
+                                <div class="img-push row">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="lead"><c:out value="${review.text}"/></span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span>${mTutor}: </span>
+                                            <div class="rating" data-rating="${review.engagementScore}"></div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span>${mEngagement}: </span>
+                                            <div class="rating" data-rating="${review.engagementScore}"></div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span>${mAmbiance}: </span>
+                                            <div class="rating" data-rating="${review.atmosphereScore}"></div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <span>${mContent}: </span>
+                                            <div class="rating" data-rating="${review.contentScore}"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </c:if>
             </div>
         </div>

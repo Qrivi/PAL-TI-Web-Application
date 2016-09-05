@@ -5,7 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="req" value="${pageContext.request}"/>
-<c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
+<c:set var="baseURL"
+       value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
 <spring:message code="Review.review" var="mReview"/>
 <spring:message code="Review.courseS" var="mCourseS"/>
@@ -65,8 +66,12 @@
                                             </ul>
                                         </div>
                                         <div class="col-md-4 col-sm-4 col-xs-4 pull-right">
-                                            <a href="<c:url value="/profile/${lesson.tutor.student.profileIdentifier}"/>" alt="Tutor info">
-                                                <img class="img-responsive img-circle" src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>" alt="Tutor profile picture" style="padding:10px;max-width: 80px; max-height: 80px;">
+                                            <a href="<c:url value="/profile/${lesson.tutor.student.profileIdentifier}"/>"
+                                               alt="Tutor info">
+                                                <img class="img-responsive img-circle"
+                                                     src="<c:url value="/resources/students/${lesson.tutor.student.id}/avatar.png"/>"
+                                                     alt="Tutor profile picture"
+                                                     style="padding:10px;max-width: 80px; max-height: 80px;">
                                             </a>
                                         </div>
                                     </div>
@@ -90,12 +95,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <div class="pull-right">
-                                        <span class="label label-primary"><fmt:formatDate value="${lesson.date}" pattern="hh:mm dd MMMMMMMMM YYYY"/> - ${lesson.duration}min.</span>
+                                        <span class="label label-primary"><fmt:formatDate value="${lesson.date}"
+                                                                                          pattern="hh:mm dd MMMMMMMMM YYYY"/> - ${lesson.duration}min.</span>
                                     </div>
                                     <h4>${mLesson}</h4>
                                     <ul>
                                         <li>${lesson.name}</li>
-                                        <li>${lesson.room.name}, ${lesson.room.campus} or ${lesson.backupRoom.name}, ${lesson.backupRoom.campus}</li>
+                                        <li>${lesson.room.name}, ${lesson.room.campus}
+                                            or ${lesson.backupRoom.name}, ${lesson.backupRoom.campus}</li>
                                     </ul>
                                 </div>
                             </div>

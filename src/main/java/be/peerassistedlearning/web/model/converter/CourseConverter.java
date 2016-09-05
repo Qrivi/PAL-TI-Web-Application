@@ -8,18 +8,14 @@ import org.springframework.core.convert.converter.Converter;
 /**
  * Converts a String into the matching Room
  */
-public class CourseConverter implements Converter<String, Course>
-{
+public class CourseConverter implements Converter<String, Course>{
     @Autowired
     private PALService service;
 
-    public Course convert( String s )
-    {
-        try
-        {
+    public Course convert( String s ){
+        try{
             return service.getCourseById( Integer.parseInt( s ) );
-        } catch ( Exception e )
-        {
+        }catch( Exception e ){
             return null;
         }
     }

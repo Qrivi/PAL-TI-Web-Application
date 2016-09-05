@@ -17,8 +17,7 @@ import java.util.ArrayList;
 /**
  * Class used to authenticate students
  */
-public class AuthenticationProviderImpl implements AuthenticationProvider
-{
+public class AuthenticationProviderImpl implements AuthenticationProvider{
 
     @Autowired
     private PALService service;
@@ -30,31 +29,26 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
      * @return A valid UsernamePasswordAuthenticationToken if the authentication is valid, otherwise null is returned
      * @throws AuthenticationException This exception is never thrown
      */
-    public Authentication authenticate( Authentication auth ) throws AuthenticationException
-    {
+    public Authentication authenticate( Authentication auth ) throws AuthenticationException{
         final String email = auth.getName().toLowerCase();
         final String password = auth.getCredentials().toString();
         final Student student;
         final Tutor tutor;
 
-        try
-        {
+        try{
             student = service.getStudentByEmail( email );
             tutor = service.getTutorByStudent( student );
-        } catch ( Exception e )
-        {
+        }catch( Exception e ){
             return null;
         }
 
-        if ( student != null && student.isPasswordValid( password ) )
-        {
-            return new UsernamePasswordAuthenticationToken( student, password, new ArrayList<GrantedAuthority>()
-            {
+        if( student != null && student.isPasswordValid( password ) ){
+            return new UsernamePasswordAuthenticationToken( student, password, new ArrayList<GrantedAuthority>(){
                 {
                     add( new SimpleGrantedAuthority( "ROLE_USER" ) );
-                    if ( tutor != null )
+                    if( tutor != null )
                         add( new SimpleGrantedAuthority( "ROLE_TUTOR" ) );
-                    if ( student.getType().equals( UserType.ADMIN ) )
+                    if( student.getType().equals( UserType.ADMIN ) )
                         add( new SimpleGrantedAuthority( "ROLE_ADMIN" ) );
                 }
             } );
@@ -69,8 +63,7 @@ public class AuthenticationProviderImpl implements AuthenticationProvider
      * @param type The class to check
      * @return If the class equals UsernamePasswordAuthenticationToken
      */
-    public boolean supports( Class<?> type )
-    {
+    public boolean supports( Class<?> type ){
         return type.equals( UsernamePasswordAuthenticationToken.class );
     }
 

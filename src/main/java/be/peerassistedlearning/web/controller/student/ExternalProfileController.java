@@ -26,64 +26,56 @@ import java.util.Date;
 
 @Controller
 @RequestMapping( value = "/profile/{identifier:.+}" )
-public class ExternalProfileController extends StudentController
-{
+public class ExternalProfileController extends StudentController{
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model, Student student )
-    {
-        if ( student.equals( SessionAuth.getStudent() ) )
+    private ModelMap fillModel( ModelMap model, Student student ){
+        if( student.equals( SessionAuth.getStudent() ) )
             model = fillModel2( model, student );
-        if ( model.get( "user" ) == null )
+        if( model.get( "user" ) == null )
             model.addAttribute( "user", student );
-        if ( model.get( "pastBookings" ) == null )
+        if( model.get( "pastBookings" ) == null )
             model.addAttribute( "pastBookings", service.getPastBookings( student ).size() );
-        if ( model.get( "upcomingBookings" ) == null )
+        if( model.get( "upcomingBookings" ) == null )
             model.addAttribute( "upcomingBookings", service.getUpcomingBookings( student ).size() );
         return model;
     }
 
-    private ModelMap fillModel2( ModelMap model, Student student )
-    {
-        if ( model.get( "profile" ) == null )
-        {
+    private ModelMap fillModel2( ModelMap model, Student student ){
+        if( model.get( "profile" ) == null ){
             ProfileForm profile = new ProfileForm();
             profile.setSubscriptions( student.getSubscriptions() );
             model.addAttribute( "profile", profile );
         }
-        if ( model.get( "courses" ) == null )
+        if( model.get( "courses" ) == null )
             model.addAttribute( "courses", service.getAllCourses() );
         return model;
     }
 
     @RequestMapping( method = RequestMethod.GET )
-    public ModelAndView getProfile( @PathVariable( "identifier" ) String id, ModelMap model )
-    {
+    public ModelAndView getProfile( @PathVariable( "identifier" ) String id, ModelMap model ){
         Student student = service.getStudentByProfileIdentifier( id );
 
-        if ( student == null )
+        if( student == null )
             return new ModelAndView( "redirect:/profile" );
 
         return new ModelAndView( "student/profile", fillModel( model, student ) );
     }
 
     @RequestMapping( method = RequestMethod.POST )
-    public ModelAndView modifyStudentProfile( @PathVariable( "identifier" ) String id, @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView modifyStudentProfile( @PathVariable( "identifier" ) String id, @Valid @ModelAttribute( "profile" ) ProfileForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
+        if( result.hasErrors() )
             return new ModelAndView( "student/profile", fillModel( model, SessionAuth.getStudent() ) );
 
         Student student = SessionAuth.getStudent();
         Student s = service.getStudentByProfileIdentifier( id );
 
-        if ( !s.equals( student ) )
+        if( !s.equals( student ) )
             return new ModelAndView( "redirect:/profile" );
 
-        if ( !form.getAvatar().isEmpty() )
-        {
-            try
-            {
+        if( !form.getAvatar().isEmpty() ){
+            try{
                 MultipartFile avatar = form.getAvatar();
 
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -96,8 +88,7 @@ public class ExternalProfileController extends StudentController
                 byte[] imageBytes = bos.toByteArray();
 
                 student.setAvatar( new Image( imageBytes, new Date() ) );
-            } catch ( Exception e )
-            {
+            }catch( Exception e ){
                 result.reject( "SaveFile.ProfileForm.avatar" );
                 return new ModelAndView( "student/profile", fillModel( model, student ) );
             }
@@ -115,8 +106,7 @@ public class ExternalProfileController extends StudentController
     }
 
     @RequestMapping( value = "/timeline", method = RequestMethod.GET )
-    public ModelAndView getTimeline( @PathVariable( "identifier" ) String id, @RequestParam( value = "offset", required = true ) int offset, @RequestParam( value = "limit", required = true ) int limit, ModelMap model )
-    {
+    public ModelAndView getTimeline( @PathVariable( "identifier" ) String id, @RequestParam( value = "offset", required = true ) int offset, @RequestParam( value = "limit", required = true ) int limit, ModelMap model ){
         Student current = service.getStudentByProfileIdentifier( id );
 
         Timeline timeline = new Timeline();
@@ -124,8 +114,7 @@ public class ExternalProfileController extends StudentController
         timeline.addAll( service.getPastBookings( current, offset, limit ) );
         timeline.addAll( service.getReviews( current, offset, limit ) );
 
-        if ( current.getTutor() != null )
-        {
+        if( current.getTutor() != null ){
             timeline.addAll( service.getPastLessons( current.getTutor(), offset, limit ) );
             timeline.addAll( service.getReviews( current.getTutor(), offset, limit ) );
         }

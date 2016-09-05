@@ -7,15 +7,11 @@ import java.time.LocalTime;
 /**
  * Converts a LocalTime into the matching String
  */
-public class TimeInverseConverter implements Converter<LocalTime, String>
-{
-    public String convert( LocalTime localTime )
-    {
-        try
-        {
+public class TimeInverseConverter implements Converter<LocalTime, String>{
+    public String convert( LocalTime localTime ){
+        try{
             return localTime.toString();
-        } catch ( Exception e )
-        {
+        }catch( Exception e ){
             return null;
         }
     }

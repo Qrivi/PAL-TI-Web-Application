@@ -106,7 +106,9 @@
         <property name="velocityProperties">
             <props>
                 <prop key="resource.loader">classpath</prop>
-                <prop key="classpath.resource.loader.class">org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+                <prop key="classpath.resource.loader.class">
+                    org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+                </prop>
             </props>
         </property>
     </bean>

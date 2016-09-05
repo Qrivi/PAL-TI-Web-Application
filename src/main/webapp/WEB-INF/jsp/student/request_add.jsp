@@ -5,7 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="req" value="${pageContext.request}"/>
-<c:set var="baseURL" value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
+<c:set var="baseURL"
+       value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
 
 <spring:message code="Request.allRequests" var="mAllRequests"/>
 <spring:message code="Request.allMyRequests" var="mMyRequests"/>
@@ -41,7 +42,8 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    <form:form action="${pageContext.request.contextPath}/request/add" method="POST" commandName="request">
+                    <form:form action="${pageContext.request.contextPath}/request/add" method="POST"
+                               commandName="request">
                         <c:set var="courseError"><form:errors path="course"/></c:set>
                         <c:set var="titleError"><form:errors path="title"/></c:set>
                         <c:set var="descriptionError"><form:errors path="description"/></c:set>
@@ -56,7 +58,8 @@
                             <div class="col-md-3 form-group has-feedback">
                                 <form:label path="course">${mCourse} : <c:if test="${not empty courseError}"><span
                                         class="text-danger">${courseError}</span></c:if></form:label>
-                                <form:select id="request_course" path="course" class="form-control select2 select2-hidden-accessible"
+                                <form:select id="request_course" path="course"
+                                             class="form-control select2 select2-hidden-accessible"
                                              data-placeholder="${mCourse}" style="width: 100%;" tabindex="-1"
                                              aria-hidden="true">
                                     <option></option>
@@ -93,7 +96,8 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <table id="request-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="request-overview" class="table table-striped table-bordered" cellspacing="0"
+                               width="100%">
                             <thead>
                             <tr>
                                 <th>${mUpvotes}</th>
@@ -105,11 +109,13 @@
                             <tbody>
                             <c:forEach var="request" items="${myRequests}">
                                 <tr>
-                                    <td><span class="label label-default"><i class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
+                                    <td><span class="label label-default"><i
+                                            class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
                                     <td>${request.title}</td>
                                     <td>${request.course.name}</td>
                                     <td>
-                                        <a href="<c:url value="/request/${request.id}"/>" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                                        <a href="<c:url value="/request/${request.id}"/>"
+                                           class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -133,26 +139,29 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <table id="request-overview" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="request-overview" class="table table-striped table-bordered" cellspacing="0"
+                               width="100%">
                             <thead>
-                                <tr>
-                                    <th>${mUpvotes}</th>
-                                    <th>${mTitle}</th>
-                                    <th>${mCourse}</th>
-                                    <th data-orderable="false">${mInfo}</th>
-                                </tr>
+                            <tr>
+                                <th>${mUpvotes}</th>
+                                <th>${mTitle}</th>
+                                <th>${mCourse}</th>
+                                <th data-orderable="false">${mInfo}</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="request" items="${requests}">
-                                    <tr>
-                                        <td><span class="label label-default"><i class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
-                                        <td>${request.title}</td>
-                                        <td>${request.course.name}</td>
-                                        <td>
-                                            <a href="<c:url value="/request/${request.id}"/>" class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
+                            <c:forEach var="request" items="${requests}">
+                                <tr>
+                                    <td><span class="label label-default"><i
+                                            class="fa fa-thumbs-up"></i> ${request.upvotes.size()}</span></td>
+                                    <td>${request.title}</td>
+                                    <td>${request.course.name}</td>
+                                    <td>
+                                        <a href="<c:url value="/request/${request.id}"/>"
+                                           class="btn btn-sm btn-info pull-right"><i class="fa fa-info"></i></a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>

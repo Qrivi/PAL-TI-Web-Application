@@ -99,8 +99,8 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text">${requested.lesson.course.shortName}</span>
                                             <span class="info-box-text">${requested.lesson.name}</span>
-                                                <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM hh:mm"
-                                                                                            value="${requested.lesson.date}"/> - ${requested.lesson.room.name}</span>
+                                            <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM hh:mm"
+                                                                                        value="${requested.lesson.date}"/> - ${requested.lesson.room.name}</span>
                                             <div class="progress">
                                                 <div class="progress-bar"
                                                      style="width: ${requested.lesson.bookings.size()/requested.lesson.maxParticipants*100}%"></div>
@@ -133,8 +133,8 @@
                             <div class="panel no-margin">
                                 <div class="panel-heading">
                                     <h4 class="box-title">${mUpvotes}</h4>
-                            <span class="label label-default"><i
-                                    class="fa fa-thumbs-up"></i> ${requested.upvotes.size()}</span>
+                                    <span class="label label-default"><i
+                                            class="fa fa-thumbs-up"></i> ${requested.upvotes.size()}</span>
                                 </div>
                                 <div class="panel-body">
                                     <c:if test="${empty requested.upvotes}">

@@ -49,7 +49,8 @@
             <li class="${nav_item == "rooms" ? "active" : "" }"><a
                     href="<c:url value="/admin/rooms"/>"><i class="fa fa-building"></i><span>${mRooms}</span></a></li>
             <li class="${nav_item == "applications" ? "active" : "" }"><a
-                    href="<c:url value="/admin/applications"/>"><i class="fa fa-file-text"></i><span>${mApplications}</span>
+                    href="<c:url value="/admin/applications"/>"><i
+                    class="fa fa-file-text"></i><span>${mApplications}</span>
                 <small id="application-count" class="label pull-right bg-red"></small>
             </a></li>
             <li class="${nav_item == "lessons" ? "active" : "" }"><a
@@ -59,16 +60,19 @@
                     href="<c:url value="/admin/tutors"/>"><i class="fa fa-briefcase"></i><span>${mTutors}</span></a>
             </li>
             <li class="${nav_item == "reviews" ? "active" : "" }"><a
-                    href="<c:url value="/admin/reviews"/>"><i class="fa fa-commenting-o"></i><span>${mReviews}</span></a>
+                    href="<c:url value="/admin/reviews"/>"><i
+                    class="fa fa-commenting-o"></i><span>${mReviews}</span></a>
             </li>
             <li class="${nav_item == "requests" ? "active" : ""}"><a
-                    href="<c:url value="/admin/requests"/>"><i class="fa fa-question-circle"></i><span>${mRequests}</span></a>
+                    href="<c:url value="/admin/requests"/>"><i
+                    class="fa fa-question-circle"></i><span>${mRequests}</span></a>
             </li>
         </sec:authorize>
         <sec:authorize access="hasRole('ROLE_TUTOR')">
             <li class="header">${mNavTutor}</li>
             <li class="${nav_item == "tutor_lesson_add" ? "active" : ""}"><a
-                    href="<c:url value="/tutor/lessons/add"/>"><i class="fa fa-calendar-plus-o"></i><span>${mMakeLesson}</span></a>
+                    href="<c:url value="/tutor/lessons/add"/>"><i
+                    class="fa fa-calendar-plus-o"></i><span>${mMakeLesson}</span></a>
             </li>
             <li class="${nav_item == "tutor_lessons" ? "active" : ""}"><a
                     href="<c:url value="/tutor/lessons"/>"><i
@@ -78,7 +82,8 @@
         <sec:authorize access="hasRole('ROLE_USER')">
             <li class="header">${mNavMain}</li>
             <li class="${nav_item == "profile" ? "active" : "" }"><a
-                    href="<c:url value="/profile/${auth.profileIdentifier}"/>"><i class="fa fa-user"></i><span>${mProfile}</span></a>
+                    href="<c:url value="/profile/${auth.profileIdentifier}"/>"><i
+                    class="fa fa-user"></i><span>${mProfile}</span></a>
             </li>
             <li class="${nav_item == "calendar" ? "active" : "" }"><a
                     href="<c:url value="/calendar"/>"><i class="fa fa-calendar"></i><span>${mCalendar}</span></a>
@@ -90,14 +95,17 @@
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="${nav_item == "booking_table" ? "active" : "" }"><a href="<c:url value="/booking/table"/>"><i
+                    <li class="${nav_item == "booking_table" ? "active" : "" }"><a
+                            href="<c:url value="/booking/table"/>"><i
                             class="fa fa-th-list"></i>${mByTable}</a></li>
-                    <li class="${nav_item == "booking_calendar" ? "active" : "" }"><a href="<c:url value="/booking/calendar"/>"><i
+                    <li class="${nav_item == "booking_calendar" ? "active" : "" }"><a
+                            href="<c:url value="/booking/calendar"/>"><i
                             class="fa fa-calendar"></i>${mByCalendar}</a></li>
                 </ul>
             </li>
             <li class="${nav_item == "request" ? "active" : "" }"><a
-                    href="<c:url value="/request"/>"><i class="fa fa-plus-square-o"></i><span>${mRequestLesson}</span></a>
+                    href="<c:url value="/request"/>"><i
+                    class="fa fa-plus-square-o"></i><span>${mRequestLesson}</span></a>
             </li>
             <li class="${nav_item == "apply" ? "active" : "" }"><a
                     href="<c:url value="/apply"/>"><i class="fa fa-check-circle-o"></i><span>${mApplyForTutoring}</span></a>

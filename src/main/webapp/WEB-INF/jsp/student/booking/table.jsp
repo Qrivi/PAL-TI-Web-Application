@@ -70,7 +70,8 @@
                                                 </button>
                                             </form>
                                         </div>
-                                        <a href="<c:url value="/profile/${booking.tutor.student.profileIdentifier}"/>" alt="Tutor info">
+                                        <a href="<c:url value="/profile/${booking.tutor.student.profileIdentifier}"/>"
+                                           alt="Tutor info">
                                                     <span class="info-box-icon">
                                                         <img class="img-circle"
                                                              src="<c:url value="/resources/students/${booking.tutor.student.id}/avatar.png"/>"
@@ -80,8 +81,8 @@
                                         <div class="info-box-content">
                                             <span class="info-box-text">${booking.course.shortName}</span>
                                             <span class="info-box-text">${booking.name}</span>
-                                                <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM hh:mm"
-                                                                                            value="${booking.date}"/> - ${booking.room.name}</span>
+                                            <span class="info-box-text"><fmt:formatDate pattern="EEE. dd/MM hh:mm"
+                                                                                        value="${booking.date}"/> - ${booking.room.name}</span>
                                             <div class="progress">
                                                 <div class="progress-bar"
                                                      style="width: ${booking.bookings.size()/booking.maxParticipants*100}%"></div>
@@ -124,71 +125,74 @@
                                        cellspacing="0"
                                        width="100%">
                                     <thead>
-                                        <tr>
-                                            <th>${mName}</th>
-                                            <th>${mCourse}</th>
-                                            <th>${mDate}</th>
-                                            <th>${mDuration}</th>
-                                            <th>${mParticipants}</th>
-                                            <th>${mTutor}</th>
-                                            <th data-orderable="false">${mActions}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>${mName}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mDuration}</th>
+                                        <th>${mParticipants}</th>
+                                        <th>${mTutor}</th>
+                                        <th data-orderable="false">${mActions}</th>
+                                    </tr>
                                     </thead>
                                     <tfoot>
-                                        <tr>
-                                            <th>${mName}</th>
-                                            <th>${mCourse}</th>
-                                            <th>${mDate}</th>
-                                            <th>${mDuration}</th>
-                                            <th>${mParticipants}</th>
-                                            <th>${mTutor}</th>
-                                            <th>${mActions}</th>
-                                        </tr>
+                                    <tr>
+                                        <th>${mName}</th>
+                                        <th>${mCourse}</th>
+                                        <th>${mDate}</th>
+                                        <th>${mDuration}</th>
+                                        <th>${mParticipants}</th>
+                                        <th>${mTutor}</th>
+                                        <th>${mActions}</th>
+                                    </tr>
                                     </tfoot>
                                     <tbody>
-                                        <c:forEach var="lesson" items="${lessons}">
-                                            <tr>
-                                                <td>${lesson.name}</td>
-                                                <td>${lesson.course.name}</td>
-                                                <td>${lesson.date}</td>
-                                                <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
-                                                <td>
-                                                    <div class="progress progress-xs">
-                                                        <div class="progress-bar
+                                    <c:forEach var="lesson" items="${lessons}">
+                                        <tr>
+                                            <td>${lesson.name}</td>
+                                            <td>${lesson.course.name}</td>
+                                            <td>${lesson.date}</td>
+                                            <td><fmt:formatNumber maxFractionDigits="0"
+                                                                  value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber
+                                                    value="${lesson.duration%60}" type="number"
+                                                    minIntegerDigits="2"/></td>
+                                            <td>
+                                                <div class="progress progress-xs">
+                                                    <div class="progress-bar
                                                             <c:set var="percentage" value="${lesson.bookings.size()/lesson.maxParticipants*100}"/>
                                                             <c:choose>
                                                                 <c:when test="${percentage < 60}">progress-bar-success</c:when>
                                                                 <c:when test="${percentage > 60 and percentage < 100}">progress-bar-warning</c:when>
                                                                 <c:when test="${percentage == 100}">progress-bar-danger</c:when>
                                                             </c:choose>"
-                                                             style="width: ${lesson.bookings.size()/lesson.maxParticipants*100}%"></div>
-                                                    </div>
-                                                        ${lesson.bookings.size()}/${lesson.maxParticipants}
-                                                </td>
-                                                <td>${lesson.tutor.student.name}</td>
-                                                <td>
-                                                    <c:if test="${percentage < 100 and not myOpenBookings.contains(lesson)}">
-                                                        <form action="<c:url value="/booking/register/${lesson.id}" />"
-                                                              method="POST">
-                                                            <button type="submit"
-                                                                    class="btn btn-success btn-sm" data-toggle="tooltip"
-                                                                    title="${mRegister}">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                    <c:if test="${myOpenBookings.contains(lesson)}">
-                                                        <form action="<c:url value="/booking/unregister/${lesson.id}" />"
-                                                              method="POST">
-                                                            <button class="btn btn-danger btn-sm" data-toggle="tooltip"
-                                                                    title="${mUnregister}">
-                                                                <i class="fa fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                                                         style="width: ${lesson.bookings.size()/lesson.maxParticipants*100}%"></div>
+                                                </div>
+                                                    ${lesson.bookings.size()}/${lesson.maxParticipants}
+                                            </td>
+                                            <td>${lesson.tutor.student.name}</td>
+                                            <td>
+                                                <c:if test="${percentage < 100 and not myOpenBookings.contains(lesson)}">
+                                                    <form action="<c:url value="/booking/register/${lesson.id}" />"
+                                                          method="POST">
+                                                        <button type="submit"
+                                                                class="btn btn-success btn-sm" data-toggle="tooltip"
+                                                                title="${mRegister}">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </form>
+                                                </c:if>
+                                                <c:if test="${myOpenBookings.contains(lesson)}">
+                                                    <form action="<c:url value="/booking/unregister/${lesson.id}" />"
+                                                          method="POST">
+                                                        <button class="btn btn-danger btn-sm" data-toggle="tooltip"
+                                                                title="${mUnregister}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </c:if>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

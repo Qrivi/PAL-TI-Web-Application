@@ -6,8 +6,7 @@ import org.springframework.web.util.HtmlUtils;
 /**
  * Represents a calendar event
  */
-public class CalendarDTO
-{
+public class CalendarDTO{
     @JsonProperty( index = 0, value = "id" )
     private int id;
 
@@ -35,92 +34,78 @@ public class CalendarDTO
     @JsonProperty( index = 8, value = "color" )
     private String color;
 
-    public CalendarDTO() {}
-
-    public void setId( int id )
-    {
-        this.id = id;
+    public CalendarDTO(){
     }
 
-    public void setTitle( String title )
-    {
-        this.title = title;
-    }
-
-    public void setDescription( String description )
-    {
-        this.description = description;
-    }
-
-    public void setStart( String start )
-    {
-        this.start = start;
-    }
-
-    public void setEnd( String end )
-    {
-        this.end = end;
-    }
-
-    public void setColor( String color )
-    {
-        this.color = color;
-    }
-
-    public void setTutorName( String tutorName )
-    {
-        this.tutorName = tutorName;
-    }
-
-    public void setCourseName( String courseName )
-    {
-        this.courseName = courseName;
-    }
-
-    public void setRegistered( boolean registered )
-    {
-        this.registered = registered;
-    }
-
-    public int getId()
-    {
+    public int getId(){
         return id;
     }
 
-    public String getTitle()
-    {
+    public void setId( int id ){
+        this.id = id;
+    }
+
+    public String getTitle(){
         return HtmlUtils.htmlEscape( title );
     }
 
-    public String getDescription()
-    {
+    public void setTitle( String title ){
+        this.title = title;
+    }
+
+    public String getDescription(){
         return HtmlUtils.htmlEscape( description );
     }
 
-    public String getColor()
-    {
+    public void setDescription( String description ){
+        this.description = description;
+    }
+
+    public String getColor(){
         return HtmlUtils.htmlEscape( color );
     }
 
-    public String getStart() { return HtmlUtils.htmlEscape( start ); }
+    public void setColor( String color ){
+        this.color = color;
+    }
 
-    public String getEnd()
-    {
+    public String getStart(){
+        return HtmlUtils.htmlEscape( start );
+    }
+
+    public void setStart( String start ){
+        this.start = start;
+    }
+
+    public String getEnd(){
         return HtmlUtils.htmlEscape( end );
     }
 
-    public String getTutorName()
-    {
+    public void setEnd( String end ){
+        this.end = end;
+    }
+
+    public String getTutorName(){
         return HtmlUtils.htmlEscape( tutorName );
     }
 
-    public String getCourseName()
-    {
+    public void setTutorName( String tutorName ){
+        this.tutorName = tutorName;
+    }
+
+    public String getCourseName(){
         return HtmlUtils.htmlEscape( courseName );
     }
 
-    public boolean isRegistered()
-    {
+    public void setCourseName( String courseName ){
+        this.courseName = courseName;
+    }
+
+    public boolean isRegistered(){
         return registered;
+    }
+
+    public void setRegistered( boolean registered ){
+        this.registered = registered;
     }
 }

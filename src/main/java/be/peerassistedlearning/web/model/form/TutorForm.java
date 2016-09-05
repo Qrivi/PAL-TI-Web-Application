@@ -4,17 +4,18 @@ import be.peerassistedlearning.model.Course;
 
 import javax.validation.constraints.NotNull;
 
-public class TutorForm {
-    @NotNull(message = "NotNull.TutorForm.course")
+public class TutorForm{
+    @NotNull( message = "NotNull.TutorForm.course" )
     private Course course;
 
-    public TutorForm(){}
+    public TutorForm(){
+    }
 
-    public Course getCourse() {
+    public Course getCourse(){
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse( Course course ){
         this.course = course;
     }
 }

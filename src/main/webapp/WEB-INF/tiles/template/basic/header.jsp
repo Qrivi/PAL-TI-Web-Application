@@ -24,12 +24,14 @@
                 <li><a href="?lang=nl">nl</a></li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<c:url value="/resources/students/${auth.id}/avatar.png"/>" class="user-image" alt="User Image">
+                        <img src="<c:url value="/resources/students/${auth.id}/avatar.png"/>" class="user-image"
+                             alt="User Image">
                         <span class="hidden-xs">${auth.name}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="user-header">
-                            <img src="<c:url value="/resources/students/${auth.id}/avatar.png"/>" class="img-circle" alt="User Image">
+                            <img src="<c:url value="/resources/students/${auth.id}/avatar.png"/>" class="img-circle"
+                                 alt="User Image">
                             <p>
                                 ${auth.name}
                                 <small>${auth.email}</small>

@@ -45,60 +45,62 @@
                             <table id="lesson-overview" class="table table-striped table-bordered"
                                    cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>${mName}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mDescription}</th>
-                                        <th>${mDate}</th>
-                                        <th>${mDuration}</th>
-                                        <th>${mMaxParticipants}</th>
-                                        <th>${mTutor}</th>
-                                        <th>${mRoom}</th>
-                                        <th>${mBackupRoom}</th>
-                                        <th>${mRegisteredStudents}</th>
-                                        <th data-orderable="false">${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mName}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mDescription}</th>
+                                    <th>${mDate}</th>
+                                    <th>${mDuration}</th>
+                                    <th>${mMaxParticipants}</th>
+                                    <th>${mTutor}</th>
+                                    <th>${mRoom}</th>
+                                    <th>${mBackupRoom}</th>
+                                    <th>${mRegisteredStudents}</th>
+                                    <th data-orderable="false">${mActions}</th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th>${mName}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mDescription}</th>
-                                        <th>${mDate}</th>
-                                        <th>${mDuration}</th>
-                                        <th>${mMaxParticipants}</th>
-                                        <th>${mTutor}</th>
-                                        <th>${mRoom}</th>
-                                        <th>${mBackupRoom}</th>
-                                        <th>${mRegisteredStudents}</th>
-                                        <th>${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mName}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mDescription}</th>
+                                    <th>${mDate}</th>
+                                    <th>${mDuration}</th>
+                                    <th>${mMaxParticipants}</th>
+                                    <th>${mTutor}</th>
+                                    <th>${mRoom}</th>
+                                    <th>${mBackupRoom}</th>
+                                    <th>${mRegisteredStudents}</th>
+                                    <th>${mActions}</th>
+                                </tr>
                                 </tfoot>
                                 <tbody>
-                                    <c:forEach var="lesson" items="${lessons}">
-                                        <tr>
-                                            <td>${lesson.name}</td>
-                                            <td>${lesson.course.shortName}</td>
-                                            <td>${lesson.description}</td>
-                                            <td>${lesson.date}</td>
-                                            <td><fmt:formatNumber maxFractionDigits="0" value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
-                                            <td>${lesson.maxParticipants}</td>
-                                            <td>${lesson.tutor.student.name}</td>
-                                            <td>${lesson.room.name}</td>
-                                            <td>${lesson.backupRoom.name}</td>
-                                            <td>${lesson.bookings.size()}</td>
-                                            <td>
-                                                <form action="<c:url value="/admin/lessons" />" method="POST">
-                                                    <input type="hidden" name="_method" value="delete"/>
-                                                    <input type="hidden" name="id" value="${lesson.id}"/>
-                                                    <button class="btn btn-sm" data-toggle="tooltip"
-                                                            title="${mDelete}" data-toggle="tooltip">
-                                                        <i class="fa fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach var="lesson" items="${lessons}">
+                                    <tr>
+                                        <td>${lesson.name}</td>
+                                        <td>${lesson.course.shortName}</td>
+                                        <td>${lesson.description}</td>
+                                        <td>${lesson.date}</td>
+                                        <td><fmt:formatNumber maxFractionDigits="0"
+                                                              value="${(lesson.duration-0.5)/60}"/>:<fmt:formatNumber
+                                                value="${lesson.duration%60}" type="number" minIntegerDigits="2"/></td>
+                                        <td>${lesson.maxParticipants}</td>
+                                        <td>${lesson.tutor.student.name}</td>
+                                        <td>${lesson.room.name}</td>
+                                        <td>${lesson.backupRoom.name}</td>
+                                        <td>${lesson.bookings.size()}</td>
+                                        <td>
+                                            <form action="<c:url value="/admin/lessons" />" method="POST">
+                                                <input type="hidden" name="_method" value="delete"/>
+                                                <input type="hidden" name="id" value="${lesson.id}"/>
+                                                <button class="btn btn-sm" data-toggle="tooltip"
+                                                        title="${mDelete}" data-toggle="tooltip">
+                                                    <i class="fa fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

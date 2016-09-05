@@ -7,7 +7,8 @@
         <!-- Select2 -->
         <css>https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css</css>
         <!-- datetime-picker-css -->
-        <css>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css</css>
+        <css>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.css
+        </css>
         <!-- data-tables-css -->
         <css>https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css</css>
         <!-- fancy box -->
@@ -34,7 +35,8 @@
         <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.js</js>
         <js>https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/locale/nl.js</js>
         <!-- datetime-picker-js -->
-        <js>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js</js>
+        <js>https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js
+        </js>
         <!-- data-tables-js -->
         <js>https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js</js>
         <js>https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js</js>

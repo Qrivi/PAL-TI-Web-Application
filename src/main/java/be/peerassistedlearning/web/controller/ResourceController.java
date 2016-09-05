@@ -32,33 +32,27 @@ import java.util.GregorianCalendar;
 
 @Controller
 @RequestMapping( "/resources" )
-public class ResourceController
-{
+public class ResourceController{
 
     @Autowired
     private PALService service;
 
     @ResponseBody
     @RequestMapping( value = "/students/{id}/avatar.png", method = RequestMethod.GET )
-    public HttpEntity<byte[]> getAvatar( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response )
-    {
+    public HttpEntity<byte[]> getAvatar( @PathVariable( "id" ) int id, HttpServletRequest request, HttpServletResponse response ){
         Student student = service.getStudentById( id );
         Image image = service.getAvatar( student );
         byte[] bytes;
 
-        if ( image == null )
-        {
-            try
-            {
+        if( image == null ){
+            try{
                 String path = request.getSession().getServletContext().getRealPath( "/resources/img" ) + "/default_profile.jpg";
                 InputStream in = new FileSystemResource( new File( path ) ).getInputStream();
                 bytes = IOUtils.toByteArray( in );
-            } catch ( Exception e )
-            {
-                bytes = new byte[ 0 ];
+            }catch( Exception e ){
+                bytes = new byte[0];
             }
-        } else
-        {
+        }else{
             bytes = image.getBytes();
         }
 
@@ -71,14 +65,13 @@ public class ResourceController
 
     @ResponseBody
     @RequestMapping( value = "/applications/{id}/screenshot.png", method = RequestMethod.GET )
-    public HttpEntity<byte[]> getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response )
-    {
+    public HttpEntity<byte[]> getScreenshot( @PathVariable( value = "id" ) int id, HttpServletResponse response ){
         Application app = service.getApplicationById( id );
         Image image = service.getScreenshot( app );
         byte[] bytes = image.getBytes();
 
-        if ( bytes == null )
-            bytes = new byte[ 0 ];
+        if( bytes == null )
+            bytes = new byte[0];
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType( MediaType.IMAGE_JPEG );
@@ -89,50 +82,48 @@ public class ResourceController
 
     @ResponseBody
     @RequestMapping( value = "/students/{id}/bookings.ics", method = RequestMethod.GET )
-    public void getBookingsICal( @PathVariable( value = "id" ) int id, @RequestParam( value = "token", required = true ) String token, HttpServletResponse response )
-    {
+    public void getBookingsICal( @PathVariable( value = "id" ) int id, @RequestParam( value = "token", required = true ) String token, HttpServletResponse response ){
         Student s = service.getStudentById( id );
 
-        if ( s == null )
+        if( s == null )
             return;
 
-        if ( !s.getSecurityToken().equals( token ) )
+        if( !s.getSecurityToken().equals( token ) )
             return;
 
-        try
-        {
+        try{
             net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Bookings Calendar//iCal4j 1.0//EN", service.getUpcomingBookings( s ) );
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
             outputter.output( calendar, response.getOutputStream() );
-        } catch ( IOException | ValidationException e ) {}
+        }catch( IOException | ValidationException e ){
+        }
     }
 
     @ResponseBody
     @RequestMapping( value = "/students/{id}/lessons.ics", method = RequestMethod.GET )
-    public void getLessonsICal( @PathVariable( value = "id" ) int id, @RequestParam( value = "token", required = true ) String token, HttpServletResponse response )
-    {
+    public void getLessonsICal( @PathVariable( value = "id" ) int id, @RequestParam( value = "token", required = true ) String token, HttpServletResponse response ){
         Student s = service.getStudentById( id );
 
-        if ( s == null )
+        if( s == null )
             return;
 
-        if ( !s.getSecurityToken().equals( token ) )
+        if( !s.getSecurityToken().equals( token ) )
             return;
 
         Tutor tutor = service.getTutorByStudent( s );
 
-        if ( tutor == null )
+        if( tutor == null )
             return;
 
-        try
-        {
+        try{
             net.fortuna.ical4j.model.Calendar calendar = generateCalendar( "-//PAL Lessons Calendar//iCal4j 1.0//EN", service.getUpcomingLessons( tutor ) );
 
             CalendarOutputter outputter = new CalendarOutputter();
             outputter.setValidating( false );
             outputter.output( calendar, response.getOutputStream() );
-        } catch ( IOException | ValidationException e ) {}
+        }catch( IOException | ValidationException e ){
+        }
     }
 
     /**
@@ -142,8 +133,7 @@ public class ResourceController
      * @param items The lessons of the calendar
      * @return A calendar with the specified id and using the specified lessons
      */
-    private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Collection<Lesson> items )
-    {
+    private net.fortuna.ical4j.model.Calendar generateCalendar( String id, Collection<Lesson> items ){
         // Set the timezone to 'Europe/Brussels'
         TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
         TimeZone timezone = registry.getTimeZone( "Europe/Brussels" );
@@ -155,8 +145,7 @@ public class ResourceController
         icsCalendar.getProperties().add( CalScale.GREGORIAN );
 
         // Iterate over the lessons
-        for ( Lesson lesson : items )
-        {
+        for( Lesson lesson : items ){
             // Set the start date
             java.util.Calendar startDate = new GregorianCalendar();
             startDate.setTimeZone( timezone );
@@ -178,10 +167,10 @@ public class ResourceController
 
             // Generate unique identifier for the event
             UidGenerator ug = null;
-            try
-            {
+            try{
                 ug = new UidGenerator( "uidGen" );
-            } catch ( SocketException e ) { }
+            }catch( SocketException e ){
+            }
 
             Uid uid = ug.generateUid();
             event.getProperties().add( uid );
@@ -202,8 +191,7 @@ public class ResourceController
             event.getProperties().add( loc );
 
             // Iterate over the bookings
-            for ( Student s : lesson.getBookings() )
-            {
+            for( Student s : lesson.getBookings() ){
                 // Add the student as a participant
                 Attendee attendee = new Attendee( URI.create( "mailto:" + s.getEmail() ) );
                 attendee.getParameters().add( Role.REQ_PARTICIPANT );

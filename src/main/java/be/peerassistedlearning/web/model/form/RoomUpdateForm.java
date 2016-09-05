@@ -2,56 +2,45 @@ package be.peerassistedlearning.web.model.form;
 
 import be.peerassistedlearning.model.Campus;
 import be.peerassistedlearning.model.RoomType;
-import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotNull;
-
-public class RoomUpdateForm
-{
+public class RoomUpdateForm{
     private Integer id;
     private String name;
     private Campus campus;
     private RoomType type;
 
-    public RoomUpdateForm() {}
+    public RoomUpdateForm(){
+    }
 
-    public Integer getId()
-    {
+    public Integer getId(){
         return id;
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
-    public Campus getCampus()
-    {
-        return campus;
-    }
-
-    public RoomType getType()
-    {
-        return type;
-    }
-
-    public void setId( Integer id )
-    {
+    public void setId( Integer id ){
         this.id = id;
     }
 
-    public void setName( String name )
-    {
+    public String getName(){
+        return name;
+    }
+
+    public void setName( String name ){
         this.name = name;
     }
 
-    public void setCampus( Campus campus )
-    {
+    public Campus getCampus(){
+        return campus;
+    }
+
+    public void setCampus( Campus campus ){
         this.campus = campus;
     }
 
-    public void setType( RoomType type )
-    {
+    public RoomType getType(){
+        return type;
+    }
+
+    public void setType( RoomType type ){
         this.type = type;
     }
 }

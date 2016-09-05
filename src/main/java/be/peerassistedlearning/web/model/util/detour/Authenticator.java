@@ -5,7 +5,7 @@ import be.krivi.detour.core.KUAccount;
 
 public class Authenticator{
 
-    public static KUAccount auth( String id, String password){
+    public static KUAccount auth( String id, String password ){
         KUAuth detour = new KUAuth();
         return detour.authenticate( id, password );
     }

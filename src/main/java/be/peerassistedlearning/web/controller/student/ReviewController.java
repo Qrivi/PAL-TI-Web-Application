@@ -23,18 +23,14 @@ import java.util.Date;
 
 @Controller
 @RequestMapping( value = "/reviews" )
-public class ReviewController extends StudentController
-{
+public class ReviewController extends StudentController{
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model, Review review, Lesson lesson )
-    {
-        if ( model.get( "review" ) == null )
-        {
+    private ModelMap fillModel( ModelMap model, Review review, Lesson lesson ){
+        if( model.get( "review" ) == null ){
             ReviewForm form = new ReviewForm();
-            if ( review != null )
-            {
+            if( review != null ){
                 form.setText( review.getText() );
                 form.setAnonymous( review.isAnonymous() );
                 form.setTutorScore( review.getTutorScore() );
@@ -44,18 +40,17 @@ public class ReviewController extends StudentController
             }
             model.addAttribute( "review", form );
         }
-        if ( model.get( "lesson" ) == null )
+        if( model.get( "lesson" ) == null )
             model.addAttribute( "lesson", lesson );
         return model;
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.GET )
-    public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model )
-    {
+    public ModelAndView addReview( @PathVariable( value = "id" ) int id, ModelMap model ){
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById( id );
 
-        if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
+        if( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
             return new ModelAndView( "redirect:/profile" );
 
         Review review = service.getReviews( current, lesson );
@@ -63,24 +58,21 @@ public class ReviewController extends StudentController
     }
 
     @RequestMapping( value = "/{id}", method = RequestMethod.POST )
-    public ModelAndView addReview( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
+    public ModelAndView addReview( @PathVariable( value = "id" ) int id, @Valid @ModelAttribute( "review" ) ReviewForm reviewForm, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
         Student current = SessionAuth.getStudent();
         Lesson lesson = service.getLessonById( id );
 
-        if ( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
+        if( lesson == null || !lesson.getBookings().contains( current ) || !lesson.getDate().before( new Date() ) )
             return new ModelAndView( "redirect:/profile" );
 
-        if ( result.hasErrors() )
+        if( result.hasErrors() )
             return new ModelAndView( "student/review_add", fillModel( model, null, lesson ) );
 
         Review review = service.getReviews( current, lesson );
-        if ( review == null )
-        {
+        if( review == null ){
             review = new Review( reviewForm.getText(), SessionAuth.getStudent(), lesson, reviewForm.getContentScore(), reviewForm.getTutorScore(), reviewForm.getEngagementScore(), reviewForm
                     .getAtmosphereScore(), reviewForm.isAnonymous(), new Date() );
-        } else
-        {
+        }else{
             review.setText( reviewForm.getText() );
             review.setAnonymous( reviewForm.isAnonymous() );
             review.setContentScore( reviewForm.getContentScore() );
@@ -92,7 +84,7 @@ public class ReviewController extends StudentController
 
         service.addReview( review );
         redirectAttributes
-                .addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ProfileController.Review", new Object[]{ review.getLesson().getTutor().getStudent().getName() } ) );
+                .addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.ProfileController.Review", new Object[]{review.getLesson().getTutor().getStudent().getName()} ) );
         return new ModelAndView( "redirect:/profile/" + current.getProfileIdentifier() );
     }
 

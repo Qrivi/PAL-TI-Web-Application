@@ -82,7 +82,7 @@
                                             <div class="input-group date" id="datetimepicker">
                                                 <form:input path="date" type="text" class="form-control"
                                                             placeholder="${mDateTime}"/>
-                                                                <span class="input-group-addon">
+                                                <span class="input-group-addon">
                                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                                 </span>
                                             </div>
@@ -93,7 +93,8 @@
                                             <form:label path="course">${mCourse} : <c:if
                                                     test="${not empty courseError}"><span
                                                     class="text-danger">${courseError}</span></c:if></form:label>
-                                            <form:select path="course" class="form-control select2 select2-hidden-accessible"
+                                            <form:select path="course"
+                                                         class="form-control select2 select2-hidden-accessible"
                                                          data-placeholder="${mCourse}" style="width: 100%;"
                                                          tabindex="-1" aria-hidden="true">
                                                 <option></option>
@@ -127,7 +128,8 @@
                                         <div class="form-group has-feedback">
                                             <form:label path="room">${mRoom} : <c:if test="${not empty roomError}"><span
                                                     class="text-danger">${roomError}</span></c:if></form:label>
-                                            <form:select path="room" class="form-control select2 select2-hidden-accessible"
+                                            <form:select path="room"
+                                                         class="form-control select2 select2-hidden-accessible"
                                                          data-placeholder="${mRoom}" style="width: 100%;" tabindex="-1"
                                                          aria-hidden="true">
                                                 <option></option>
@@ -140,7 +142,8 @@
                                             <form:label path="backupRoom">${mBackupRoom} : <c:if
                                                     test="${not empty backupRoomError}"><span
                                                     class="text-danger">${backupRoomError}</span></c:if></form:label>
-                                            <form:select path="backupRoom" class="form-control select2 select2-hidden-accessible"
+                                            <form:select path="backupRoom"
+                                                         class="form-control select2 select2-hidden-accessible"
                                                          data-placeholder="${mBackupRoom}" style="width: 100%;"
                                                          tabindex="-1" aria-hidden="true">
                                                 <option></option>

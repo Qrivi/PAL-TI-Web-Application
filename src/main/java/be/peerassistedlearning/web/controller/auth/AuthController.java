@@ -39,8 +39,7 @@ public class AuthController{
             @RequestParam( value = "different_user", required = false ) boolean differentUser,
             @CookieValue( value = "remember", required = false ) String remember,
             @CookieValue( value = "email", required = false ) String email,
-            ModelMap model )
-    {
+            ModelMap model ){
         if( !"".equals( error ) )
             model.addAttribute( "error", error );
 
@@ -81,7 +80,7 @@ public class AuthController{
 
             Curriculum c = service.getCurriculumFromProgramme( programme );
 
-            if(c == null)
+            if( c == null )
                 return new ModelAndView( "redirect:/auth/login?error=unsupported&id=" + studentId );
 
             s = new Student(
@@ -92,7 +91,7 @@ public class AuthController{
                     StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.ADMIN ); //TODO UserType.Normal
             service.addStudent( s );
         }else{
-            if( !s.isPasswordValid( password ))
+            if( !s.isPasswordValid( password ) )
                 s.setPassword( password );
         }
 

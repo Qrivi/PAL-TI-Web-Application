@@ -10,16 +10,12 @@ import java.util.Date;
 /**
  * Converts a String into the matching Date
  */
-public class DateConverter implements Converter<String, Date>
-{
-    public Date convert( String s )
-    {
-        try
-        {
+public class DateConverter implements Converter<String, Date>{
+    public Date convert( String s ){
+        try{
             DateFormat dateFormat = new SimpleDateFormat( "dd-MM-yyyy hh:mm" );
             return dateFormat.parse( s );
-        } catch ( ParseException e )
-        {
+        }catch( ParseException e ){
             return null;
         }
     }

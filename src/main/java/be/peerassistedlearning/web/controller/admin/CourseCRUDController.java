@@ -21,65 +21,58 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 @Controller
-public class CourseCRUDController extends AdminController
-{
+public class CourseCRUDController extends AdminController{
 
     @Autowired
     private PALService service;
 
-    private ModelMap fillModel( ModelMap model )
-    {
-        if ( model.get( "course" ) == null )
+    private ModelMap fillModel( ModelMap model ){
+        if( model.get( "course" ) == null )
             model.addAttribute( "course", new CourseForm() );
-        if ( model.get( "updateCourse" ) == null )
+        if( model.get( "updateCourse" ) == null )
             model.addAttribute( "updateCourse", new CourseUpdateForm() );
-        if ( model.get( "courses" ) == null )
+        if( model.get( "courses" ) == null )
             model.addAttribute( "courses", service.getAllCourses() );
         return model;
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.GET )
-    public ModelAndView getCourseOverviewPage( ModelMap model )
-    {
+    public ModelAndView getCourseOverviewPage( ModelMap model ){
         return new ModelAndView( "admin/courses", fillModel( model ) );
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.POST )
-    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView addCourse( @Valid @ModelAttribute( "course" ) CourseForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
+        if( result.hasErrors() )
             return new ModelAndView( "admin/courses", fillModel( model ) );
 
         service.addCourse( new Course( form.getCode(), form.getName(), form.getShortName(), form.getCurriculum(), form.getYear() ) );
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Add", new Object[]{ form.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Add", new Object[]{form.getName()} ) );
 
         return new ModelAndView( "redirect:/admin/courses" );
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.PUT )
-    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes )
-    {
-        if ( result.hasErrors() )
+    public ModelAndView updateCourse( @Valid @ModelAttribute( "updateCourse" ) CourseUpdateForm form, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes ){
+        if( result.hasErrors() )
             return new ModelAndView( "admin/courses", fillModel( model ) );
 
         Integer id = form.getId();
 
-        if ( id == null )
+        if( id == null )
             return new ModelAndView( "admin/courses", fillModel( model ) );
 
         Course c = service.getCourseById( id );
 
-        if ( c == null )
+        if( c == null )
             return new ModelAndView( "admin/courses", fillModel( model ) );
 
         String code = form.getCode();
 
-        if ( !StringUtils.isEmpty( code ) )
-        {
+        if( !StringUtils.isEmpty( code ) ){
             Course c2 = service.getCourseByCode( code );
-            if ( c2 != null && !c.equals( c2 ) )
-            {
+            if( c2 != null && !c.equals( c2 ) ){
                 result.reject( "CheckCodeExists.CourseUpdateForm.code" );
                 return new ModelAndView( "admin/courses", fillModel( model ) );
             }
@@ -93,17 +86,16 @@ public class CourseCRUDController extends AdminController
 
         service.updateCourse( c );
 
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Update", new Object[]{ form.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Update", new Object[]{form.getName()} ) );
 
         return new ModelAndView( "redirect:/admin/courses" );
     }
 
     @RequestMapping( value = "/courses", method = RequestMethod.DELETE )
-    public String removeCourse( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes )
-    {
+    public String removeCourse( @RequestParam( required = true ) int id, RedirectAttributes redirectAttributes ){
         Course c = service.getCourseById( id );
         service.removeCourse( c );
-        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Remove", new Object[]{ c.getName() } ) );
+        redirectAttributes.addFlashAttribute( "message", MessageFactory.createSuccessMessage( "Success.CourseCRUDController.Remove", new Object[]{c.getName()} ) );
         return "redirect:/admin/courses";
     }
 

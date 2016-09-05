@@ -13,14 +13,15 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Checks if the given email will be unique in the database
  */
-@Target( { METHOD , FIELD , ANNOTATION_TYPE } )
+@Target( {METHOD, FIELD, ANNOTATION_TYPE} )
 @Retention( RUNTIME )
 @Constraint( validatedBy = CheckEmailIsUniqueValidator.class )
 @Documented
-public @interface CheckEmailIsUnique
-{
+public @interface CheckEmailIsUnique{
     String message() default "{constraints.checkemailexists.message}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
     /**

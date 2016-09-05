@@ -36,41 +36,42 @@
                             <table id="tutor-overview" class="table table-striped table-bordered"
                                    cellspacing="0" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>${mTutor}</th>
-                                        <th>${mCourse}</th>
-                                        <th data-orderable="false">${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mTutor}</th>
+                                    <th>${mCourse}</th>
+                                    <th data-orderable="false">${mActions}</th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th>${mTutor}</th>
-                                        <th>${mCourse}</th>
-                                        <th>${mActions}</th>
-                                    </tr>
+                                <tr>
+                                    <th>${mTutor}</th>
+                                    <th>${mCourse}</th>
+                                    <th>${mActions}</th>
+                                </tr>
                                 </tfoot>
                                 <tbody>
-                                    <c:forEach var="tutor" items="${tutors}">
-                                        <tr>
-                                            <td>${tutor.student.name}</td>
-                                            <td>
-                                                <ul>
-                                                    <c:forEach var="course" items="${tutor.courses}">
-                                                        <li>${course.name}</li>
-                                                    </c:forEach>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <form class="small" action="<c:url value="/admin/tutors" />"
-                                                      method="POST">
-                                                    <input type="hidden" name="_method" value="delete"/>
-                                                    <input type="hidden" name="id" value="${tutor.id}"/>
-                                                    <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip" title="${mDelete}"></i>
-                                                    </button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach var="tutor" items="${tutors}">
+                                    <tr>
+                                        <td>${tutor.student.name}</td>
+                                        <td>
+                                            <ul>
+                                                <c:forEach var="course" items="${tutor.courses}">
+                                                    <li>${course.name}</li>
+                                                </c:forEach>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <form class="small" action="<c:url value="/admin/tutors" />"
+                                                  method="POST">
+                                                <input type="hidden" name="_method" value="delete"/>
+                                                <input type="hidden" name="id" value="${tutor.id}"/>
+                                                <button class="btn btn-sm"><i class="fa fa-trash" data-toggle="tooltip"
+                                                                              title="${mDelete}"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

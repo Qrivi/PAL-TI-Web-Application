@@ -13,13 +13,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Checks if the given code will be unique in the database
  */
-@Target( { METHOD , FIELD , ANNOTATION_TYPE } )
+@Target( {METHOD, FIELD, ANNOTATION_TYPE} )
 @Retention( RUNTIME )
 @Constraint( validatedBy = CheckCodeIsUniqueValidator.class )
 @Documented
-public @interface CheckCodeIsUnique
-{
+public @interface CheckCodeIsUnique{
     String message() default "{constraints.checkcodeexists.message}";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

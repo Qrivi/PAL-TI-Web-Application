@@ -3,8 +3,7 @@ package be.peerassistedlearning.web.model.util.message;
 /**
  * Class used to send generic messages between pages
  */
-public class GenericMessage
-{
+public class GenericMessage{
 
     private String message;
     private MessageType type;
@@ -15,10 +14,16 @@ public class GenericMessage
      * @param message The message string
      * @param type    The type of message
      */
-    public GenericMessage( String message, MessageType type )
-    {
+    public GenericMessage( String message, MessageType type ){
         this.message = message;
         this.type = type;
+    }
+
+    /**
+     * @return The message
+     */
+    public String getMessage(){
+        return message;
     }
 
     /**
@@ -26,9 +31,15 @@ public class GenericMessage
      *
      * @param message The message
      */
-    public void setMessage( String message )
-    {
+    public void setMessage( String message ){
         this.message = message;
+    }
+
+    /**
+     * @return The type of the message
+     */
+    public MessageType getType(){
+        return type;
     }
 
     /**
@@ -36,32 +47,14 @@ public class GenericMessage
      *
      * @param type The type of the message
      */
-    public void setType( MessageType type )
-    {
+    public void setType( MessageType type ){
         this.type = type;
-    }
-
-    /**
-     * @return The message
-     */
-    public String getMessage()
-    {
-        return message;
-    }
-
-    /**
-     * @return The type of the message
-     */
-    public MessageType getType()
-    {
-        return type;
     }
 
     /**
      * Enum for the type of messages
      */
-    public enum MessageType
-    {
+    public enum MessageType{
         danger,
         info,
         warning,
