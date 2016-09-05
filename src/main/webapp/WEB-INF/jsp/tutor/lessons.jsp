@@ -19,6 +19,7 @@
 <spring:message code="Lesson.myUpcomingLessons" var="mMyUpcomingLessons"/>
 <spring:message code="Lesson.noLessons" var="mNoLessons"/>
 <spring:message code="Lesson.noLessonsToGive" var="mNoLessonsToGive"/>
+<spring:message code="Lesson.noLessonsGiven" var="mNoLessonsGiven"/>
 <spring:message code="Lesson.history" var="mHistory"/>
 
 <spring:message code="Actions.actions" var="mActions"/>
@@ -106,7 +107,7 @@
                         <c:if test="${empty myPastLessons}">
                             <div class="alert alert-info col-sm-4 col-sm-offset-4">
                                 <h4><i class="icon fa fa-info"></i>${mNoLessons}</h4>
-                                    ${mNoLessonsToGive}
+                                    ${mNoLessonsGiven}
                             </div>
                         </c:if>
                         <c:if test="${not empty myPastLessons}">
