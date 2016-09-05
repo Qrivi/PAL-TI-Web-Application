@@ -1,5 +1,5 @@
 $.ajax( {
-    url     : "/admin/applications/count" ,
+    url     : documentRoot + "/admin/applications/count" ,
     type    : "get" ,
     success : function ( count ) {
         if(count != 0){

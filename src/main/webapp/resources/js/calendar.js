@@ -8,7 +8,7 @@ $( document ).ready( function () {
         height      : window.innerHeight - 90 ,
         editable    : false ,
         eventLimit  : true ,
-        events      : "/calendar/events" ,
+        events      : documentRoot + "/calendar/events" ,
         eventRender : function ( event , element ) {
             var title = $( "<span class='title'>" + event.course_name + " - " + element.find( '.fc-title' ).text() + "</span>" );
             element.find( '.fc-title' ).html( title );

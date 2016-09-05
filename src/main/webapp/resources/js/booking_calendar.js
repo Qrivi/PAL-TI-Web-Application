@@ -154,7 +154,7 @@ $( document ).ready( function () {
     function lookup () {
         var courses = $( "#course" ).val();
         $.ajax( {
-            url     : "/booking/calendar/events" ,
+            url     : documentRoot + "/booking/calendar/events" ,
             type    : "get" ,
             data    : {
                 courses : courses.join()

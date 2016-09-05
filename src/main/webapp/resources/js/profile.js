@@ -80,7 +80,7 @@ $( document ).ready( function () {
 
     function loadReviews () {
         $.ajax( {
-            url     : "/profile/reviews" ,
+            url     : documentRoot + "/profile/reviews",
             type    : "get" ,
             data    : {
                 "offset" : reviewsTotal ,

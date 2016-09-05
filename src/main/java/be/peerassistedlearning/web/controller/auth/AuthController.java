@@ -34,9 +34,10 @@ public class AuthController{
 
     @RequestMapping( value = "/login", method = RequestMethod.GET )
     public ModelAndView loginStudent( @RequestParam( value = "error", required = false ) String error, @RequestParam( value = "id", required = false ) String studentId, @RequestParam( value = "different_user", required = false ) boolean differentUser, @CookieValue( value = "remember", required = false ) String remember, @CookieValue( value = "email", required = false ) String email, ModelMap model ){
-        if( !"".equals( error ) )
+        if( !"".equals( error ) ){
+            //TODO if error.equals("failure") -> KUL password most likely changed; change PAL password too before throwing an error
             model.addAttribute( "error", error );
-        model.addAttribute( "studentId", studentId );
+        }
         if( !differentUser && remember != null && Boolean.valueOf( remember ) ){
             if( email != null ){
                 Student current = service.getStudentByEmail( email );
@@ -46,6 +47,9 @@ public class AuthController{
                 }
             }
         }
+
+        model.addAttribute( "studentId", studentId );
+
         return new ModelAndView( "auth/login", model );
     }
 
