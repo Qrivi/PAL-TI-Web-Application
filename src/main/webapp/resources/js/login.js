@@ -18,34 +18,18 @@ $(function () {
  */
 
 $(document).ready(function () {
-    var rCookie = $.cookie("remember") === 'true';
-    var eCookie = ($.cookie("email") === undefined) ? "" : $.cookie("email");
-    var rElement = $("#remember-me");
-    var eElement = $("#email");
-
-    if (rElement.length == 0)
+    if ($('#remember-me').length == 0)
         return;
 
-    if (rCookie) {
-        $(eElement).val(eCookie);
+    if ($.cookie('remember') !== undefined) {
+        $('#studentId').val($.cookie('remember'));
         $('input').iCheck('check');
     }
 
-    $(rElement).change(function () {
-        remember();
+    $('#studentId, #remember-me').change(function () {
+        if ($('#remember-me').is(':checked'))
+            $.cookie('remember', $('#studentId').val(), {expires: 14});
+        else
+            $.removeCookie('remember');
     });
-    $(eElement).change(function () {
-        remember();
-    });
-
-    function remember() {
-        if ($(rElement).is(':checked')) {
-            $.cookie("email", $(eElement).val(), {expires: 14});
-            $.cookie("remember", true, {expires: 14});
-        }
-        else {
-            $.cookie("email", null);
-            $.cookie("remember", null);
-        }
-    }
 });
