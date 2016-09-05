@@ -80,7 +80,7 @@ public class AuthController{
                     password,
                     a.getEmail(),
                     curriculum,
-                    StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.NORMAL );
+                    StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.ADMIN ); //TODO UserType.Normal
             service.addStudent( s );
         }
 
