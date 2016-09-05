@@ -6,9 +6,9 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <sec:authentication var="auth" property="principal"/>
-<c:set var="req" value="${pageContext.request}"/>
+
 <c:set var="baseURL"
-       value="${fn:replace(req.requestURL, fn:substring(req.requestURI, 1, fn:length(req.requestURI)), req.contextPath)}"/>
+       value="${fn:replace(pageContext.request.requestURL, pageContext.request.requestURI, pageContext.request.contextPath)}"/>
 
 <spring:message code="Profile.profile" var="mProfile"/>
 <spring:message code="Profile.upcomingBookings" var="mUpcomingBookings"/>
@@ -122,7 +122,7 @@
                                                 <div class="col-sm-10">
                                                     <div class="input-group">
                                                         <input id="lesson-calendar" type="text"
-                                                               value="${baseURL}resources/students/${user.id}/lessons.ics?token=${user.securityToken}"
+                                                               value="${baseURL}/resources/students/${user.id}/lessons.ics?token=${user.securityToken}"
                                                                class="form-control"/>
                                                         <span class="input-group-btn">
                                                             <button class="btn btn-default" type="button"
@@ -139,7 +139,7 @@
                                             <div class="col-sm-10">
                                                 <div class="input-group">
                                                     <input id="booking-calendar" type="text"
-                                                           value="${baseURL}resources/students/${user.id}/bookings.ics?token=${user.securityToken}"
+                                                           value="${baseURL}/resources/students/${user.id}/bookings.ics?token=${user.securityToken}"
                                                            class="form-control"/>
                                                     <span class="input-group-btn">
                                                         <button class="btn btn-default" type="button"
