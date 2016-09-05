@@ -38,19 +38,16 @@ public class AuthController{
             @RequestParam( value = "id", required = false ) String studentId,
             @RequestParam( value = "different_user", required = false ) boolean differentUser,
             @CookieValue( value = "remember", required = false ) String remember,
-            @CookieValue( value = "email", required = false ) String email,
             ModelMap model ){
         if( !"".equals( error ) )
             model.addAttribute( "error", error );
 
-        if( !differentUser && remember != null && Boolean.valueOf( remember ) ){
-            if( email != null ){
-                Student current = service.getStudentByEmail( email );
+        if( !differentUser && !"".equals( remember ) ){
+                Student current = service.getStudentByProfileIdentifier( remember );
                 if( current != null ){
                     model.addAttribute( "user", current );
                     return new ModelAndView( "auth/lockscreen", model );
                 }
-            }
         }
 
         model.addAttribute( "studentId", studentId );
