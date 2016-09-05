@@ -34,7 +34,7 @@ $( document ).ready( function () {
         $( "#timeline" ).find( ".loading" ).show();
         $( "#timeline" ).find( ".timeline" ).hide();
         $.ajax( {
-            url     : window.location.href + "/timeline" ,
+            url     : window.location.href.split('?')[0] + "/timeline" ,
             type    : "get" ,
             data    : {
                 "offset" : 0 ,
