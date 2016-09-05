@@ -56,7 +56,7 @@ public class AuthController{
     }
 
     @RequestMapping( value = "/login", method = RequestMethod.POST )
-    public ModelAndView registerStudent( @RequestParam( "studentId" ) String studentId, @RequestParam( "password" ) String password, ModelMap model ){
+    public ModelAndView loginStudent( @RequestParam( "studentId" ) String studentId, @RequestParam( "password" ) String password, ModelMap model ){
 
         KUAccount a = Authenticator.auth( studentId, password );
 
