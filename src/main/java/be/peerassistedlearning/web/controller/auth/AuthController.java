@@ -43,11 +43,11 @@ public class AuthController{
             model.addAttribute( "error", error );
 
         if( !differentUser && !"".equals( remember ) ){
-                Student current = service.getStudentByProfileIdentifier( remember );
-                if( current != null ){
-                    model.addAttribute( "user", current );
-                    return new ModelAndView( "auth/lockscreen", model );
-                }
+            Student current = service.getStudentByProfileIdentifier( remember );
+            if( current != null ){
+                model.addAttribute( "user", current );
+                return new ModelAndView( "auth/lockscreen", model );
+            }
         }
 
         model.addAttribute( "studentId", studentId );
@@ -58,41 +58,56 @@ public class AuthController{
     @RequestMapping( value = "/login", method = RequestMethod.POST )
     public ModelAndView loginStudent( @RequestParam( "studentId" ) String studentId, @RequestParam( "password" ) String password, ModelMap model ){
 
-        KUAccount a = Authenticator.auth( studentId, password );
+        // Get the PAL account corresponding to the student ID
+        Student s = service.getStudentByProfileIdentifier( studentId );
 
-        if( a == null )
-            return new ModelAndView( "redirect:/auth/login?error=invalid&id=" + studentId );
+        // If no PAL account is found or password doesn't match, check with KUL
+        if( s == null || !s.isPasswordValid( password ) ){
 
-        Student s = service.getStudentByEmail( a.getEmail() );
+            // Log in student with KUL
+            KUAccount a = Authenticator.auth( studentId, password );
 
-        if( s == null ){
-            String programme = "None";
+            // If student is not found at KUL, credentials must be incorrect
+            if( a == null )
+                return new ModelAndView( "redirect:/auth/login?error=invalid&id=" + studentId );
 
-            for( KUSubscription sub : a.getSubscriptions() ){
-                if( "Valid".equals( sub.getStatus() ) ){
-                    programme = sub.getProgramme();
-                    break;
+            // If PAL account is not found at all, create new account from KUL student details
+            if( s == null ){
+                String programme = "None";
+
+                // Get the student's current programme
+                for( KUSubscription sub : a.getSubscriptions() ){
+                    if( "Valid".equals( sub.getStatus() ) ){
+                        programme = sub.getProgramme();
+                        break;
+                    }
                 }
+
+                // Get the curriculum associated with the student's programme
+                Curriculum c = service.getCurriculumFromProgramme( programme );
+
+                // If the curriculum does not exist, it is not supported by PAL
+                if( c == null )
+                    return new ModelAndView( "redirect:/auth/login?error=unsupported&id=" + studentId );
+
+                // Create a new PAL account from KUL student details
+                s = new Student(
+                        a.getFirstName() + " " + a.getLastName(),
+                        password,
+                        a.getEmail(),
+                        c,
+                        StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.NORMAL );
+                service.addStudent( s );
+            }else{
+                // Student details were found, but password didn't match with PAL's
+                if( !s.isPasswordValid( password ) )
+                    s.setPassword( password );
+                // This means the student changed its KUL account password between two PAL session, so
+                // we'll be updating the password in our database as well.
             }
-
-            Curriculum c = service.getCurriculumFromProgramme( programme );
-
-            if( c == null )
-                return new ModelAndView( "redirect:/auth/login?error=unsupported&id=" + studentId );
-
-            s = new Student(
-                    a.getFirstName() + " " + a.getLastName(),
-                    password,
-                    a.getEmail(),
-                    c,
-                    StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.NORMAL );
-            service.addStudent( s );
-        }else{
-            if( !s.isPasswordValid( password ) )
-                s.setPassword( password );
         }
-
-        model.addAttribute( "email", a.getEmail() );
+        
+        model.addAttribute( "email", s.getEmail() );
         model.addAttribute( "password", password );
 
         return new ModelAndView( "auth/logincheck", model );
