@@ -5,7 +5,7 @@
     padding: 3px 3px 2px 3px;
     background-color: red;
     color: white;
-    font-family: arial;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     font-size: 10px;
     border-radius: 4px;
@@ -13,9 +13,9 @@
 }
 
 .checkbox {
-    margin-top: 0px;
+    margin-top: 0;
     padding: 6px 0;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .checkbox > label > span {
@@ -95,4 +95,42 @@ textarea {
 .fc-title .title {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.lowercase{
+    text-transform: lowercase !important;
+}
+
+.timeline strong{
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+}
+
+.timeline .rating{
+    transform: scale(.7);
+}
+
+.timeline .panel{
+    position: relative;
+}
+
+.timeline .tutorpicture{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.timeline .tutorpicture img{
+    max-width: 32px;
+    max-height: 32px;
+}
+
+.box-profile .profile-username,
+.box-profile .text-muted{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

@@ -17,10 +17,12 @@
 <spring:message code="Review.ambiance" var="mAmbiance"/>
 
 <spring:message code="Course.course" var="mCourse"/>
+<spring:message code="Course.year" var="mYear"/>
 <spring:message code="Course.courses" var="mCourses"/>
 <spring:message code="Lesson.lesson" var="mLesson"/>
 <spring:message code="Lesson.participants" var="mParticipants"/>
 <spring:message code="Lesson.minutes" var="mMinutes"/>
+<spring:message code="Room.room" var="mRoom"/>
 <spring:message code="Tutor.tutor" var="mTutor"/>
 
 <spring:message code="Actions.loadMore" var="mLoadMore"/>
@@ -69,53 +71,43 @@
                     <div class="timeline-body">
                         <div class="row">
                             <!-- course info -->
-                            <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="panel panel-default bg-purple-gradient">
                                     <div class="panel-body">
                                         <strong>${mCourse}</strong>
                                         <ul class="list-unstyled">
-                                            <li>${archivable.course.code}/${archivable.course.name}</li>
-                                            <li>${archivable.course.curriculum} - ${archivable.course.year}e</li>
+                                            <li>${archivable.course.name} [${archivable.course.code}]</li>
+                                            <li>${archivable.course.curriculum} <span class="lowercase">${mYear}${" "}${archivable.course.year}</span></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <!-- lesson info -->
-                            <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="panel panel-default bg-purple-gradient">
                                     <div class="panel-body">
-                                        <strong>${mLesson}</strong>
+                                        <strong>${mRoom}</strong>
                                         <ul class="list-unstyled">
-                                            <li>${archivable.room.campus}
-                                                - ${archivable.room.name}, ${archivable.backupRoom.campus}
-                                                - ${archivable.backupRoom.name}</li>
-                                            <li>${archivable.duration}${' '}${mMinutes}
-                                                - ${archivable.bookings.size()}${' '}${mParticipants}
-                                            </li>
+                                            <li>${archivable.room.campus}${" "}${archivable.room.name} </li>
+                                            <li>(${archivable.backupRoom.campus}${" "}${archivable.backupRoom.name})</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <!-- tutor info -->
-                            <div class="col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                                 <div class="panel panel-default bg-purple-gradient">
-                                    <div class="panel-body row">
-                                        <div class="col-md-8">
-                                            <strong>${mTutor}</strong>
-                                            <ul class="list-unstyled">
-                                                <li>${archivable.tutor.student.name}</li>
-                                                <li>${archivable.tutor.courses.size()}${mCourses}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="pull-right">
-                                                <a href="<c:url value="/profile/${archivable.tutor.student.profileIdentifier}"/>">
-                                                    <img class="user-img img-responsive img-circle"
-                                                         src="<c:url value="/resources/students/${archivable.tutor.student.id}/avatar.png"/>"
-                                                         alt="User profile picture"
-                                                         style="max-width: 32px;max-height: 32px;">
-                                                </a>
-                                            </div>
+                                    <div class="panel-body ">
+                                        <strong>${mLesson}</strong>
+                                        <ul class="list-unstyled">
+                                            <li>${mTutor}: ${archivable.tutor.student.name}</li>
+                                            <li><span class="lowercase">${archivable.duration}${" "}${mMinutes}, ${archivable.bookings.size()}${" "}${mParticipants}</span></li>
+                                        </ul>
+                                        <div class="tutorpicture">
+                                            <a href="<c:url value="/profile/${archivable.tutor.student.profileIdentifier}"/>">
+                                                <img class="user-img img-responsive img-circle" alt=""
+                                                     src="<c:url value="/resources/students/${archivable.tutor.student.id}/avatar.png"/>">
+                                            </a>
                                         </div>
 
                                     </div>
@@ -171,20 +163,20 @@
                                 </blockquote>
                             </div>
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-3">
+                                <div class="row-fluid">
+                                    <div class="col-lg-3 col-md-6">
                                         <span>${mTutor}: </span>
                                         <div class="rating" data-rating="${archivable.engagementScore}"></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <span>${mEngagement}: </span>
                                         <div class="rating" data-rating="${archivable.engagementScore}"></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <span>${mAmbiance}: </span>
                                         <div class="rating" data-rating="${archivable.atmosphereScore}"></div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <span>${mContent}: </span>
                                         <div class="rating" data-rating="${archivable.contentScore}"></div>
                                     </div>
