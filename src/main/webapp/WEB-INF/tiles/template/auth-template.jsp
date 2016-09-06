@@ -16,9 +16,8 @@
 <head>
     <title>${mTitle} - PAL</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <meta name="description" content="<tiles:insertAttribute name="page_description" ignore="true"/>"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta charset="UTF-8">
 
     <c:forEach var="css" items="${stylesheets}">
         <link rel="stylesheet" type="text/css" href="<c:url value="${css}"/>">
