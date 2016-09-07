@@ -20,7 +20,7 @@
         </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <li><a href="?lang=en_US">en</a></li>
+                <li><a href="?lang=en">en</a></li>
                 <li><a href="?lang=nl">nl</a></li>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
