@@ -43,6 +43,7 @@
                 </div>
                 <div class="box-body">
                     <form:form action="${pageContext.request.contextPath}/request/add" method="POST"
+                               accept-charset="UTF-8"
                                commandName="request">
                         <c:set var="courseError"><form:errors path="course"/></c:set>
                         <c:set var="titleError"><form:errors path="title"/></c:set>

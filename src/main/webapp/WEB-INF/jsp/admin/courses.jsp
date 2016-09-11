@@ -111,7 +111,9 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form:form method="post" commandName="course" enctype="application/x-www-form-urlencoded">
+                            <form:form method="post" commandName="course"
+                                       accept-charset="UTF-8"
+                                       enctype="application/x-www-form-urlencoded">
                                 <c:set var="codeError"><form:errors path="code"/></c:set>
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="shortNameError"><form:errors path="shortName"/></c:set>
@@ -168,6 +170,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <form:form method="put" commandName="updateCourse"
+                                       accept-charset="UTF-8"
                                        enctype="application/x-www-form-urlencoded">
                                 <c:set var="codeError"><form:errors path="code"/></c:set>
                                 <c:set var="nameError"><form:errors path="name"/></c:set>

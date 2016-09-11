@@ -111,6 +111,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <form:form class="form-horizontal" method="put" commandName="profile"
+                                               accept-charset="UTF-8"
                                                enctype="multipart/form-data">
                                         <form:errors element="div" cssClass="alert alert-danger" path="*"/>
 

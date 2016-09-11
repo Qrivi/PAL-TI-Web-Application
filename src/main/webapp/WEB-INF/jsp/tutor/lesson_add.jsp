@@ -33,7 +33,9 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <form:form method="post" commandName="lesson" enctype="application/x-www-form-urlencoded">
+                            <form:form method="post" commandName="lesson"
+                                       accept-charset="UTF-8"
+                                       enctype="application/x-www-form-urlencoded">
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="descriptionError"><form:errors path="description"/></c:set>
                                 <c:set var="dateError"><form:errors path="date"/></c:set>

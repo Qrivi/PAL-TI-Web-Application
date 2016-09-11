@@ -4,6 +4,26 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <!-- Encoding filter -->
+
+    <filter>
+        <filter-name>CharsetFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>CharsetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!-- Default Mapping  -->
 
     <servlet-mapping>
@@ -80,26 +100,6 @@
         <location>/WEB-INF/jsp/error/layout-500.jsp</location>
     </error-page>
 
-    <!-- Encoding filter -->
-
-    <filter>
-        <filter-name>CharsetFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>CharsetFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
     <!-- WRO -->
 
     <filter>
@@ -112,7 +112,7 @@
         <url-pattern>/resources/*</url-pattern>
     </filter-mapping>
 
-    <!-- Url Rewrite -->
+    <!-- URL Rewrite -->
 
     <filter>
         <filter-name>UrlRewriteFilter</filter-name>

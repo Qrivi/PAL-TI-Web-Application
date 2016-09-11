@@ -15,7 +15,9 @@
 
 <div class="login-box-body">
     <p class="login-box-msg">${mRegisterMembership}</p>
-    <form:form method="post" commandName="register" enctype="application/x-www-form-urlencoded">
+    <form:form method="post" commandName="register"
+               accept-charset="UTF-8"
+               enctype="application/x-www-form-urlencoded">
         <c:set var="nameError"><form:errors path="name"/></c:set>
         <c:set var="emailError"><form:errors path="email"/></c:set>
         <c:set var="passwordError"><form:errors path="password"/></c:set>

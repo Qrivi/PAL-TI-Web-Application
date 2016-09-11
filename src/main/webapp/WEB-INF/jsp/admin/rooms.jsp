@@ -102,7 +102,9 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form:form method="post" commandName="room" enctype="application/x-www-form-urlencoded">
+                            <form:form method="post" commandName="room"
+                                       accept-charset="UTF-8"
+                                       enctype="application/x-www-form-urlencoded">
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="campusError"><form:errors path="campus"/></c:set>
                                 <c:set var="typeError"><form:errors path="type"/></c:set>
@@ -152,6 +154,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <form:form method="put" commandName="updateRoom"
+                                       accept-charset="UTF-8"
                                        enctype="application/x-www-form-urlencoded">
                                 <c:set var="nameError"><form:errors path="name"/></c:set>
                                 <c:set var="campusError"><form:errors path="campus"/></c:set>

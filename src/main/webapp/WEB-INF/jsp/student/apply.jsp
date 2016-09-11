@@ -41,7 +41,9 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <form:form method="post" commandName="tutorApply" enctype="multipart/form-data">
+                            <form:form method="post" commandName="tutorApply"
+                                       accept-charset="UTF-8"
+                                       enctype="multipart/form-data">
                                 <c:set var="courseError"><form:errors path="course"/></c:set>
                                 <c:set var="screenshotError"><form:errors path="screenshot"/></c:set>
                                 <div class="form-group has-feedback ${ not empty courseError ? 'has-error' : ''}">

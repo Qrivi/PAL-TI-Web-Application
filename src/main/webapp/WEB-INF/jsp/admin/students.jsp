@@ -114,6 +114,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <form:form method="put" commandName="updateStudent"
+                                       accept-charset="UTF-8"
                                        enctype="application/x-www-form-urlencoded">
                                 <c:set var="typeError"><form:errors path="type"/></c:set>
                                 <c:set var="curriculumError"><form:errors path="curriculum"/></c:set>

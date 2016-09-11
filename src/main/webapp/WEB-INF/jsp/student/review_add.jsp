@@ -124,7 +124,9 @@
         <!-- review form -->
         <div class="col-md-12">
             <div class="box box-primary">
-                <form:form method="post" commandName="review" enctype="application/x-www-form-urlencoded">
+                <form:form method="post" commandName="review"
+                           accept-charset="UTF-8"
+                           enctype="application/x-www-form-urlencoded">
                     <c:set var="contentScoreError"><form:errors path="contentScore"/></c:set>
                     <c:set var="engagementScoreError"><form:errors path="engagementScore"/></c:set>
                     <c:set var="atmosphereScoreError"><form:errors path="atmosphereScore"/></c:set>

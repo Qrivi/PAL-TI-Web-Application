@@ -10,7 +10,9 @@
 
 <div class="login-box-body">
     <p class="login-box-msg">${mEmailInstructions}</p>
-    <form:form method="post" commandName="resetRequest" enctype="application/x-www-form-urlencoded">
+    <form:form method="post" commandName="resetRequest"
+               accept-charset="UTF-8"
+               enctype="application/x-www-form-urlencoded">
         <c:set var="emailError"><form:errors path="email"/></c:set>
         <div class="form-group has-feedback ${ not empty emailError ? 'has-error' : ''}">
             <form:errors path="email" element="label"/>

@@ -10,7 +10,9 @@
 
 <div class="login-box-body">
     <p class="login-box-msg">${mEnter}</p>
-    <form:form method="post" commandName="reset" enctype="application/x-www-form-urlencoded">
+    <form:form method="post" commandName="reset"
+               accept-charset="UTF-8"
+               enctype="application/x-www-form-urlencoded">
         <c:set var="passwordError"><form:errors path="password"/></c:set>
         <c:set var="repeatPasswordError"><form:errors path="repeatPassword"/></c:set>
         <div class="form-group has-feedback ${ not empty passwordError ? 'has-error' : ''}">
