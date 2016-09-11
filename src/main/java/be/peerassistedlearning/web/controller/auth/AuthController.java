@@ -98,15 +98,16 @@ public class AuthController{
                         c,
                         StudentUtils.createProfileIdentifier( a.getUsername() ), UserType.NORMAL );
                 service.addStudent( s );
-            }else{
-                // Student details were found, but password didn't match with PAL's
-                if( !s.isPasswordValid( password ) )
+            }else{ // = Student details were found, but password didn't match with PAL's
+                if( !s.isPasswordValid( password ) ){ // Extra check
                     s.setPassword( password );
+                    service.updateStudent( s );
+                }
                 // This means the student changed its KUL account password between two PAL session, so
                 // we'll be updating the password in our database as well.
             }
         }
-        
+
         model.addAttribute( "email", s.getEmail() );
         model.addAttribute( "password", password );
 
