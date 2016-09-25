@@ -34,7 +34,7 @@
         <jackson.version>2.7.2</jackson.version>
         <guava.version>r05</guava.version>
         <thumbnailator.version>0.4.8</thumbnailator.version>
-        <detour.version>0.1</detour.version>
+        <detour.version>0.2</detour.version>
     </properties>
 
     <dependencies>
@@ -258,7 +258,7 @@
                         <id>install-external</id>
                         <phase>clean</phase>
                         <configuration>
-                            <file>${basedir}/lib/detour-0.1.jar</file>
+                            <file>${basedir}/lib/detour-${detour.version}.jar</file>
                             <repositoryLayout>default</repositoryLayout>
                             <groupId>be.krivi</groupId>
                             <artifactId>detour</artifactId>
