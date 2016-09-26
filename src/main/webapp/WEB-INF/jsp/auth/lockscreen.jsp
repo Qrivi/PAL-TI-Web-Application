@@ -23,9 +23,9 @@
 <div class="lockscreen-name text-center">${user.name}</div>
 <div class="lockscreen-item">
     <div class="lockscreen-image">
-        <img src="<c:url value="/resources/students/${user.id}/avatar.png"/>" alt="User Image">
+        <img src="<c:url value="/resources/students/${user.id}/avatar.png"/>" alt="">
     </div>
-    <form class="lockscreen-credentials" method="post" action="<c:url value="/auth/checklogin"/>">
+    <form class="lockscreen-credentials" method="post">
         <input type="hidden" name="email" value="${user.email}">
         <div class="input-group">
             <input type="password" name="password" class="form-control" placeholder="${mPassword}">
